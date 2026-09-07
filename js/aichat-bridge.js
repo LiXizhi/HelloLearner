@@ -55,6 +55,7 @@ export class AIChatBridge {
       : 'https://keepwork.com/api/raw/maisi/maisi/webgames/tools/AIChat/release/AIChat_v1.html', location.href);
     url.searchParams.set('layout', 'thin');
     url.searchParams.set('compact', '1');
+    url.searchParams.set('hide', 'pet');
     url.searchParams.set('chat', 'new');
     url.searchParams.set('persist', '0');
     url.searchParams.set('frontpage', 'hide');
@@ -75,7 +76,7 @@ export class AIChatBridge {
   announceReady(target = window.parent) {
     this.post('tool:ready', {
       toolId: APP_ID,
-      capabilities: ['tool-context', 'tool-commands', 'game-world-commands', 'workspace', 'llm', 'voice', 'composer-intercept'],
+      capabilities: ['tool-context', 'tool-commands', 'game-world-commands', 'workspace', 'llm', 'voice', 'composer-intercept', 'hide-host-pet'],
       commands: COMMANDS,
     }, target);
   }
@@ -124,7 +125,7 @@ export class AIChatBridge {
     ]); } finally { clearTimeout(readyTimer); }
     const target = window.parent !== window ? window.parent : this.engineFrame?.contentWindow;
     const model = this.getModel();
-    return this.request('tool:llm-request', { includeHistory: false, ...(model ? { model } : {}), ...detail }, timeoutMs, target, options);
+    return this.request('tool:llm-request', { includeHistory: false, presentation: 'tool', ...(model ? { model } : {}), ...detail }, timeoutMs, target, options);
   }
 
   async listModels() {
@@ -173,7 +174,7 @@ export class AIChatBridge {
       this.lastEngineToken = undefined;
       this.post('host:init', {
         app: 'HelloLearner',
-        config: { layout: 'thin', compact: true, chat: 'keep', persist: false, frontpage: 'hide', workspace: DEFAULT_WORKSPACE },
+        config: { layout: 'thin', compact: true, hide: 'pet', chat: 'keep', persist: false, frontpage: 'hide', workspace: DEFAULT_WORKSPACE },
         capabilities: ['llm', 'voice', 'chat-io'],
       }, event.source);
       return;

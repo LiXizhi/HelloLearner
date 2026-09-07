@@ -96,3 +96,65 @@ test('planner summaries exclude identifiers, credentials, raw history and bulk p
   assert.doesNotMatch(JSON.stringify(summary), /secret|private|displayName|history/);
   assert.equal(summary.feedback[0].text, 'Use would like.');
 });
+test('topic units require valid paths, membership and contiguous lesson order', () => {
+  validatePlan(examplePlan());
+  for (const mutate of [
+    p => { delete p.units; delete p.unitFiles; },
+    p => { delete p.units; },
+    p => { delete p.unitFiles; },
+    p => { delete p.lessons[0].unit; },
+    p => { p.lessons[0].unit = 'missing'; },
+    p => { p.unitFiles['unit-01'] = '../outside.json'; },
+    p => { p.lessons[1].unit = 'unit-03'; },
+    p => { p.units['empty-unit'] = 'Empty'; p.unitFiles['empty-unit'] = './units/empty-unit.json'; },
+  ]) {
+    const plan = examplePlan(); mutate(plan); assert.throws(() => validatePlan(plan));
+  }
+});
+
+test('unit saves merge concurrent lesson generation and preserve other content after reload', async () => {
+  const backend = memoryBackend(), store = new PlanStore(backend), plan = examplePlan();
+  await store.savePlan(plan);
+  assert.equal([...backend.files.keys()].some(path => path.includes('/units/')), false);
+  await Promise.all(plan.lessons.slice(0, 2).map(outline => store.saveLesson(plan, outline, exampleLesson(plan, outline))));
+  const path = store.path(plan.id, 'units/unit-01.json');
+  const unit = JSON.parse(backend.files.get(path));
+  assert.deepEqual(unit.lessons.map(l => l.id), ['day-01', 'day-02']);
+  assert.equal([...backend.files.keys()].some(path => path.includes('/lessons/')), false);
+  unit.custom = { preserved: true }; backend.files.set(path, JSON.stringify(unit));
+  const reloaded = new PlanStore(backend);
+  await reloaded.saveLesson(plan, plan.lessons[2], exampleLesson(plan, plan.lessons[2]));
+  assert.deepEqual(JSON.parse(backend.files.get(path)).custom, { preserved: true });
+  assert.equal((await reloaded.lesson(plan, plan.lessons[1])).id, 'day-02');
+  assert.equal(await reloaded.lesson(plan, plan.lessons[6]), null);
+  assert.equal(backend.files.has(store.path(plan.id, 'units/unit-02.json')), false);
+  backend.files.set(path, '{bad');
+  await assert.rejects(new PlanStore(backend).saveLesson(plan, plan.lessons[0], exampleLesson(plan)), /损坏/);
+  assert.equal(backend.files.get(path), '{bad');
+});
+
+test('failed unit writes retain every prepared lesson and retry without losing siblings', async () => {
+  const backend = memoryBackend(), store = new PlanStore(backend), plan = examplePlan();
+  const write = backend.write;
+  backend.write = async () => { throw new Error('offline'); };
+  for (const outline of plan.lessons.slice(0, 2)) {
+    await assert.rejects(store.saveLesson(plan, outline, exampleLesson(plan, outline)), /offline/);
+  }
+  backend.write = write;
+  await store.retry();
+  const reloaded = new PlanStore(backend);
+  assert.equal((await reloaded.lesson(plan, plan.lessons[0])).id, 'day-01');
+  assert.equal((await reloaded.lesson(plan, plan.lessons[1])).id, 'day-02');
+});
+
+test('lesson maker requires big-topic units and assigns safe relative file paths', async () => {
+  let value = examplePlan();
+  value.unitFiles = { malicious: '../outside.json' };
+  const planner = new LessonPlanner({ requestLLM: async () => ({ text: JSON.stringify({ kind: 'plan', value }) }) },
+    () => ({ profile: {}, settings: {} }), async () => ({ ok: true, text: async () => 'instructions' }));
+  const { plan } = await planner.outline('制定旅行课程', null, []);
+  assert.deepEqual(plan.unitFiles, examplePlan().unitFiles);
+  assert.equal(plan.lessons[6].unit, 'unit-02');
+  value = examplePlan(); delete value.units; delete value.unitFiles;
+  await assert.rejects(planner.outline('制定旅行课程', null, []), /大主题/);
+});

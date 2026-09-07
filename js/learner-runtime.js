@@ -52,46 +52,7 @@ const dialogueState = {
   history: [],
   waiting: false
 };
-let fillQuestions = [
-  {
-    kind: 'be',
-    prefix: 'What',
-    suffix: 'your name?',
-    answer: 'is',
-    prompt: '很好，下面有三道填空题。先补全这个句子：',
-    assist: '在空格里输入缺少的 be 动词。',
-    fullSentence: 'What is your name?',
-    translation: '你叫什么名字？',
-    reason: '<b>your name</b> 是单数，前面的 be 动词应该使用 <b>is</b>。',
-    memoryTip: '<b>What\'s your name?</b> 是 <b>What is your name?</b> 的缩写。'
-  },
-  {
-    kind: 'possessive',
-    prefix: 'What is',
-    suffix: 'name?',
-    answer: 'her',
-    context: '一位女性',
-    prompt: '很好！现在把句型用在一位女性身上：',
-    assist: '参考“她的”，也可以尝试其他能修饰 name 的词；AI 会判断语法和语境。',
-    fullSentence: 'What is her name?',
-    translation: '她叫什么名字？',
-    reason: '<b>she</b> 表示“她”，用作主语；<b>her</b> 表示“她的”，可以放在名词 <b>name</b> 前。',
-    memoryTip: '记住：<b>she → her name</b>，就像 <b>you → your name</b>。'
-  },
-  {
-    kind: 'possessive',
-    prefix: 'What is',
-    suffix: 'name?',
-    answer: 'its',
-    context: '宠物或物品',
-    prompt: '最后一题：如果询问宠物或物品的名字呢？',
-    assist: '可以根据人、宠物或物品灵活作答；AI 不只匹配唯一答案。',
-    fullSentence: 'What is its name?',
-    translation: '它叫什么名字？',
-    reason: '<b>it</b> 表示“它”；<b>its</b> 表示“它的”，可以修饰名词 <b>name</b>。',
-    memoryTip: '<b>its</b> 没有撇号；<b>it\'s</b> 是 <b>it is</b> 的缩写。'
-  }
-];
+let fillQuestions = [];
 
 let activeLessonKey = 'introductions';
 let activeRoleplayScenarioId = '';
@@ -244,49 +205,7 @@ function buildGrammarFillExercises(lesson, rawWarmup) {
   });
 }
 
-const lessonPracticeConfigs = {
-  introductions: {
-    number: '01', title: '自我介绍', phrase: "What's your name?", phonetic: '/wʌts jər neɪm/',
-    summary: '学习如何询问对方姓名，并自然、礼貌地介绍自己。', heading: '怎么询问对方的名字？',
-    meaning: '意思是“你叫什么名字？”，用于第一次见面时询问姓名。',
-    formula: [["What's", 'What is'], ['your', '你的'], ['name?', '名字']],
-    answerTip: '<b>I\'m Sequoia.</b> = 我是 Sequoia。<br>I\'m 是 <b>I am</b> 的缩写，口语中更自然。',
-    vocabulary: [['name','/neɪm/ · 名字'],['your','/jʊr/ · 你的'],['my','/maɪ/ · 我的'],['meet','/miːt/ · 认识'],['nice','/naɪs/ · 愉快的'],['too','/tuː/ · 也']],
-    sample: [["Hi! What's your name?",'你好！你叫什么名字？'],["I'm Sequoia. Nice to meet you.",'我是 Sequoia，很高兴认识你。'],['Nice to meet you, too!','我也很高兴认识你！']],
-    welcome: '欢迎你进入“自我介绍”主题。我们会练习询问姓名、介绍自己，并用母语提供必要提示。',
-    vocabIntro: '接下来的对话会用到 name、your、my、meet、nice 和 too。先熟悉词汇，再进入练习。',
-    warmup: { kind:'grammar-judgment',sentence: 'What is you name?', correct: false, grammarFocus:'名词前使用物主限定词',explanation: '<b>name</b> 前要用表示“你的”的 <b>your</b>，不能使用主格 <b>you</b>。', correction: ['What is you name?', 'What is your name?'] },
-    fills: fillQuestions,
-    briefing: ['你在语言交流活动中第一次遇见新同学 Maya。','Maya 会先询问你的名字。请介绍自己并礼貌回应。'],
-    role: '第一次见面的新同学', mission: '说出名字并礼貌问候', hint: "I'm Sequoia. Nice to meet you.",
-    opening: "Hi! I'm Maya. What's your name?", openingZh: '你好！我是 Maya。你叫什么名字？',
-    demoAnswers: ["I'm Sequoia.",'Nice to meet you, too.',"What's your name?"]
-  },
-  'small-talk': {
-    number: '02', title: '轻松寒暄', phrase: "It's a beautiful day, isn't it?", phonetic: '/ɪts ə ˈbjuːtəfəl deɪ/',
-    summary: '学习用天气自然开启对话，并礼貌回应对方。', heading: '怎么用天气开启寒暄？',
-    meaning: '意思是“今天天气很好，不是吗？”，适合与邻居或同事轻松开启对话。',
-    formula: [["It's", 'It is'], ['a beautiful day', '美好的一天'], ["isn't it?", '不是吗']],
-    answerTip: '<b>Yes, it is!</b> = 是的，天气很好。<br>还可以补充 <b>Perfect for a walk.</b> 让回应更自然。',
-    vocabulary: [['beautiful','/ˈbjuːtəfəl/ · 美好的'],['day','/deɪ/ · 一天'],['weather','/ˈweðər/ · 天气'],['walk','/wɔːk/ · 散步'],['sunny','/ˈsʌni/ · 晴朗的'],['today','/təˈdeɪ/ · 今天']],
-    sample: [["It's a beautiful day, isn't it?",'今天天气很好，不是吗？'],['Yes, it is! Perfect for a walk.','是的！很适合散步。'],['Absolutely. Enjoy your walk!','确实如此，祝你散步愉快！']],
-    welcome: '欢迎进入“轻松寒暄”主题。我们会练习用天气开启对话，并自然回应。',
-    vocabIntro: '接下来的对话会用到 beautiful、day、weather、walk、sunny 和 today。',
-    warmup: { kind:'grammar-judgment',sentence: "It's beautiful day, isn't it?", correct: false, grammarFocus:'单数可数名词前使用冠词',explanation: '单数可数名词 <b>day</b> 前需要冠词 <b>a</b>。', correction: ["It's beautiful day, isn't it?", "It's a beautiful day, isn't it?"] },
-    fills: [
-      {kind:'exact',prefix:"It's",suffix:"beautiful day, isn't it?",answer:'a',prompt:'补全寒暄句：',assist:'在单数名词前填入冠词。',fullSentence:"It's a beautiful day, isn't it?",translation:'今天天气很好，不是吗？',reason:'单数可数名词 day 前需要冠词 a。',memoryTip:'记住固定表达：<b>a beautiful day</b>。'},
-      {kind:'exact',prefix:'Yes,',suffix:'is!',answer:'it',prompt:'怎么肯定回应天气？',assist:'填入指代天气的代词。',fullSentence:'Yes, it is!',translation:'是的，天气很好！',reason:'用 it 指代天气。',memoryTip:'天气话题常用 <b>it</b> 作主语。'},
-      {kind:'exact',prefix:'Perfect',suffix:'a walk.',answer:'for',prompt:'补全更自然的回应：',assist:'填入表示“适合”的介词。',fullSentence:'Perfect for a walk.',translation:'很适合散步。',reason:'perfect for 表示“非常适合”。',memoryTip:'搭配：<b>perfect for + 名词</b>。'}
-    ],
-    briefing: ['你在公寓门口遇到邻居 Maya，今天天气很好。','Maya 会先聊起天气。请回应她，并继续一句轻松的寒暄。'], role:'偶遇邻居',mission:'回应天气并延续话题',hint:'Yes, it is! Perfect for a walk.', opening:"It's a beautiful day, isn't it?",openingZh:'今天天气很好，不是吗？',demoAnswers:['Yes, it is!','Perfect for a walk.','How about you?']
-  },
-  coffee: {
-    number:'03',title:'咖啡店点单',phrase:'Could I have a medium latte, please?',phonetic:'/kʊd aɪ hæv ə ˈmiːdiəm ˈlɑːteɪ/',summary:'学习在咖啡店礼貌点单，并确认杯型与需求。',heading:'怎么礼貌地在咖啡店点单？',meaning:'Could I have ...? 比 I want ... 更礼貌自然，please 可以让语气更友好。',formula:[["Could I have",'我可以要'],['a medium latte','一杯中杯拿铁'],['please?','请']],answerTip:'<b>Could I have ...?</b> 是点单万能句型。饮品、尺寸和额外要求都可以放在后面。',vocabulary:[['could','/kʊd/ · 可以'],['have','/hæv/ · 要'],['medium','/ˈmiːdiəm/ · 中杯'],['latte','/ˈlɑːteɪ/ · 拿铁'],['please','/pliːz/ · 请'],['anything','/ˈeniθɪŋ/ · 任何东西']],sample:[["Hi! What can I get for you?",'你好！想喝点什么？'],['Could I have a medium latte, please?','请给我一杯中杯拿铁。'],['Sure. Anything else?','好的，还需要别的吗？']],welcome:'欢迎进入“咖啡店点单”主题。我们会练习礼貌点饮品、选择杯型并回应店员。',vocabIntro:'接下来的对话会用到 could、have、medium、latte、please 和 anything。',warmup:{kind:'grammar-judgment',sentence:'Could I has a latte, please?',correct:false,grammarFocus:'情态动词后使用动词原形',explanation:'情态动词 <b>could</b> 后使用动词原形 <b>have</b>。',correction:['Could I has a latte, please?','Could I have a latte, please?']},fills:[{kind:'exact',prefix:'Could I',suffix:'a latte, please?',answer:'have',prompt:'补全礼貌点单句：',assist:'填入表示“要一杯”的动词原形。',fullSentence:'Could I have a latte, please?',translation:'请给我一杯拿铁。',reason:'could 后使用动词原形 have。',memoryTip:'点单句型：<b>Could I have ...?</b>'},{kind:'exact',grammarFocus:'形容词修饰名词',prefix:'A',suffix:'latte, please.',answer:'medium',answers:['medium','small','large'],prompt:'选择杯型：',assist:'说出一种合适的杯型形容词。',fullSentence:'A medium latte, please.',translation:'请给我一杯中杯拿铁。',reason:'尺寸形容词放在饮品名前。',memoryTip:'尺寸放在饮品名前：<b>medium latte</b>。',alternativeExplanation:'small、medium、large 都可以放在 latte 前修饰杯型，你的句子语法正确。'},{kind:'exact',prefix:'Anything',suffix:'?',answer:'else',prompt:'店员还会这样确认：',assist:'填入表示“其他”的词。',fullSentence:'Anything else?',translation:'还需要别的吗？',reason:'anything else 是点单后的常用确认。',memoryTip:'固定表达：<b>Anything else?</b>'}],briefing:['你走进咖啡店，Maya 是今天的咖啡师。','Maya 会询问你想喝什么。请礼貌说出饮品和杯型。'],role:'咖啡店顾客',mission:'礼貌点一杯中杯拿铁',hint:'Could I have a medium latte, please?',opening:'Hi! What can I get for you today?',openingZh:'你好！今天想喝点什么？',demoAnswers:['Could I have a latte, please?','A medium one, please.','That is all, thank you.']
-  },
-  directions: {
-    number:'04',title:'问路与指路',phrase:'How can I get to the train station?',phonetic:'/haʊ kæn aɪ ɡet tə ðə treɪn ˈsteɪʃən/',summary:'学习礼貌问路，并听懂常见方向表达。',heading:'怎么询问去某个地点的路线？',meaning:'How can I get to ...? 表示“我怎么去……？”，适用于询问车站、酒店或景点。',formula:[['How can I get','我怎么到达'],['to the','去这个'],['train station?','火车站']],answerTip:'问路前先说 <b>Excuse me</b> 会更礼貌。听路线时留意 straight、left、right。',vocabulary:[['excuse','/ɪkˈskjuːz/ · 打扰'],['get','/ɡet/ · 到达'],['station','/ˈsteɪʃən/ · 车站'],['straight','/streɪt/ · 直走'],['left','/left/ · 左边'],['right','/raɪt/ · 右边']],sample:[['Excuse me. Are you looking for somewhere?','打扰一下，你在找地方吗？'],['Yes. How can I get to the train station?','是的，我怎么去火车站？'],['Go straight and turn left.','直走，然后左转。']],welcome:'欢迎进入“问路与指路”主题。我们会练习礼貌问路并理解方向。',vocabIntro:'接下来的对话会用到 excuse、get、station、straight、left 和 right。',warmup:{kind:'grammar-judgment',sentence:'How can I get the train station?',correct:false,grammarFocus:'get to + 地点',explanation:'表示“到某地”需要介词 <b>to</b>：get to the station。',correction:['How can I get the train station?','How can I get to the train station?']},fills:[{kind:'exact',prefix:'How can I get',suffix:'the station?',answer:'to',prompt:'补全问路句：',assist:'填入表示“到”的介词。',fullSentence:'How can I get to the station?',translation:'我怎么去车站？',reason:'get to 表示“到达某地”。',memoryTip:'搭配：<b>get to + 地点</b>。'},{kind:'exact',prefix:'Go',suffix:'for two blocks.',answer:'straight',prompt:'补全指路表达：',assist:'填入“直走”。',fullSentence:'Go straight for two blocks.',translation:'直走两个街区。',reason:'go straight 表示直走。',memoryTip:'固定表达：<b>go straight</b>。'},{kind:'exact',grammarFocus:'方向副词修饰 turn',prefix:'Turn',suffix:'at the corner.',answer:'left',answers:['left','right'],prompt:'补全转向指令：',assist:'说出一个能与 turn 搭配的方向词。',fullSentence:'Turn left at the corner.',translation:'在拐角处左转。',reason:'turn left / turn right 都是正确的方向表达。',memoryTip:'方向表达：<b>turn left / turn right</b>。',alternativeExplanation:'left 和 right 都可以放在 turn 后构成正确的方向指令，你的答案不会被误判。'}],briefing:['你在陌生街区寻找火车站，Maya 是路过的当地人。','请先礼貌询问路线，再确认直走和转弯方向。'],role:'问路的游客',mission:'问清去火车站的路线',hint:'Excuse me. How can I get to the train station?',opening:'Hi there! Are you looking for somewhere?',openingZh:'你好！你在找什么地方吗？',demoAnswers:['Yes. How can I get to the station?','Should I go straight?','Thank you for your help.']
-  }
-};
+const lessonPracticeConfigs = {};
 
 function buildCurriculumPracticeConfig(lesson) {
   const words = lesson.vocabulary || [];
@@ -322,13 +241,12 @@ function buildCurriculumPracticeConfig(lesson) {
 }
 
 const curriculum = window.HELLO_LEARNER_CURRICULUM;
-if (curriculum?.lessons) {
-  curriculum.lessons.forEach(lesson => {
-    if (curriculum.premade || !Object.hasOwn(lessonPracticeConfigs, lesson.id)) lessonPracticeConfigs[lesson.id] = buildCurriculumPracticeConfig(lesson);
+function registerLesson(lesson) {
+    if (curriculum.premade || !lesson.practice) lessonPracticeConfigs[lesson.id] = buildCurriculumPracticeConfig(lesson);
     else lessonPracticeConfigs[lesson.id] = {
-      ...lessonPracticeConfigs[lesson.id],
+      ...lesson.practice,
       number: lesson.number,
-      warmup: validateGrammarWarmup(lessonPracticeConfigs[lesson.id].warmup, `课程 ${lesson.number} ${lesson.title}`)
+      warmup: validateGrammarWarmup(lesson.practice.warmup, `课程 ${lesson.number} ${lesson.title}`)
     };
     if (lesson.dialogue) {
       Object.assign(lessonPracticeConfigs[lesson.id], {
@@ -339,7 +257,25 @@ if (curriculum?.lessons) {
         demoAnswers: lesson.dialogue.goals.map(goal => goal.hint),
       });
     }
-  });
+}
+
+// URL packs already contain their content. Local defaults have summaries only.
+if (!curriculum?.loadLesson) curriculum?.lessons?.forEach(registerLesson);
+let lessonOpenRequest = 0;
+async function openCurriculumLesson(lessonId) {
+  const request = ++lessonOpenRequest;
+  if (!lessonPracticeConfigs[lessonId]) {
+    if (!curriculum?.loadLesson) throw new Error('Unknown lesson');
+    showToast('正在加载课程…');
+    const lesson = await curriculum.loadLesson(lessonId);
+    if (request !== lessonOpenRequest) return;
+    registerLesson(lesson);
+  }
+  if (request !== lessonOpenRequest) return;
+  resetPracticeRoom();
+  applyLessonPracticeConfig(lessonId);
+  openIntroPracticeRoom();
+  window.dispatchEvent(new CustomEvent('hellolearner:screen', { detail: { screen: 'lesson', lessonId } }));
 }
 
 let activeCurriculumUnitIndex = 0;
@@ -438,7 +374,7 @@ const possessiveAnswerProfiles = {
 };
 
 function getActiveLesson() {
-  return lessonPracticeConfigs[activeLessonKey] || lessonPracticeConfigs.introductions;
+  return lessonPracticeConfigs[activeLessonKey] || lessonPracticeConfigs.introductions || Object.values(lessonPracticeConfigs)[0];
 }
 
 function getActiveRoleplayScenario() {
@@ -551,7 +487,7 @@ function applyLessonPracticeConfig(key) {
   fillAnswerInput.removeAttribute('maxlength');
   activeRoleplayScenarioId = '';
   practiceRoomShell.dataset.dialogueMode = 'lesson';
-  activeLessonKey = lessonPracticeConfigs[key] ? key : 'introductions';
+  activeLessonKey = lessonPracticeConfigs[key] ? key : Object.keys(lessonPracticeConfigs)[0];
   const config = getActiveLesson();
   const warmup = validateGrammarWarmup(config.warmup, `课程 ${config.number} ${config.title}`);
   config.warmup = warmup;
@@ -959,13 +895,8 @@ function evaluateDialogueSpeech(text) {
   const lower = normalized.toLowerCase();
   const round = Math.min(dialogueState.history.length, 2);
   const expected = getActiveLesson().demoAnswers[round] || getVoiceDemoAnswer();
-  const lessonPatterns = {
-    introductions: [/(?:i\s*['’]?m|i am|my name is)\s+[a-z]+/i, /nice\s+to\s+meet\s+you/i, /what(?:'s| is)?\s+your\s+name/i],
-    'small-talk': [/\b(?:yes|yeah|it is|beautiful|lovely)\b/i, /\b(?:walk|outside|park|sunny)\b/i, /\b(?:how about you|what about you|and you)\b/i],
-    coffee: [/(?:could|can)\s+i\s+(?:have|get)|i(?:'d| would)\s+like/i, /\b(?:small|medium|large)\b/i, /\b(?:that is all|nothing else|no thank you|thanks)\b/i],
-    directions: [/(?:how|where).*(?:get|station)|(?:get|go).*station/i, /\b(?:straight|left|right)\b/i, /\b(?:thank you|thanks|got it)\b/i]
-  };
-  const pattern = (lessonPatterns[activeLessonKey] || [])[round];
+  const source = getActiveLesson().answerPatterns?.[round];
+  const pattern = source ? new RegExp(source, 'i') : null;
   return { accepted: pattern ? pattern.test(lower) : lower.length > 2, normalized, expected };
 }
 
@@ -1164,13 +1095,13 @@ function resetPracticeRoom() {
   const languageProfile = getNativeLanguageProfile();
   const config = getActiveLesson();
   practiceRoomShell.dataset.phase = 'intro';
-  document.querySelector('.room-topic strong').textContent = getActiveRoleplayScenario()?.titleEn || config.phrase;
+  document.querySelector('.room-topic strong').textContent = getActiveRoleplayScenario()?.titleEn || config?.phrase || '';
   practiceRoomShell.dataset.practiceStep = 'intro';
   document.querySelector('#roomPhaseTitle').textContent = '课程讲解';
   document.querySelector('#nativeLanguageBadge').textContent = languageProfile.badge;
   document.querySelector('#messageLanguageLabel').textContent = languageProfile.label;
-  document.querySelector('#nativeWelcomeMessage').innerHTML = config.welcome;
-  document.querySelector('#nativeVocabularyIntro').textContent = config.vocabIntro;
+  document.querySelector('#nativeWelcomeMessage').innerHTML = config?.welcome || '';
+  document.querySelector('#nativeVocabularyIntro').textContent = config?.vocabIntro || '';
   welcomeRoomMessage.hidden = false;
   vocabularyPreviewMessage.hidden = true;
   readyPrompt.hidden = true;
@@ -1215,6 +1146,7 @@ let freeTalkSession = 0;
 const freeTalkHistory = [];
 
 function openFreeTalk() {
+  lessonOpenRequest++;
   resetPracticeRoom();
   freeTalkSession++;
   freeTalkHistory.length = 0;
@@ -1683,8 +1615,8 @@ function resetDialogueState() {
   dialogueState.history = [];
   dialogueState.waiting = false;
   dialogueHistory.replaceChildren();
-  if (!scenario) recordDialogueVocabulary(getActiveLesson().opening);
-  updateDialogueProgress();
+  if (!scenario && getActiveLesson()) recordDialogueVocabulary(getActiveLesson().opening);
+  if (scenario || getActiveLesson()) updateDialogueProgress();
   roomMic.disabled = false;
   practiceTextInput.disabled = false;
   practiceTextForm.querySelector('button').disabled = false;
@@ -1886,29 +1818,12 @@ function generateDeterministicCoachState(answer, scenarioEvaluation = null) {
   if (activeLessonKey !== 'introductions') {
     const config = getActiveLesson();
     const turnIndex = Math.min(dialogueState.history.length, 2);
-    const scriptedReplies = {
-      'small-talk': [
-        { directAnswer:'That sounds lovely!', bridge:'Yes, it is perfect for a walk. What do you like to do on sunny days?', nativeAssist:'听起来很不错！这种天气很适合散步。晴天时你喜欢做什么？' },
-        { directAnswer:'Me too!', bridge:'I enjoy walking in the park. Is the weather usually sunny where you live?', nativeAssist:'我也是！我喜欢在公园散步。你住的地方通常天气晴朗吗？' },
-        { directAnswer:'Great small talk!', bridge:'You responded naturally and kept the conversation going.', nativeAssist:'很好！你已经能自然回应并延续寒暄。', completed:true }
-      ],
-      coffee: [
-        { directAnswer:'Of course!', bridge:'What size would you like: small, medium, or large?', nativeAssist:'当然可以！你想要小杯、中杯还是大杯？' },
-        { directAnswer:'A medium latte. Great choice!', bridge:'Would you like anything else?', nativeAssist:'一杯中杯拿铁，很好的选择！还需要别的吗？' },
-        { directAnswer:'Perfect. That will be five dollars.', bridge:'Your order is complete. You used a polite and natural ordering sentence.', nativeAssist:'好的，一共五美元。你已经用礼貌自然的句型完成点单。', completed:true }
-      ],
-      directions: [
-        { directAnswer:'Sure, I can help.', bridge:'Go straight for two blocks, then turn left. Would you like me to repeat that?', nativeAssist:'当然。直走两个街区，然后左转。需要我重复一遍吗？' },
-        { directAnswer:'Yes, go straight first.', bridge:'Then turn left at the corner. Can you tell me the directions back?', nativeAssist:'对，先直走，然后在拐角左转。你能复述一下路线吗？' },
-        { directAnswer:"That's exactly right!", bridge:'The station will be on your right. You completed the directions role-play.', nativeAssist:'完全正确！车站就在右手边。你已经完成问路对话。', completed:true }
-      ]
-    };
     const genericReplies = [
       { directAnswer:'Good start!', bridge:`Try the key phrase: ${config.phrase}`, nativeAssist:`很好！试着使用本课核心表达：${config.phrase}` },
       { directAnswer:'That works.', bridge:`Now add one detail and respond naturally as ${config.role}.`, nativeAssist:'表达正确。现在补充一个细节，让对话更自然。' },
       { directAnswer:'Well done!', bridge:`You completed the ${config.title} practice.`, nativeAssist:`做得好！你已经完成“${config.title}”对话练习。`, completed:true }
     ];
-    const reply = (scriptedReplies[activeLessonKey] || genericReplies)[turnIndex];
+    const reply = (config.coachTurns || genericReplies)[turnIndex];
     return {
       ...reply,
       correction: '',
@@ -2486,8 +2401,7 @@ document.querySelectorAll('.path-step').forEach((step) => {
       showToast('完成上一课后即可解锁');
       return;
     }
-    applyLessonPracticeConfig(step.dataset.lesson);
-    openIntroPracticeRoom();
+    openCurriculumLesson(step.dataset.lesson).catch(error => showToast(error.message));
   });
 });
 
@@ -2514,14 +2428,14 @@ micButton.addEventListener('click', () => {
     return;
   }
   dialog.close();
-  applyLessonPracticeConfig(activeLessonKey);
-  openIntroPracticeRoom();
+  openCurriculumLesson(activeLessonKey).catch(error => showToast(error.message));
 });
 
 const pageScrollArea = document.querySelector('#standaloneLayout');
 
 document.querySelectorAll('.bottom-nav button').forEach((button) => {
   button.addEventListener('click', () => {
+    lessonOpenRequest++;
     document.querySelectorAll('.bottom-nav button').forEach((item) => item.classList.remove('active'));
     button.classList.add('active');
     const profilePage = document.querySelector('#profilePage');
@@ -2655,6 +2569,7 @@ previousTopicButton.addEventListener('click', () => {
 pageScrollArea.addEventListener('scroll', updatePreviousTopicButton, { passive: true });
 
 function openScenario(card) {
+  lessonOpenRequest++;
   const config = roleplayScenarioConfigs[card.dataset.scenarioId];
   if (!config) {
     showToast('这个角色扮演场景正在补充内容');
@@ -2763,6 +2678,7 @@ window.helloLearnerRuntime = {
     return submitPracticeAnswer(text);
   },
   pauseForPlanner() {
+    lessonOpenRequest++;
     plannerPaused = true; practiceEpoch++; freeTalkSession++;
     if (plannerRollback) { Object.assign(dialogueState, plannerRollback); plannerRollback = null; }
     setDialogueWaiting(false);
@@ -2779,13 +2695,7 @@ window.helloLearnerRuntime = {
       vocabularyPreviewMessage.hidden = false; readyPrompt.hidden = false;
     }
   },
-  openLessonById(lessonId) {
-    if (!lessonPracticeConfigs[lessonId]) throw new Error('Unknown lesson');
-    resetPracticeRoom();
-    applyLessonPracticeConfig(lessonId);
-    openIntroPracticeRoom();
-    window.dispatchEvent(new CustomEvent('hellolearner:screen', { detail: { screen: 'lesson', lessonId } }));
-  },
+  openLessonById: openCurriculumLesson,
   openRoleplayById(scenarioId) {
     const card = document.querySelector(`[data-scenario-id="${CSS.escape(scenarioId)}"]`);
     if (!card) throw new Error('Unknown roleplay');
@@ -2816,7 +2726,7 @@ window.helloLearnerRuntime = {
     }
     return {
       activeLessonId: activeLessonKey,
-      activeLessonTitle: getActiveLesson().title,
+      activeLessonTitle: getActiveLesson()?.title || curriculum?.lessons.find(l => l.id === activeLessonKey)?.title || '',
       activeScenarioId: activeRoleplayScenarioId,
       exercise: practiceRoomShell.dataset.practiceStep || '',
       goalIndex: dialogueState.goalIndex,

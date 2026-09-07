@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import vm from 'node:vm';
 import { validateLessonPack, loadLessonPack } from '../js/lesson-pack.js';
 
-const context = { window: {} };
-vm.runInNewContext(fs.readFileSync(new URL('../data/curriculum-data.js', import.meta.url), 'utf8'), context);
-const pack = JSON.parse(JSON.stringify(context.window.HELLO_LEARNER_CURRICULUM));
+const index = JSON.parse(fs.readFileSync(new URL('../data/default_lesson_index.json', import.meta.url), 'utf8'));
+const pack = { ...index, lessons: Object.values(index.unitFiles).flatMap(path =>
+  JSON.parse(fs.readFileSync(new URL('../data/' + path, import.meta.url), 'utf8')).lessons
+).map(({ practice, ...lesson }) => lesson) };
 test('all 54 authored lessons satisfy the JSON pack contract', () => {
   assert.equal(pack.lessons.length, 54);
   assert.deepEqual(validateLessonPack(pack).errors, []);

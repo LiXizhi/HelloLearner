@@ -1,4 +1,4 @@
-import { checkItem, STEP_LABELS } from './plan-model.js?v=20260907c';
+import { checkItem, STEP_LABELS } from './plan-model.js?v=20260907o';
 import { evaluateLessonDialogue } from './lesson-engine.js?v=20260905a';
 
 export function element(tag, text = '', parent) {

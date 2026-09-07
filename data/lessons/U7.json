@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "units": {
+    "U7": "经历与计划"
+  },
+  "lessons": [
+    {
+      "id": "recent-actions",
+      "number": "37",
+      "order": 37,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U7",
+      "unitTitle": "经历与计划",
+      "icon": "●",
+      "title": "最近做过什么",
+      "subtitle": "Talk about recent actions",
+      "status": "draft",
+      "visible": false,
+      "phrase": "What have you done today?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够交流今天已经完成的事情。",
+      "meaning": "你今天都做了什么？",
+      "answerTip": "先掌握核心表达“What have you done today?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "have",
+          "",
+          "have"
+        ],
+        [
+          "done",
+          "",
+          "done"
+        ],
+        [
+          "already",
+          "",
+          "already"
+        ],
+        [
+          "yet",
+          "",
+          "yet"
+        ],
+        [
+          "just",
+          "",
+          "just"
+        ],
+        [
+          "today",
+          "",
+          "today"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 85-88 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "What have you did today?",
+        "correct": false,
+        "grammarFocus": "现在完成时 have + 过去分词",
+        "explanation": "do 的过去分词是 done，不能使用过去式 did。",
+        "correction": "What have you done today?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "What",
+          "have",
+          "done"
+        ]
+      },
+      "warmupWrong": "What have you did today?",
+      "warmupCorrect": "What have you done today?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "现在完成时 have + 过去分词",
+      "warmupExplanation": "do 的过去分词是 done，不能使用过去式 did。",
+      "aiRole": "朋友",
+      "mission": "交流今天已经完成的事情",
+      "opening": "Hi! I'm Maya. Let's practise: 最近做过什么.",
+      "hint": "What have you done today?",
+      "briefing": "你正在进行“最近做过什么”场景练习，Maya 扮演朋友。",
+      "completionGoals": [
+        "交流今天已经完成的事情",
+        "使用核心表达：What have you done today?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "accident-report",
+      "number": "38",
+      "order": 38,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U7",
+      "unitTitle": "经历与计划",
+      "icon": "◆",
+      "title": "描述意外",
+      "subtitle": "Report an accident",
+      "status": "draft",
+      "visible": false,
+      "phrase": "A car has hit the gate.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明一场小事故经过。",
+      "meaning": "一辆车撞到了大门。",
+      "answerTip": "先掌握核心表达“A car has hit the gate.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "accident",
+          "",
+          "accident"
+        ],
+        [
+          "hit",
+          "",
+          "hit"
+        ],
+        [
+          "damage",
+          "",
+          "damage"
+        ],
+        [
+          "driver",
+          "",
+          "driver"
+        ],
+        [
+          "police",
+          "",
+          "police"
+        ],
+        [
+          "happen",
+          "",
+          "happen"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 87-88 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "A car has hit the gate.",
+        "correct": true,
+        "grammarFocus": "现在完成时 has + 过去分词",
+        "explanation": "单数主语 a car 使用 has，hit 的过去分词仍是 hit。",
+        "correction": "A car has hit the gate.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "car",
+          "has",
+          "hit"
+        ]
+      },
+      "warmupWrong": "A car has hit the gate.",
+      "warmupCorrect": "A car has hit the gate.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "现在完成时 has + 过去分词",
+      "warmupExplanation": "单数主语 a car 使用 has，hit 的过去分词仍是 hit。",
+      "aiRole": "保险客服",
+      "mission": "说明一场小事故经过",
+      "opening": "Hi! I'm Maya. Let's practise: 描述意外.",
+      "hint": "A car has hit the gate.",
+      "briefing": "你正在进行“描述意外”场景练习，Maya 扮演保险客服。",
+      "completionGoals": [
+        "说明一场小事故经过",
+        "使用核心表达：A car has hit the gate.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "house-viewing",
+      "number": "39",
+      "order": 39,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U7",
+      "unitTitle": "经历与计划",
+      "icon": "✦",
+      "title": "看房咨询",
+      "subtitle": "Ask about a home for sale",
+      "status": "draft",
+      "visible": false,
+      "phrase": "How long has the flat been for sale?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够询问房屋情况并预约看房。",
+      "meaning": "这套公寓出售多久了？",
+      "answerTip": "先掌握核心表达“How long has the flat been for sale?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "sale",
+          "",
+          "sale"
+        ],
+        [
+          "flat",
+          "",
+          "flat"
+        ],
+        [
+          "price",
+          "",
+          "price"
+        ],
+        [
+          "room",
+          "",
+          "room"
+        ],
+        [
+          "view",
+          "",
+          "view"
+        ],
+        [
+          "market",
+          "",
+          "market"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 89-90 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "How long has the flat be for sale?",
+        "correct": false,
+        "grammarFocus": "现在完成时 has + been",
+        "explanation": "be 的过去分词是 been，完整结构是 has been。",
+        "correction": "How long has the flat been for sale?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "has",
+          "been",
+          "for"
+        ]
+      },
+      "warmupWrong": "How long has the flat be for sale?",
+      "warmupCorrect": "How long has the flat been for sale?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "现在完成时 has + been",
+      "warmupExplanation": "be 的过去分词是 been，完整结构是 has been。",
+      "aiRole": "房产经纪人",
+      "mission": "询问房屋情况并预约看房",
+      "opening": "Hi! I'm Maya. Let's practise: 看房咨询.",
+      "hint": "How long has the flat been for sale?",
+      "briefing": "你正在进行“看房咨询”场景练习，Maya 扮演房产经纪人。",
+      "completionGoals": [
+        "询问房屋情况并预约看房",
+        "使用核心表达：How long has the flat been for sale?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "future-arrangements",
+      "number": "40",
+      "order": 40,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U7",
+      "unitTitle": "经历与计划",
+      "icon": "▲",
+      "title": "未来安排",
+      "subtitle": "Discuss future arrangements",
+      "status": "draft",
+      "visible": false,
+      "phrase": "When will you move into your new home?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明未来的搬家安排。",
+      "meaning": "你什么时候搬进新家？",
+      "answerTip": "先掌握核心表达“When will you move into your new home?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "will",
+          "",
+          "will"
+        ],
+        [
+          "move",
+          "",
+          "move"
+        ],
+        [
+          "neighbour",
+          "",
+          "neighbour"
+        ],
+        [
+          "next",
+          "",
+          "next"
+        ],
+        [
+          "month",
+          "",
+          "month"
+        ],
+        [
+          "arrange",
+          "",
+          "arrange"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 91-94 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "When will you move into your new home?",
+        "correct": true,
+        "grammarFocus": "will 疑问句语序",
+        "explanation": "will 位于主语 you 前，move 保持原形，结构正确。",
+        "correction": "When will you move into your new home?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "When",
+          "will",
+          "move"
+        ]
+      },
+      "warmupWrong": "When will you move into your new home?",
+      "warmupCorrect": "When will you move into your new home?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "will 疑问句语序",
+      "warmupExplanation": "will 位于主语 you 前，move 保持原形，结构正确。",
+      "aiRole": "新邻居",
+      "mission": "说明未来的搬家安排",
+      "opening": "Hi! I'm Maya. Let's practise: 未来安排.",
+      "hint": "When will you move into your new home?",
+      "briefing": "你正在进行“未来安排”场景练习，Maya 扮演新邻居。",
+      "completionGoals": [
+        "说明未来的搬家安排",
+        "使用核心表达：When will you move into your new home?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "lost-luggage",
+      "number": "41",
+      "order": 41,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U7",
+      "unitTitle": "经历与计划",
+      "icon": "■",
+      "title": "寻找行李",
+      "subtitle": "Describe a lost item",
+      "status": "draft",
+      "visible": false,
+      "phrase": "It is a small blue case with a black handle.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够准确描述并找回行李。",
+      "meaning": "它是一个带黑色手柄的小蓝箱。",
+      "answerTip": "先掌握核心表达“It is a small blue case with a black handle.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "case",
+          "",
+          "case"
+        ],
+        [
+          "handle",
+          "",
+          "handle"
+        ],
+        [
+          "small",
+          "",
+          "small"
+        ],
+        [
+          "blue",
+          "",
+          "blue"
+        ],
+        [
+          "lost",
+          "",
+          "lost"
+        ],
+        [
+          "belong",
+          "",
+          "belong"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 97-98 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "It is a small blue case with a black handle.",
+        "correct": true,
+        "grammarFocus": "多个形容词的顺序",
+        "explanation": "尺寸 small 位于颜色 blue 前，顺序正确。",
+        "correction": "It is a small blue case with a black handle.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "a",
+          "small",
+          "blue"
+        ]
+      },
+      "warmupWrong": "It is a small blue case with a black handle.",
+      "warmupCorrect": "It is a small blue case with a black handle.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "多个形容词的顺序",
+      "warmupExplanation": "尺寸 small 位于颜色 blue 前，顺序正确。",
+      "aiRole": "失物招领员",
+      "mission": "准确描述并找回行李",
+      "opening": "Hi! I'm Maya. Let's practise: 寻找行李.",
+      "hint": "It is a small blue case with a black handle.",
+      "briefing": "你正在进行“寻找行李”场景练习，Maya 扮演失物招领员。",
+      "completionGoals": [
+        "准确描述并找回行李",
+        "使用核心表达：It is a small blue case with a black handle.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "message-relay",
+      "number": "42",
+      "order": 42,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U7",
+      "unitTitle": "经历与计划",
+      "icon": "◎",
+      "title": "转述消息",
+      "subtitle": "Pass on a message",
+      "status": "draft",
+      "visible": false,
+      "phrase": "She says that she will arrive late.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够准确转述一条消息。",
+      "meaning": "她说她会晚到。",
+      "answerTip": "先掌握核心表达“She says that she will arrive late.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "say",
+          "",
+          "say"
+        ],
+        [
+          "tell",
+          "",
+          "tell"
+        ],
+        [
+          "message",
+          "",
+          "message"
+        ],
+        [
+          "arrive",
+          "",
+          "arrive"
+        ],
+        [
+          "late",
+          "",
+          "late"
+        ],
+        [
+          "that",
+          "",
+          "that"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 99-102 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "She say that she will arrive late.",
+        "correct": false,
+        "grammarFocus": "一般现在时第三人称单数",
+        "explanation": "主语 she 后应使用 says。",
+        "correction": "She says that she will arrive late.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "She",
+          "says",
+          "will"
+        ]
+      },
+      "warmupWrong": "She say that she will arrive late.",
+      "warmupCorrect": "She says that she will arrive late.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "一般现在时第三人称单数",
+      "warmupExplanation": "主语 she 后应使用 says。",
+      "aiRole": "同事",
+      "mission": "准确转述一条消息",
+      "opening": "Hi! I'm Maya. Let's practise: 转述消息.",
+      "hint": "She says that she will arrive late.",
+      "briefing": "你正在进行“转述消息”场景练习，Maya 扮演同事。",
+      "completionGoals": [
+        "准确转述一条消息",
+        "使用核心表达：She says that she will arrive late.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}

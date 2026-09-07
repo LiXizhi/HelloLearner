@@ -1,10 +1,10 @@
 import { runtimeConfig, SDK_CDN_URL, sanitizeWorkspace } from './config.js';
-import { PlanStore } from './plan-store.js?v=20260907c';
-import { LessonPlanner } from './lesson-planner.js?v=20260907c';
-import { mountLessonPlans } from './view_lesson_plans.js?v=20260907k';
+import { PlanStore } from './plan-store.js?v=20260907o';
+import { LessonPlanner } from './lesson-planner.js?v=20260907p';
+import { mountLessonPlans } from './view_lesson_plans.js?v=20260907o';
 import { updateState, getState, subscribe } from './state.js';
 import { KeepworkAuth } from './auth.js?v=20260907g';
-import { AIChatBridge } from './aichat-bridge.js?v=20260907i';
+import { AIChatBridge } from './aichat-bridge.js?v=20260907r';
 import { initLiveVoice } from './view_live_voice.js?v=20260906p';
 import { LearnerStorage, createEmbeddedBackend, createStandaloneBackend } from './storage.js?v=20260907c';
 import { SpeechController } from './speech.js?v=20260905r';
@@ -14,6 +14,7 @@ import { openSystemSettings } from './view_system_settings.js?v=20260907d';
 import { openProfileSetup } from './view_profile_setup.js?v=20260905b';
 import { initAvatarSelector } from './view_select_avartar.js?v=20260905n';
 import { $, todayKey } from './utils.js';
+import { loadDefaultLessons } from './lesson-catalog.js?v=20260907n';
 import { loadLessonPack } from './lesson-pack.js?v=20260905b';
 import { appendFeedback } from './feedback.js?v=20260905a';
 import { loadRoleplayCatalog } from './roleplay-catalog.js?v=20260905a';
@@ -166,7 +167,7 @@ async function executeCommand(command, args) {
     if (!['learning', 'roleplay', 'progress', 'profile'].includes(args.screen)) throw new Error('Invalid screen');
     runtime.navigate(args.screen);
   } else if (command === 'openLesson') {
-    runtime.openLessonById(String(args.lessonId || ''));
+    await runtime.openLessonById(String(args.lessonId || ''));
   } else if (command === 'openRoleplay') {
     runtime.openRoleplayById(String(args.scenarioId || ''));
   } else if (command === 'presentPhrase') {
@@ -420,6 +421,7 @@ async function bootstrap() {
   window.helloLearnerUnmountPracticeAvatar = () => avatar.setTarget($('avatarStage'), { closeUp: true });
   await initAvatarSelector({ button: $('chooseCoach'), avatar, speech, sdk, showNotice });
   bindLearnerEvents();
+  window.HELLO_LEARNER_CURRICULUM = await loadDefaultLessons(document.baseURI);
   const lessonPackPath = new URLSearchParams(location.search).get('lessonPack');
   if (lessonPackPath) {
     try {
@@ -430,7 +432,7 @@ async function bootstrap() {
       alert(`课程包加载失败，保留内置课程。\n${error.message}`);
     }
   }
-  await import('./learner-runtime.js?v=20260907c');
+  await import('./learner-runtime.js?v=20260907m');
   planner = new LessonPlanner(bridge, getState);
   window.helloLearnerPlanRequest = routePlanRequest;
   const restorePlanAvatar = () => {
@@ -450,7 +452,7 @@ async function bootstrap() {
     onAvatar: target => avatar.setTarget(target, { closeUp: true }), restoreAvatar: restorePlanAvatar,
     route: routePlanRequest,
     getCurriculum: () => ({ ...window.HELLO_LEARNER_CURRICULUM, completed: getState().progress?.completedLessons || {} }),
-    openCurriculumLesson: id => window.helloLearnerRuntime.openLessonById(id),
+    openCurriculumLesson: id => window.helloLearnerRuntime.openLessonById(id).catch(error => showNotice(error.message)),
     savePlan: async (store, plan) => (await requirePlanLogin(store)).savePlan(plan),
     saveLesson: async (store, plan, outline, lesson) => (await requirePlanLogin(store)).saveLesson(plan, outline, lesson),
     checkpoint: async (store, plan, lesson, detail) => {

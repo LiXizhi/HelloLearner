@@ -2,6 +2,17 @@
 
 How HelloLearner talks to AIChat. Implemented by `js/aichat-bridge.js` (`AIChatBridge`). Read this before changing anything host-facing.
 
+LLM requests default to `presentation: 'tool'` with `includeHistory: false`:
+typed practice replies render in HelloLearner without automatically opening the
+host's 聊天历史 popup. This applies to both learner and host composer input.
+
+HelloLearner advertises `hide-host-pet` so the parent hides its own avatar and
+subtitles while the learner tab is active, including during Live Voice. Standalone
+engine URL/config also explicitly sets `hide: pet`. Embedded requests continue
+to target the parent; no nested engine is mounted. The host resolves Live model
+selections for text requests and uses the advertised learner command catalog
+instead of injecting pet-game `say` instructions. `say` is not a learner command.
+
 - **Channel:** `aichat.external-tool.v1` (constant `CHANNEL` in `js/config.js`)
 - **Tool id:** `language-learner` (constant `APP_ID`)
 - **Transport:** `window.postMessage` only. Both sides validate `event.data.channel` and `event.source`.

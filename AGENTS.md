@@ -22,7 +22,7 @@ Read in this order before any non-trivial change:
 ## Tech stack (no exceptions)
 
 - Plain ES modules, plain CSS, plain HTML. **No framework, no TypeScript, no JSX, no bundler in the source path, no npm runtime dependency.**
-- `HelloLearner.html` is the entry. It loads the Keepwork Tailwind CDN, then `data/curriculum-data.js` as a classic script, then `js/app.js` as a module. The app awaits `js/roleplay-catalog.js` to load and validate `data/roleplay-data.json` before initializing the runtime.
+- `HelloLearner.html` is the entry. It loads the Keepwork Tailwind CDN, then `js/app.js` as a module. Bootstrap loads `data/default_lesson_index.json` at startup and loads relative unit JSON files on demand through `js/lesson-catalog.js`. The app awaits `js/roleplay-catalog.js` to load and validate `data/roleplay-data.json` before initializing the runtime.
 - There is no `DOMContentLoaded` wrapper; `js/app.js` calls `bootstrap()` directly at module scope.
 - Vite is **only** the human-controlled deployment pipeline. It is not the way this app runs in development.
 - Curriculum and roleplay data are authored content, not app code. Treat them as data.
@@ -101,7 +101,7 @@ Every completion write is gated on `getState().auth.loggedIn`; anonymous users a
 
 ## Persistence contract
 
-- Three core learner records: `.hellolearner/profile.json`, `.hellolearner/progress.json`, `.hellolearner/settings.json`. General lesson plans additionally use `.hellolearner/plans/index.json`, `<planId>/plan.json`, `<planId>/lessons/<lessonId>.json`, and `<planId>/progress.json`; see `docs/general-lesson-plans.md`.
+- Three core learner records: `.hellolearner/profile.json`, `.hellolearner/progress.json`, `.hellolearner/settings.json`. General lesson plans additionally use `.hellolearner/plans/index.json`, `<planId>/plan.json`, `<planId>/units/<unitId>.json`, and `<planId>/progress.json`; see `docs/general-lesson-plans.md`.
 - Every record carries `schemaVersion: 1` and `updatedAt`. Bump `SCHEMA_VERSION` in `js/config.js` only for a breaking shape change.
 - Reads deep-merge known defaults and **preserve unknown top-level and nested fields**. Never drop a field you do not recognize.
 - Invalid JSON falls back to defaults with a non-blocking warning; never throw on load.

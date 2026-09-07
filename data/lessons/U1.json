@@ -1,0 +1,660 @@
+{
+  "version": 1,
+  "units": {
+    "U1": "初次连接"
+  },
+  "lessons": [
+    {
+      "id": "greeting-politely",
+      "number": "01",
+      "order": 1,
+      "band": "Pre-A1",
+      "level": "Pre-A1",
+      "unit": "U1",
+      "unitTitle": "初次连接",
+      "icon": "●",
+      "title": "礼貌打招呼",
+      "subtitle": "Greet someone politely",
+      "status": "published",
+      "visible": true,
+      "phrase": "Excuse me. Is this seat free?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够礼貌开启一次交流。",
+      "meaning": "打扰一下，这个座位有人吗？",
+      "answerTip": "先掌握核心表达“Excuse me. Is this seat free?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "excuse",
+          "",
+          "excuse"
+        ],
+        [
+          "seat",
+          "",
+          "seat"
+        ],
+        [
+          "free",
+          "",
+          "free"
+        ],
+        [
+          "sorry",
+          "",
+          "sorry"
+        ],
+        [
+          "please",
+          "",
+          "please"
+        ],
+        [
+          "thanks",
+          "",
+          "thanks"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 1-4 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Excuse me. Is this seat free?",
+        "correct": true,
+        "grammarFocus": "be 动词一般疑问句",
+        "explanation": "is 已放在单数主语 this seat 前，疑问句结构正确。",
+        "correction": "Excuse me. Is this seat free?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Is",
+          "this",
+          "free"
+        ]
+      },
+      "warmupWrong": "Excuse me. Is this seat free?",
+      "warmupCorrect": "Excuse me. Is this seat free?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "be 动词一般疑问句",
+      "warmupExplanation": "is 已放在单数主语 this seat 前，疑问句结构正确。",
+      "aiRole": "陌生同学",
+      "mission": "礼貌开启一次交流",
+      "opening": "Hi! I'm Maya. Let's practise: 礼貌打招呼.",
+      "hint": "Excuse me. Is this seat free?",
+      "briefing": "你正在进行“礼貌打招呼”场景练习，Maya 扮演陌生同学。",
+      "completionGoals": [
+        "礼貌开启一次交流",
+        "使用核心表达：Excuse me. Is this seat free?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "introductions",
+      "number": "02",
+      "order": 2,
+      "band": "Pre-A1",
+      "level": "Pre-A1",
+      "unit": "U1",
+      "unitTitle": "初次连接",
+      "icon": "◆",
+      "title": "自我介绍",
+      "subtitle": "Introduce yourself",
+      "status": "published",
+      "visible": true,
+      "phrase": "Hi, I'm Sequoia. Nice to meet you.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够介绍自己并回应问候。",
+      "meaning": "你好，我是 Sequoia，很高兴认识你。",
+      "answerTip": "先掌握核心表达“Hi, I'm Sequoia. Nice to meet you.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "name",
+          "",
+          "name"
+        ],
+        [
+          "my",
+          "",
+          "my"
+        ],
+        [
+          "your",
+          "",
+          "your"
+        ],
+        [
+          "meet",
+          "",
+          "meet"
+        ],
+        [
+          "nice",
+          "",
+          "nice"
+        ],
+        [
+          "too",
+          "",
+          "too"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 5-6 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Hi, I is Sequoia. Nice to meet you.",
+        "correct": false,
+        "grammarFocus": "主语 I 与 be 动词一致",
+        "explanation": "主语 I 后应使用 am，不能使用 is。",
+        "correction": "Hi, I am Sequoia. Nice to meet you.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "I",
+          "am",
+          "to"
+        ]
+      },
+      "warmupWrong": "Hi, I is Sequoia. Nice to meet you.",
+      "warmupCorrect": "Hi, I am Sequoia. Nice to meet you.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "主语 I 与 be 动词一致",
+      "warmupExplanation": "主语 I 后应使用 am，不能使用 is。",
+      "aiRole": "新同学",
+      "mission": "介绍自己并回应问候",
+      "opening": "Hi! I'm Maya. Let's practise: 自我介绍.",
+      "hint": "Hi, I'm Sequoia. Nice to meet you.",
+      "briefing": "你正在进行“自我介绍”场景练习，Maya 扮演新同学。",
+      "completionGoals": [
+        "介绍自己并回应问候",
+        "使用核心表达：Hi, I'm Sequoia. Nice to meet you.",
+        "自然回应一次追问"
+      ],
+      "versions": [],
+      "practice": {
+        "number": "01",
+        "title": "自我介绍",
+        "phrase": "What's your name?",
+        "phonetic": "/wʌts jər neɪm/",
+        "summary": "学习如何询问对方姓名，并自然、礼貌地介绍自己。",
+        "heading": "怎么询问对方的名字？",
+        "meaning": "意思是“你叫什么名字？”，用于第一次见面时询问姓名。",
+        "formula": [
+          [
+            "What's",
+            "What is"
+          ],
+          [
+            "your",
+            "你的"
+          ],
+          [
+            "name?",
+            "名字"
+          ]
+        ],
+        "answerTip": "<b>I'm Sequoia.</b> = 我是 Sequoia。<br>I'm 是 <b>I am</b> 的缩写，口语中更自然。",
+        "vocabulary": [
+          [
+            "name",
+            "/neɪm/ · 名字"
+          ],
+          [
+            "your",
+            "/jʊr/ · 你的"
+          ],
+          [
+            "my",
+            "/maɪ/ · 我的"
+          ],
+          [
+            "meet",
+            "/miːt/ · 认识"
+          ],
+          [
+            "nice",
+            "/naɪs/ · 愉快的"
+          ],
+          [
+            "too",
+            "/tuː/ · 也"
+          ]
+        ],
+        "sample": [
+          [
+            "Hi! What's your name?",
+            "你好！你叫什么名字？"
+          ],
+          [
+            "I'm Sequoia. Nice to meet you.",
+            "我是 Sequoia，很高兴认识你。"
+          ],
+          [
+            "Nice to meet you, too!",
+            "我也很高兴认识你！"
+          ]
+        ],
+        "welcome": "欢迎你进入“自我介绍”主题。我们会练习询问姓名、介绍自己，并用母语提供必要提示。",
+        "vocabIntro": "接下来的对话会用到 name、your、my、meet、nice 和 too。先熟悉词汇，再进入练习。",
+        "warmup": {
+          "kind": "grammar-judgment",
+          "sentence": "What is you name?",
+          "correct": false,
+          "grammarFocus": "名词前使用物主限定词",
+          "explanation": "<b>name</b> 前要用表示“你的”的 <b>your</b>，不能使用主格 <b>you</b>。",
+          "correction": [
+            "What is you name?",
+            "What is your name?"
+          ]
+        },
+        "fills": [
+          {
+            "kind": "be",
+            "prefix": "What",
+            "suffix": "your name?",
+            "answer": "is",
+            "prompt": "很好，下面有三道填空题。先补全这个句子：",
+            "assist": "在空格里输入缺少的 be 动词。",
+            "fullSentence": "What is your name?",
+            "translation": "你叫什么名字？",
+            "reason": "<b>your name</b> 是单数，前面的 be 动词应该使用 <b>is</b>。",
+            "memoryTip": "<b>What's your name?</b> 是 <b>What is your name?</b> 的缩写。"
+          },
+          {
+            "kind": "possessive",
+            "prefix": "What is",
+            "suffix": "name?",
+            "answer": "her",
+            "context": "一位女性",
+            "prompt": "很好！现在把句型用在一位女性身上：",
+            "assist": "参考“她的”，也可以尝试其他能修饰 name 的词；AI 会判断语法和语境。",
+            "fullSentence": "What is her name?",
+            "translation": "她叫什么名字？",
+            "reason": "<b>she</b> 表示“她”，用作主语；<b>her</b> 表示“她的”，可以放在名词 <b>name</b> 前。",
+            "memoryTip": "记住：<b>she → her name</b>，就像 <b>you → your name</b>。"
+          },
+          {
+            "kind": "possessive",
+            "prefix": "What is",
+            "suffix": "name?",
+            "answer": "its",
+            "context": "宠物或物品",
+            "prompt": "最后一题：如果询问宠物或物品的名字呢？",
+            "assist": "可以根据人、宠物或物品灵活作答；AI 不只匹配唯一答案。",
+            "fullSentence": "What is its name?",
+            "translation": "它叫什么名字？",
+            "reason": "<b>it</b> 表示“它”；<b>its</b> 表示“它的”，可以修饰名词 <b>name</b>。",
+            "memoryTip": "<b>its</b> 没有撇号；<b>it's</b> 是 <b>it is</b> 的缩写。"
+          }
+        ],
+        "briefing": [
+          "你在语言交流活动中第一次遇见新同学 Maya。",
+          "Maya 会先询问你的名字。请介绍自己并礼貌回应。"
+        ],
+        "role": "第一次见面的新同学",
+        "mission": "说出名字并礼貌问候",
+        "hint": "I'm Sequoia. Nice to meet you.",
+        "opening": "Hi! I'm Maya. What's your name?",
+        "openingZh": "你好！我是 Maya。你叫什么名字？",
+        "demoAnswers": [
+          "I'm Sequoia.",
+          "Nice to meet you, too.",
+          "What's your name?"
+        ],
+        "answerPatterns": [
+          "(?:i\\s*['’]?m|i am|my name is)\\s+[a-z]+",
+          "nice\\s+to\\s+meet\\s+you",
+          "what(?:'s| is)?\\s+your\\s+name"
+        ]
+      }
+    },
+    {
+      "id": "identity-check",
+      "number": "03",
+      "order": 3,
+      "band": "Pre-A1",
+      "level": "Pre-A1",
+      "unit": "U1",
+      "unitTitle": "初次连接",
+      "icon": "✦",
+      "title": "确认身份",
+      "subtitle": "Ask about identity",
+      "status": "published",
+      "visible": true,
+      "phrase": "Are you a new student?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够确认对方的身份。",
+      "meaning": "你是新同学吗？",
+      "answerTip": "先掌握核心表达“Are you a new student?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "student",
+          "",
+          "student"
+        ],
+        [
+          "teacher",
+          "",
+          "teacher"
+        ],
+        [
+          "new",
+          "",
+          "new"
+        ],
+        [
+          "yes",
+          "",
+          "yes"
+        ],
+        [
+          "no",
+          "",
+          "no"
+        ],
+        [
+          "class",
+          "",
+          "class"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 7-8 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Are you a new student?",
+        "correct": true,
+        "grammarFocus": "单数身份名词前使用冠词 a",
+        "explanation": "student 是单数可数名词，a new student 的结构正确。",
+        "correction": "Are you a new student?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Are",
+          "you",
+          "a"
+        ]
+      },
+      "warmupWrong": "Are you a new student?",
+      "warmupCorrect": "Are you a new student?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "单数身份名词前使用冠词 a",
+      "warmupExplanation": "student 是单数可数名词，a new student 的结构正确。",
+      "aiRole": "班级助教",
+      "mission": "确认对方的身份",
+      "opening": "Hi! I'm Maya. Let's practise: 确认身份.",
+      "hint": "Are you a new student?",
+      "briefing": "你正在进行“确认身份”场景练习，Maya 扮演班级助教。",
+      "completionGoals": [
+        "确认对方的身份",
+        "使用核心表达：Are you a new student?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "how-are-you",
+      "number": "04",
+      "order": 4,
+      "band": "Pre-A1",
+      "level": "Pre-A1",
+      "unit": "U1",
+      "unitTitle": "初次连接",
+      "icon": "▲",
+      "title": "询问近况",
+      "subtitle": "Ask how someone feels",
+      "status": "published",
+      "visible": true,
+      "phrase": "How are you today?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够询问近况并自然回应。",
+      "meaning": "你今天怎么样？",
+      "answerTip": "先掌握核心表达“How are you today?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "fine",
+          "",
+          "fine"
+        ],
+        [
+          "well",
+          "",
+          "well"
+        ],
+        [
+          "tired",
+          "",
+          "tired"
+        ],
+        [
+          "happy",
+          "",
+          "happy"
+        ],
+        [
+          "today",
+          "",
+          "today"
+        ],
+        [
+          "thank",
+          "",
+          "thank"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 9-10 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "How is you today?",
+        "correct": false,
+        "grammarFocus": "主语 you 与 be 动词一致",
+        "explanation": "主语 you 应与 are 搭配，不能使用 is。",
+        "correction": "How are you today?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "How",
+          "are",
+          "you"
+        ]
+      },
+      "warmupWrong": "How is you today?",
+      "warmupCorrect": "How are you today?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "主语 you 与 be 动词一致",
+      "warmupExplanation": "主语 you 应与 are 搭配，不能使用 is。",
+      "aiRole": "朋友",
+      "mission": "询问近况并自然回应",
+      "opening": "Hi! I'm Maya. Let's practise: 询问近况.",
+      "hint": "How are you today?",
+      "briefing": "你正在进行“询问近况”场景练习，Maya 扮演朋友。",
+      "completionGoals": [
+        "询问近况并自然回应",
+        "使用核心表达：How are you today?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "nationality",
+      "number": "05",
+      "order": 5,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U1",
+      "unitTitle": "初次连接",
+      "icon": "■",
+      "title": "来自哪里",
+      "subtitle": "Talk about countries",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Where are you from?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明自己来自哪里。",
+      "meaning": "你来自哪里？",
+      "answerTip": "先掌握核心表达“Where are you from?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "from",
+          "",
+          "from"
+        ],
+        [
+          "country",
+          "",
+          "country"
+        ],
+        [
+          "city",
+          "",
+          "city"
+        ],
+        [
+          "Chinese",
+          "",
+          "Chinese"
+        ],
+        [
+          "Korean",
+          "",
+          "Korean"
+        ],
+        [
+          "French",
+          "",
+          "French"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 15-16 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Where are you from?",
+        "correct": true,
+        "grammarFocus": "Where + be + 主语 + from",
+        "explanation": "询问来源地时，Where are you from? 的语序和搭配正确。",
+        "correction": "Where are you from?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Where",
+          "are",
+          "from"
+        ]
+      },
+      "warmupWrong": "Where are you from?",
+      "warmupCorrect": "Where are you from?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "Where + be + 主语 + from",
+      "warmupExplanation": "询问来源地时，Where are you from? 的语序和搭配正确。",
+      "aiRole": "国际活动志愿者",
+      "mission": "说明自己来自哪里",
+      "opening": "Hi! I'm Maya. Let's practise: 来自哪里.",
+      "hint": "Where are you from?",
+      "briefing": "你正在进行“来自哪里”场景练习，Maya 扮演国际活动志愿者。",
+      "completionGoals": [
+        "说明自己来自哪里",
+        "使用核心表达：Where are you from?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "jobs",
+      "number": "06",
+      "order": 6,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U1",
+      "unitTitle": "初次连接",
+      "icon": "◎",
+      "title": "谈论职业",
+      "subtitle": "Talk about jobs",
+      "status": "draft",
+      "visible": false,
+      "phrase": "What do you do?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够询问并介绍职业。",
+      "meaning": "你是做什么工作的？",
+      "answerTip": "先掌握核心表达“What do you do?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "job",
+          "",
+          "job"
+        ],
+        [
+          "designer",
+          "",
+          "designer"
+        ],
+        [
+          "teacher",
+          "",
+          "teacher"
+        ],
+        [
+          "doctor",
+          "",
+          "doctor"
+        ],
+        [
+          "student",
+          "",
+          "student"
+        ],
+        [
+          "work",
+          "",
+          "work"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 17-18 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "What do you do?",
+        "correct": true,
+        "grammarFocus": "一般现在时疑问句的助动词 do",
+        "explanation": "主语 you 使用助动词 do，后面的实义动词保持原形。",
+        "correction": "What do you do?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "What",
+          "do",
+          "do"
+        ]
+      },
+      "warmupWrong": "What do you do?",
+      "warmupCorrect": "What do you do?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "一般现在时疑问句的助动词 do",
+      "warmupExplanation": "主语 you 使用助动词 do，后面的实义动词保持原形。",
+      "aiRole": "活动认识的新朋友",
+      "mission": "询问并介绍职业",
+      "opening": "Hi! I'm Maya. Let's practise: 谈论职业.",
+      "hint": "What do you do?",
+      "briefing": "你正在进行“谈论职业”场景练习，Maya 扮演活动认识的新朋友。",
+      "completionGoals": [
+        "询问并介绍职业",
+        "使用核心表达：What do you do?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}

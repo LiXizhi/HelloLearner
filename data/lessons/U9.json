@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "units": {
+    "U9": "进阶沟通"
+  },
+  "lessons": [
+    {
+      "id": "describe-people",
+      "number": "49",
+      "order": 49,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U9",
+      "unitTitle": "进阶沟通",
+      "icon": "●",
+      "title": "准确描述人物",
+      "subtitle": "Identify people clearly",
+      "status": "draft",
+      "visible": false,
+      "phrase": "The man who is wearing a hat is my uncle.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够根据外貌找到正确的人。",
+      "meaning": "戴帽子的那位男士是我叔叔。",
+      "answerTip": "先掌握核心表达“The man who is wearing a hat is my uncle.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "who",
+          "",
+          "who"
+        ],
+        [
+          "wear",
+          "",
+          "wear"
+        ],
+        [
+          "hat",
+          "",
+          "hat"
+        ],
+        [
+          "uncle",
+          "",
+          "uncle"
+        ],
+        [
+          "woman",
+          "",
+          "woman"
+        ],
+        [
+          "identify",
+          "",
+          "identify"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 121-124 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "The man which is wearing a hat is my uncle.",
+        "correct": false,
+        "grammarFocus": "指人的关系代词 who",
+        "explanation": "先行词 the man 指人，应使用 who。",
+        "correction": "The man who is wearing a hat is my uncle.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "man",
+          "who",
+          "is"
+        ]
+      },
+      "warmupWrong": "The man which is wearing a hat is my uncle.",
+      "warmupCorrect": "The man who is wearing a hat is my uncle.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "指人的关系代词 who",
+      "warmupExplanation": "先行词 the man 指人，应使用 who。",
+      "aiRole": "活动接待员",
+      "mission": "根据外貌找到正确的人",
+      "opening": "Hi! I'm Maya. Let's practise: 准确描述人物.",
+      "hint": "The man who is wearing a hat is my uncle.",
+      "briefing": "你正在进行“准确描述人物”场景练习，Maya 扮演活动接待员。",
+      "completionGoals": [
+        "根据外貌找到正确的人",
+        "使用核心表达：The man who is wearing a hat is my uncle.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "obligation",
+      "number": "50",
+      "order": 50,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U9",
+      "unitTitle": "进阶沟通",
+      "icon": "◆",
+      "title": "必须与不必",
+      "subtitle": "Explain obligations",
+      "status": "draft",
+      "visible": false,
+      "phrase": "You have to book, but you do not need to pay now.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够理解报名要求。",
+      "meaning": "你需要预订，但现在不必付款。",
+      "answerTip": "先掌握核心表达“You have to book, but you do not need to pay now.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "have",
+          "",
+          "have"
+        ],
+        [
+          "need",
+          "",
+          "need"
+        ],
+        [
+          "book",
+          "",
+          "book"
+        ],
+        [
+          "pay",
+          "",
+          "pay"
+        ],
+        [
+          "rule",
+          "",
+          "rule"
+        ],
+        [
+          "must",
+          "",
+          "must"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 125-126 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "You have to book before the event.",
+        "correct": true,
+        "grammarFocus": "have to + 动词原形",
+        "explanation": "have to 后使用动词原形 book，结构正确。",
+        "correction": "You have to book before the event.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "have",
+          "to",
+          "book"
+        ]
+      },
+      "warmupWrong": "You have to book before the event.",
+      "warmupCorrect": "You have to book before the event.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "have to + 动词原形",
+      "warmupExplanation": "have to 后使用动词原形 book，结构正确。",
+      "aiRole": "活动客服",
+      "mission": "理解报名要求",
+      "opening": "Hi! I'm Maya. Let's practise: 必须与不必.",
+      "hint": "You have to book, but you do not need to pay now.",
+      "briefing": "你正在进行“必须与不必”场景练习，Maya 扮演活动客服。",
+      "completionGoals": [
+        "理解报名要求",
+        "使用核心表达：You have to book, but you do not need to pay now.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "deduction",
+      "number": "51",
+      "order": 51,
+      "band": "A2+",
+      "level": "A2",
+      "unit": "U9",
+      "unitTitle": "进阶沟通",
+      "icon": "✦",
+      "title": "做出推测",
+      "subtitle": "Make careful deductions",
+      "status": "draft",
+      "visible": false,
+      "phrase": "She might be our new manager.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够根据线索做出合理推测。",
+      "meaning": "她可能是我们的新经理。",
+      "answerTip": "先掌握核心表达“She might be our new manager.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "might",
+          "",
+          "might"
+        ],
+        [
+          "must",
+          "",
+          "must"
+        ],
+        [
+          "cannot",
+          "",
+          "cannot"
+        ],
+        [
+          "sure",
+          "",
+          "sure"
+        ],
+        [
+          "manager",
+          "",
+          "manager"
+        ],
+        [
+          "perhaps",
+          "",
+          "perhaps"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 127-132 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "She might be our new manager.",
+        "correct": true,
+        "grammarFocus": "情态动词 might + 动词原形",
+        "explanation": "might 后使用 be，结构正确。",
+        "correction": "She might be our new manager.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "might",
+          "be",
+          "manager"
+        ]
+      },
+      "warmupWrong": "She might be our new manager.",
+      "warmupCorrect": "She might be our new manager.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "情态动词 might + 动词原形",
+      "warmupExplanation": "might 后使用 be，结构正确。",
+      "aiRole": "同事",
+      "mission": "根据线索做出合理推测",
+      "opening": "Hi! I'm Maya. Let's practise: 做出推测.",
+      "hint": "She might be our new manager.",
+      "briefing": "你正在进行“做出推测”场景练习，Maya 扮演同事。",
+      "completionGoals": [
+        "根据线索做出合理推测",
+        "使用核心表达：She might be our new manager.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "reported-news",
+      "number": "52",
+      "order": 52,
+      "band": "A2+",
+      "level": "A2",
+      "unit": "U9",
+      "unitTitle": "进阶沟通",
+      "icon": "▲",
+      "title": "转述新闻",
+      "subtitle": "Report what someone said",
+      "status": "draft",
+      "visible": false,
+      "phrase": "He told me that the meeting was cancelled.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够转述一条重要消息。",
+      "meaning": "他告诉我会议取消了。",
+      "answerTip": "先掌握核心表达“He told me that the meeting was cancelled.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "told",
+          "",
+          "told"
+        ],
+        [
+          "said",
+          "",
+          "said"
+        ],
+        [
+          "news",
+          "",
+          "news"
+        ],
+        [
+          "meeting",
+          "",
+          "meeting"
+        ],
+        [
+          "cancel",
+          "",
+          "cancel"
+        ],
+        [
+          "report",
+          "",
+          "report"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 133-136 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "He told that the meeting was cancelled.",
+        "correct": false,
+        "grammarFocus": "tell 后需要间接宾语",
+        "explanation": "tell 在这里要说明“告诉谁”，that 从句前需要 me 等宾语。",
+        "correction": "He told me that the meeting was cancelled.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "told",
+          "me",
+          "that"
+        ]
+      },
+      "warmupWrong": "He told that the meeting was cancelled.",
+      "warmupCorrect": "He told me that the meeting was cancelled.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "tell 后需要间接宾语",
+      "warmupExplanation": "tell 在这里要说明“告诉谁”，that 从句前需要 me 等宾语。",
+      "aiRole": "团队成员",
+      "mission": "转述一条重要消息",
+      "opening": "Hi! I'm Maya. Let's practise: 转述新闻.",
+      "hint": "He told me that the meeting was cancelled.",
+      "briefing": "你正在进行“转述新闻”场景练习，Maya 扮演团队成员。",
+      "completionGoals": [
+        "转述一条重要消息",
+        "使用核心表达：He told me that the meeting was cancelled.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "conditions",
+      "number": "53",
+      "order": 53,
+      "band": "A2+",
+      "level": "A2",
+      "unit": "U9",
+      "unitTitle": "进阶沟通",
+      "icon": "■",
+      "title": "条件与结果",
+      "subtitle": "Talk about conditions",
+      "status": "draft",
+      "visible": false,
+      "phrase": "If it rains, we will stay inside.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够根据情况调整计划。",
+      "meaning": "如果下雨，我们就待在室内。",
+      "answerTip": "先掌握核心表达“If it rains, we will stay inside.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "if",
+          "",
+          "if"
+        ],
+        [
+          "rain",
+          "",
+          "rain"
+        ],
+        [
+          "will",
+          "",
+          "will"
+        ],
+        [
+          "inside",
+          "",
+          "inside"
+        ],
+        [
+          "plan",
+          "",
+          "plan"
+        ],
+        [
+          "change",
+          "",
+          "change"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 137-140 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "If it rains, we will stay inside.",
+        "correct": true,
+        "grammarFocus": "第一条件句的时态",
+        "explanation": "if 从句使用一般现在时 rains，主句使用 will stay，结构正确。",
+        "correction": "If it rains, we will stay inside.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "If",
+          "rains",
+          "will"
+        ]
+      },
+      "warmupWrong": "If it rains, we will stay inside.",
+      "warmupCorrect": "If it rains, we will stay inside.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "第一条件句的时态",
+      "warmupExplanation": "if 从句使用一般现在时 rains，主句使用 will stay，结构正确。",
+      "aiRole": "活动策划人",
+      "mission": "根据情况调整计划",
+      "opening": "Hi! I'm Maya. Let's practise: 条件与结果.",
+      "hint": "If it rains, we will stay inside.",
+      "briefing": "你正在进行“条件与结果”场景练习，Maya 扮演活动策划人。",
+      "completionGoals": [
+        "根据情况调整计划",
+        "使用核心表达：If it rains, we will stay inside.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "passive-service",
+      "number": "54",
+      "order": 54,
+      "band": "A2+",
+      "level": "A2",
+      "unit": "U9",
+      "unitTitle": "进阶沟通",
+      "icon": "◎",
+      "title": "服务与流程",
+      "subtitle": "Describe a service process",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Your order will be delivered tomorrow.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够确认服务进度和结果。",
+      "meaning": "你的订单会在明天送达。",
+      "answerTip": "先掌握核心表达“Your order will be delivered tomorrow.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "order",
+          "",
+          "order"
+        ],
+        [
+          "deliver",
+          "",
+          "deliver"
+        ],
+        [
+          "serve",
+          "",
+          "serve"
+        ],
+        [
+          "invite",
+          "",
+          "invite"
+        ],
+        [
+          "send",
+          "",
+          "send"
+        ],
+        [
+          "soon",
+          "",
+          "soon"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 141-144 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Your order will delivered tomorrow.",
+        "correct": false,
+        "grammarFocus": "一般将来时被动语态",
+        "explanation": "一般将来时被动结构是 will be + 过去分词，will 后缺少 be。",
+        "correction": "Your order will be delivered tomorrow.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "will",
+          "be",
+          "delivered"
+        ]
+      },
+      "warmupWrong": "Your order will delivered tomorrow.",
+      "warmupCorrect": "Your order will be delivered tomorrow.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "一般将来时被动语态",
+      "warmupExplanation": "一般将来时被动结构是 will be + 过去分词，will 后缺少 be。",
+      "aiRole": "客户服务人员",
+      "mission": "确认服务进度和结果",
+      "opening": "Hi! I'm Maya. Let's practise: 服务与流程.",
+      "hint": "Your order will be delivered tomorrow.",
+      "briefing": "你正在进行“服务与流程”场景练习，Maya 扮演客户服务人员。",
+      "completionGoals": [
+        "确认服务进度和结果",
+        "使用核心表达：Your order will be delivered tomorrow.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}

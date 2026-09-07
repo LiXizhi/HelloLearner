@@ -1,0 +1,683 @@
+{
+  "version": 1,
+  "units": {
+    "U4": "日常生活"
+  },
+  "lessons": [
+    {
+      "id": "coffee",
+      "number": "19",
+      "order": 19,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U4",
+      "unitTitle": "日常生活",
+      "icon": "●",
+      "title": "咖啡店点单",
+      "subtitle": "Order a drink",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Could I have a medium latte, please?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够完成饮品与附加要求。",
+      "meaning": "请给我一杯中杯拿铁。",
+      "answerTip": "先掌握核心表达“Could I have a medium latte, please?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "coffee",
+          "",
+          "coffee"
+        ],
+        [
+          "milk",
+          "",
+          "milk"
+        ],
+        [
+          "sugar",
+          "",
+          "sugar"
+        ],
+        [
+          "cup",
+          "",
+          "cup"
+        ],
+        [
+          "please",
+          "",
+          "please"
+        ],
+        [
+          "black",
+          "",
+          "black"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 47-48 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Could I has a latte, please?",
+        "correct": false,
+        "grammarFocus": "情态动词后使用动词原形",
+        "explanation": "could 后应使用 have，不能使用 has。",
+        "correction": "Could I have a latte, please?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Could",
+          "I",
+          "have"
+        ]
+      },
+      "warmupWrong": "Could I has a latte, please?",
+      "warmupCorrect": "Could I have a latte, please?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "情态动词后使用动词原形",
+      "warmupExplanation": "could 后应使用 have，不能使用 has。",
+      "aiRole": "咖啡师",
+      "mission": "完成饮品与附加要求",
+      "opening": "Hi! I'm Maya. Let's practise: 咖啡店点单.",
+      "hint": "Could I have a medium latte, please?",
+      "briefing": "你正在进行“咖啡店点单”场景练习，Maya 扮演咖啡师。",
+      "completionGoals": [
+        "完成饮品与附加要求",
+        "使用核心表达：Could I have a medium latte, please?",
+        "自然回应一次追问"
+      ],
+      "versions": [],
+      "practice": {
+        "number": "03",
+        "title": "咖啡店点单",
+        "phrase": "Could I have a medium latte, please?",
+        "phonetic": "/kʊd aɪ hæv ə ˈmiːdiəm ˈlɑːteɪ/",
+        "summary": "学习在咖啡店礼貌点单，并确认杯型与需求。",
+        "heading": "怎么礼貌地在咖啡店点单？",
+        "meaning": "Could I have ...? 比 I want ... 更礼貌自然，please 可以让语气更友好。",
+        "formula": [
+          [
+            "Could I have",
+            "我可以要"
+          ],
+          [
+            "a medium latte",
+            "一杯中杯拿铁"
+          ],
+          [
+            "please?",
+            "请"
+          ]
+        ],
+        "answerTip": "<b>Could I have ...?</b> 是点单万能句型。饮品、尺寸和额外要求都可以放在后面。",
+        "vocabulary": [
+          [
+            "could",
+            "/kʊd/ · 可以"
+          ],
+          [
+            "have",
+            "/hæv/ · 要"
+          ],
+          [
+            "medium",
+            "/ˈmiːdiəm/ · 中杯"
+          ],
+          [
+            "latte",
+            "/ˈlɑːteɪ/ · 拿铁"
+          ],
+          [
+            "please",
+            "/pliːz/ · 请"
+          ],
+          [
+            "anything",
+            "/ˈeniθɪŋ/ · 任何东西"
+          ]
+        ],
+        "sample": [
+          [
+            "Hi! What can I get for you?",
+            "你好！想喝点什么？"
+          ],
+          [
+            "Could I have a medium latte, please?",
+            "请给我一杯中杯拿铁。"
+          ],
+          [
+            "Sure. Anything else?",
+            "好的，还需要别的吗？"
+          ]
+        ],
+        "welcome": "欢迎进入“咖啡店点单”主题。我们会练习礼貌点饮品、选择杯型并回应店员。",
+        "vocabIntro": "接下来的对话会用到 could、have、medium、latte、please 和 anything。",
+        "warmup": {
+          "kind": "grammar-judgment",
+          "sentence": "Could I has a latte, please?",
+          "correct": false,
+          "grammarFocus": "情态动词后使用动词原形",
+          "explanation": "情态动词 <b>could</b> 后使用动词原形 <b>have</b>。",
+          "correction": [
+            "Could I has a latte, please?",
+            "Could I have a latte, please?"
+          ]
+        },
+        "fills": [
+          {
+            "kind": "exact",
+            "prefix": "Could I",
+            "suffix": "a latte, please?",
+            "answer": "have",
+            "prompt": "补全礼貌点单句：",
+            "assist": "填入表示“要一杯”的动词原形。",
+            "fullSentence": "Could I have a latte, please?",
+            "translation": "请给我一杯拿铁。",
+            "reason": "could 后使用动词原形 have。",
+            "memoryTip": "点单句型：<b>Could I have ...?</b>"
+          },
+          {
+            "kind": "exact",
+            "grammarFocus": "形容词修饰名词",
+            "prefix": "A",
+            "suffix": "latte, please.",
+            "answer": "medium",
+            "answers": [
+              "medium",
+              "small",
+              "large"
+            ],
+            "prompt": "选择杯型：",
+            "assist": "说出一种合适的杯型形容词。",
+            "fullSentence": "A medium latte, please.",
+            "translation": "请给我一杯中杯拿铁。",
+            "reason": "尺寸形容词放在饮品名前。",
+            "memoryTip": "尺寸放在饮品名前：<b>medium latte</b>。",
+            "alternativeExplanation": "small、medium、large 都可以放在 latte 前修饰杯型，你的句子语法正确。"
+          },
+          {
+            "kind": "exact",
+            "prefix": "Anything",
+            "suffix": "?",
+            "answer": "else",
+            "prompt": "店员还会这样确认：",
+            "assist": "填入表示“其他”的词。",
+            "fullSentence": "Anything else?",
+            "translation": "还需要别的吗？",
+            "reason": "anything else 是点单后的常用确认。",
+            "memoryTip": "固定表达：<b>Anything else?</b>"
+          }
+        ],
+        "briefing": [
+          "你走进咖啡店，Maya 是今天的咖啡师。",
+          "Maya 会询问你想喝什么。请礼貌说出饮品和杯型。"
+        ],
+        "role": "咖啡店顾客",
+        "mission": "礼貌点一杯中杯拿铁",
+        "hint": "Could I have a medium latte, please?",
+        "opening": "Hi! What can I get for you today?",
+        "openingZh": "你好！今天想喝点什么？",
+        "demoAnswers": [
+          "Could I have a latte, please?",
+          "A medium one, please.",
+          "That is all, thank you."
+        ],
+        "answerPatterns": [
+          "(?:could|can)\\s+i\\s+(?:have|get)|i(?:'d| would)\\s+like",
+          "\\b(?:small|medium|large)\\b",
+          "\\b(?:that is all|nothing else|no thank you|thanks)\\b"
+        ],
+        "coachTurns": [
+          {
+            "directAnswer": "Of course!",
+            "bridge": "What size would you like: small, medium, or large?",
+            "nativeAssist": "当然可以！你想要小杯、中杯还是大杯？"
+          },
+          {
+            "directAnswer": "A medium latte. Great choice!",
+            "bridge": "Would you like anything else?",
+            "nativeAssist": "一杯中杯拿铁，很好的选择！还需要别的吗？"
+          },
+          {
+            "directAnswer": "Perfect. That will be five dollars.",
+            "bridge": "Your order is complete. You used a polite and natural ordering sentence.",
+            "nativeAssist": "好的，一共五美元。你已经用礼貌自然的句型完成点单。",
+            "completed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "food-preferences",
+      "number": "20",
+      "order": 20,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U4",
+      "unitTitle": "日常生活",
+      "icon": "◆",
+      "title": "饮食偏好",
+      "subtitle": "Say what you like",
+      "status": "draft",
+      "visible": false,
+      "phrase": "I like chicken, but I do not like beef.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够表达喜欢和不喜欢的食物。",
+      "meaning": "我喜欢鸡肉，但不喜欢牛肉。",
+      "answerTip": "先掌握核心表达“I like chicken, but I do not like beef.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "like",
+          "",
+          "like"
+        ],
+        [
+          "want",
+          "",
+          "want"
+        ],
+        [
+          "chicken",
+          "",
+          "chicken"
+        ],
+        [
+          "beef",
+          "",
+          "beef"
+        ],
+        [
+          "vegetable",
+          "",
+          "vegetable"
+        ],
+        [
+          "fruit",
+          "",
+          "fruit"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 49-50 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "I like chicken, but I do not like beef.",
+        "correct": true,
+        "grammarFocus": "do not + 动词原形",
+        "explanation": "do not 后面的 like 保持原形，结构正确。",
+        "correction": "I like chicken, but I do not like beef.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "do",
+          "not",
+          "like"
+        ]
+      },
+      "warmupWrong": "I like chicken, but I do not like beef.",
+      "warmupCorrect": "I like chicken, but I do not like beef.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "do not + 动词原形",
+      "warmupExplanation": "do not 后面的 like 保持原形，结构正确。",
+      "aiRole": "一起吃饭的朋友",
+      "mission": "表达喜欢和不喜欢的食物",
+      "opening": "Hi! I'm Maya. Let's practise: 饮食偏好.",
+      "hint": "I like chicken, but I do not like beef.",
+      "briefing": "你正在进行“饮食偏好”场景练习，Maya 扮演一起吃饭的朋友。",
+      "completionGoals": [
+        "表达喜欢和不喜欢的食物",
+        "使用核心表达：I like chicken, but I do not like beef.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "climate",
+      "number": "21",
+      "order": 21,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U4",
+      "unitTitle": "日常生活",
+      "icon": "✦",
+      "title": "天气与气候",
+      "subtitle": "Describe local climate",
+      "status": "draft",
+      "visible": false,
+      "phrase": "It is often warm and sunny here.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够介绍本地气候。",
+      "meaning": "这里经常温暖晴朗。",
+      "answerTip": "先掌握核心表达“It is often warm and sunny here.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "climate",
+          "",
+          "climate"
+        ],
+        [
+          "warm",
+          "",
+          "warm"
+        ],
+        [
+          "cold",
+          "",
+          "cold"
+        ],
+        [
+          "rain",
+          "",
+          "rain"
+        ],
+        [
+          "sunny",
+          "",
+          "sunny"
+        ],
+        [
+          "often",
+          "",
+          "often"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 51-54 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "It is often warm and sunny here.",
+        "correct": true,
+        "grammarFocus": "频率副词在 be 动词后",
+        "explanation": "often 放在 is 后、形容词前，位置正确。",
+        "correction": "It is often warm and sunny here.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "is",
+          "often",
+          "warm"
+        ]
+      },
+      "warmupWrong": "It is often warm and sunny here.",
+      "warmupCorrect": "It is often warm and sunny here.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "频率副词在 be 动词后",
+      "warmupExplanation": "often 放在 is 后、形容词前，位置正确。",
+      "aiRole": "外地朋友",
+      "mission": "介绍本地气候",
+      "opening": "Hi! I'm Maya. Let's practise: 天气与气候.",
+      "hint": "It is often warm and sunny here.",
+      "briefing": "你正在进行“天气与气候”场景练习，Maya 扮演外地朋友。",
+      "completionGoals": [
+        "介绍本地气候",
+        "使用核心表达：It is often warm and sunny here.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "daily-routine",
+      "number": "22",
+      "order": 22,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U4",
+      "unitTitle": "日常生活",
+      "icon": "▲",
+      "title": "日常作息",
+      "subtitle": "Describe a routine",
+      "status": "draft",
+      "visible": false,
+      "phrase": "I usually start work at nine.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够描述一天的日常安排。",
+      "meaning": "我通常九点开始工作。",
+      "answerTip": "先掌握核心表达“I usually start work at nine.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "usually",
+          "",
+          "usually"
+        ],
+        [
+          "start",
+          "",
+          "start"
+        ],
+        [
+          "finish",
+          "",
+          "finish"
+        ],
+        [
+          "morning",
+          "",
+          "morning"
+        ],
+        [
+          "evening",
+          "",
+          "evening"
+        ],
+        [
+          "work",
+          "",
+          "work"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 55-56 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "I usually starts work at nine.",
+        "correct": false,
+        "grammarFocus": "一般现在时主谓一致",
+        "explanation": "主语 I 后的动词使用原形 start，不加 -s。",
+        "correction": "I usually start work at nine.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "I",
+          "usually",
+          "start"
+        ]
+      },
+      "warmupWrong": "I usually starts work at nine.",
+      "warmupCorrect": "I usually start work at nine.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "一般现在时主谓一致",
+      "warmupExplanation": "主语 I 后的动词使用原形 start，不加 -s。",
+      "aiRole": "新同事",
+      "mission": "描述一天的日常安排",
+      "opening": "Hi! I'm Maya. Let's practise: 日常作息.",
+      "hint": "I usually start work at nine.",
+      "briefing": "你正在进行“日常作息”场景练习，Maya 扮演新同事。",
+      "completionGoals": [
+        "描述一天的日常安排",
+        "使用核心表达：I usually start work at nine.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "unusual-day",
+      "number": "23",
+      "order": 23,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U4",
+      "unitTitle": "日常生活",
+      "icon": "■",
+      "title": "不一样的一天",
+      "subtitle": "Contrast routine and now",
+      "status": "draft",
+      "visible": false,
+      "phrase": "I usually drive, but today I am walking.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明今天和平时有什么不同。",
+      "meaning": "我通常开车，但今天在步行。",
+      "answerTip": "先掌握核心表达“I usually drive, but today I am walking.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "usually",
+          "",
+          "usually"
+        ],
+        [
+          "today",
+          "",
+          "today"
+        ],
+        [
+          "drive",
+          "",
+          "drive"
+        ],
+        [
+          "walk",
+          "",
+          "walk"
+        ],
+        [
+          "different",
+          "",
+          "different"
+        ],
+        [
+          "because",
+          "",
+          "because"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 57-58 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "I usually drive, but today I am walk.",
+        "correct": false,
+        "grammarFocus": "现在进行时 be + V-ing",
+        "explanation": "am 后应使用 walking，构成现在进行时。",
+        "correction": "I usually drive, but today I am walking.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "usually",
+          "am",
+          "walking"
+        ]
+      },
+      "warmupWrong": "I usually drive, but today I am walk.",
+      "warmupCorrect": "I usually drive, but today I am walking.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "现在进行时 be + V-ing",
+      "warmupExplanation": "am 后应使用 walking，构成现在进行时。",
+      "aiRole": "同事",
+      "mission": "说明今天和平时有什么不同",
+      "opening": "Hi! I'm Maya. Let's practise: 不一样的一天.",
+      "hint": "I usually drive, but today I am walking.",
+      "briefing": "你正在进行“不一样的一天”场景练习，Maya 扮演同事。",
+      "completionGoals": [
+        "说明今天和平时有什么不同",
+        "使用核心表达：I usually drive, but today I am walking.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "time-plans",
+      "number": "24",
+      "order": 24,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U4",
+      "unitTitle": "日常生活",
+      "icon": "◎",
+      "title": "时间与安排",
+      "subtitle": "Ask and tell the time",
+      "status": "draft",
+      "visible": false,
+      "phrase": "What time shall we meet?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够确认见面时间。",
+      "meaning": "我们几点见面？",
+      "answerTip": "先掌握核心表达“What time shall we meet?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "time",
+          "",
+          "time"
+        ],
+        [
+          "clock",
+          "",
+          "clock"
+        ],
+        [
+          "half",
+          "",
+          "half"
+        ],
+        [
+          "quarter",
+          "",
+          "quarter"
+        ],
+        [
+          "meet",
+          "",
+          "meet"
+        ],
+        [
+          "late",
+          "",
+          "late"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 58-60 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "What time shall we meet?",
+        "correct": true,
+        "grammarFocus": "情态动词疑问句语序",
+        "explanation": "shall 位于主语 we 前，meet 保持原形，结构正确。",
+        "correction": "What time shall we meet?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "shall",
+          "we",
+          "meet"
+        ]
+      },
+      "warmupWrong": "What time shall we meet?",
+      "warmupCorrect": "What time shall we meet?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "情态动词疑问句语序",
+      "warmupExplanation": "shall 位于主语 we 前，meet 保持原形，结构正确。",
+      "aiRole": "约见的朋友",
+      "mission": "确认见面时间",
+      "opening": "Hi! I'm Maya. Let's practise: 时间与安排.",
+      "hint": "What time shall we meet?",
+      "briefing": "你正在进行“时间与安排”场景练习，Maya 扮演约见的朋友。",
+      "completionGoals": [
+        "确认见面时间",
+        "使用核心表达：What time shall we meet?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}

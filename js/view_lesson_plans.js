@@ -1,5 +1,5 @@
-import { STEP_LABELS } from './plan-model.js?v=20260907c';
-import { element, button, mountPlanRunner } from './view_plan_runner.js?v=20260907c';
+import { STEP_LABELS } from './plan-model.js?v=20260907o';
+import { element, button, mountPlanRunner } from './view_plan_runner.js?v=20260907o';
 
 export function mountLessonPlans(options) {
   const { planner, getStore, getWorkspace, pause, resume, savePlan, saveLesson, checkpoint, speak, onAvatar, restoreAvatar, route } = options;
@@ -91,9 +91,13 @@ export function mountLessonPlans(options) {
     if (clickable && next) button(container, '继续学习', () => openLesson(plan.id, next.id));
     const list = element('ol', '', container); list.className = 'space-y-3';
     plan.lessons.forEach((lesson, i) => {
+      if (i === 0 || lesson.unit !== plan.lessons[i - 1].unit) {
+        const heading = element('li', '', list);
+        element('h4', plan.units[lesson.unit], heading).className = 'pt-4 text-lg font-bold';
+      }
       const row = element('li', '', list); row.className = 'rounded-xl border border-[#174f46]/15 p-4';
       const p = progress.lessons?.[lesson.id];
-      const label = p?.completedAt ? '已完成' : Object.keys(p?.steps || {}).length ? '学习中' : readiness[lesson.id] ? '已准备' : '待生成';
+      const label = p?.completedAt ? '已完成' : Object.keys(p?.steps || {}).length ? '学习中' : readiness[lesson.id] ? '已准备' : '打开课程';
       if (clickable) button(row, `第 ${i + 1} 天 · ${lesson.title} · ${label}`, () => openLesson(plan.id, lesson.id));
       else element('h4', `第 ${i + 1} 天 · ${lesson.title}`, row).className = 'font-bold';
       element('p', lesson.objectives.join(' · '), row).className = 'my-2';
@@ -138,7 +142,7 @@ export function mountLessonPlans(options) {
       conversation.push({ role: 'user', content: request.slice(0, 2000) });
       if (result.question) conversation.push({ role: 'assistant', content: result.question });
       else draft = result.plan;
-      status.textContent = result.question ? '请补充这一项信息' : '请检查每天的目标和活动，满意后保存。';
+      status.textContent = result.question ? '请补充这一项信息' : '请检查主题单元、每天的目标和活动，满意后保存。';
       renderDraft();
     });
   }
@@ -237,7 +241,6 @@ export function mountLessonPlans(options) {
     await run(async token => {
       const store = getStore(); status.textContent = '正在读取计划…';
       const plan = await store.get(id), progress = await store.progress(id), readiness = {};
-      for (const lesson of plan.lessons) readiness[lesson.id] = Boolean(await store.lesson(plan, lesson));
       if (!current(token)) return;
       body.replaceChildren(); previews.replaceChildren(); restoreAvatar?.();
       outlineView(body, plan, true, progress, readiness);
@@ -257,6 +260,7 @@ export function mountLessonPlans(options) {
       const progress = await store.progress(planId);
       if (!current(token)) return;
       body.replaceChildren(); previews.replaceChildren();
+      element('p', plan.units[outline.unit], body).className = 'text-sm font-semibold opacity-70';
       element('h3', outline.title, body).className = 'text-xl font-bold';
       let lesson = await store.lesson(plan, outline);
       if (!current(token)) return;

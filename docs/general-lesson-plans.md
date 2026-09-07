@@ -53,10 +53,25 @@ plans and content; save errors remain visible and retryable.
 All plan artifacts use `schemaVersion: 1` and `updatedAt`:
 
 - `.hellolearner/plans/index.json`: small plan metadata entries.
-- `.hellolearner/plans/<planId>/plan.json`: reviewed ordered outline.
-- `.hellolearner/plans/<planId>/lessons/<lessonId>.json`: generated day.
+- `.hellolearner/plans/<planId>/plan.json`: reviewed ordered outline, named `units`,
+  relative `unitFiles` (for example `./units/unit-01.json`), and a `unit` ID on each lesson.
+- `.hellolearner/plans/<planId>/units/<unitId>.json`: a topic unit containing the
+  prepared lessons in outline order. Missing lessons are generated only when opened.
 - `.hellolearner/plans/<planId>/progress.json`: step answers/checkpoints, attempts,
   completed timestamps, and bounded feedback.
+
+All plans require `units`, `unitFiles`, and a unit ID on every lesson.
+Outlines group lessons into big topics, each containing 1–6 related lessons.
+The review and saved-plan views display topic headings. Browsing an outline reads
+only its manifest and progress; opening a day reads only its unit. Generation still
+prepares one day at a time. Saving merges that day into the unit through a serialized
+read-modify-write operation, preserving sibling lessons and unknown unit metadata.
+A corrupt unit is never replaced with an empty default. Failed writes remain retryable.
+
+A unit file has `{schemaVersion:1, planId, id:unitId, title, lessons:[DAILY_LESSON]}`.
+The app assigns unit paths; models supply topic names and lesson membership. Both
+local defaults (`data/default_lesson_index.json` plus `data/lessons/U1.json`, etc.)
+and generated plans now use an index/outline plus relative topic-unit files.
 
 Application-generated UUID plan IDs and deterministic day/step IDs are stable
 after saving. Manifest writes precede index writes. Embedded directory listing

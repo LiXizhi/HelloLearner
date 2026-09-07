@@ -1,4 +1,4 @@
-import { PLAN_ROOT, validId, validatePlan, validateDailyLesson, stepCompleted } from './plan-model.js?v=20260907c';
+import { PLAN_ROOT, validId, validatePlan, validateDailyLesson, stepCompleted } from './plan-model.js?v=20260907o';
 
 export class PlanStore {
   constructor(backend) {
@@ -84,12 +84,36 @@ export class PlanStore {
     });
   }
   async lesson(plan, outline) {
-    const value = await this.read(this.path(plan.id, `lessons/${outline.id}.json`), null);
-    return value ? validateDailyLesson(value, plan, outline) : null;
+    const unit = await this.unit(plan, outline);
+    return unit.lessons.find(lesson => lesson.id === outline.id) || null;
   }
   async saveLesson(plan, outline, value) {
     validateDailyLesson(value, plan, outline);
-    await this.write(this.path(plan.id, `lessons/${outline.id}.json`), value);
+    return this.transaction(async () => {
+      const unit = await this.unit(plan, outline);
+      const lessons = [...unit.lessons.filter(lesson => lesson.id !== value.id), value];
+      lessons.sort((a, b) => plan.lessons.findIndex(l => l.id === a.id) - plan.lessons.findIndex(l => l.id === b.id));
+      const next = { ...unit, lessons };
+      if (JSON.stringify(next).length > 1000000) throw new Error('单元课程文件过大');
+      await this.write(this.path(plan.id, plan.unitFiles[outline.unit].slice(2)), next);
+    });
+  }
+  async unit(plan, outline) {
+    validatePlan(plan);
+    const expected = plan.lessons.find(lesson => lesson.id === outline.id);
+    if (!expected || expected.unit !== outline.unit) throw new Error('课程不属于当前主题单元');
+    const unit = await this.read(this.path(plan.id, plan.unitFiles[outline.unit].slice(2)), {
+      schemaVersion: 1, planId: plan.id, id: outline.unit, title: plan.units[outline.unit], lessons: [],
+    });
+    if (unit.schemaVersion !== 1 || unit.planId !== plan.id || unit.id !== outline.unit || !Array.isArray(unit.lessons)) throw new Error('主题单元文件损坏');
+    const ids = new Set();
+    for (const lesson of unit.lessons) {
+      const summary = plan.lessons.find(item => item.id === lesson?.id && item.unit === outline.unit);
+      if (!summary || ids.has(lesson.id)) throw new Error('主题单元课程无效或重复');
+      ids.add(lesson.id);
+      validateDailyLesson(lesson, plan, summary);
+    }
+    return unit;
   }
   async progress(id) {
     const progress = await this.read(this.path(id, 'progress.json'), { schemaVersion: 1, lessons: {}, feedback: [] });

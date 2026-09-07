@@ -55,7 +55,8 @@ dist/
   avatar-preview.html
   SKILL.md
   data/
-    curriculum-data.js
+    default_lesson_index.json
+    lessons/<unitId>.json
     roleplay-data.json
     avatar-config.json
   assets/
@@ -66,7 +67,15 @@ dist/
     favicon-<hash>.svg
 ```
 
-`data/` is copied as a side-by-side runtime resource because the curriculum and roleplay scripts are loaded as classic `<script>` tags in standalone mode.
+`data/` and `lesson-planner/` are copied beside the entry HTML. The default lesson
+index and planner instructions resolve against `document.baseURI`, so the release
+wrapper’s CDN `<base>` also governs these fetches. Unit paths resolve relative to
+`data/default_lesson_index.json`; they do not depend on Vite chunk filenames or
+the origin serving the wrapper. The uploader preserves these nested directories.
+
+Run `node --test tests/release-lesson-resources.test.mjs` to check the declared
+Vite copy inputs and exercise all unit/planner fetches under versioned CDN and
+local paths. This source-level check does not run Vite, generate or upload a release.
 
 ## Release
 

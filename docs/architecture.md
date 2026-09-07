@@ -18,7 +18,8 @@ HelloLearner/
   observer-copilot.md    background Observer agent
   vite.config.mjs        release pipeline only
   data/
-    curriculum-data.js
+    default_lesson_index.json    ordered local lesson catalog
+    lessons/<unitId>.json
     roleplay-data.json
     avatar-config.json
   js/

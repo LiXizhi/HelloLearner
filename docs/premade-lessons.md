@@ -1,5 +1,28 @@
 # Premade Lesson Packs
 
+## Default lesson files
+
+The 54 default lessons are grouped into nine files, `data/lessons/U1.json`
+through `U9.json`, with up to six complete lessons in each version-1 pack.
+`data/default_lesson_index.json` contains unit names, relative `unitFiles` paths,
+and small lesson summaries for the route and course picker. Update both the
+summary and the unit file when changing a lesson title, order or membership.
+
+Startup fetches only the index. Opening a lesson loads its unit through
+`js/lesson-catalog.js`; concurrent requests share one fetch, and successful
+units remain cached for the page session. Failed loads can be retried by opening
+the lesson again. Browsing units and the course picker needs no lesson fetches.
+Paths resolve against the index under the page base URL in standalone, embedded
+and CDN releases. The existing release pipeline copies the whole `data/` folder.
+
+Four lessons retain their authored `practice` overrides inside their unit
+files, including formatted presentation, fills, answer patterns and coach-turn
+metadata. Public URL packs remain plain-text validated and ignore these local
+overrides. Existing lesson IDs and learner progress storage remain unchanged;
+the shipped content is read-only. Generated workspace plans use the same topic-unit grouping with relative file
+paths, retaining their flexible daily-step schema and workspace backend. See
+[general lesson plans](general-lesson-plans.md).
+
 ## Authoring Workflow
 
 Follow SchoolTeacher's lesson-designer workflow: review a teaching plan first,

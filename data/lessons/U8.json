@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "units": {
+    "U8": "清晰表达"
+  },
+  "lessons": [
+    {
+      "id": "mistakes-feedback",
+      "number": "43",
+      "order": 43,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U8",
+      "unitTitle": "清晰表达",
+      "icon": "●",
+      "title": "理解修改意见",
+      "subtitle": "Respond to feedback",
+      "status": "draft",
+      "visible": false,
+      "phrase": "There are a few mistakes in this report.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够理解错误并提出修改方案。",
+      "meaning": "这份报告里有几个错误。",
+      "answerTip": "先掌握核心表达“There are a few mistakes in this report.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "mistake",
+          "",
+          "mistake"
+        ],
+        [
+          "report",
+          "",
+          "report"
+        ],
+        [
+          "correct",
+          "",
+          "correct"
+        ],
+        [
+          "check",
+          "",
+          "check"
+        ],
+        [
+          "few",
+          "",
+          "few"
+        ],
+        [
+          "again",
+          "",
+          "again"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 103-106 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "There are a few mistakes in this report.",
+        "correct": true,
+        "grammarFocus": "there be 与复数名词一致",
+        "explanation": "a few mistakes 是复数，因此使用 there are。",
+        "correction": "There are a few mistakes in this report.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "There",
+          "are",
+          "mistakes"
+        ]
+      },
+      "warmupWrong": "There are a few mistakes in this report.",
+      "warmupCorrect": "There are a few mistakes in this report.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "there be 与复数名词一致",
+      "warmupExplanation": "a few mistakes 是复数，因此使用 there are。",
+      "aiRole": "老师",
+      "mission": "理解错误并提出修改方案",
+      "opening": "Hi! I'm Maya. Let's practise: 理解修改意见.",
+      "hint": "There are a few mistakes in this report.",
+      "briefing": "你正在进行“理解修改意见”场景练习，Maya 扮演老师。",
+      "completionGoals": [
+        "理解错误并提出修改方案",
+        "使用核心表达：There are a few mistakes in this report.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "too-enough",
+      "number": "44",
+      "order": 44,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U8",
+      "unitTitle": "清晰表达",
+      "icon": "◆",
+      "title": "太过与足够",
+      "subtitle": "Use too and enough",
+      "status": "draft",
+      "visible": false,
+      "phrase": "This bag is too heavy for me.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明某物为什么不合适。",
+      "meaning": "这个包对我来说太重了。",
+      "answerTip": "先掌握核心表达“This bag is too heavy for me.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "too",
+          "",
+          "too"
+        ],
+        [
+          "enough",
+          "",
+          "enough"
+        ],
+        [
+          "heavy",
+          "",
+          "heavy"
+        ],
+        [
+          "light",
+          "",
+          "light"
+        ],
+        [
+          "large",
+          "",
+          "large"
+        ],
+        [
+          "small",
+          "",
+          "small"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 103-107 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "This bag is heavy too for me.",
+        "correct": false,
+        "grammarFocus": "too 位于形容词前",
+        "explanation": "表示“太重”时应使用 too heavy。",
+        "correction": "This bag is too heavy for me.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "is",
+          "too",
+          "heavy"
+        ]
+      },
+      "warmupWrong": "This bag is heavy too for me.",
+      "warmupCorrect": "This bag is too heavy for me.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "too 位于形容词前",
+      "warmupExplanation": "表示“太重”时应使用 too heavy。",
+      "aiRole": "商店店员",
+      "mission": "说明某物为什么不合适",
+      "opening": "Hi! I'm Maya. Let's practise: 太过与足够.",
+      "hint": "This bag is too heavy for me.",
+      "briefing": "你正在进行“太过与足够”场景练习，Maya 扮演商店店员。",
+      "completionGoals": [
+        "说明某物为什么不合适",
+        "使用核心表达：This bag is too heavy for me.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "compare-options",
+      "number": "45",
+      "order": 45,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U8",
+      "unitTitle": "清晰表达",
+      "icon": "✦",
+      "title": "比较选择",
+      "subtitle": "Compare two options",
+      "status": "draft",
+      "visible": false,
+      "phrase": "This model is cheaper and easier to use.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够比较两个方案并作出选择。",
+      "meaning": "这个型号更便宜，也更容易使用。",
+      "answerTip": "先掌握核心表达“This model is cheaper and easier to use.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "cheap",
+          "",
+          "cheap"
+        ],
+        [
+          "expensive",
+          "",
+          "expensive"
+        ],
+        [
+          "easy",
+          "",
+          "easy"
+        ],
+        [
+          "better",
+          "",
+          "better"
+        ],
+        [
+          "model",
+          "",
+          "model"
+        ],
+        [
+          "compare",
+          "",
+          "compare"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 107-112 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "This model is more cheaper than that one.",
+        "correct": false,
+        "grammarFocus": "避免双重比较级",
+        "explanation": "cheaper 已经是比较级，前面不能再加 more。",
+        "correction": "This model is cheaper than that one.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "is",
+          "cheaper",
+          "than"
+        ]
+      },
+      "warmupWrong": "This model is more cheaper than that one.",
+      "warmupCorrect": "This model is cheaper than that one.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "避免双重比较级",
+      "warmupExplanation": "cheaper 已经是比较级，前面不能再加 more。",
+      "aiRole": "产品顾问",
+      "mission": "比较两个方案并作出选择",
+      "opening": "Hi! I'm Maya. Let's practise: 比较选择.",
+      "hint": "This model is cheaper and easier to use.",
+      "briefing": "你正在进行“比较选择”场景练习，Maya 扮演产品顾问。",
+      "completionGoals": [
+        "比较两个方案并作出选择",
+        "使用核心表达：This model is cheaper and easier to use.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "money-quantity",
+      "number": "46",
+      "order": 46,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U8",
+      "unitTitle": "清晰表达",
+      "icon": "▲",
+      "title": "数量与零钱",
+      "subtitle": "Talk about quantity",
+      "status": "draft",
+      "visible": false,
+      "phrase": "I have some cash, but I do not have any change.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明付款方式和零钱情况。",
+      "meaning": "我有现金，但没有零钱。",
+      "answerTip": "先掌握核心表达“I have some cash, but I do not have any change.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "some",
+          "",
+          "some"
+        ],
+        [
+          "any",
+          "",
+          "any"
+        ],
+        [
+          "none",
+          "",
+          "none"
+        ],
+        [
+          "change",
+          "",
+          "change"
+        ],
+        [
+          "cash",
+          "",
+          "cash"
+        ],
+        [
+          "each",
+          "",
+          "each"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 113-116 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "I have some cash, but I do not have any change.",
+        "correct": true,
+        "grammarFocus": "肯定句 some / 否定句 any",
+        "explanation": "肯定分句使用 some，否定分句使用 any，搭配正确。",
+        "correction": "I have some cash, but I do not have any change.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "some",
+          "but",
+          "any"
+        ]
+      },
+      "warmupWrong": "I have some cash, but I do not have any change.",
+      "warmupCorrect": "I have some cash, but I do not have any change.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "肯定句 some / 否定句 any",
+      "warmupExplanation": "肯定分句使用 some，否定分句使用 any，搭配正确。",
+      "aiRole": "收银员",
+      "mission": "说明付款方式和零钱情况",
+      "opening": "Hi! I'm Maya. Let's practise: 数量与零钱.",
+      "hint": "I have some cash, but I do not have any change.",
+      "briefing": "你正在进行“数量与零钱”场景练习，Maya 扮演收银员。",
+      "completionGoals": [
+        "说明付款方式和零钱情况",
+        "使用核心表达：I have some cash, but I do not have any change.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "past-in-progress",
+      "number": "47",
+      "order": 47,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U8",
+      "unitTitle": "清晰表达",
+      "icon": "■",
+      "title": "当时正在做什么",
+      "subtitle": "Describe an interrupted action",
+      "status": "draft",
+      "visible": false,
+      "phrase": "I was having breakfast when you called.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明某事发生时正在做什么。",
+      "meaning": "你打电话时我正在吃早餐。",
+      "answerTip": "先掌握核心表达“I was having breakfast when you called.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "was",
+          "",
+          "was"
+        ],
+        [
+          "were",
+          "",
+          "were"
+        ],
+        [
+          "breakfast",
+          "",
+          "breakfast"
+        ],
+        [
+          "call",
+          "",
+          "call"
+        ],
+        [
+          "when",
+          "",
+          "when"
+        ],
+        [
+          "happen",
+          "",
+          "happen"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 117-120 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "I were having breakfast when you called.",
+        "correct": false,
+        "grammarFocus": "过去进行时主谓一致",
+        "explanation": "主语 I 在过去进行时中使用 was。",
+        "correction": "I was having breakfast when you called.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "I",
+          "was",
+          "having"
+        ]
+      },
+      "warmupWrong": "I were having breakfast when you called.",
+      "warmupCorrect": "I was having breakfast when you called.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "过去进行时主谓一致",
+      "warmupExplanation": "主语 I 在过去进行时中使用 was。",
+      "aiRole": "朋友",
+      "mission": "说明某事发生时正在做什么",
+      "opening": "Hi! I'm Maya. Let's practise: 当时正在做什么.",
+      "hint": "I was having breakfast when you called.",
+      "briefing": "你正在进行“当时正在做什么”场景练习，Maya 扮演朋友。",
+      "completionGoals": [
+        "说明某事发生时正在做什么",
+        "使用核心表达：I was having breakfast when you called.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "tell-a-story",
+      "number": "48",
+      "order": 48,
+      "band": "A2",
+      "level": "A2",
+      "unit": "U8",
+      "unitTitle": "清晰表达",
+      "icon": "◎",
+      "title": "讲一个小故事",
+      "subtitle": "Retell events in order",
+      "status": "draft",
+      "visible": false,
+      "phrase": "First I heard a noise, then I opened the door.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够按顺序讲述一件真实小事。",
+      "meaning": "我先听到声音，然后打开了门。",
+      "answerTip": "先掌握核心表达“First I heard a noise, then I opened the door.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "first",
+          "",
+          "first"
+        ],
+        [
+          "then",
+          "",
+          "then"
+        ],
+        [
+          "suddenly",
+          "",
+          "suddenly"
+        ],
+        [
+          "heard",
+          "",
+          "heard"
+        ],
+        [
+          "opened",
+          "",
+          "opened"
+        ],
+        [
+          "story",
+          "",
+          "story"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 119-120 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "First I heard a noise, then I opened the door.",
+        "correct": true,
+        "grammarFocus": "一般过去时叙述连续事件",
+        "explanation": "heard 和 opened 都使用过去式，时态一致。",
+        "correction": "First I heard a noise, then I opened the door.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "heard",
+          "then",
+          "opened"
+        ]
+      },
+      "warmupWrong": "First I heard a noise, then I opened the door.",
+      "warmupCorrect": "First I heard a noise, then I opened the door.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "一般过去时叙述连续事件",
+      "warmupExplanation": "heard 和 opened 都使用过去式，时态一致。",
+      "aiRole": "播客主持人",
+      "mission": "按顺序讲述一件真实小事",
+      "opening": "Hi! I'm Maya. Let's practise: 讲一个小故事.",
+      "hint": "First I heard a noise, then I opened the door.",
+      "briefing": "你正在进行“讲一个小故事”场景练习，Maya 扮演播客主持人。",
+      "completionGoals": [
+        "按顺序讲述一件真实小事",
+        "使用核心表达：First I heard a noise, then I opened the door.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}

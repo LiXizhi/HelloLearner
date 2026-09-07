@@ -4,7 +4,7 @@ export const CHANNEL = 'aichat.external-tool.v1';
 export const DEFAULT_WORKSPACE = 'HelloLearner';
 export const SCHEMA_VERSION = 1;
 export const DATA_ROOT = '.hellolearner';
-export const SDK_CDN_URL = 'https://cdn.keepwork.com/sdk/keepworkSDK.iife.js?v=c1ff58c09d76';
+export const SDK_CDN_URL = 'https://cdn.keepwork.com/sdk/keepworkSDK.iife.js?v=1c493a6eeff0';
 export const LIVE2D_CDN = 'https://cdn.keepwork.com/digitalhuman/live2d/';
 export const TUTOR_SKILL_ID = 'local-language-learner';
 

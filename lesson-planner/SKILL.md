@@ -25,7 +25,10 @@ not invent assessments, mastery, scores or completed practice.
 Default to 14 daily lessons, 10 minutes (20 if selected in the supplied context).
 If the user changes duration or length, honor it within 1–60 lessons and 10/20
 minutes per day. Ask at most one short question if an essential goal is missing;
-otherwise draft an outline. Revisions return a complete replacement outline.
+otherwise draft an outline. Group lessons into named big-topic units (for example
+出行、住宿、餐饮), each with 1–6 related lessons. Return a units map and a unit
+ID on every lesson; keep each unit together in the ordered outline. Group by
+teaching topic, not arbitrary day counts. Revisions return a complete replacement outline.
 Only the learner's Save action commits it. Every lesson needs a concrete outcome,
 multiple timed steps, and a progression from supported practice to application
 and review. Vary and repeat the supported step types where useful. Never fill a
@@ -34,7 +37,7 @@ course with identical activities under different titles.
 ## Daily preparation
 
 Generate all activities for only the requested day from its reviewed summary.
-Retain the provided IDs, step order/types and minutes. Connect to previous lesson
+Use the requested lesson’s unit as its big-topic context. Retain the provided IDs, step order/types and minutes. Connect to previous lesson
 summaries and revisit real difficulties from feedback. Make tasks achievable in
 the time budget. Do not regenerate other days. Provide useful hints and accurate
 answer keys. Phrase matching is literal: use multiple acceptable expressions for

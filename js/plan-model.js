@@ -44,6 +44,23 @@ export function validatePlan(plan) {
     requireValue(text(lesson.title) && texts(lesson.objectives), '课程标题或目标无效');
     steps(lesson.steps, plan.dailyMinutes);
   });
+  requireValue(object(plan.units) && object(plan.unitFiles) && Object.keys(plan.units).length > 0, '计划需要主题单元和单元文件目录');
+  requireValue(Object.keys(plan.unitFiles).length === Object.keys(plan.units).length, '单元文件目录不一致');
+  for (const [unit, title] of Object.entries(plan.units)) {
+    requireValue(validId(unit) && text(title) && plan.unitFiles[unit] === `./units/${unit}.json`, '单元标题、ID 或相对路径无效');
+    const lessons = plan.lessons.filter(lesson => lesson.unit === unit);
+    requireValue(lessons.length > 0 && lessons.length <= 6, '每个主题单元需要 1–6 课');
+  }
+  const closed = new Set();
+  let previous;
+  for (const lesson of plan.lessons) {
+    requireValue(Object.hasOwn(plan.units, lesson.unit), '课程必须属于已定义的主题单元');
+    if (lesson.unit !== previous) {
+      requireValue(!closed.has(lesson.unit), '同一主题单元的课程需要连续排列');
+      if (previous) closed.add(previous);
+      previous = lesson.unit;
+    }
+  }
   return plan;
 }
 

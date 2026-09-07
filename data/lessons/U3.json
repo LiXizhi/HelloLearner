@@ -1,0 +1,676 @@
+{
+  "version": 1,
+  "units": {
+    "U3": "正在发生"
+  },
+  "lessons": [
+    {
+      "id": "actions-now",
+      "number": "13",
+      "order": 13,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U3",
+      "unitTitle": "正在发生",
+      "icon": "●",
+      "title": "此刻在做什么",
+      "subtitle": "Describe actions now",
+      "status": "draft",
+      "visible": false,
+      "phrase": "What are you doing?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够描述此刻正在进行的活动。",
+      "meaning": "你正在做什么？",
+      "answerTip": "先掌握核心表达“What are you doing?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "doing",
+          "",
+          "doing"
+        ],
+        [
+          "reading",
+          "",
+          "reading"
+        ],
+        [
+          "working",
+          "",
+          "working"
+        ],
+        [
+          "cooking",
+          "",
+          "cooking"
+        ],
+        [
+          "watching",
+          "",
+          "watching"
+        ],
+        [
+          "now",
+          "",
+          "now"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 31-34 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "What are you do now?",
+        "correct": false,
+        "grammarFocus": "现在进行时 be + V-ing",
+        "explanation": "are 后应使用 doing，构成现在进行时。",
+        "correction": "What are you doing now?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "What",
+          "are",
+          "doing"
+        ]
+      },
+      "warmupWrong": "What are you do now?",
+      "warmupCorrect": "What are you doing now?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "现在进行时 be + V-ing",
+      "warmupExplanation": "are 后应使用 doing，构成现在进行时。",
+      "aiRole": "朋友",
+      "mission": "描述此刻正在进行的活动",
+      "opening": "Hi! I'm Maya. Let's practise: 此刻在做什么.",
+      "hint": "What are you doing?",
+      "briefing": "你正在进行“此刻在做什么”场景练习，Maya 扮演朋友。",
+      "completionGoals": [
+        "描述此刻正在进行的活动",
+        "使用核心表达：What are you doing?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "small-talk",
+      "number": "14",
+      "order": 14,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U3",
+      "unitTitle": "正在发生",
+      "icon": "◆",
+      "title": "轻松寒暄",
+      "subtitle": "Connect weather and actions",
+      "status": "draft",
+      "visible": false,
+      "phrase": "The sun is shining, so we are walking.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够描述天气和当前活动。",
+      "meaning": "阳光很好，所以我们正在散步。",
+      "answerTip": "先掌握核心表达“The sun is shining, so we are walking.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "sun",
+          "",
+          "sun"
+        ],
+        [
+          "cloud",
+          "",
+          "cloud"
+        ],
+        [
+          "shine",
+          "",
+          "shine"
+        ],
+        [
+          "walk",
+          "",
+          "walk"
+        ],
+        [
+          "river",
+          "",
+          "river"
+        ],
+        [
+          "sky",
+          "",
+          "sky"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 33-34 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "The sun is shining, so we are walking.",
+        "correct": true,
+        "grammarFocus": "现在进行时 be + V-ing",
+        "explanation": "is shining 和 are walking 都符合现在进行时结构。",
+        "correction": "The sun is shining, so we are walking.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "is",
+          "shining",
+          "are"
+        ]
+      },
+      "warmupWrong": "The sun is shining, so we are walking.",
+      "warmupCorrect": "The sun is shining, so we are walking.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "现在进行时 be + V-ing",
+      "warmupExplanation": "is shining 和 are walking 都符合现在进行时结构。",
+      "aiRole": "散步伙伴",
+      "mission": "描述天气和当前活动",
+      "opening": "Hi! I'm Maya. Let's practise: 轻松寒暄.",
+      "hint": "The sun is shining, so we are walking.",
+      "briefing": "你正在进行“轻松寒暄”场景练习，Maya 扮演散步伙伴。",
+      "completionGoals": [
+        "描述天气和当前活动",
+        "使用核心表达：The sun is shining, so we are walking.",
+        "自然回应一次追问"
+      ],
+      "versions": [],
+      "practice": {
+        "number": "02",
+        "title": "轻松寒暄",
+        "phrase": "It's a beautiful day, isn't it?",
+        "phonetic": "/ɪts ə ˈbjuːtəfəl deɪ/",
+        "summary": "学习用天气自然开启对话，并礼貌回应对方。",
+        "heading": "怎么用天气开启寒暄？",
+        "meaning": "意思是“今天天气很好，不是吗？”，适合与邻居或同事轻松开启对话。",
+        "formula": [
+          [
+            "It's",
+            "It is"
+          ],
+          [
+            "a beautiful day",
+            "美好的一天"
+          ],
+          [
+            "isn't it?",
+            "不是吗"
+          ]
+        ],
+        "answerTip": "<b>Yes, it is!</b> = 是的，天气很好。<br>还可以补充 <b>Perfect for a walk.</b> 让回应更自然。",
+        "vocabulary": [
+          [
+            "beautiful",
+            "/ˈbjuːtəfəl/ · 美好的"
+          ],
+          [
+            "day",
+            "/deɪ/ · 一天"
+          ],
+          [
+            "weather",
+            "/ˈweðər/ · 天气"
+          ],
+          [
+            "walk",
+            "/wɔːk/ · 散步"
+          ],
+          [
+            "sunny",
+            "/ˈsʌni/ · 晴朗的"
+          ],
+          [
+            "today",
+            "/təˈdeɪ/ · 今天"
+          ]
+        ],
+        "sample": [
+          [
+            "It's a beautiful day, isn't it?",
+            "今天天气很好，不是吗？"
+          ],
+          [
+            "Yes, it is! Perfect for a walk.",
+            "是的！很适合散步。"
+          ],
+          [
+            "Absolutely. Enjoy your walk!",
+            "确实如此，祝你散步愉快！"
+          ]
+        ],
+        "welcome": "欢迎进入“轻松寒暄”主题。我们会练习用天气开启对话，并自然回应。",
+        "vocabIntro": "接下来的对话会用到 beautiful、day、weather、walk、sunny 和 today。",
+        "warmup": {
+          "kind": "grammar-judgment",
+          "sentence": "It's beautiful day, isn't it?",
+          "correct": false,
+          "grammarFocus": "单数可数名词前使用冠词",
+          "explanation": "单数可数名词 <b>day</b> 前需要冠词 <b>a</b>。",
+          "correction": [
+            "It's beautiful day, isn't it?",
+            "It's a beautiful day, isn't it?"
+          ]
+        },
+        "fills": [
+          {
+            "kind": "exact",
+            "prefix": "It's",
+            "suffix": "beautiful day, isn't it?",
+            "answer": "a",
+            "prompt": "补全寒暄句：",
+            "assist": "在单数名词前填入冠词。",
+            "fullSentence": "It's a beautiful day, isn't it?",
+            "translation": "今天天气很好，不是吗？",
+            "reason": "单数可数名词 day 前需要冠词 a。",
+            "memoryTip": "记住固定表达：<b>a beautiful day</b>。"
+          },
+          {
+            "kind": "exact",
+            "prefix": "Yes,",
+            "suffix": "is!",
+            "answer": "it",
+            "prompt": "怎么肯定回应天气？",
+            "assist": "填入指代天气的代词。",
+            "fullSentence": "Yes, it is!",
+            "translation": "是的，天气很好！",
+            "reason": "用 it 指代天气。",
+            "memoryTip": "天气话题常用 <b>it</b> 作主语。"
+          },
+          {
+            "kind": "exact",
+            "prefix": "Perfect",
+            "suffix": "a walk.",
+            "answer": "for",
+            "prompt": "补全更自然的回应：",
+            "assist": "填入表示“适合”的介词。",
+            "fullSentence": "Perfect for a walk.",
+            "translation": "很适合散步。",
+            "reason": "perfect for 表示“非常适合”。",
+            "memoryTip": "搭配：<b>perfect for + 名词</b>。"
+          }
+        ],
+        "briefing": [
+          "你在公寓门口遇到邻居 Maya，今天天气很好。",
+          "Maya 会先聊起天气。请回应她，并继续一句轻松的寒暄。"
+        ],
+        "role": "偶遇邻居",
+        "mission": "回应天气并延续话题",
+        "hint": "Yes, it is! Perfect for a walk.",
+        "opening": "It's a beautiful day, isn't it?",
+        "openingZh": "今天天气很好，不是吗？",
+        "demoAnswers": [
+          "Yes, it is!",
+          "Perfect for a walk.",
+          "How about you?"
+        ],
+        "answerPatterns": [
+          "\\b(?:yes|yeah|it is|beautiful|lovely)\\b",
+          "\\b(?:walk|outside|park|sunny)\\b",
+          "\\b(?:how about you|what about you|and you)\\b"
+        ],
+        "coachTurns": [
+          {
+            "directAnswer": "That sounds lovely!",
+            "bridge": "Yes, it is perfect for a walk. What do you like to do on sunny days?",
+            "nativeAssist": "听起来很不错！这种天气很适合散步。晴天时你喜欢做什么？"
+          },
+          {
+            "directAnswer": "Me too!",
+            "bridge": "I enjoy walking in the park. Is the weather usually sunny where you live?",
+            "nativeAssist": "我也是！我喜欢在公园散步。你住的地方通常天气晴朗吗？"
+          },
+          {
+            "directAnswer": "Great small talk!",
+            "bridge": "You responded naturally and kept the conversation going.",
+            "nativeAssist": "很好！你已经能自然回应并延续寒暄。",
+            "completed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "places-around",
+      "number": "15",
+      "order": 15,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U3",
+      "unitTitle": "正在发生",
+      "icon": "✦",
+      "title": "社区与地点",
+      "subtitle": "Describe places nearby",
+      "status": "draft",
+      "visible": false,
+      "phrase": "There is a café near my home.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够介绍居住地附近的设施。",
+      "meaning": "我家附近有一家咖啡馆。",
+      "answerTip": "先掌握核心表达“There is a café near my home.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "village",
+          "",
+          "village"
+        ],
+        [
+          "street",
+          "",
+          "street"
+        ],
+        [
+          "near",
+          "",
+          "near"
+        ],
+        [
+          "bridge",
+          "",
+          "bridge"
+        ],
+        [
+          "shop",
+          "",
+          "shop"
+        ],
+        [
+          "cafe",
+          "",
+          "cafe"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 35-36 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "There is a café near my home.",
+        "correct": true,
+        "grammarFocus": "there be 与单数名词一致",
+        "explanation": "a café 是单数，因此使用 there is。",
+        "correction": "There is a café near my home.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "There",
+          "is",
+          "a"
+        ]
+      },
+      "warmupWrong": "There is a café near my home.",
+      "warmupCorrect": "There is a café near my home.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "there be 与单数名词一致",
+      "warmupExplanation": "a café 是单数，因此使用 there is。",
+      "aiRole": "新邻居",
+      "mission": "介绍居住地附近的设施",
+      "opening": "Hi! I'm Maya. Let's practise: 社区与地点.",
+      "hint": "There is a café near my home.",
+      "briefing": "你正在进行“社区与地点”场景练习，Maya 扮演新邻居。",
+      "completionGoals": [
+        "介绍居住地附近的设施",
+        "使用核心表达：There is a café near my home.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "future-intention",
+      "number": "16",
+      "order": 16,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U3",
+      "unitTitle": "正在发生",
+      "icon": "▲",
+      "title": "准备做什么",
+      "subtitle": "Talk about intentions",
+      "status": "draft",
+      "visible": false,
+      "phrase": "I'm going to make dinner.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明接下来的计划。",
+      "meaning": "我准备做晚饭。",
+      "answerTip": "先掌握核心表达“I'm going to make dinner.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "going",
+          "",
+          "going"
+        ],
+        [
+          "make",
+          "",
+          "make"
+        ],
+        [
+          "paint",
+          "",
+          "paint"
+        ],
+        [
+          "wait",
+          "",
+          "wait"
+        ],
+        [
+          "dinner",
+          "",
+          "dinner"
+        ],
+        [
+          "tonight",
+          "",
+          "tonight"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 37-40 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "I'm going make dinner tonight.",
+        "correct": false,
+        "grammarFocus": "be going to + 动词原形",
+        "explanation": "going 后缺少 to，完整结构是 be going to + 动词原形。",
+        "correction": "I'm going to make dinner tonight.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "I'm",
+          "going",
+          "to"
+        ]
+      },
+      "warmupWrong": "I'm going make dinner tonight.",
+      "warmupCorrect": "I'm going to make dinner tonight.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "be going to + 动词原形",
+      "warmupExplanation": "going 后缺少 to，完整结构是 be going to + 动词原形。",
+      "aiRole": "室友",
+      "mission": "说明接下来的计划",
+      "opening": "Hi! I'm Maya. Let's practise: 准备做什么.",
+      "hint": "I'm going to make dinner.",
+      "briefing": "你正在进行“准备做什么”场景练习，Maya 扮演室友。",
+      "completionGoals": [
+        "说明接下来的计划",
+        "使用核心表达：I'm going to make dinner.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "there-is",
+      "number": "17",
+      "order": 17,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U3",
+      "unitTitle": "正在发生",
+      "icon": "■",
+      "title": "有没有",
+      "subtitle": "Ask whether something exists",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Is there any coffee left?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够确认家里还有什么。",
+      "meaning": "还有咖啡吗？",
+      "answerTip": "先掌握核心表达“Is there any coffee left?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "there",
+          "",
+          "there"
+        ],
+        [
+          "any",
+          "",
+          "any"
+        ],
+        [
+          "some",
+          "",
+          "some"
+        ],
+        [
+          "left",
+          "",
+          "left"
+        ],
+        [
+          "bottle",
+          "",
+          "bottle"
+        ],
+        [
+          "bread",
+          "",
+          "bread"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 41-44 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Is there any coffee left?",
+        "correct": true,
+        "grammarFocus": "there is 与不可数名词",
+        "explanation": "coffee 在这里是不可数名词，疑问句使用 Is there any...。",
+        "correction": "Is there any coffee left?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Is",
+          "there",
+          "any"
+        ]
+      },
+      "warmupWrong": "Is there any coffee left?",
+      "warmupCorrect": "Is there any coffee left?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "there is 与不可数名词",
+      "warmupExplanation": "coffee 在这里是不可数名词，疑问句使用 Is there any...。",
+      "aiRole": "家人",
+      "mission": "确认家里还有什么",
+      "opening": "Hi! I'm Maya. Let's practise: 有没有.",
+      "hint": "Is there any coffee left?",
+      "briefing": "你正在进行“有没有”场景练习，Maya 扮演家人。",
+      "completionGoals": [
+        "确认家里还有什么",
+        "使用核心表达：Is there any coffee left?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "can-you",
+      "number": "18",
+      "order": 18,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U3",
+      "unitTitle": "正在发生",
+      "icon": "◎",
+      "title": "请求帮助",
+      "subtitle": "Ask for help with can",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Can you help me with this box?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够礼貌请求并回应帮助。",
+      "meaning": "你能帮我搬这个箱子吗？",
+      "answerTip": "先掌握核心表达“Can you help me with this box?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "can",
+          "",
+          "can"
+        ],
+        [
+          "help",
+          "",
+          "help"
+        ],
+        [
+          "carry",
+          "",
+          "carry"
+        ],
+        [
+          "box",
+          "",
+          "box"
+        ],
+        [
+          "heavy",
+          "",
+          "heavy"
+        ],
+        [
+          "sure",
+          "",
+          "sure"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 45-46 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Can you to help me with this box?",
+        "correct": false,
+        "grammarFocus": "情态动词后使用动词原形",
+        "explanation": "can 后直接接 help，不使用 to。",
+        "correction": "Can you help me with this box?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Can",
+          "you",
+          "help"
+        ]
+      },
+      "warmupWrong": "Can you to help me with this box?",
+      "warmupCorrect": "Can you help me with this box?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "情态动词后使用动词原形",
+      "warmupExplanation": "can 后直接接 help，不使用 to。",
+      "aiRole": "同事",
+      "mission": "礼貌请求并回应帮助",
+      "opening": "Hi! I'm Maya. Let's practise: 请求帮助.",
+      "hint": "Can you help me with this box?",
+      "briefing": "你正在进行“请求帮助”场景练习，Maya 扮演同事。",
+      "completionGoals": [
+        "礼貌请求并回应帮助",
+        "使用核心表达：Can you help me with this box?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}

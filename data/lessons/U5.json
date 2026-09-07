@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "units": {
+    "U5": "健康与周末"
+  },
+  "lessons": [
+    {
+      "id": "at-the-doctor",
+      "number": "25",
+      "order": 25,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U5",
+      "unitTitle": "健康与周末",
+      "icon": "●",
+      "title": "身体不舒服",
+      "subtitle": "Explain a health problem",
+      "status": "draft",
+      "visible": false,
+      "phrase": "I have a bad cold and a headache.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明症状并听懂建议。",
+      "meaning": "我重感冒了，还有点头疼。",
+      "answerTip": "先掌握核心表达“I have a bad cold and a headache.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "cold",
+          "",
+          "cold"
+        ],
+        [
+          "headache",
+          "",
+          "headache"
+        ],
+        [
+          "temperature",
+          "",
+          "temperature"
+        ],
+        [
+          "doctor",
+          "",
+          "doctor"
+        ],
+        [
+          "better",
+          "",
+          "better"
+        ],
+        [
+          "rest",
+          "",
+          "rest"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 61-63 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "I have bad cold and a headache.",
+        "correct": false,
+        "grammarFocus": "单数可数名词前使用冠词",
+        "explanation": "cold 表示一次感冒时是单数可数名词，前面需要 a。",
+        "correction": "I have a bad cold and a headache.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "I",
+          "a",
+          "cold"
+        ]
+      },
+      "warmupWrong": "I have bad cold and a headache.",
+      "warmupCorrect": "I have a bad cold and a headache.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "单数可数名词前使用冠词",
+      "warmupExplanation": "cold 表示一次感冒时是单数可数名词，前面需要 a。",
+      "aiRole": "医生",
+      "mission": "说明症状并听懂建议",
+      "opening": "Hi! I'm Maya. Let's practise: 身体不舒服.",
+      "hint": "I have a bad cold and a headache.",
+      "briefing": "你正在进行“身体不舒服”场景练习，Maya 扮演医生。",
+      "completionGoals": [
+        "说明症状并听懂建议",
+        "使用核心表达：I have a bad cold and a headache.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "health-advice",
+      "number": "26",
+      "order": 26,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U5",
+      "unitTitle": "健康与周末",
+      "icon": "◆",
+      "title": "健康建议",
+      "subtitle": "Give simple advice",
+      "status": "draft",
+      "visible": false,
+      "phrase": "You should rest and drink some water.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够理解必须做和不能做的事。",
+      "meaning": "你应该休息并喝些水。",
+      "answerTip": "先掌握核心表达“You should rest and drink some water.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "should",
+          "",
+          "should"
+        ],
+        [
+          "must",
+          "",
+          "must"
+        ],
+        [
+          "rest",
+          "",
+          "rest"
+        ],
+        [
+          "water",
+          "",
+          "water"
+        ],
+        [
+          "medicine",
+          "",
+          "medicine"
+        ],
+        [
+          "bed",
+          "",
+          "bed"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 62-64 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "You should to rest and drink some water.",
+        "correct": false,
+        "grammarFocus": "情态动词后使用动词原形",
+        "explanation": "should 后直接接 rest，不使用 to。",
+        "correction": "You should rest and drink some water.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "should",
+          "rest",
+          "drink"
+        ]
+      },
+      "warmupWrong": "You should to rest and drink some water.",
+      "warmupCorrect": "You should rest and drink some water.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "情态动词后使用动词原形",
+      "warmupExplanation": "should 后直接接 rest，不使用 to。",
+      "aiRole": "健康顾问",
+      "mission": "理解必须做和不能做的事",
+      "opening": "Hi! I'm Maya. Let's practise: 健康建议.",
+      "hint": "You should rest and drink some water.",
+      "briefing": "你正在进行“健康建议”场景练习，Maya 扮演健康顾问。",
+      "completionGoals": [
+        "理解必须做和不能做的事",
+        "使用核心表达：You should rest and drink some water.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "permission-time",
+      "number": "27",
+      "order": 27,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U5",
+      "unitTitle": "健康与周末",
+      "icon": "✦",
+      "title": "时间与许可",
+      "subtitle": "Ask for permission",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Can I stay out until ten?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够询问回家时间并达成约定。",
+      "meaning": "我可以在外面待到十点吗？",
+      "answerTip": "先掌握核心表达“Can I stay out until ten?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "until",
+          "",
+          "until"
+        ],
+        [
+          "home",
+          "",
+          "home"
+        ],
+        [
+          "early",
+          "",
+          "early"
+        ],
+        [
+          "late",
+          "",
+          "late"
+        ],
+        [
+          "permission",
+          "",
+          "permission"
+        ],
+        [
+          "parent",
+          "",
+          "parent"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 65-66 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Can I stay out until ten?",
+        "correct": true,
+        "grammarFocus": "Can I + 动词原形询问许可",
+        "explanation": "can 后使用 stay，until 正确表示持续到十点。",
+        "correction": "Can I stay out until ten?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Can",
+          "stay",
+          "until"
+        ]
+      },
+      "warmupWrong": "Can I stay out until ten?",
+      "warmupCorrect": "Can I stay out until ten?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "Can I + 动词原形询问许可",
+      "warmupExplanation": "can 后使用 stay，until 正确表示持续到十点。",
+      "aiRole": "寄宿家庭家长",
+      "mission": "询问回家时间并达成约定",
+      "opening": "Hi! I'm Maya. Let's practise: 时间与许可.",
+      "hint": "Can I stay out until ten?",
+      "briefing": "你正在进行“时间与许可”场景练习，Maya 扮演寄宿家庭家长。",
+      "completionGoals": [
+        "询问回家时间并达成约定",
+        "使用核心表达：Can I stay out until ten?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "weekend-plans",
+      "number": "28",
+      "order": 28,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U5",
+      "unitTitle": "健康与周末",
+      "icon": "▲",
+      "title": "周末计划",
+      "subtitle": "Talk about the weekend",
+      "status": "draft",
+      "visible": false,
+      "phrase": "What are you going to do this weekend?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够交流周末计划。",
+      "meaning": "你这个周末准备做什么？",
+      "answerTip": "先掌握核心表达“What are you going to do this weekend?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "weekend",
+          "",
+          "weekend"
+        ],
+        [
+          "Saturday",
+          "",
+          "Saturday"
+        ],
+        [
+          "Sunday",
+          "",
+          "Sunday"
+        ],
+        [
+          "visit",
+          "",
+          "visit"
+        ],
+        [
+          "stay",
+          "",
+          "stay"
+        ],
+        [
+          "plan",
+          "",
+          "plan"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 67-68 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "What are you going to do this weekend?",
+        "correct": true,
+        "grammarFocus": "be going to 疑问句",
+        "explanation": "are 位于主语 you 前，going to 后接动词原形 do，结构正确。",
+        "correction": "What are you going to do this weekend?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "are",
+          "going",
+          "to"
+        ]
+      },
+      "warmupWrong": "What are you going to do this weekend?",
+      "warmupCorrect": "What are you going to do this weekend?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "be going to 疑问句",
+      "warmupExplanation": "are 位于主语 you 前，going to 后接动词原形 do，结构正确。",
+      "aiRole": "朋友",
+      "mission": "交流周末计划",
+      "opening": "Hi! I'm Maya. Let's practise: 周末计划.",
+      "hint": "What are you going to do this weekend?",
+      "briefing": "你正在进行“周末计划”场景练习，Maya 扮演朋友。",
+      "completionGoals": [
+        "交流周末计划",
+        "使用核心表达：What are you going to do this weekend?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "past-location",
+      "number": "29",
+      "order": 29,
+      "band": "A1+",
+      "level": "A1",
+      "unit": "U5",
+      "unitTitle": "健康与周末",
+      "icon": "■",
+      "title": "过去在哪里",
+      "subtitle": "Talk about past location",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Where were you yesterday afternoon?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明过去的地点。",
+      "meaning": "昨天下午你在哪里？",
+      "answerTip": "先掌握核心表达“Where were you yesterday afternoon?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "was",
+          "",
+          "was"
+        ],
+        [
+          "were",
+          "",
+          "were"
+        ],
+        [
+          "yesterday",
+          "",
+          "yesterday"
+        ],
+        [
+          "race",
+          "",
+          "race"
+        ],
+        [
+          "crowd",
+          "",
+          "crowd"
+        ],
+        [
+          "there",
+          "",
+          "there"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 69-70 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Where was you yesterday afternoon?",
+        "correct": false,
+        "grammarFocus": "过去式 be 的主谓一致",
+        "explanation": "主语 you 应与 were 搭配，不能使用 was。",
+        "correction": "Where were you yesterday afternoon?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Where",
+          "were",
+          "you"
+        ]
+      },
+      "warmupWrong": "Where was you yesterday afternoon?",
+      "warmupCorrect": "Where were you yesterday afternoon?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "过去式 be 的主谓一致",
+      "warmupExplanation": "主语 you 应与 were 搭配，不能使用 was。",
+      "aiRole": "活动组织者",
+      "mission": "说明过去的地点",
+      "opening": "Hi! I'm Maya. Let's practise: 过去在哪里.",
+      "hint": "Where were you yesterday afternoon?",
+      "briefing": "你正在进行“过去在哪里”场景练习，Maya 扮演活动组织者。",
+      "completionGoals": [
+        "说明过去的地点",
+        "使用核心表达：Where were you yesterday afternoon?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "past-time",
+      "number": "30",
+      "order": 30,
+      "band": "A1+",
+      "level": "A1",
+      "unit": "U5",
+      "unitTitle": "健康与周末",
+      "icon": "◎",
+      "title": "过去的时间",
+      "subtitle": "Ask when something happened",
+      "status": "draft",
+      "visible": false,
+      "phrase": "When did you arrive?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够说明过去事件的时间。",
+      "meaning": "你什么时候到的？",
+      "answerTip": "先掌握核心表达“When did you arrive?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "when",
+          "",
+          "when"
+        ],
+        [
+          "arrive",
+          "",
+          "arrive"
+        ],
+        [
+          "leave",
+          "",
+          "leave"
+        ],
+        [
+          "last",
+          "",
+          "last"
+        ],
+        [
+          "ago",
+          "",
+          "ago"
+        ],
+        [
+          "did",
+          "",
+          "did"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 71-72 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "When did you arrived?",
+        "correct": false,
+        "grammarFocus": "did 后使用动词原形",
+        "explanation": "did 已表示过去，后面的动词应使用原形 arrive。",
+        "correction": "When did you arrive?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "When",
+          "did",
+          "arrive"
+        ]
+      },
+      "warmupWrong": "When did you arrived?",
+      "warmupCorrect": "When did you arrive?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "did 后使用动词原形",
+      "warmupExplanation": "did 已表示过去，后面的动词应使用原形 arrive。",
+      "aiRole": "接待人员",
+      "mission": "说明过去事件的时间",
+      "opening": "Hi! I'm Maya. Let's practise: 过去的时间.",
+      "hint": "When did you arrive?",
+      "briefing": "你正在进行“过去的时间”场景练习，Maya 扮演接待人员。",
+      "completionGoals": [
+        "说明过去事件的时间",
+        "使用核心表达：When did you arrive?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}

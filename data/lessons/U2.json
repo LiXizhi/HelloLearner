@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "units": {
+    "U2": "身边事物"
+  },
+  "lessons": [
+    {
+      "id": "possessions",
+      "number": "07",
+      "order": 7,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U2",
+      "unitTitle": "身边事物",
+      "icon": "●",
+      "title": "物品归属",
+      "subtitle": "Ask who owns something",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Is this your bag?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够确认物品属于谁。",
+      "meaning": "这是你的包吗？",
+      "answerTip": "先掌握核心表达“Is this your bag?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "this",
+          "",
+          "this"
+        ],
+        [
+          "that",
+          "",
+          "that"
+        ],
+        [
+          "bag",
+          "",
+          "bag"
+        ],
+        [
+          "your",
+          "",
+          "your"
+        ],
+        [
+          "mine",
+          "",
+          "mine"
+        ],
+        [
+          "whose",
+          "",
+          "whose"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 11-12 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Is this you bag?",
+        "correct": false,
+        "grammarFocus": "名词前使用物主限定词",
+        "explanation": "bag 前应使用表示“你的”的 your，不能使用主格 you。",
+        "correction": "Is this your bag?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Is",
+          "this",
+          "your"
+        ]
+      },
+      "warmupWrong": "Is this you bag?",
+      "warmupCorrect": "Is this your bag?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "名词前使用物主限定词",
+      "warmupExplanation": "bag 前应使用表示“你的”的 your，不能使用主格 you。",
+      "aiRole": "失物招领员",
+      "mission": "确认物品属于谁",
+      "opening": "Hi! I'm Maya. Let's practise: 物品归属.",
+      "hint": "Is this your bag?",
+      "briefing": "你正在进行“物品归属”场景练习，Maya 扮演失物招领员。",
+      "completionGoals": [
+        "确认物品属于谁",
+        "使用核心表达：Is this your bag?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "colours",
+      "number": "08",
+      "order": 8,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U2",
+      "unitTitle": "身边事物",
+      "icon": "◆",
+      "title": "颜色与款式",
+      "subtitle": "Describe colour and style",
+      "status": "draft",
+      "visible": false,
+      "phrase": "What colour is your jacket?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够描述一件物品的颜色。",
+      "meaning": "你的夹克是什么颜色？",
+      "answerTip": "先掌握核心表达“What colour is your jacket?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "colour",
+          "",
+          "colour"
+        ],
+        [
+          "black",
+          "",
+          "black"
+        ],
+        [
+          "white",
+          "",
+          "white"
+        ],
+        [
+          "blue",
+          "",
+          "blue"
+        ],
+        [
+          "jacket",
+          "",
+          "jacket"
+        ],
+        [
+          "dress",
+          "",
+          "dress"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 13-14 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "What colour are your jacket?",
+        "correct": false,
+        "grammarFocus": "单数主语与 be 动词一致",
+        "explanation": "主语 your jacket 是单数，be 动词应使用 is。",
+        "correction": "What colour is your jacket?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "colour",
+          "is",
+          "jacket"
+        ]
+      },
+      "warmupWrong": "What colour are your jacket?",
+      "warmupCorrect": "What colour is your jacket?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "单数主语与 be 动词一致",
+      "warmupExplanation": "主语 your jacket 是单数，be 动词应使用 is。",
+      "aiRole": "服装店店员",
+      "mission": "描述一件物品的颜色",
+      "opening": "Hi! I'm Maya. Let's practise: 颜色与款式.",
+      "hint": "What colour is your jacket?",
+      "briefing": "你正在进行“颜色与款式”场景练习，Maya 扮演服装店店员。",
+      "completionGoals": [
+        "描述一件物品的颜色",
+        "使用核心表达：What colour is your jacket?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "choose-one",
+      "number": "09",
+      "order": 9,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U2",
+      "unitTitle": "身边事物",
+      "icon": "✦",
+      "title": "选择物品",
+      "subtitle": "Choose the right item",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Which one would you like?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够在多个物品中做出选择。",
+      "meaning": "你想要哪一个？",
+      "answerTip": "先掌握核心表达“Which one would you like?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "which",
+          "",
+          "which"
+        ],
+        [
+          "one",
+          "",
+          "one"
+        ],
+        [
+          "these",
+          "",
+          "these"
+        ],
+        [
+          "those",
+          "",
+          "those"
+        ],
+        [
+          "glass",
+          "",
+          "glass"
+        ],
+        [
+          "book",
+          "",
+          "book"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 21-24 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Which one would you like?",
+        "correct": true,
+        "grammarFocus": "情态动词疑问句语序",
+        "explanation": "would 位于主语 you 前，like 保持原形，结构正确。",
+        "correction": "Which one would you like?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Which",
+          "would",
+          "like"
+        ]
+      },
+      "warmupWrong": "Which one would you like?",
+      "warmupCorrect": "Which one would you like?",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "情态动词疑问句语序",
+      "warmupExplanation": "would 位于主语 you 前，like 保持原形，结构正确。",
+      "aiRole": "商店店员",
+      "mission": "在多个物品中做出选择",
+      "opening": "Hi! I'm Maya. Let's practise: 选择物品.",
+      "hint": "Which one would you like?",
+      "briefing": "你正在进行“选择物品”场景练习，Maya 扮演商店店员。",
+      "completionGoals": [
+        "在多个物品中做出选择",
+        "使用核心表达：Which one would you like?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "home-objects",
+      "number": "10",
+      "order": 10,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U2",
+      "unitTitle": "身边事物",
+      "icon": "▲",
+      "title": "家里的物品",
+      "subtitle": "Name household objects",
+      "status": "draft",
+      "visible": false,
+      "phrase": "The cups are in the cupboard.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够介绍家中物品的位置。",
+      "meaning": "杯子在橱柜里。",
+      "answerTip": "先掌握核心表达“The cups are in the cupboard.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "kitchen",
+          "",
+          "kitchen"
+        ],
+        [
+          "cup",
+          "",
+          "cup"
+        ],
+        [
+          "cupboard",
+          "",
+          "cupboard"
+        ],
+        [
+          "table",
+          "",
+          "table"
+        ],
+        [
+          "shelf",
+          "",
+          "shelf"
+        ],
+        [
+          "room",
+          "",
+          "room"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 25-28 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "The cups is in the cupboard.",
+        "correct": false,
+        "grammarFocus": "复数主语与 be 动词一致",
+        "explanation": "cups 是复数，be 动词应使用 are。",
+        "correction": "The cups are in the cupboard.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "cups",
+          "are",
+          "in"
+        ]
+      },
+      "warmupWrong": "The cups is in the cupboard.",
+      "warmupCorrect": "The cups are in the cupboard.",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "复数主语与 be 动词一致",
+      "warmupExplanation": "cups 是复数，be 动词应使用 are。",
+      "aiRole": "来访的朋友",
+      "mission": "介绍家中物品的位置",
+      "opening": "Hi! I'm Maya. Let's practise: 家里的物品.",
+      "hint": "The cups are in the cupboard.",
+      "briefing": "你正在进行“家里的物品”场景练习，Maya 扮演来访的朋友。",
+      "completionGoals": [
+        "介绍家中物品的位置",
+        "使用核心表达：The cups are in the cupboard.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "where-is-it",
+      "number": "11",
+      "order": 11,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U2",
+      "unitTitle": "身边事物",
+      "icon": "■",
+      "title": "询问位置",
+      "subtitle": "Ask where things are",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Where are my keys?",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够找到一件遗失物品。",
+      "meaning": "我的钥匙在哪里？",
+      "answerTip": "先掌握核心表达“Where are my keys?”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "where",
+          "",
+          "where"
+        ],
+        [
+          "key",
+          "",
+          "key"
+        ],
+        [
+          "on",
+          "",
+          "on"
+        ],
+        [
+          "in",
+          "",
+          "in"
+        ],
+        [
+          "under",
+          "",
+          "under"
+        ],
+        [
+          "beside",
+          "",
+          "beside"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 26-28 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Where is my keys?",
+        "correct": false,
+        "grammarFocus": "复数主语与 be 动词一致",
+        "explanation": "my keys 是复数，be 动词应使用 are。",
+        "correction": "Where are my keys?",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Where",
+          "are",
+          "keys"
+        ]
+      },
+      "warmupWrong": "Where is my keys?",
+      "warmupCorrect": "Where are my keys?",
+      "warmupIsCorrect": false,
+      "warmupGrammarFocus": "复数主语与 be 动词一致",
+      "warmupExplanation": "my keys 是复数，be 动词应使用 are。",
+      "aiRole": "室友",
+      "mission": "找到一件遗失物品",
+      "opening": "Hi! I'm Maya. Let's practise: 询问位置.",
+      "hint": "Where are my keys?",
+      "briefing": "你正在进行“询问位置”场景练习，Maya 扮演室友。",
+      "completionGoals": [
+        "找到一件遗失物品",
+        "使用核心表达：Where are my keys?",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    },
+    {
+      "id": "simple-instructions",
+      "number": "12",
+      "order": 12,
+      "band": "A1",
+      "level": "A1",
+      "unit": "U2",
+      "unitTitle": "身边事物",
+      "icon": "◎",
+      "title": "简单指令",
+      "subtitle": "Give simple instructions",
+      "status": "draft",
+      "visible": false,
+      "phrase": "Please put it on the table.",
+      "phonetic": "",
+      "summary": "完成本课后，学习者能够听懂并完成简单指令。",
+      "meaning": "请把它放在桌上。",
+      "answerTip": "先掌握核心表达“Please put it on the table.”，再替换关键词完成自己的表达。",
+      "vocabulary": [
+        [
+          "put",
+          "",
+          "put"
+        ],
+        [
+          "give",
+          "",
+          "give"
+        ],
+        [
+          "open",
+          "",
+          "open"
+        ],
+        [
+          "close",
+          "",
+          "close"
+        ],
+        [
+          "table",
+          "",
+          "table"
+        ],
+        [
+          "please",
+          "",
+          "please"
+        ]
+      ],
+      "sourceRefs": "第一册 Lesson 20-30 · 提取主题与语言递进，内容为原创改写",
+      "exercisePatterns": [
+        "判断完整句中的单一语法点",
+        "在完整句中补全语法成分",
+        "在 AI 场景中完成真实任务"
+      ],
+      "grammarJudgment": {
+        "sentence": "Please put it on the table.",
+        "correct": true,
+        "grammarFocus": "祈使句使用动词原形",
+        "explanation": "please 后使用动词原形 put，结构正确。",
+        "correction": "Please put it on the table.",
+        "kind": "grammar-judgment",
+        "targets": [
+          "Please",
+          "put",
+          "it"
+        ]
+      },
+      "warmupWrong": "Please put it on the table.",
+      "warmupCorrect": "Please put it on the table.",
+      "warmupIsCorrect": true,
+      "warmupGrammarFocus": "祈使句使用动词原形",
+      "warmupExplanation": "please 后使用动词原形 put，结构正确。",
+      "aiRole": "一起整理房间的朋友",
+      "mission": "听懂并完成简单指令",
+      "opening": "Hi! I'm Maya. Let's practise: 简单指令.",
+      "hint": "Please put it on the table.",
+      "briefing": "你正在进行“简单指令”场景练习，Maya 扮演一起整理房间的朋友。",
+      "completionGoals": [
+        "听懂并完成简单指令",
+        "使用核心表达：Please put it on the table.",
+        "自然回应一次追问"
+      ],
+      "versions": []
+    }
+  ]
+}
