@@ -1,0 +1,1740 @@
+{
+  "version": 1,
+  "scenarios": {
+    "directions": {
+      "id": "directions",
+      "titleZh": "问路与指路",
+      "titleEn": "Asking for directions",
+      "level": "初级",
+      "theme": "daily",
+      "aiRoleZh": "热心的当地居民",
+      "aiRoleEn": "a helpful local",
+      "learnerRoleZh": "正在问路的游客",
+      "learnerRoleEn": "a visitor asking for directions",
+      "descriptionZh": "这是一个在陌生街区问路的场景。接下来我会扮演当地居民，你要礼貌说明目的地、确认路线，并在听懂后回应。",
+      "missionZh": "完成询问目的地、确认方向和结束问路三个任务。",
+      "vocabulary": [
+        "excuse me",
+        "station",
+        "straight",
+        "left",
+        "right",
+        "repeat"
+      ],
+      "goals": [
+        {
+          "id": "destination",
+          "labelZh": "礼貌询问目的地",
+          "prompt": "Hi there! Can I help you find somewhere?",
+          "example": "Yes, please. How can I get to the train station?",
+          "retry": "No problem. Tell me where you would like to go.",
+          "success": "Of course. I can help you get there.",
+          "slotLabelZh": "目的地",
+          "terms": [
+            "station",
+            "train station",
+            "bus station",
+            "hotel",
+            "airport",
+            "museum",
+            "cafe",
+            "restaurant",
+            "bank",
+            "pharmacy"
+          ],
+          "patterns": [
+            "\\b(?:how|where)\\b.*\\b(?:get|go|find)\\b.*\\b(?:station|hotel|airport|museum|cafe|restaurant|bank|pharmacy)\\b",
+            "\\b(?:i(?:'d| would) like|i need|i want|looking for)\\b.*\\b(?:station|hotel|airport|museum|cafe|restaurant|bank|pharmacy)\\b",
+            "\\b(?:station|hotel|airport|museum|cafe|restaurant|bank|pharmacy)\\b(?:\\s+please)?[.!]?$"
+          ],
+          "aliases": {
+            "railway station": "train station",
+            "train terminal": "train station",
+            "coach station": "bus station",
+            "café": "cafe"
+          }
+        },
+        {
+          "id": "confirm-directions",
+          "labelZh": "确认听懂路线",
+          "prompt": "Go straight for two blocks, then turn left. Does that make sense?",
+          "example": "Yes. I go straight and then turn left.",
+          "retry": "That is okay. Try saying the directions back to me.",
+          "success": "Exactly. Go straight first, and then turn left.",
+          "slotLabelZh": "方向",
+          "terms": [
+            "straight",
+            "left",
+            "right",
+            "two blocks",
+            "got it",
+            "understand",
+            "makes sense",
+            "repeat",
+            "again"
+          ],
+          "patterns": [
+            "\\b(?:go|walk|keep going)\\b.*\\bstraight\\b.*\\b(?:left|right)\\b",
+            "\\b(?:yes|okay|ok|got it|i understand|that makes sense)\\b",
+            "\\b(?:could|can|would)\\s+you\\s+(?:repeat|say).*(?:again)?\\b"
+          ],
+          "aliases": {
+            "go ahead": "straight",
+            "turn to the left": "left",
+            "turn to the right": "right",
+            "i see": "understand"
+          }
+        },
+        {
+          "id": "close-directions",
+          "labelZh": "结束问路",
+          "prompt": "Would you like me to repeat the directions?",
+          "example": "No, thank you. I got it.",
+          "retry": "No worries. Please tell me whether you want me to repeat it.",
+          "success": "Great. Have a safe trip!",
+          "slotLabelZh": "是否需要重复",
+          "terms": [
+            "yes",
+            "no",
+            "please",
+            "repeat",
+            "again",
+            "got it",
+            "understand",
+            "thank you",
+            "thanks"
+          ],
+          "patterns": [
+            "\\b(?:yes|sure|please)\\b.*\\b(?:repeat|again)\\b",
+            "\\b(?:no|nope|not necessary)\\b.*\\b(?:thank you|thanks|got it|understand)?\\b",
+            "\\b(?:thank you|thanks)\\b.*\\b(?:got it|understand)?\\b"
+          ],
+          "aliases": {
+            "one more time": "repeat",
+            "say it again": "repeat",
+            "no thanks": "no, thank you"
+          }
+        }
+      ],
+      "redirect": "Let us come back to finding your destination.",
+      "completion": "Great job! You asked for directions, confirmed the route, and ended the conversation politely."
+    },
+    "pharmacy": {
+      "id": "pharmacy",
+      "titleZh": "在药店买药",
+      "titleEn": "At the pharmacy",
+      "level": "初中级",
+      "theme": "daily",
+      "aiRoleZh": "药剂师",
+      "aiRoleEn": "a pharmacist",
+      "learnerRoleZh": "需要用药建议的顾客",
+      "learnerRoleEn": "a customer asking for medicine",
+      "descriptionZh": "这是一个在药店说明身体不适的场景。接下来我会扮演药剂师，你要描述症状、持续时间和过敏情况。",
+      "missionZh": "完成说明症状、说明持续时间和回答过敏情况三个任务。",
+      "vocabulary": [
+        "headache",
+        "cough",
+        "fever",
+        "medicine",
+        "days",
+        "allergic"
+      ],
+      "goals": [
+        {
+          "id": "symptom",
+          "labelZh": "说明症状",
+          "prompt": "Hello. How can I help you today?",
+          "example": "I have a headache and a bad cough.",
+          "retry": "That is okay. Tell me what feels wrong.",
+          "success": "I am sorry you are not feeling well.",
+          "slotLabelZh": "症状",
+          "terms": [
+            "headache",
+            "cough",
+            "cold",
+            "sore throat",
+            "fever",
+            "stomachache",
+            "pain",
+            "dizzy",
+            "nauseous",
+            "allergy"
+          ],
+          "patterns": [
+            "\\b(?:i have|i(?:'ve| have) got|i feel|i am feeling)\\b.*\\b(?:headache|cough|cold|sore throat|fever|stomachache|pain|dizzy|nauseous|allergy)\\b",
+            "\\b(?:my head|my throat|my stomach|my back)\\b.*\\b(?:hurts|aches|is sore)\\b",
+            "^\\s*(?:a\\s+)?(?:headache|cough|cold|sore throat|fever|stomachache)\\s*[.!]?$"
+          ],
+          "aliases": {
+            "tummy ache": "stomachache",
+            "stomach ache": "stomachache",
+            "high temperature": "fever",
+            "feel sick": "nauseous"
+          }
+        },
+        {
+          "id": "duration",
+          "labelZh": "说明持续时间",
+          "prompt": "How long have you had these symptoms?",
+          "example": "I have had them for three days.",
+          "retry": "No problem. Tell me how many hours, days, or weeks it has been.",
+          "success": "Thank you. That helps me understand the situation.",
+          "slotLabelZh": "持续时间",
+          "terms": [
+            "today",
+            "since yesterday",
+            "one day",
+            "two days",
+            "three days",
+            "a few days",
+            "one week",
+            "two weeks",
+            "for a while"
+          ],
+          "patterns": [
+            "\\b(?:for|since)\\b\\s+(?:about\\s+)?(?:\\d+|one|two|three|a few|several)\\s*(?:hour|hours|day|days|week|weeks)?\\b",
+            "\\b(?:today|yesterday|last night|this morning|a few days|for a while)\\b",
+            "\\b(?:it started|they started|i have had it|i have had them)\\b.*\\b(?:today|yesterday|ago|day|days|week|weeks)\\b"
+          ],
+          "aliases": {
+            "couple of days": "two days",
+            "several days": "a few days",
+            "from yesterday": "since yesterday"
+          }
+        },
+        {
+          "id": "allergies",
+          "labelZh": "回答过敏情况",
+          "prompt": "Do you have any allergies to medicine?",
+          "example": "No, I do not have any allergies.",
+          "retry": "That is okay. Please tell me yes or no, and name the medicine if you know it.",
+          "success": "Thank you. I will keep that in mind.",
+          "slotLabelZh": "过敏情况",
+          "terms": [
+            "no",
+            "none",
+            "not allergic",
+            "yes",
+            "allergic",
+            "penicillin",
+            "aspirin",
+            "ibuprofen",
+            "antibiotics"
+          ],
+          "patterns": [
+            "\\b(?:no|none|nope|not that i know of|i do not|i don(?:'t| not))\\b.*\\b(?:allerg|medicine)?",
+            "\\b(?:yes|i am|i(?:'m| am))\\b.*\\ballergic\\b.*\\b(?:penicillin|aspirin|ibuprofen|antibiotics|medicine)?\\b",
+            "\\ballergic\\s+to\\s+[a-z-]+\\b"
+          ],
+          "aliases": {
+            "not that i know of": "none",
+            "no known allergies": "none",
+            "antibiotic": "antibiotics"
+          }
+        }
+      ],
+      "redirect": "Let us come back to choosing the right medicine for you.",
+      "completion": "Well done! You explained your symptoms, their duration, and your allergy information clearly."
+    },
+    "neighbour": {
+      "id": "neighbour",
+      "titleZh": "认识新邻居",
+      "titleEn": "Meeting a neighbour",
+      "level": "初级",
+      "theme": "daily",
+      "aiRoleZh": "刚搬来的邻居",
+      "aiRoleEn": "your new neighbour",
+      "learnerRoleZh": "住在隔壁的邻居",
+      "learnerRoleEn": "the neighbour next door",
+      "descriptionZh": "这是一个第一次认识新邻居的场景。接下来我会扮演刚搬来的邻居，你要介绍自己、聊居住时间，并推荐附近的地点。",
+      "missionZh": "完成自我介绍、说明居住时间和推荐附近地点三个任务。",
+      "vocabulary": [
+        "neighbour",
+        "next door",
+        "live",
+        "nearby",
+        "cafe",
+        "welcome"
+      ],
+      "goals": [
+        {
+          "id": "introduction",
+          "labelZh": "介绍自己",
+          "prompt": "Hi! I just moved in next door. What is your name?",
+          "example": "Hi! I'm Alex. Nice to meet you.",
+          "retry": "No problem. Introduce yourself with your name.",
+          "success": "Nice to meet you! It is great to know a neighbour.",
+          "slotLabelZh": "姓名",
+          "terms": [
+            "my name is",
+            "i'm",
+            "i am",
+            "nice to meet you",
+            "hello",
+            "hi"
+          ],
+          "patterns": [
+            "\\b(?:my name is|i am|i['’]?m)\\s+[a-z][a-z'-]*\\b",
+            "\\b(?:hi|hello|hey)\\b.*\\b(?:nice to meet you|my name|i am|i['’]?m)\\b",
+            "^\\s*[a-z][a-z'-]{1,24}\\s*[.!]?$"
+          ],
+          "aliases": {
+            "pleased to meet you": "nice to meet you",
+            "good to meet you": "nice to meet you"
+          }
+        },
+        {
+          "id": "time-living-here",
+          "labelZh": "说明居住时间",
+          "prompt": "How long have you lived in this neighbourhood?",
+          "example": "I have lived here for two years.",
+          "retry": "That is okay. Tell me when you moved here or how long you have lived here.",
+          "success": "That is good to know. You must know the area well.",
+          "slotLabelZh": "居住时间",
+          "terms": [
+            "just moved",
+            "recently",
+            "one month",
+            "six months",
+            "one year",
+            "two years",
+            "a few years",
+            "all my life"
+          ],
+          "patterns": [
+            "\\b(?:i have|i['’]?ve)\\s+lived\\s+here\\s+(?:for|since)\\b",
+            "\\b(?:i moved|we moved)\\s+here\\s+(?:in|last|about|recently)\\b",
+            "\\b(?:just moved|recently|all my life|\\d+\\s*(?:month|months|year|years))\\b"
+          ],
+          "aliases": {
+            "couple of years": "two years",
+            "my whole life": "all my life",
+            "not long": "recently"
+          }
+        },
+        {
+          "id": "local-recommendation",
+          "labelZh": "推荐附近地点",
+          "prompt": "Is there a good cafe or shop nearby?",
+          "example": "Yes. There is a great cafe around the corner.",
+          "retry": "No worries. Recommend one nearby place, or tell me there is not one.",
+          "success": "Thank you! I will check it out.",
+          "slotLabelZh": "附近地点",
+          "terms": [
+            "cafe",
+            "coffee shop",
+            "restaurant",
+            "park",
+            "supermarket",
+            "shop",
+            "pharmacy",
+            "gym",
+            "around the corner",
+            "nearby"
+          ],
+          "patterns": [
+            "\\b(?:there is|there['’]?s|you can try|you should visit|go to)\\b.*\\b(?:cafe|coffee shop|restaurant|park|supermarket|shop|pharmacy|gym)\\b",
+            "\\b(?:yes|sure)\\b.*\\b(?:nearby|around the corner|down the street|next to)\\b",
+            "\\b(?:no|not really|i do not know|i don['’]?t know)\\b"
+          ],
+          "aliases": {
+            "café": "cafe",
+            "grocery store": "supermarket",
+            "fitness centre": "gym"
+          }
+        }
+      ],
+      "redirect": "Let us come back to getting to know each other as neighbours.",
+      "completion": "Wonderful! You introduced yourself, shared how long you have lived here, and recommended a local place."
+    },
+    "coffee": {
+      "id": "coffee",
+      "titleZh": "咖啡店点单",
+      "titleEn": "Ordering coffee",
+      "level": "初级",
+      "theme": "food",
+      "aiRoleZh": "咖啡店店员",
+      "aiRoleEn": "a barista",
+      "learnerRoleZh": "来买咖啡的顾客",
+      "learnerRoleEn": "a customer ordering coffee",
+      "descriptionZh": "这是一个咖啡店点单的场景。接下来我会做点餐员，你是来买咖啡的顾客。你不需要照搬示例，只要回答符合点单语境就算正确。",
+      "missionZh": "完成选择饮品、选择杯型和选择堂食或外带三个任务。",
+      "freeTalkZh": "像真实点单一样自由说：美式、拿铁或其他饮品都可以。一句话里同时说出饮品、杯型和堂食/外带，会一次完成多个任务。",
+      "allowMultiGoalFromOneTurn": true,
+      "vocabulary": [
+        "americano",
+        "latte",
+        "medium",
+        "large",
+        "for here",
+        "to go"
+      ],
+      "goals": [
+        {
+          "id": "drink",
+          "labelZh": "选择饮品",
+          "prompt": "Hi! What can I get for you?",
+          "example": "I'd like an Americano.",
+          "retry": "No problem. Let us try again. What drink would you like?",
+          "success": "Great choice!",
+          "slotLabelZh": "饮品",
+          "terms": [
+            "americano",
+            "latte",
+            "cappuccino",
+            "espresso",
+            "mocha",
+            "coffee",
+            "tea",
+            "matcha",
+            "flat white",
+            "cold brew",
+            "hot chocolate",
+            "macchiato",
+            "cortado",
+            "frappe",
+            "frappuccino",
+            "smoothie",
+            "juice",
+            "lemonade",
+            "milkshake",
+            "water",
+            "soda",
+            "chai",
+            "cocoa"
+          ],
+          "patterns": [
+            "\\b(?:i['’]?d like|i would like|can i get|could i get|can i have|could i have|i(?:['’]?ll| will) have|i want)\\b.*\\b(?:americano|latte|cappuccino|espresso|mocha|coffee|tea|matcha|flat white|cold brew|hot chocolate)\\b",
+            "^\\s*(?:an?\\s+)?(?:americano|latte|cappuccino|espresso|mocha|coffee|tea|matcha|flat white|cold brew|hot chocolate)(?:\\s+please)?\\s*[.!]?$"
+          ],
+          "aliases": {
+            "flatwhite": "flat white",
+            "iced coffee": "cold brew",
+            "cafe latte": "latte",
+            "green tea latte": "matcha"
+          }
+        },
+        {
+          "id": "size",
+          "labelZh": "选择杯型",
+          "prompt": "What size would you like?",
+          "example": "Can I get a medium?",
+          "retry": "No problem. Let us try again. Would you like a small, medium, or large?",
+          "success": "Perfect. I have the size.",
+          "slotLabelZh": "杯型",
+          "terms": [
+            "small",
+            "medium",
+            "large",
+            "big",
+            "regular",
+            "tall",
+            "grande",
+            "venti",
+            "xl",
+            "extra large"
+          ],
+          "patterns": [
+            "\\b(?:small|medium|large|big|regular|tall|grande|venti|xl|extra large)\\b",
+            "\\b(?:can i get|could i get|can i have|could i have|i['’]?d like|i would like|make it)\\b.*\\b(?:small|medium|large|big|regular|tall|grande|venti|xl|extra large)\\b"
+          ],
+          "aliases": {
+            "big": "large",
+            "xl": "extra large",
+            "extra-large": "extra large",
+            "regular size": "regular",
+            "medium size": "medium",
+            "large size": "large"
+          }
+        },
+        {
+          "id": "service",
+          "labelZh": "选择堂食或外带",
+          "prompt": "Is that for here or to go?",
+          "example": "To go, please.",
+          "retry": "No problem. Let us try again. Is it for here or to go?",
+          "success": "Perfect. Your order is ready.",
+          "slotLabelZh": "用餐方式",
+          "terms": [
+            "for here",
+            "to go",
+            "dine in",
+            "takeaway",
+            "take out"
+          ],
+          "patterns": [
+            "\\b(?:for here|to go|dine in|takeaway|take out)\\b",
+            "^\\s*(?:here|takeaway)(?:\\s+please)?\\s*[.!]?$",
+            "\\b(?:i['’]?ll have it|i will have it|make it)\\b.*\\b(?:here|to go|takeaway|take out)\\b"
+          ],
+          "aliases": {
+            "take away": "takeaway",
+            "take-out": "take out",
+            "eat here": "for here",
+            "have it here": "for here"
+          }
+        }
+      ],
+      "redirect": "Let us come back to your coffee order.",
+      "completion": "Great! You chose a drink, a size, and whether to have it here or take it to go. Your order is complete."
+    },
+    "restaurant": {
+      "id": "restaurant",
+      "titleZh": "餐厅用餐",
+      "titleEn": "At a restaurant",
+      "level": "初中级",
+      "theme": "food",
+      "aiRoleZh": "餐厅服务员",
+      "aiRoleEn": "a restaurant server",
+      "learnerRoleZh": "准备点餐的顾客",
+      "learnerRoleEn": "a restaurant guest",
+      "descriptionZh": "这是一个在餐厅点餐的场景。接下来我会扮演服务员，你要选择主食、饮品，并确认是否还需要其他东西。",
+      "missionZh": "完成选择主食、选择饮品和结束点单三个任务。",
+      "vocabulary": [
+        "menu",
+        "order",
+        "chicken",
+        "pasta",
+        "drink",
+        "anything else"
+      ],
+      "goals": [
+        {
+          "id": "main-dish",
+          "labelZh": "选择主食",
+          "prompt": "Are you ready to order?",
+          "example": "Yes, I'd like the grilled chicken, please.",
+          "retry": "No problem. Tell me which main dish you would like.",
+          "success": "Excellent choice.",
+          "slotLabelZh": "主食",
+          "terms": [
+            "chicken",
+            "grilled chicken",
+            "pasta",
+            "steak",
+            "salad",
+            "burger",
+            "pizza",
+            "fish",
+            "soup",
+            "vegetarian dish"
+          ],
+          "patterns": [
+            "\\b(?:i['’]?d like|i would like|i['’]?ll have|i will have|can i get|could i have)\\b.*\\b(?:chicken|pasta|steak|salad|burger|pizza|fish|soup|vegetarian)\\b",
+            "^\\s*(?:the\\s+)?(?:grilled chicken|chicken|pasta|steak|salad|burger|pizza|fish|soup)(?:\\s+please)?\\s*[.!]?$"
+          ],
+          "aliases": {
+            "veggie dish": "vegetarian dish",
+            "beef steak": "steak",
+            "green salad": "salad"
+          }
+        },
+        {
+          "id": "drink",
+          "labelZh": "选择饮品",
+          "prompt": "What would you like to drink?",
+          "example": "Could I have some sparkling water, please?",
+          "retry": "That is okay. Choose any drink you would enjoy.",
+          "success": "Certainly. I will bring that with your meal.",
+          "slotLabelZh": "饮品",
+          "terms": [
+            "water",
+            "sparkling water",
+            "still water",
+            "juice",
+            "orange juice",
+            "tea",
+            "coffee",
+            "cola",
+            "lemonade",
+            "wine",
+            "beer"
+          ],
+          "patterns": [
+            "\\b(?:i['’]?d like|i would like|i['’]?ll have|can i get|could i have)\\b.*\\b(?:water|juice|tea|coffee|cola|lemonade|wine|beer)\\b",
+            "^\\s*(?:some|a|an)?\\s*(?:sparkling water|still water|water|orange juice|juice|tea|coffee|cola|lemonade|wine|beer)(?:\\s+please)?\\s*[.!]?$"
+          ],
+          "aliases": {
+            "soda": "cola",
+            "fizzy water": "sparkling water",
+            "OJ": "orange juice"
+          }
+        },
+        {
+          "id": "anything-else",
+          "labelZh": "结束点单",
+          "prompt": "Would you like anything else?",
+          "example": "No, thank you. That is all.",
+          "retry": "No worries. Tell me if you want something else or if that is all.",
+          "success": "Perfect. I will place your order now.",
+          "slotLabelZh": "是否加单",
+          "terms": [
+            "no",
+            "nothing else",
+            "that is all",
+            "that's all",
+            "yes",
+            "dessert",
+            "bread",
+            "another drink",
+            "thank you"
+          ],
+          "patterns": [
+            "\\b(?:no|nothing else|that is all|that['’]?s all|i am good|i['’]?m good)\\b",
+            "\\b(?:yes|also|and)\\b.*\\b(?:dessert|bread|drink|water|coffee|tea)\\b",
+            "\\b(?:thank you|thanks)\\b.*\\b(?:that is all|that['’]?s all)?\\b"
+          ],
+          "aliases": {
+            "no thanks": "no, thank you",
+            "all good": "that is all",
+            "i am fine": "nothing else"
+          }
+        }
+      ],
+      "redirect": "Let us come back to completing your restaurant order.",
+      "completion": "Excellent! You ordered a main dish, chose a drink, and completed the order naturally."
+    },
+    "restaurant-problem": {
+      "id": "restaurant-problem",
+      "titleZh": "礼貌提出问题",
+      "titleEn": "Handling a problem",
+      "level": "中高级",
+      "theme": "food",
+      "aiRoleZh": "餐厅经理",
+      "aiRoleEn": "a restaurant manager",
+      "learnerRoleZh": "需要处理点单问题的顾客",
+      "learnerRoleEn": "a guest reporting a problem",
+      "descriptionZh": "这是一个在餐厅礼貌处理问题的场景。接下来我会扮演餐厅经理，你要说明问题、选择解决方式，并确认是否还需要帮助。",
+      "missionZh": "完成说明问题、选择解决方式和礼貌结束三个任务。",
+      "vocabulary": [
+        "order",
+        "wrong",
+        "cold",
+        "replacement",
+        "refund",
+        "anything else"
+      ],
+      "goals": [
+        {
+          "id": "explain-problem",
+          "labelZh": "说明问题",
+          "prompt": "I am sorry to hear that. What seems to be the problem?",
+          "example": "I'm afraid this is not what I ordered.",
+          "retry": "That is okay. Please explain what is wrong with your order.",
+          "success": "I understand. I am sorry about that.",
+          "slotLabelZh": "问题",
+          "terms": [
+            "wrong order",
+            "not what I ordered",
+            "cold",
+            "undercooked",
+            "overcooked",
+            "missing",
+            "too salty",
+            "allergy",
+            "waited too long",
+            "not fresh"
+          ],
+          "patterns": [
+            "\\b(?:this is|it is|my food is|my order is)\\b.*\\b(?:wrong|cold|undercooked|overcooked|missing|salty|not fresh)\\b",
+            "\\b(?:not what i ordered|did not order|didn['’]?t order|ordered something else)\\b",
+            "\\b(?:i have been waiting|i['’]?ve been waiting|waited)\\b.*\\b(?:too long|minutes|hour)\\b"
+          ],
+          "aliases": {
+            "raw": "undercooked",
+            "not cooked": "undercooked",
+            "the wrong dish": "wrong order"
+          }
+        },
+        {
+          "id": "resolution",
+          "labelZh": "选择解决方式",
+          "prompt": "Would you like a replacement or a refund?",
+          "example": "A replacement would be great, please.",
+          "retry": "No problem. Tell me whether you prefer a replacement or a refund.",
+          "success": "Of course. I will arrange that for you.",
+          "slotLabelZh": "解决方式",
+          "terms": [
+            "replacement",
+            "replace it",
+            "new one",
+            "another dish",
+            "refund",
+            "money back",
+            "cancel it",
+            "take it off the bill"
+          ],
+          "patterns": [
+            "\\b(?:i would like|i['’]?d like|i prefer|please give me|can i have)\\b.*\\b(?:replacement|refund|new one|another dish|money back)\\b",
+            "^\\s*(?:a\\s+)?(?:replacement|refund|new one|another dish)(?:\\s+please)?\\s*[.!]?$",
+            "\\b(?:replace it|cancel it|take it off the bill|give me my money back)\\b"
+          ],
+          "aliases": {
+            "money back": "refund",
+            "another one": "replacement",
+            "change it": "replacement"
+          }
+        },
+        {
+          "id": "close-problem",
+          "labelZh": "礼貌结束",
+          "prompt": "Is there anything else I can help you with?",
+          "example": "No, that is all. Thank you for your help.",
+          "retry": "That is okay. Tell me if you need more help or if everything is settled.",
+          "success": "Thank you for your patience.",
+          "slotLabelZh": "是否还需帮助",
+          "terms": [
+            "no",
+            "that is all",
+            "that's all",
+            "everything is fine",
+            "yes",
+            "one more thing",
+            "thank you",
+            "thanks"
+          ],
+          "patterns": [
+            "\\b(?:no|nothing else|that is all|that['’]?s all|everything is fine|we are good)\\b",
+            "\\b(?:yes|actually|one more thing)\\b",
+            "\\b(?:thank you|thanks)\\b.*\\b(?:help|understanding|sorting it out)?\\b"
+          ],
+          "aliases": {
+            "all sorted": "everything is fine",
+            "no thanks": "no, thank you",
+            "we are all good": "everything is fine"
+          }
+        }
+      ],
+      "redirect": "Let us come back to solving the problem with your order.",
+      "completion": "Well done! You explained the problem, chose a solution, and closed the conversation politely."
+    },
+    "clothes": {
+      "id": "clothes",
+      "titleZh": "试穿衣服",
+      "titleEn": "Shopping for clothes",
+      "level": "初级",
+      "theme": "shopping",
+      "aiRoleZh": "服装店店员",
+      "aiRoleEn": "a shop assistant",
+      "learnerRoleZh": "正在选购衣服的顾客",
+      "learnerRoleEn": "a customer shopping for clothes",
+      "descriptionZh": "这是一个在服装店购物的场景。接下来我会扮演店员，你要说出想找的衣服、需要的尺码，并决定是否试穿。",
+      "missionZh": "完成选择衣服、选择尺码和回应试穿邀请三个任务。",
+      "vocabulary": [
+        "shirt",
+        "dress",
+        "jacket",
+        "size",
+        "small",
+        "try on"
+      ],
+      "goals": [
+        {
+          "id": "item",
+          "labelZh": "选择衣服",
+          "prompt": "Hi! Can I help you find anything?",
+          "example": "Yes, I am looking for a blue shirt.",
+          "retry": "No problem. Tell me what kind of clothing you want.",
+          "success": "Certainly. Let me show you some options.",
+          "slotLabelZh": "衣服",
+          "terms": [
+            "shirt",
+            "t-shirt",
+            "dress",
+            "jacket",
+            "coat",
+            "jeans",
+            "trousers",
+            "pants",
+            "skirt",
+            "sweater",
+            "shoes"
+          ],
+          "patterns": [
+            "\\b(?:i am|i['’]?m)\\s+looking for\\b.*\\b(?:shirt|t-shirt|dress|jacket|coat|jeans|trousers|pants|skirt|sweater|shoes)\\b",
+            "\\b(?:do you have|i need|i want|i['’]?d like)\\b.*\\b(?:shirt|t-shirt|dress|jacket|coat|jeans|trousers|pants|skirt|sweater|shoes)\\b",
+            "^\\s*(?:a|some)?\\s*(?:shirt|t-shirt|dress|jacket|coat|jeans|trousers|pants|skirt|sweater|shoes)(?:\\s+please)?\\s*[.!]?$"
+          ],
+          "aliases": {
+            "tee": "t-shirt",
+            "slacks": "trousers",
+            "pullover": "sweater"
+          }
+        },
+        {
+          "id": "clothing-size",
+          "labelZh": "选择尺码",
+          "prompt": "What size would you like?",
+          "example": "Do you have it in a medium?",
+          "retry": "That is okay. Choose a size such as small, medium, or large.",
+          "success": "Great. I will find that size for you.",
+          "slotLabelZh": "尺码",
+          "terms": [
+            "extra small",
+            "xs",
+            "small",
+            "medium",
+            "large",
+            "extra large",
+            "xl",
+            "size six",
+            "size eight",
+            "size ten",
+            "smaller",
+            "bigger"
+          ],
+          "patterns": [
+            "\\b(?:xs|xl|extra small|small|medium|large|extra large|smaller|bigger)\\b",
+            "\\bsize\\s+(?:\\d+|six|eight|ten|twelve|fourteen)\\b",
+            "\\b(?:do you have|can i get|i need|i wear)\\b.*\\b(?:xs|xl|small|medium|large|size)\\b"
+          ],
+          "aliases": {
+            "s": "small",
+            "m": "medium",
+            "l": "large",
+            "extra-large": "extra large"
+          }
+        },
+        {
+          "id": "try-on",
+          "labelZh": "决定是否试穿",
+          "prompt": "Would you like to try it on?",
+          "example": "Yes, please. Where is the fitting room?",
+          "retry": "No worries. Tell me yes or no.",
+          "success": "Of course. The fitting room is over there.",
+          "slotLabelZh": "是否试穿",
+          "terms": [
+            "yes",
+            "please",
+            "try it on",
+            "fitting room",
+            "changing room",
+            "no",
+            "not now",
+            "I will take it"
+          ],
+          "patterns": [
+            "\\b(?:yes|sure|okay|of course)\\b.*\\b(?:try|please|fitting room|changing room)?\\b",
+            "\\b(?:where is|where['’]?s)\\b.*\\b(?:fitting room|changing room)\\b",
+            "\\b(?:no|not now|i will take it|i['’]?ll take it)\\b"
+          ],
+          "aliases": {
+            "dressing room": "fitting room",
+            "change room": "changing room",
+            "try this on": "try it on"
+          }
+        }
+      ],
+      "redirect": "Let us come back to finding the right clothes for you.",
+      "completion": "Great work! You chose an item, gave your size, and handled the fitting-room question."
+    },
+    "checkout": {
+      "id": "checkout",
+      "titleZh": "超市结账",
+      "titleEn": "At the checkout",
+      "level": "初中级",
+      "theme": "shopping",
+      "aiRoleZh": "超市收银员",
+      "aiRoleEn": "a cashier",
+      "learnerRoleZh": "正在结账的顾客",
+      "learnerRoleEn": "a customer at the checkout",
+      "descriptionZh": "这是一个在超市结账的场景。接下来我会扮演收银员，你要回答是否需要袋子、选择支付方式，并回答是否需要小票。",
+      "missionZh": "完成购物袋、支付方式和小票三个结账任务。",
+      "vocabulary": [
+        "bag",
+        "card",
+        "cash",
+        "contactless",
+        "receipt",
+        "please"
+      ],
+      "goals": [
+        {
+          "id": "bag",
+          "labelZh": "选择是否需要袋子",
+          "prompt": "Would you like a bag?",
+          "example": "Yes, please. I would like one bag.",
+          "retry": "No problem. Tell me yes or no about the bag.",
+          "success": "Certainly.",
+          "slotLabelZh": "购物袋",
+          "terms": [
+            "yes",
+            "no",
+            "one bag",
+            "two bags",
+            "a bag",
+            "my own bag",
+            "reusable bag",
+            "no bag"
+          ],
+          "patterns": [
+            "\\b(?:yes|sure|please)\\b.*\\b(?:bag|one|two)?\\b",
+            "\\b(?:no|nope|no bag|i have my own|i brought my own)\\b",
+            "\\b(?:one|two|three)\\s+bags?\\b"
+          ],
+          "aliases": {
+            "carrier bag": "bag",
+            "shopping bag": "bag",
+            "i have one": "my own bag"
+          }
+        },
+        {
+          "id": "payment",
+          "labelZh": "选择支付方式",
+          "prompt": "How would you like to pay?",
+          "example": "Can I pay by card?",
+          "retry": "That is okay. Choose card, cash, contactless, or another payment method.",
+          "success": "Of course. Please use the card reader.",
+          "slotLabelZh": "支付方式",
+          "terms": [
+            "card",
+            "credit card",
+            "debit card",
+            "cash",
+            "contactless",
+            "phone",
+            "mobile pay",
+            "apple pay",
+            "google pay"
+          ],
+          "patterns": [
+            "\\b(?:pay|paying)\\b.*\\b(?:card|cash|contactless|phone|apple pay|google pay|mobile pay)\\b",
+            "^\\s*(?:by\\s+|with\\s+)?(?:card|cash|contactless|phone|apple pay|google pay)(?:\\s+please)?\\s*[.!]?$",
+            "\\b(?:can i|could i|i['’]?ll|i will)\\b.*\\b(?:card|cash|contactless|apple pay|google pay)\\b"
+          ],
+          "aliases": {
+            "tap": "contactless",
+            "bank card": "card",
+            "mobile payment": "mobile pay"
+          }
+        },
+        {
+          "id": "receipt",
+          "labelZh": "选择是否需要小票",
+          "prompt": "Would you like your receipt?",
+          "example": "Yes, please. I need the receipt.",
+          "retry": "No worries. Tell me whether you want the receipt.",
+          "success": "Here you are. Have a nice day!",
+          "slotLabelZh": "小票",
+          "terms": [
+            "yes",
+            "no",
+            "receipt",
+            "email receipt",
+            "paper receipt",
+            "do not need it",
+            "don't need it",
+            "please"
+          ],
+          "patterns": [
+            "\\b(?:yes|sure|please)\\b.*\\b(?:receipt|it)?\\b",
+            "\\b(?:no|nope|do not need|don['’]?t need|keep it)\\b.*\\b(?:receipt|it)?\\b",
+            "\\b(?:email|paper|printed)\\s+receipt\\b"
+          ],
+          "aliases": {
+            "bill": "receipt",
+            "printed receipt": "paper receipt",
+            "digital receipt": "email receipt"
+          }
+        }
+      ],
+      "redirect": "Let us come back to finishing your checkout.",
+      "completion": "Nice work! You chose a bag, paid for your shopping, and handled the receipt question."
+    },
+    "returns": {
+      "id": "returns",
+      "titleZh": "退换商品",
+      "titleEn": "Returning an item",
+      "level": "中高级",
+      "theme": "shopping",
+      "aiRoleZh": "客服人员",
+      "aiRoleEn": "a customer service agent",
+      "learnerRoleZh": "需要退换商品的顾客",
+      "learnerRoleEn": "a customer returning an item",
+      "descriptionZh": "这是一个退换商品的场景。接下来我会扮演客服人员，你要说明退什么、解释原因，并选择退款或换货。",
+      "missionZh": "完成说明商品、说明退换原因和选择处理方式三个任务。",
+      "vocabulary": [
+        "return",
+        "receipt",
+        "broken",
+        "wrong size",
+        "refund",
+        "exchange"
+      ],
+      "goals": [
+        {
+          "id": "return-item",
+          "labelZh": "说明要退的商品",
+          "prompt": "What would you like to return today?",
+          "example": "I would like to return this jacket.",
+          "retry": "No problem. Tell me which item you are returning.",
+          "success": "Certainly. Let me take a look.",
+          "slotLabelZh": "退换商品",
+          "terms": [
+            "jacket",
+            "shirt",
+            "dress",
+            "shoes",
+            "phone",
+            "headphones",
+            "bag",
+            "appliance",
+            "item",
+            "product"
+          ],
+          "patterns": [
+            "\\b(?:i would like|i['’]?d like|i want|i need)\\s+to\\s+return\\b.*\\b(?:jacket|shirt|dress|shoes|phone|headphones|bag|appliance|item|product)\\b",
+            "\\b(?:returning|return)\\b.*\\b(?:this|the|my)\\b.*\\b(?:jacket|shirt|dress|shoes|phone|headphones|bag|item|product)\\b",
+            "^\\s*(?:this|the|my)?\\s*(?:jacket|shirt|dress|shoes|phone|headphones|bag|item|product)\\s*[.!]?$"
+          ],
+          "aliases": {
+            "cell phone": "phone",
+            "earphones": "headphones",
+            "purse": "bag"
+          }
+        },
+        {
+          "id": "return-reason",
+          "labelZh": "说明退换原因",
+          "prompt": "Could you tell me why you would like to return it?",
+          "example": "It does not work properly.",
+          "retry": "That is okay. Explain what is wrong with the item.",
+          "success": "I understand the problem.",
+          "slotLabelZh": "退换原因",
+          "terms": [
+            "broken",
+            "does not work",
+            "doesn't work",
+            "wrong size",
+            "too small",
+            "too big",
+            "damaged",
+            "faulty",
+            "missing parts",
+            "changed my mind"
+          ],
+          "patterns": [
+            "\\b(?:it is|it['’]?s|they are|they['’]?re)\\b.*\\b(?:broken|damaged|faulty|too small|too big|wrong size)\\b",
+            "\\b(?:does not|doesn['’]?t|do not|don['’]?t)\\s+work\\b",
+            "\\b(?:missing|came without)\\b.*\\b(?:part|parts|piece|accessory)\\b",
+            "\\b(?:changed my mind|not what i expected|do not need it|don['’]?t need it)\\b"
+          ],
+          "aliases": {
+            "defective": "faulty",
+            "not working": "does not work",
+            "does not fit": "wrong size"
+          }
+        },
+        {
+          "id": "return-resolution",
+          "labelZh": "选择退款或换货",
+          "prompt": "Would you like a refund or an exchange?",
+          "example": "I would like an exchange, please.",
+          "retry": "No problem. Choose a refund or an exchange.",
+          "success": "Certainly. I will process that for you.",
+          "slotLabelZh": "处理方式",
+          "terms": [
+            "refund",
+            "money back",
+            "exchange",
+            "replacement",
+            "different size",
+            "store credit"
+          ],
+          "patterns": [
+            "\\b(?:i would like|i['’]?d like|i prefer|can i have|could i get)\\b.*\\b(?:refund|exchange|replacement|money back|store credit)\\b",
+            "^\\s*(?:a|an)?\\s*(?:refund|exchange|replacement|store credit)(?:\\s+please)?\\s*[.!]?$",
+            "\\b(?:different|another)\\s+(?:size|colour|color|one)\\b"
+          ],
+          "aliases": {
+            "money back": "refund",
+            "swap": "exchange",
+            "new one": "replacement"
+          }
+        }
+      ],
+      "redirect": "Let us come back to your return request.",
+      "completion": "Excellent! You identified the item, explained the problem, and chose a suitable return option."
+    },
+    "airport": {
+      "id": "airport",
+      "titleZh": "机场值机",
+      "titleEn": "Airport check-in",
+      "level": "初级",
+      "theme": "travel",
+      "aiRoleZh": "航空公司值机人员",
+      "aiRoleEn": "an airline check-in agent",
+      "learnerRoleZh": "正在办理值机的旅客",
+      "learnerRoleEn": "a passenger checking in",
+      "descriptionZh": "这是一个机场值机的场景。接下来我会扮演航空公司工作人员，你要出示护照、说明托运行李，并选择座位。",
+      "missionZh": "完成出示护照、说明行李和选择座位三个任务。",
+      "vocabulary": [
+        "passport",
+        "check in",
+        "bag",
+        "luggage",
+        "aisle",
+        "window seat"
+      ],
+      "goals": [
+        {
+          "id": "passport",
+          "labelZh": "出示护照",
+          "prompt": "May I see your passport, please?",
+          "example": "Of course. Here you are.",
+          "retry": "No problem. Hand me your passport with a short polite reply.",
+          "success": "Thank you. I have your booking.",
+          "slotLabelZh": "护照回应",
+          "terms": [
+            "here you are",
+            "of course",
+            "sure",
+            "certainly",
+            "passport",
+            "here it is"
+          ],
+          "patterns": [
+            "\\b(?:here you are|here it is)\\b",
+            "\\b(?:of course|sure|certainly|yes)\\b.*\\b(?:passport|here)?\\b",
+            "\\b(?:this is|it is|it['’]?s)\\b.*\\bmy passport\\b"
+          ],
+          "aliases": {
+            "here you go": "here you are",
+            "this is my passport": "passport"
+          }
+        },
+        {
+          "id": "checked-bags",
+          "labelZh": "说明托运行李",
+          "prompt": "Are you checking any bags today?",
+          "example": "Yes. I have one suitcase to check.",
+          "retry": "That is okay. Tell me how many bags you are checking, or say none.",
+          "success": "Great. Please place the bag on the scale.",
+          "slotLabelZh": "托运行李",
+          "terms": [
+            "no bags",
+            "none",
+            "one bag",
+            "two bags",
+            "one suitcase",
+            "two suitcases",
+            "carry-on only",
+            "checking a bag"
+          ],
+          "patterns": [
+            "\\b(?:yes|i am|i['’]?m)\\b.*\\b(?:one|two|three|a)\\b.*\\b(?:bag|bags|suitcase|suitcases)\\b",
+            "\\b(?:no|none|no bags|not checking|carry-on only|hand luggage only)\\b",
+            "\\b(?:i have|we have)\\b.*\\b(?:bag|bags|suitcase|suitcases)\\b.*\\b(?:check|checking)?\\b"
+          ],
+          "aliases": {
+            "luggage": "bags",
+            "hold bag": "checked bag",
+            "cabin bag only": "carry-on only"
+          }
+        },
+        {
+          "id": "seat",
+          "labelZh": "选择座位",
+          "prompt": "Would you prefer an aisle or a window seat?",
+          "example": "A window seat, please.",
+          "retry": "No worries. Choose an aisle seat, a window seat, or say you have no preference.",
+          "success": "Perfect. I have assigned your seat.",
+          "slotLabelZh": "座位偏好",
+          "terms": [
+            "aisle",
+            "aisle seat",
+            "window",
+            "window seat",
+            "middle seat",
+            "no preference",
+            "any seat"
+          ],
+          "patterns": [
+            "\\b(?:aisle|window|middle)\\s*(?:seat)?\\b",
+            "\\b(?:i prefer|i would like|i['’]?d like|can i have)\\b.*\\b(?:aisle|window|middle)\\b",
+            "\\b(?:no preference|any seat|either is fine|does not matter|doesn['’]?t matter)\\b"
+          ],
+          "aliases": {
+            "seat by the window": "window seat",
+            "seat by the aisle": "aisle seat",
+            "either one": "no preference"
+          }
+        }
+      ],
+      "redirect": "Let us come back to completing your airport check-in.",
+      "completion": "You did it! You presented your passport, checked your luggage, and chose a seat."
+    },
+    "hotel": {
+      "id": "hotel",
+      "titleZh": "酒店入住",
+      "titleEn": "Checking into a hotel",
+      "level": "初中级",
+      "theme": "travel",
+      "aiRoleZh": "酒店前台",
+      "aiRoleEn": "a hotel receptionist",
+      "learnerRoleZh": "办理入住的客人",
+      "learnerRoleEn": "a hotel guest checking in",
+      "descriptionZh": "这是一个酒店入住的场景。接下来我会扮演前台，你要确认预订、提供预订姓名，并选择房卡数量。",
+      "missionZh": "完成确认预订、提供姓名和选择房卡数量三个任务。",
+      "vocabulary": [
+        "reservation",
+        "booking",
+        "under the name",
+        "passport",
+        "room key",
+        "check in"
+      ],
+      "goals": [
+        {
+          "id": "reservation",
+          "labelZh": "确认是否有预订",
+          "prompt": "Welcome! Do you have a reservation?",
+          "example": "Yes, I have a reservation.",
+          "retry": "No problem. Tell me whether you have a booking.",
+          "success": "Great. I will look it up.",
+          "slotLabelZh": "预订状态",
+          "terms": [
+            "yes",
+            "reservation",
+            "booking",
+            "booked online",
+            "no reservation",
+            "walk-in"
+          ],
+          "patterns": [
+            "\\b(?:yes|i do|i have|we have)\\b.*\\b(?:reservation|booking|room)\\b",
+            "\\b(?:i booked|we booked)\\b.*\\b(?:online|a room|this hotel)?\\b",
+            "\\b(?:no|i do not|i don['’]?t|walk-in)\\b.*\\b(?:reservation|booking)?\\b"
+          ],
+          "aliases": {
+            "booking": "reservation",
+            "booked a room": "reservation",
+            "no booking": "no reservation"
+          }
+        },
+        {
+          "id": "booking-name",
+          "labelZh": "提供预订姓名",
+          "prompt": "What name is the booking under?",
+          "example": "It is under the name Alex Chen.",
+          "retry": "That is okay. Tell me the name on the booking.",
+          "success": "Thank you. I found your reservation.",
+          "slotLabelZh": "预订姓名",
+          "terms": [
+            "under the name",
+            "the booking is under",
+            "my name is",
+            "it's under",
+            "it is under"
+          ],
+          "patterns": [
+            "\\b(?:it is|it['’]?s|the booking is|the reservation is)\\s+under(?:\\s+the name)?\\s+[a-z][a-z'-]*(?:\\s+[a-z][a-z'-]*)?\\b",
+            "\\bmy name is\\s+[a-z][a-z'-]*(?:\\s+[a-z][a-z'-]*)?\\b",
+            "^\\s*[a-z][a-z'-]+(?:\\s+[a-z][a-z'-]+){0,2}\\s*[.!]?$"
+          ],
+          "aliases": {
+            "booked as": "under the name",
+            "reservation name": "under the name"
+          }
+        },
+        {
+          "id": "room-keys",
+          "labelZh": "选择房卡数量",
+          "prompt": "Would you like one room key or two?",
+          "example": "Two room keys, please.",
+          "retry": "No worries. Choose one key or two keys.",
+          "success": "Certainly. Here are your room keys.",
+          "slotLabelZh": "房卡数量",
+          "terms": [
+            "one key",
+            "two keys",
+            "one room key",
+            "two room keys",
+            "a key",
+            "an extra key"
+          ],
+          "patterns": [
+            "\\b(?:one|two|three|a|an extra)\\s+(?:room\\s+)?keys?\\b",
+            "\\b(?:i would like|i['’]?d like|can i have|could i get)\\b.*\\b(?:one|two|three|extra)\\b.*\\bkeys?\\b",
+            "^\\s*(?:one|two)(?:\\s+please)?\\s*[.!]?$"
+          ],
+          "aliases": {
+            "key card": "room key",
+            "cards": "room keys",
+            "another key": "an extra key"
+          }
+        }
+      ],
+      "redirect": "Let us come back to completing your hotel check-in.",
+      "completion": "Great! You confirmed your reservation, gave the booking name, and chose your room keys."
+    },
+    "car-rental": {
+      "id": "car-rental",
+      "titleZh": "租车出行",
+      "titleEn": "Renting a car",
+      "level": "中高级",
+      "theme": "travel",
+      "aiRoleZh": "租车公司工作人员",
+      "aiRoleEn": "a rental car agent",
+      "learnerRoleZh": "需要租车的旅客",
+      "learnerRoleEn": "a traveller renting a car",
+      "descriptionZh": "这是一个租车柜台的场景。接下来我会扮演租车工作人员，你要选择车型、说明租期，并决定是否购买保险。",
+      "missionZh": "完成选择车型、说明租用时间和选择保险三个任务。",
+      "vocabulary": [
+        "compact",
+        "SUV",
+        "automatic",
+        "days",
+        "insurance",
+        "full coverage"
+      ],
+      "goals": [
+        {
+          "id": "car-type",
+          "labelZh": "选择车型",
+          "prompt": "What kind of car are you looking for?",
+          "example": "I would prefer a compact automatic car.",
+          "retry": "No problem. Choose a car type or describe what you need.",
+          "success": "Good choice. We have that type available.",
+          "slotLabelZh": "车型",
+          "terms": [
+            "compact",
+            "economy",
+            "sedan",
+            "SUV",
+            "minivan",
+            "convertible",
+            "automatic",
+            "manual",
+            "electric car",
+            "hybrid"
+          ],
+          "patterns": [
+            "\\b(?:i prefer|i would like|i['’]?d like|i need|looking for)\\b.*\\b(?:compact|economy|sedan|suv|minivan|convertible|automatic|manual|electric|hybrid)\\b",
+            "^\\s*(?:a|an)?\\s*(?:compact|economy|sedan|suv|minivan|convertible|automatic|manual|electric car|hybrid)(?:\\s+car)?\\s*[.!]?$"
+          ],
+          "aliases": {
+            "small car": "compact",
+            "family car": "minivan",
+            "auto": "automatic",
+            "stick shift": "manual"
+          }
+        },
+        {
+          "id": "rental-duration",
+          "labelZh": "说明租期",
+          "prompt": "How many days will you need the car?",
+          "example": "I will need it for five days.",
+          "retry": "That is okay. Tell me how many days or weeks you need it.",
+          "success": "Great. I have noted the rental period.",
+          "slotLabelZh": "租用时间",
+          "terms": [
+            "one day",
+            "two days",
+            "three days",
+            "five days",
+            "one week",
+            "two weeks",
+            "until Friday",
+            "for the weekend"
+          ],
+          "patterns": [
+            "\\b(?:for|about)\\s+(?:\\d+|one|two|three|four|five|six|seven|a)\\s*(?:day|days|week|weeks)\\b",
+            "\\b(?:until|through)\\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\\b",
+            "\\b(?:for the weekend|over the weekend|a few days)\\b"
+          ],
+          "aliases": {
+            "seven days": "one week",
+            "couple of days": "two days",
+            "weekend": "for the weekend"
+          }
+        },
+        {
+          "id": "insurance",
+          "labelZh": "选择保险",
+          "prompt": "Would you like full insurance coverage?",
+          "example": "Yes, I would like full coverage, please.",
+          "retry": "No worries. Tell me whether you want full coverage, basic coverage, or no extra insurance.",
+          "success": "Certainly. I have added your insurance choice.",
+          "slotLabelZh": "保险方案",
+          "terms": [
+            "yes",
+            "full insurance",
+            "full coverage",
+            "basic insurance",
+            "basic coverage",
+            "no insurance",
+            "decline",
+            "no extra insurance"
+          ],
+          "patterns": [
+            "\\b(?:yes|sure|please)\\b.*\\b(?:full|insurance|coverage)?\\b",
+            "\\b(?:i would like|i['’]?d like|i want|add)\\b.*\\b(?:full|basic)\\b.*\\b(?:insurance|coverage)\\b",
+            "\\b(?:no|decline|do not need|don['’]?t need)\\b.*\\b(?:insurance|coverage|extra)?\\b"
+          ],
+          "aliases": {
+            "complete insurance": "full insurance",
+            "standard insurance": "basic insurance",
+            "no cover": "no insurance"
+          }
+        }
+      ],
+      "redirect": "Let us come back to arranging your rental car.",
+      "completion": "Excellent! You selected a car, set the rental period, and made an insurance choice."
+    },
+    "interview": {
+      "id": "interview",
+      "titleZh": "参加面试",
+      "titleEn": "A job interview",
+      "level": "初中级",
+      "theme": "work",
+      "aiRoleZh": "面试官",
+      "aiRoleEn": "an interviewer",
+      "learnerRoleZh": "正在参加面试的求职者",
+      "learnerRoleEn": "a job candidate",
+      "descriptionZh": "这是一个求职面试的场景。接下来我会扮演面试官，你要介绍自己、说明求职动机，并讲出一项个人优势。",
+      "missionZh": "完成自我介绍、说明应聘动机和说明个人优势三个任务。",
+      "vocabulary": [
+        "experience",
+        "skills",
+        "role",
+        "interested",
+        "strength",
+        "team"
+      ],
+      "goals": [
+        {
+          "id": "professional-introduction",
+          "labelZh": "进行职业自我介绍",
+          "prompt": "Could you tell me a little about yourself?",
+          "example": "I am a product designer with three years of experience.",
+          "retry": "Take your time. Tell me your role, studies, or experience.",
+          "success": "Thank you. That is a clear introduction.",
+          "slotLabelZh": "职业背景",
+          "terms": [
+            "designer",
+            "developer",
+            "engineer",
+            "teacher",
+            "student",
+            "manager",
+            "experience",
+            "work",
+            "study",
+            "graduate"
+          ],
+          "patterns": [
+            "\\b(?:i am|i['’]?m)\\b.*\\b(?:designer|developer|engineer|teacher|student|manager|graduate)\\b",
+            "\\b(?:i have|i['’]?ve got)\\b.*\\b(?:year|years)\\b.*\\bexperience\\b",
+            "\\b(?:i work|i studied|i study|my background is)\\b"
+          ],
+          "aliases": {
+            "software programmer": "developer",
+            "product designer": "designer",
+            "recent graduate": "graduate"
+          }
+        },
+        {
+          "id": "motivation",
+          "labelZh": "说明求职动机",
+          "prompt": "Why are you interested in this role?",
+          "example": "I am interested because I enjoy solving customer problems.",
+          "retry": "No problem. Tell me what attracts you to the role or company.",
+          "success": "That is a thoughtful reason.",
+          "slotLabelZh": "求职动机",
+          "terms": [
+            "interested",
+            "enjoy",
+            "passionate",
+            "learn",
+            "grow",
+            "challenge",
+            "team",
+            "company",
+            "customers",
+            "skills"
+          ],
+          "patterns": [
+            "\\b(?:i am|i['’]?m)\\s+(?:very\\s+)?(?:interested|excited|passionate)\\b.*\\b(?:because|about|in)\\b",
+            "\\bbecause\\b.*\\b(?:enjoy|like|love|want|learn|grow|challenge|team|company|customers|skills)\\b",
+            "\\b(?:this role|the position|your company)\\b.*\\b(?:matches|fits|offers|lets|allows)\\b"
+          ],
+          "aliases": {
+            "job": "role",
+            "position": "role",
+            "develop my skills": "grow"
+          }
+        },
+        {
+          "id": "strength",
+          "labelZh": "说明个人优势",
+          "prompt": "What is one of your strengths?",
+          "example": "One of my strengths is communicating clearly with a team.",
+          "retry": "That is okay. Name one skill or quality you are good at.",
+          "success": "That strength would be valuable in this role.",
+          "slotLabelZh": "个人优势",
+          "terms": [
+            "communication",
+            "teamwork",
+            "problem solving",
+            "organised",
+            "organized",
+            "creative",
+            "reliable",
+            "patient",
+            "leadership",
+            "attention to detail"
+          ],
+          "patterns": [
+            "\\b(?:my strength is|one of my strengths is|i am|i['’]?m)\\b.*\\b(?:communicat|teamwork|problem solving|organi[sz]ed|creative|reliable|patient|leadership)\\b",
+            "\\b(?:i am good at|i['’]?m good at|i excel at)\\b.*\\b(?:communicat|working with|solving|planning|leading|organising|organizing)\\b",
+            "\\battention to detail\\b"
+          ],
+          "aliases": {
+            "working in a team": "teamwork",
+            "solving problems": "problem solving",
+            "well organised": "organised"
+          }
+        }
+      ],
+      "redirect": "Let us come back to the interview question.",
+      "completion": "Well done! You introduced your background, explained your motivation, and described a professional strength."
+    },
+    "classmate": {
+      "id": "classmate",
+      "titleZh": "认识同学",
+      "titleEn": "Meeting a classmate",
+      "level": "初级",
+      "theme": "work",
+      "aiRoleZh": "新同学",
+      "aiRoleEn": "a classmate",
+      "learnerRoleZh": "刚到教室的学生",
+      "learnerRoleEn": "a student meeting a classmate",
+      "descriptionZh": "这是一个在教室里认识同学的场景。接下来我会扮演同学，你要回应座位问题、说明自己是不是新生，并聊聊所学内容。",
+      "missionZh": "完成回应座位、说明新生身份和介绍所学内容三个任务。",
+      "vocabulary": [
+        "seat",
+        "free",
+        "new",
+        "class",
+        "study",
+        "course"
+      ],
+      "goals": [
+        {
+          "id": "seat-status",
+          "labelZh": "回应座位问题",
+          "prompt": "Hi! Is this seat taken?",
+          "example": "No, it is free. You can sit here.",
+          "retry": "No problem. Tell me whether the seat is free or taken.",
+          "success": "Thanks! I will sit here.",
+          "slotLabelZh": "座位状态",
+          "terms": [
+            "free",
+            "available",
+            "not taken",
+            "taken",
+            "someone is sitting here",
+            "you can sit here",
+            "yes",
+            "no"
+          ],
+          "patterns": [
+            "\\b(?:no|it is not|it isn['’]?t)\\b.*\\b(?:taken|occupied)?\\b",
+            "\\b(?:it is|it['’]?s|the seat is)\\b.*\\b(?:free|available|taken|occupied)\\b",
+            "\\b(?:you can|feel free to)\\b.*\\b(?:sit|take the seat)\\b"
+          ],
+          "aliases": {
+            "open": "available",
+            "occupied": "taken",
+            "nobody is sitting here": "free"
+          }
+        },
+        {
+          "id": "new-student",
+          "labelZh": "说明是否是新生",
+          "prompt": "Are you new here too?",
+          "example": "Yes, this is my first week.",
+          "retry": "That is okay. Tell me whether you are new here.",
+          "success": "Me too! It is nice to meet another new student.",
+          "slotLabelZh": "新生身份",
+          "terms": [
+            "yes",
+            "new here",
+            "first day",
+            "first week",
+            "just started",
+            "no",
+            "second year",
+            "been here before",
+            "returning student"
+          ],
+          "patterns": [
+            "\\b(?:yes|i am|i['’]?m)\\b.*\\b(?:new|first day|first week|just started)?\\b",
+            "\\b(?:this is|it is|it['’]?s)\\b.*\\bmy first\\s+(?:day|week|class|term)\\b",
+            "\\b(?:no|not really|i am not|i['’]?m not)\\b.*\\b(?:new|second year|been here|returning)?\\b"
+          ],
+          "aliases": {
+            "freshman": "new student",
+            "first-year student": "new student",
+            "not my first year": "returning student"
+          }
+        },
+        {
+          "id": "study-subject",
+          "labelZh": "介绍所学内容",
+          "prompt": "What are you studying?",
+          "example": "I am studying English and product design.",
+          "retry": "No worries. Name a subject, course, or major you study.",
+          "success": "That sounds interesting!",
+          "slotLabelZh": "学科或专业",
+          "terms": [
+            "English",
+            "business",
+            "design",
+            "product design",
+            "computer science",
+            "engineering",
+            "medicine",
+            "law",
+            "art",
+            "history",
+            "marketing"
+          ],
+          "patterns": [
+            "\\b(?:i am|i['’]?m)\\s+studying\\b.*\\b(?:english|business|design|computer science|engineering|medicine|law|art|history|marketing)\\b",
+            "\\b(?:my major is|i major in|my course is)\\b.*[a-z]",
+            "^\\s*(?:english|business|design|product design|computer science|engineering|medicine|law|art|history|marketing)\\s*[.!]?$"
+          ],
+          "aliases": {
+            "CS": "computer science",
+            "computer engineering": "engineering",
+            "fine arts": "art"
+          }
+        }
+      ],
+      "redirect": "Let us come back to getting to know each other as classmates.",
+      "completion": "Nice work! You handled the seat question, shared whether you are new, and talked about your studies."
+    },
+    "project-update": {
+      "id": "project-update",
+      "titleZh": "汇报工作进度",
+      "titleEn": "A project update",
+      "level": "中高级",
+      "theme": "work",
+      "aiRoleZh": "团队负责人",
+      "aiRoleEn": "your team lead",
+      "learnerRoleZh": "汇报项目进度的团队成员",
+      "learnerRoleEn": "a team member giving a project update",
+      "descriptionZh": "这是一个工作进度汇报的场景。接下来我会扮演团队负责人，你要说明当前进度、风险或阻碍，并说出下一步计划。",
+      "missionZh": "完成进度、阻碍和下一步计划三个汇报任务。",
+      "vocabulary": [
+        "on track",
+        "completed",
+        "blocker",
+        "risk",
+        "deadline",
+        "next step"
+      ],
+      "goals": [
+        {
+          "id": "project-status",
+          "labelZh": "汇报当前进度",
+          "prompt": "How is the project coming along?",
+          "example": "We are on track, and the first phase is complete.",
+          "retry": "Take your time. Tell me what is complete and whether the project is on track.",
+          "success": "Thanks. That gives me a clear picture of the progress.",
+          "slotLabelZh": "当前进度",
+          "terms": [
+            "on track",
+            "ahead of schedule",
+            "behind schedule",
+            "completed",
+            "finished",
+            "in progress",
+            "almost done",
+            "halfway",
+            "delayed"
+          ],
+          "patterns": [
+            "\\b(?:we are|we['’]?re|the project is|it is|it['’]?s)\\b.*\\b(?:on track|ahead of schedule|behind schedule|in progress|almost done|delayed)\\b",
+            "\\b(?:completed|finished|delivered)\\b.*\\b(?:phase|task|design|work|feature|milestone)?\\b",
+            "\\b(?:about|around|nearly)\\s+\\d+\\s*percent\\b"
+          ],
+          "aliases": {
+            "going well": "on track",
+            "late": "behind schedule",
+            "nearly finished": "almost done"
+          }
+        },
+        {
+          "id": "blocker",
+          "labelZh": "说明风险或阻碍",
+          "prompt": "Is anything blocking you right now?",
+          "example": "We are waiting for customer feedback, but there are no major risks.",
+          "retry": "No problem. Name one blocker or say that there are no blockers.",
+          "success": "Understood. We can plan around that.",
+          "slotLabelZh": "风险或阻碍",
+          "terms": [
+            "no blockers",
+            "no major risks",
+            "waiting for feedback",
+            "technical issue",
+            "missing data",
+            "limited time",
+            "resource problem",
+            "dependency",
+            "approval",
+            "delay"
+          ],
+          "patterns": [
+            "\\b(?:no|not any|none)\\b.*\\b(?:blocker|blockers|risk|risks|issue|issues)\\b",
+            "\\b(?:we are|we['’]?re|i am|i['’]?m)\\s+waiting for\\b.*\\b(?:feedback|approval|data|design|decision)\\b",
+            "\\b(?:the blocker is|the main risk is|we have|there is|there['’]?s)\\b.*\\b(?:issue|problem|delay|dependency|approval|resource|time|data)\\b"
+          ],
+          "aliases": {
+            "nothing blocking us": "no blockers",
+            "customer response": "feedback",
+            "sign-off": "approval"
+          }
+        },
+        {
+          "id": "next-step",
+          "labelZh": "说明下一步计划",
+          "prompt": "What will you do next?",
+          "example": "Next, I will finish testing and send the update tomorrow.",
+          "retry": "That is okay. Tell me one action you will take next and, if possible, when.",
+          "success": "Great. That sounds like a clear next step.",
+          "slotLabelZh": "下一步计划",
+          "terms": [
+            "next",
+            "will finish",
+            "going to",
+            "test",
+            "review",
+            "send",
+            "deliver",
+            "meet",
+            "update",
+            "tomorrow",
+            "this week",
+            "by Friday"
+          ],
+          "patterns": [
+            "\\b(?:next|then|after that)\\b.*\\b(?:finish|test|review|send|deliver|meet|update|prepare|complete)\\b",
+            "\\b(?:i will|i['’]?ll|we will|we['’]?ll|i am going to|we are going to)\\b.*\\b(?:finish|test|review|send|deliver|meet|update|prepare|complete)\\b",
+            "\\b(?:by|on)\\s+(?:tomorrow|monday|tuesday|wednesday|thursday|friday|the end of the week)\\b"
+          ],
+          "aliases": {
+            "QA": "test",
+            "check": "review",
+            "ship": "deliver",
+            "status report": "update"
+          }
+        }
+      ],
+      "redirect": "Let us come back to the project update.",
+      "completion": "Excellent update! You covered the current status, the blockers, and the next step clearly."
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "avatars": [
+    {
+      "id": "maya", "name": "Maya", "model": "littlegirl/littlegirl.model3.json", "vip": false,
+      "role": "温柔启蒙教练", "personality": "耐心、亲切，擅长帮助你轻松开口。", "specialty": "日常交流 · 发音入门", "sample": "Hi! Ready to practice English together?",
+      "voice": { "language": "en-US", "voiceType": "zh_female_tianmeiyueyue_moon_bigtts", "label": "甜美悦悦", "names": ["Ava", "Samantha"], "rate": 0.84, "pitch": 1.08 }
+    },
+    {
+      "id": "waiter", "name": "Waiter", "model": "femalewaiter/femalewaiter.model3.json", "vip": true,
+      "role": "英伦情景教练", "personality": "专业、从容，带你练习真实服务场景。", "specialty": "餐厅英语 · 英式表达", "sample": "Good evening. What would you like to order?",
+      "voice": { "language": "en-GB", "voiceType": "zh_female_qingxinnvsheng_mars_bigtts", "label": "清新女声", "names": ["Serena", "Sonia"], "rate": 0.82, "pitch": 1.0 }
+    },
+    {
+      "id": "haru", "name": "Haru", "model": "Haru/Haru.model3.json", "vip": true,
+      "role": "活力口语伙伴", "personality": "开朗、有活力，让口语练习更有节奏。", "specialty": "校园对话 · 流利表达", "sample": "That sounds great! Tell me more about your day.",
+      "voice": { "language": "en-US", "voiceType": "zh_female_yuanqinvyou_moon_bigtts", "label": "元气女友", "names": ["Aria", "Jenny"], "rate": 0.88, "pitch": 1.14 }
+    },
+    {
+      "id": "hiyori", "name": "Hiyori", "model": "Hiyori/Hiyori.model3.json", "vip": true,
+      "role": "旅行口语向导", "personality": "自然、友善，陪你应对旅途中的真实对话。", "specialty": "旅行英语 · 澳式口音", "sample": "Welcome! Where would you like to go today?",
+      "voice": { "language": "en-AU", "voiceType": "zh_female_cancan_mars_bigtts", "label": "知性灿灿", "names": ["Karen", "Natasha"], "rate": 0.86, "pitch": 1.1 }
+    },
+    {
+      "id": "mark", "name": "Mark", "model": "Mark/Mark.model3.json", "vip": true,
+      "role": "商务表达教练", "personality": "沉稳、清晰，帮助你组织专业表达。", "specialty": "职场沟通 · 面试表达", "sample": "Let's make your answer clear and confident.",
+      "voice": { "language": "en-US", "voiceType": "zh_male_yangguangqingnian_moon_bigtts", "label": "阳光男声", "names": ["Guy", "David"], "rate": 0.82, "pitch": 0.86 }
+    },
+    {
+      "id": "natori", "name": "Natori", "model": "Natori/Natori.model3.json", "vip": true,
+      "role": "英式发音导师", "personality": "严谨、温和，关注语音细节与表达逻辑。", "specialty": "英式发音 · 演讲训练", "sample": "Take your time, and pronounce each word clearly.",
+      "voice": { "language": "en-GB", "voiceType": "zh_male_jieshuonansheng_mars_bigtts", "label": "磁性解说男声", "names": ["Ryan", "Daniel"], "rate": 0.8, "pitch": 0.92 }
+    },
+    {
+      "id": "rice", "name": "Rice", "model": "Rice/Rice.model3.json", "vip": true, "scale": 3.3,
+      "role": "趣味词汇伙伴", "personality": "轻快、有趣，用短对话帮助你记住新词。", "specialty": "词汇积累 · 快速反应", "sample": "Great word! Now let's use it in a sentence.",
+      "voice": { "language": "en-US", "voiceType": "zh_female_shaoergushi_mars_bigtts", "label": "少儿故事", "names": ["Allison", "Zira"], "rate": 0.92, "pitch": 1.18 }
+    },
+    {
+      "id": "mao", "name": "Mao", "model": "Mao/Mao.model3.json", "vip": true,
+      "role": "暖心对话伙伴", "personality": "细腻、鼓励，适合慢节奏的深度练习。", "specialty": "情感表达 · 长对话", "sample": "You expressed that beautifully. How did it feel?",
+      "voice": { "language": "en-CA", "voiceType": "zh_female_qinqienvsheng_moon_bigtts", "label": "亲切女声", "names": ["Clara", "Linda"], "rate": 0.86, "pitch": 1.04 }
+    },
+    {
+      "id": "wanko", "name": "Wanko", "model": "Wanko/Wanko.model3.json", "vip": true,
+      "role": "快乐挑战教练", "personality": "俏皮、积极，用小游戏激发你的表达欲。", "specialty": "快速问答 · 趣味挑战", "sample": "Ready for a quick English challenge? Let's go!",
+      "voice": { "language": "en-US", "voiceType": "zh_male_tiancaitongsheng_mars_bigtts", "label": "天才童声", "names": ["Ana", "Ivy"], "rate": 0.95, "pitch": 1.22 }
+    }
+  ]
+}

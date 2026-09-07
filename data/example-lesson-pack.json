@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "units": { "library": "At the library" },
+  "lessons": [{
+    "id": "library-visit", "number": "01", "order": 1, "unit": "library",
+    "title": "Borrow a book", "subtitle": "A library visit", "band": "A1", "level": "A1", "icon": "B",
+    "phrase": "I would like a book, please.", "meaning": "Politely request a book.",
+    "summary": "Ask for a book and thank the librarian.", "answerTip": "Use please to make a polite request.",
+    "aiRole": "Librarian", "mission": "Borrow a book politely", "opening": "Welcome! How can I help?",
+    "hint": "I would like a book, please.", "briefing": "You are visiting a library.",
+    "vocabulary": [["book", "", "A written work to read"], ["library", "", "A place to borrow books"]],
+    "grammarJudgment": {
+      "sentence": "I would likes a book, please.", "correct": false,
+      "correction": "I would like a book, please.", "grammarFocus": "Modal verbs followed by a base verb",
+      "explanation": "Use like, not likes, after would.", "targets": ["would", "like", "a"]
+    },
+    "dialogue": {
+      "role": "Librarian", "opening": "Welcome to the library. What would you like?",
+      "completionMessage": "Confirm the book request and politely end the library visit.",
+      "goals": [
+        { "id": "request-book", "prompt": "Ask the learner which book they want.", "hint": "I would like a book, please.", "accept": ["a book", "the book"] },
+        { "id": "say-thanks", "prompt": "Offer the book and invite a polite closing.", "hint": "Thank you!", "accept": ["thank you", "thanks"] }
+      ]
+    }
+  }]
+}

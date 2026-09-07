@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="zh-CN" data-page-node-id="AuQdYeAkin6DEIahC6YCm0">
+  <head data-page-node-id="rBTb3q3UQ3tmkyPfHcByW2">
+  <base href="https://cdn.keepwork.com/maisi/hellolearner/release/d999b2f58253/">
+    <meta charset="UTF-8" data-page-node-id="eaZ6R6gIdrj7eiTdBT31Rd" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" data-page-node-id="W7twTjIWTVzKZA2pDGv0OS" />
+    <meta name="theme-color" content="#174f46" data-page-node-id="iIgYoaZfCoXSi9qdhFn8rV" />
+    <link rel="icon" href="./assets/favicon-CPHYJf8S.svg" type="image/svg+xml" data-page-node-id="kp4lKW2kJR2VtmaB3qkLZg" />
+    <title>Hello Learner — AI 英语陪练</title>
+    <script src="https://cdn.keepwork.com/keepwork/cdn/tailwindcss@3.4.16.js"></script>
+    <script type="module" crossorigin src="./assets/HelloLearner-DCUmInmV.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/HelloLearner-DhJBHL2w.css">
+  </head>
+  <body data-page-node-id="7OMdeIuSi157msmchfFz3f">
+    <div class="integration-bar" id="integrationBar" data-page-node-id="IbNkwZIvElvrO3ev6wxNal">
+      <div class="integration-status" data-page-node-id="ee5c5OgFTv7ZcSNy9JxOJK"><span id="saveStatusDot" data-page-node-id="I2YS39DuiK6WZ8EZUOvk9N"></span><span id="saveStatus" data-page-node-id="88aT5Rffgr3td3U6Ma8NbS">正在载入学习档案</span></div>
+      <div class="integration-actions" data-page-node-id="L86phFKLFPaX1bDM0srjbO">
+        <button id="accountButton" type="button" disabled data-page-node-id="eFMZtSTgMmKyova2AxEQ2k">正在加载账号…</button>
+      </div>
+    </div>
+    <div class="standalone-layout" id="standaloneLayout" data-page-node-id="FhDrXTk6QrWdavxcCemDiF">
+      <div class="learner-pane" id="learnerPane" data-page-node-id="EN0cF9aGwpVHUrvJjdbBfG">
+    <main class="app-shell" data-page-node-id="hVGjIvTwVSxFu1TJceeK2O">
+      <section class="coach-stage" data-page-node-id="X5EOYODJJgartSbPGa1Hfe">
+        <header class="topbar" data-page-node-id="17EZPoh2ROuLhFafGEagE3">
+          <a class="brand" href="#learningPath" aria-label="Hello Learner 学习路线" data-page-node-id="MFcqJ6OirAFTs7bywpOIjW">
+            <span class="brand-mark" data-page-node-id="FzH9arDTcDpjbnBmEgJWOl">H</span><span data-page-node-id="uw8eVPxXlwjIvtGuEg7kpQ">Hello Learner</span>
+          </a>
+          <div class="topbar-actions" data-page-node-id="L0NRYo1fbUVsnuoNGuvVh1"><div class="day-streak" data-page-node-id="Wr512eDeNvFaqQboRdzmAJ"><span data-page-node-id="QsBhYmElYKXL6tDmc30bJQ">🔥</span><strong data-page-node-id="NPD2ykvsqXTwC61cpuVkcS">0</strong></div></div>
+        </header>
+
+        <div class="coach-copy" data-page-node-id="8Coagd0l5Cy5K7Uc5ZBAll">
+          <p class="eyebrow" data-page-node-id="dSO3bGYS306o3ogPM4HtMu">YOUR AI ENGLISH COACH</p>
+          <h1 data-page-node-id="9NObL2Fk9SE8NSNXlRV62E">Ready to speak,<br  data-page-node-id="0tDlEUbY6mx1qfH9eE4HGH"/><span data-page-node-id="3Nt6ErdhC8fGaZUeBxgYFV">Sequoia?</span></h1>
+          <p data-page-node-id="1RBixLPKsxFub1vATQzmvI">Maya 已经准备好了，今天从一段真实对话开始。</p>
+        </div>
+
+        <button class="coach-visual" id="avatarStage" type="button" aria-pressed="true" aria-label="AI 英语教练 Maya，上半身特写模式，点击切换为全身" data-page-node-id="fWmTfn2QzfBmOOCv68youK">
+          <div class="sound-wave left-wave" data-page-node-id="d6U2j2aEYg05MEVN89Yeq8"><i data-page-node-id="e1rZjOF2VuLtGFSJT7mOBP"></i><i data-page-node-id="zMAwnQFq3O7X2RGxnPQFzG"></i><i data-page-node-id="uOGCTkjjrHvCBSGJiqyYRk"></i></div>
+          <canvas id="live2dCanvas" aria-hidden="true" data-page-node-id="XKnOdYsJCkV7AVWYUNGNns"></canvas>
+          <div class="sound-wave right-wave" data-page-node-id="Sx70yfGhlQB2aSOR0LR3FN"><i data-page-node-id="LuNJW2VJfS9DzfTTAqiNd4"></i><i data-page-node-id="3hyPvxxooIHKdNJPfEqH5a"></i><i data-page-node-id="0HZrGIkLQq3avOJkcOzvM9"></i></div>
+        </button>
+
+        <div class="coach-actions" data-page-node-id="Rx5DnjZZGXl4QHBuf3zisL">
+          <button class="secondary-button" id="chooseCoach" data-page-node-id="IcgIs864zfDMhxnoCnBnFP"><span data-page-node-id="5ajKc4tG7mM8j43sAtDWNB">☺</span> 选择角色</button>
+          <button class="primary-button" id="quickTalk" data-page-node-id="yBwDWdH4fhlne7rE3Ae6UR"><span data-page-node-id="O2CsP01y9N6V9JqakRZ9Wu">◉</span> 自由对话</button>
+        </div>
+      </section>
+
+      <section class="journey" id="learningPath" data-page-node-id="xqYrsz2HEbB3vi7jr5RQ8q">
+        <header class="journey-header" data-page-node-id="uGjZSnaiGzEwEL8SdegP1f">
+          <div data-page-node-id="NQOCke6TehxXB5wRzodySQ">
+            <p class="eyebrow" data-page-node-id="OWZ3pPEjn725YaDiKFwAH5">YOUR LEARNING PATH</p>
+            <h2 data-page-node-id="oRdl798dfD8tKZnteCAYxB">A1 · 日常英语</h2>
+          </div>
+          <div class="path-progress" data-page-node-id="kBCvzoSLILd1SXjx63ILwH"><strong data-page-node-id="ad20R0OOOZSbFjQNLtz9Fe">3</strong><span data-page-node-id="o68bkRxmArRV2bZJ1bSNzE">/ 8 课</span></div>
+        </header>
+
+        <div class="unit-banner" data-page-node-id="vWDTag5U7r7VqngvmZPCEy">
+          <span class="unit-icon" data-page-node-id="yT6qKlJQprEUnEVxLIwejr">01</span>
+          <div data-page-node-id="izQiBGyJHhjHWnKx6HQKDq"><small data-page-node-id="HDBrrmJNsCcjCGCKYznrCB">UNIT 1</small><strong data-page-node-id="d1QNbyMSG7kIEEcv4qIV3N">认识新朋友</strong></div>
+          <span class="unit-percent" data-page-node-id="5bVqyXKHpt7qajAOAZvqQ7">38%</span>
+        </div>
+
+        <div class="learning-route" aria-label="连续学习路线" data-page-node-id="A7Fe7IF2zmyOtMO2p3PYNt">
+          <svg class="route-line" viewBox="0 0 400 970" preserveAspectRatio="none" aria-hidden="true" data-page-node-id="4pRBtzSKNp3FbhFSEdFEgr">
+            <path class="route-base" d="M200 62 C200 132 88 132 88 222 S312 294 312 382 S200 455 200 542 S88 615 88 702 S312 777 312 866" data-page-node-id="LZhSGeHJvvD8Zu0KvL2vaz" />
+            <path class="route-done" d="M200 62 C200 132 88 132 88 222 S312 294 312 382" data-page-node-id="MOQYcTwJKOorXUtZDWbJRy" />
+          </svg>
+
+          <button class="path-step completed step-one" data-lesson="introductions" aria-label="自我介绍，已完成" data-page-node-id="ahBQvnDtnrgBElTWZRVhgY">
+            <span class="step-orbit" data-page-node-id="aYzW4IiqJDjF0HeMd2IniK"><span class="step-circle" data-page-node-id="8Y9bVGCAAF2tBjoXs7IWYf"><span class="step-icon" data-page-node-id="9Xv9femFhXR18XsIHZUbze">✓</span></span></span>
+            <span class="step-label" data-page-node-id="5n0g0u0AECJPzZPFmOoCGx"><strong data-page-node-id="6lYLFKo29rmREv541B11db">自我介绍</strong><small data-page-node-id="vRXyA9dRi7t6fFQsjrE1ei">Nice to meet you</small></span>
+          </button>
+
+          <button class="path-step completed step-two" data-lesson="small-talk" aria-label="轻松寒暄，已完成" data-page-node-id="kq5Qh6dGKeTnU8QvOOmmNw">
+            <span class="step-orbit" data-page-node-id="O7tH49Q8rSAXsvmlJq0t9L"><span class="step-circle" data-page-node-id="INwXdFJXVcusjJDAJCDxcj"><span class="step-icon" data-page-node-id="hAibjyNFslpDHzeczV0BI3">☀</span></span></span>
+            <span class="step-label" data-page-node-id="XiaE0GnCCuGJxVCbg8fSWz"><strong data-page-node-id="ElJEdUumWAwF7Nedbtg9qm">轻松寒暄</strong><small data-page-node-id="1ngFMZ3WxlvsjtyEdZO7OJ">Start a conversation</small></span>
+          </button>
+
+          <button class="path-step current step-three" data-lesson="coffee" aria-label="咖啡店点单，当前课程" data-page-node-id="qG4QUdKhLUb9vAMosXDnbZ">
+            <span class="current-flag" data-page-node-id="5piMUiwjIVbNShEOhxH51o">继续学习 <b data-page-node-id="3sqBNSELbmskDjnFs4dHQb">→</b></span>
+            <span class="step-orbit" data-page-node-id="KsKAJut7B4WLHeulLIACPV"><span class="step-circle" data-page-node-id="pr6N9GHBObuHx1jZChOjdF"><span class="step-icon" data-page-node-id="8QCFH6J5HFgxSzUeKyyeLT">☕</span></span></span>
+            <span class="step-label" data-page-node-id="UXQ2sxw10pswy3UOAGm5aN"><strong data-page-node-id="XzUg3CHIkeddi71Yl0JdIz">咖啡店点单</strong><small data-page-node-id="Z1Hqp0Nq6U4veHXA2unNww">Order with confidence · 3/5</small></span>
+          </button>
+
+          <button class="path-step step-four" data-lesson="directions" aria-label="问路与指路" data-page-node-id="Rbvr8Y7LttLwiHK4gJiPXP">
+            <span class="step-orbit" data-page-node-id="Yl1kkYz1ttETOiAdQMBMvB"><span class="step-circle" data-page-node-id="sIQGQX7KH2TbwCWnhZ5XrC"><span class="step-icon" data-page-node-id="WiLT3GcqpaXqU0J7iGOoGt">↗</span></span></span>
+            <span class="step-label" data-page-node-id="TO4HK5QgAxWwsUr9J6Bs0W"><strong data-page-node-id="Hpv4gGnm85IYFLAGMZjRs6">问路与指路</strong><small data-page-node-id="XqIsxwGMHnzA231K281WeA">Find your way around</small></span>
+          </button>
+
+          <button class="path-step locked step-five" data-lesson="shopping" aria-label="商店购物，未解锁" data-page-node-id="xCaR6tLSc9ZLIUpCaXpkiU">
+            <span class="step-orbit" data-page-node-id="ZdHS66p3qAd96qNis6Mw8M"><span class="step-circle" data-page-node-id="Te1n5QAWI50xcO6cCil9oE"><span class="step-icon" data-page-node-id="nostSC6Pe7HL0J8zEWP3ZC">♙</span><span class="lock" data-page-node-id="KbBCkDjCk2VE4BPMFLMOah">●</span></span></span>
+            <span class="step-label" data-page-node-id="AA1WwDwZdDLmnDwjX8OJV1"><strong data-page-node-id="mB6To3ndFGjF7sLEGOxD78">商店购物</strong><small data-page-node-id="OSq49aWN0HeTZyOINHxqLX">完成上一课后解锁</small></span>
+          </button>
+
+          <button class="path-step locked step-six" data-lesson="restaurant" aria-label="餐厅用餐，未解锁" data-page-node-id="nAggVt6pGF7BBvlXDu2xfJ">
+            <span class="step-orbit" data-page-node-id="sd8tZpQXyQsSeDdWqtNpPb"><span class="step-circle" data-page-node-id="lTEfaZZ0rS4BDAdYh25Axr"><span class="step-icon" data-page-node-id="3pkGvKubAShk1YNg6WC4Hd">♨</span><span class="lock" data-page-node-id="fAYUn5jDetRaD9YAoVq5k5">●</span></span></span>
+            <span class="step-label" data-page-node-id="TPXpC88HXYRHyrvgaV20u6"><strong data-page-node-id="ivdnjqmvc1EPmNqLHdjFcJ">餐厅用餐</strong><small data-page-node-id="0DRh9ZBtGHdgZfpBjzIJ2V">完成上一课后解锁</small></span>
+          </button>
+        </div>
+
+        <div class="next-unit" data-page-node-id="5mu3oH6mWu3XUJOHVk6R6v">
+          <div data-page-node-id="R9tChBYLVHQ7H4RfMkOYd6"><small data-page-node-id="Z4PZUMKk8Pu5iTrNSimUkB">NEXT UP</small><strong data-page-node-id="ZdHakibLy7dxHhmQHPf1Qk">UNIT 2 · 城市生活</strong></div><span data-page-node-id="CI6tADtTPvLlOTGPh6LEV4">🔒</span>
+        </div>
+      </section>
+
+      <section class="roleplay-page" id="roleplayPage" hidden data-page-node-id="bgCGLesGYyxEbPlgdGdO39">
+        <section class="level-section" aria-labelledby="levelTitle" data-page-node-id="GfWwqz7pUOzKHLzSWM5QlE">
+          <div class="section-title-row" data-page-node-id="KLQOteJJHJlCsq5hDRMwX1"><div data-page-node-id="sbz5QwNtsMxg8IrhSAsOGK"><p class="eyebrow" data-page-node-id="BxP1D7U3rA702A2hgs0zbi">CHOOSE YOUR LEVEL</p><h2 id="levelTitle" data-page-node-id="tBESEGJrOlghd7ZmhgDWKM">语言等级</h2></div><span id="sceneCount" data-page-node-id="TMHfBY7fn7A5GoLks0CRD8">15 个场景</span></div>
+          <div class="level-picker" role="group" aria-label="按等级筛选场景" data-page-node-id="9WrapGEQk7WdHKaLYtSkD5">
+            <button class="level-card active" data-level="all" data-page-node-id="RwicUIZBFWKHN3hJyFjyD1"><span data-page-node-id="d4k6tvwxwnmjaG1AXn0TS5">✦</span><strong data-page-node-id="gGW3rZllahXn7CjC62hvVj">全部</strong><small data-page-node-id="vJNe8FKnnDAUnH2HLpiZ0V">15 个场景</small></button>
+            <button class="level-card" data-level="初级" data-page-node-id="0yCDOj6MrtY8Tj5LtwT42C"><span data-page-node-id="UB0AGgqASznColOntddXWD">🌱</span><strong data-page-node-id="62hzAFbr3h7BhFhnP2WArm">初级</strong><small data-page-node-id="dvzGrJIfz1gYqvsGdp8BFS">6 个场景</small></button>
+            <button class="level-card" data-level="初中级" data-page-node-id="1yDnerfQGupzIjGOCDP7oD"><span data-page-node-id="OJbFsy4K9bkpWLQH3LhsuD">📚</span><strong data-page-node-id="1bGgiuv4XtVPWEAsv50OH4">初中级</strong><small data-page-node-id="SeYnaFVYcxrl7PHYvvMxcA">5 个场景</small></button>
+            <button class="level-card" data-level="中高级" data-page-node-id="tbCTJeBFhz0FCwxBm4A9kP"><span data-page-node-id="Acrjyab2ardfWqkS1dBNKg">🚀</span><strong data-page-node-id="h70RrmFIwKeUmfVbEHTFaR">中高级</strong><small data-page-node-id="J3c4JnWGv5KL5MxtApj9t9">4 个场景</small></button>
+          </div>
+        </section>
+
+        <section class="featured-section" data-page-node-id="1QFV8mVKEWWY6Xu6RNhZRE">
+          <div class="section-title-row" data-page-node-id="GWc3cEfulqiKuvfksJliAu"><div data-page-node-id="vseBe9lEaTIyIn4V1S6E0p"><p class="eyebrow" data-page-node-id="DoZNxqEogqF1Mbq1xZTaOI">COLLECTIONS</p><h2 data-page-node-id="Q0QHVDuEBeMdYD2OsHldLb">主题合集</h2></div><button class="random-scene" id="randomScene" data-page-node-id="NYini0NFBj8XiZYaObYRN7">随机挑战 ↗</button></div>
+          <div class="collection-scroll" aria-label="主题合集" data-page-node-id="REUxfT5ZRtpX8Mk07e8ONs">
+            <button class="collection-card collection-food" data-scroll-theme="food" data-page-node-id="NxG8lin1pB8IaEE1IisEmZ"><span class="collection-art" data-page-node-id="O3zg3cAA8chAGYIV9mNkzS">🍽️</span><span data-page-node-id="9mCtMvsuRvI5W1mTBF3gRj"><small data-page-node-id="PDRGVSXLcwsATHdBQ3DI68">3 个场景</small><strong data-page-node-id="8QtbCifxaughTmtzIxejXb">餐厅美食</strong></span></button>
+            <button class="collection-card collection-travel" data-scroll-theme="travel" data-page-node-id="25M0RfLxIqaBynxEqlUiLq"><span class="collection-art" data-page-node-id="JjPUD58ITviZ8LTKkyuK7F">✈️</span><span data-page-node-id="mf2XZD4WrQ9IjDCWBPF8Uu"><small data-page-node-id="H7HeZfyGWNMCMuB2WeWpJm">3 个场景</small><strong data-page-node-id="aT0ouhRei8jPpMfdWJbNYJ">旅行出行</strong></span></button>
+            <button class="collection-card collection-work" data-scroll-theme="work" data-page-node-id="S54gE8fXN9WyNVWza6RZ93"><span class="collection-art" data-page-node-id="q18wKQnipjdzP0hX0sjoTU">💼</span><span data-page-node-id="6gn3QXAQ2h6A3QhAdHQ5RV"><small data-page-node-id="1kQEO5ksVoe3O4GZ6XfoAZ">3 个场景</small><strong data-page-node-id="RtbzZajG1ZiQpm7pg1S2cs">校园职场</strong></span></button>
+          </div>
+        </section>
+
+        <div class="scenario-groups" id="scenarioGroups" data-page-node-id="kWOSDBdMcg3cPTCDLME4YN">
+          <section class="scenario-group" data-theme="daily" data-page-node-id="XMm84c8M0GZ4M16C55eFEn">
+            <div class="section-title-row" data-page-node-id="XCdlrfna5Mcyhtnqf5QICE"><div data-page-node-id="NcNo17NFNOVxNdozsNXSbX"><p class="eyebrow" data-page-node-id="Wo2efoWFcUwUY5WqWdjo3g">EVERYDAY</p><h2 data-page-node-id="BPafd4A1zLOMxzmJuQb2UY">日常交流</h2></div><span data-page-node-id="e03UFCQMa3dWKSuS1qxxlf">3 个场景</span></div>
+            <div class="scenario-scroll" data-page-node-id="quV5RQGuHt0aAbu6c63QcE">
+              <button class="scenario-card" data-scenario-id="directions" data-level="初级" data-page-node-id="HgGTF9Ql8sZG4BllBGXHAd"><span class="scene-art art-blue" data-page-node-id="EohLOZxo5eFn7C2isasqNB">🗺️</span><span class="scene-copy" data-page-node-id="RQGPOGKJkX9tpT2v5KUGmi"><strong data-page-node-id="uMBUvbpQXzznQVHbadlwy4">问路与指路</strong><small data-page-node-id="8rVGcjhVUut4HHrpziPSwX">Asking for directions</small><em data-page-node-id="pp2p3SOSjZ4zYR7ylQesy6">初级</em></span></button>
+              <button class="scenario-card" data-scenario-id="pharmacy" data-level="初中级" data-page-node-id="f4OyaNWag8dOV9T9LD8F5N"><span class="scene-art art-mint" data-page-node-id="fNh5z5mrAlxGROq6Y7i6C1">💊</span><span class="scene-copy" data-page-node-id="xvRykYBd1tyLmfayWlfYG7"><strong data-page-node-id="pKVeXx1JXQyETlp4E49EhV">在药店买药</strong><small data-page-node-id="1718RRXqxCnjb4QABs6WFo">At the pharmacy</small><em data-page-node-id="Xq8fAjW06RMfAdkbtwAaCh">初中级</em></span></button>
+              <button class="scenario-card" data-scenario-id="neighbour" data-level="初级" data-page-node-id="EWMB4tWGiNF8RfYMhoi7E4"><span class="scene-art art-yellow" data-page-node-id="83PbgDXc3l6bYEXTzxKU7d">👋</span><span class="scene-copy" data-page-node-id="mOs7WG13zN5651DTrGLkLM"><strong data-page-node-id="oACOqAtDTWuXsgsPQRyVI4">认识新邻居</strong><small data-page-node-id="aLv3WnblDFe0xtmQOCbWtT">Meeting a neighbour</small><em data-page-node-id="I6EK0aaQaqc2NVgQaBMI1u">初级</em></span></button>
+            </div>
+          </section>
+
+          <section class="scenario-group" data-theme="food" data-page-node-id="HtB35K2FeBEnBTqMxMDKSh">
+            <div class="section-title-row" data-page-node-id="3B6MWN4HUCkk46fumzYxhT"><div data-page-node-id="mGuFw7S5D3GebABQA8T4z5"><p class="eyebrow" data-page-node-id="Q9AAhSs8AU7T9djMvml4MT">FOOD & DRINK</p><h2 data-page-node-id="APEc2ZID7E55ZR6NLgXwsS">餐厅美食</h2></div><span data-page-node-id="hH78t6DHKTZLBMWy25Cm6X">3 个场景</span></div>
+            <div class="scenario-scroll" data-page-node-id="FH3ZGB0rxctoj7zhOSs90P">
+              <button class="scenario-card" data-scenario-id="coffee" data-level="初级" data-page-node-id="mx5flYZEs0wpRGkeWhf1yt"><span class="scene-art art-coral" data-page-node-id="5rrkCUE3LIfjQrVJWc28Vl">☕</span><span class="scene-copy" data-page-node-id="IF5U2EbuWDXnHkGX1bHBgA"><strong data-page-node-id="7VhPvYGLuiCGji3D27bSrK">咖啡店点单</strong><small data-page-node-id="H6T9y8oV6u3DwgZ97CGjp9">Ordering coffee</small><em data-page-node-id="ZwXuzsSjE6Vtfw91FihgH3">初级</em></span></button>
+              <button class="scenario-card" data-scenario-id="restaurant" data-level="初中级" data-page-node-id="oXbb4aGvDJd7fWQ3gOxEB2"><span class="scene-art art-blue" data-page-node-id="k9Noz3d10QhMt2XzwxBBzx">🍝</span><span class="scene-copy" data-page-node-id="noWlMQZ7ZFG5pr23WwuUHN"><strong data-page-node-id="AVmIpzLacHITo6BBMu2eLR">餐厅用餐</strong><small data-page-node-id="x1P7P6RxbkceUeP5yQF8k0">At a restaurant</small><em data-page-node-id="x2K007k1nWUOzhnZkfDKSL">初中级</em></span></button>
+              <button class="scenario-card" data-scenario-id="restaurant-problem" data-level="中高级" data-page-node-id="Pi8jg6QD6fXDTkpuoUsprW"><span class="scene-art art-yellow" data-page-node-id="nZjZa1ICvzdSKkEPEWFc6s">🧾</span><span class="scene-copy" data-page-node-id="CaNbwyTkivylr4d3bs9ywB"><strong data-page-node-id="VGYuKW18y92B74FHyEMa6M">礼貌提出问题</strong><small data-page-node-id="KusZYmsEmy9baNpiIAWsTu">Handling a problem</small><em data-page-node-id="8xY0vZyDUqBygl8fHu2R5Y">中高级</em></span></button>
+            </div>
+          </section>
+
+          <section class="scenario-group" data-theme="shopping" data-page-node-id="Y2oOAHte3qMLwiDUtx1ngp">
+            <div class="section-title-row" data-page-node-id="q5TnELf93jvjW3nJKe3PwT"><div data-page-node-id="eFB6ICNdXLnuK9bhQTPkVa"><p class="eyebrow" data-page-node-id="ag1VFzVBFUd9E1CwLEO7Sa">SHOPPING</p><h2 data-page-node-id="x10SqjoPnzL0sg87BpTPia">购物消费</h2></div><span data-page-node-id="tPPrvKakGne9zQgaCTtDpB">3 个场景</span></div>
+            <div class="scenario-scroll" data-page-node-id="M8THcFx5PxWTCh0l0viTHt">
+              <button class="scenario-card" data-scenario-id="clothes" data-level="初级" data-page-node-id="3WlBBzES7DwDn8CQrCCRj6"><span class="scene-art art-mint" data-page-node-id="uBMYz2SNnMCPclAVdHFEG5">👕</span><span class="scene-copy" data-page-node-id="EHmHsU4DZu1HPWEwsQ2LvF"><strong data-page-node-id="RjleGqdf1LCUGhgqLtNRVD">试穿衣服</strong><small data-page-node-id="jQCjvLAEodNL7MhCYWMsOX">Shopping for clothes</small><em data-page-node-id="XpdtTpvsjWEYZQ9u0w9KOx">初级</em></span></button>
+              <button class="scenario-card" data-scenario-id="checkout" data-level="初中级" data-page-node-id="iT1n3zfU7f588Ahj3XgeQg"><span class="scene-art art-yellow" data-page-node-id="YNTGWjpJxAH0aCwxBbGz0b">🛒</span><span class="scene-copy" data-page-node-id="A3daGMHj8b9GDHCzb4zrAB"><strong data-page-node-id="hAM6IEKiH4dlv9Iu4knsMb">超市结账</strong><small data-page-node-id="BVY2ykc3xla5xXdZYSGcWF">At the checkout</small><em data-page-node-id="4mX3bnzgxy3u1Bbh1NipKi">初中级</em></span></button>
+              <button class="scenario-card" data-scenario-id="returns" data-level="中高级" data-page-node-id="qGvbdlt3sHioCaDiFtgGRU"><span class="scene-art art-coral" data-page-node-id="06dhFatnhx5bnsYWAyedRG">↩️</span><span class="scene-copy" data-page-node-id="KqeXMqyZyt59ruLBf87UF7"><strong data-page-node-id="meptTn7IohXhcP5sJT0mcR">退换商品</strong><small data-page-node-id="aqRvbvEq4BzljONn2NpAHC">Returning an item</small><em data-page-node-id="0ImJ5yMuLqz2DsjGpsIzWc">中高级</em></span></button>
+            </div>
+          </section>
+
+          <section class="scenario-group" data-theme="travel" data-page-node-id="wnKCtVNkFzBjA5GnG81mgm">
+            <div class="section-title-row" data-page-node-id="jh6ZseJzagxPLmaZ15Ygij"><div data-page-node-id="xvp4UFEijXtwsz8RzAHqTt"><p class="eyebrow" data-page-node-id="Jw87tGgkLqWxxVdAJP67qh">TRAVEL</p><h2 data-page-node-id="Drln6CHqhKmwPrQOnwum3L">旅行出行</h2></div><span data-page-node-id="m9YqMHhvzhLRiyeqYpCaMf">3 个场景</span></div>
+            <div class="scenario-scroll" data-page-node-id="ueWMySxPLUIT7vKGTYFnqW">
+              <button class="scenario-card" data-scenario-id="airport" data-level="初级" data-page-node-id="beGO6Ec6WVWcOQFLaLDVFB"><span class="scene-art art-blue" data-page-node-id="K6cGCBQ5PtF7doD5eeiyBE">🛫</span><span class="scene-copy" data-page-node-id="61HIB9bJoEDEibFwbLd6hJ"><strong data-page-node-id="Ry4XKXplVguDvibfpXpgh1">机场值机</strong><small data-page-node-id="C0YeAr2du7c9GIblDcQjRI">Airport check-in</small><em data-page-node-id="PK1C2ZeUHgmecXYy0YqBYs">初级</em></span></button>
+              <button class="scenario-card" data-scenario-id="hotel" data-level="初中级" data-page-node-id="8F6R2t6Df2y6wSlYStUXId"><span class="scene-art art-coral" data-page-node-id="qj2WEvXBArBDqviMoGqkNV">🏨</span><span class="scene-copy" data-page-node-id="eLzC1uDj7i09wBYQiFuog9"><strong data-page-node-id="HFrolOBIDo9k2AP5xy4uqR">酒店入住</strong><small data-page-node-id="DB9QBweeCIRAfjLMTIf6xH">Checking into a hotel</small><em data-page-node-id="OiiY0FEerrGbmsUt6cHDU4">初中级</em></span></button>
+              <button class="scenario-card" data-scenario-id="car-rental" data-level="中高级" data-page-node-id="VCm5yN8dMLsYJmOfHaacua"><span class="scene-art art-mint" data-page-node-id="HEF8vL6U3LPOvLvVMErfwI">🚙</span><span class="scene-copy" data-page-node-id="kbHc2HltdS516cfv183JFX"><strong data-page-node-id="MnR9Ea7PPbKSBH1F6mCBgy">租车出行</strong><small data-page-node-id="sgiGoRNnq8dzpH7Zaqej3w">Renting a car</small><em data-page-node-id="8ECltFmQP8U5Kk5MMg0qrs">中高级</em></span></button>
+            </div>
+          </section>
+
+          <section class="scenario-group" data-theme="work" data-page-node-id="jaotXlEdgtXp8kVbe6P6Y1">
+            <div class="section-title-row" data-page-node-id="2p2SreYQCk6AHEsBiBEpwr"><div data-page-node-id="YACeba785jPZiJXfYq1if3"><p class="eyebrow" data-page-node-id="nim5Zxlf4VwjONR9s7XbVE">SCHOOL & WORK</p><h2 data-page-node-id="VcKyPmIUvsczYPaXxJ7eC5">校园职场</h2></div><span data-page-node-id="frhJcSUDGk2jr9RnguVyO8">3 个场景</span></div>
+            <div class="scenario-scroll" data-page-node-id="H8PbkwGLVL6CCflTaCJouW">
+              <button class="scenario-card" data-scenario-id="interview" data-level="初中级" data-page-node-id="06W3aRXLMDNCDS6QyrkDNP"><span class="scene-art art-yellow" data-page-node-id="2EypSJkGuNh1iv1yq8jBoS">💼</span><span class="scene-copy" data-page-node-id="IJNlXASJC8ArIsom0jLjjT"><strong data-page-node-id="fu3DpCAC5oko3NAAegH0Xg">参加面试</strong><small data-page-node-id="Srr6bmubwP700D3TRtyFM5">A job interview</small><em data-page-node-id="0RBLp1QymhbFMLfDnpgcPS">初中级</em></span></button>
+              <button class="scenario-card" data-scenario-id="classmate" data-level="初级" data-page-node-id="EZYtLwD9bpDz8qOhEizUOo"><span class="scene-art art-blue" data-page-node-id="J7RGQShLk4cr7GIFkA4OnZ">🎒</span><span class="scene-copy" data-page-node-id="9imDjqDnSXC1C7i5ApuVCc"><strong data-page-node-id="1eJ6vBT2l3VI1RUXLHbcVR">认识同学</strong><small data-page-node-id="aRAFlm67M8ED4XXgZyrl1h">Meeting a classmate</small><em data-page-node-id="UIGBpAFJHKlLf7pQaNDEyD">初级</em></span></button>
+              <button class="scenario-card" data-scenario-id="project-update" data-level="中高级" data-page-node-id="laEU6djKIJoHgUxHwfxARc"><span class="scene-art art-mint" data-page-node-id="XUjwq2f9tgy1FBqyWEHgFw">📊</span><span class="scene-copy" data-page-node-id="YHJjcDDtU0i0jEVOEkxQ1x"><strong data-page-node-id="20bgSzxQ5WSYnc3PVKTp1t">汇报工作进度</strong><small data-page-node-id="PHumoccDmFmR4v55AGbk3t">A project update</small><em data-page-node-id="hOPzGAIrInhBalh1hvGbee">中高级</em></span></button>
+            </div>
+          </section>
+        </div>
+        <button class="previous-topic-button" id="previousTopic" hidden aria-label="返回上一个主题" data-page-node-id="C04x5gXzcc8Bb45sFLe2ig">
+          <span data-page-node-id="tIbUZBKC7o2PSYFalEJcFz">↑</span><strong data-page-node-id="L86FnknS2kZXr1pLuAuuyX">上一主题</strong>
+        </button>
+      </section>
+
+      <section class="profile-page" id="profilePage" hidden data-page-node-id="9dWYrf1e9SBtcRtKPDWxUA">
+        <header class="profile-hero" data-page-node-id="69dgW8iwZOuFCtAOzbJaiH">
+          <div class="profile-hero-top" data-page-node-id="MjRWgey4f1ifnvFisf9Per">
+            <div data-page-node-id="OkLG8ir5a01vOK8Ct1obHn">
+              <p class="eyebrow" data-page-node-id="QYH8HmyQiBFeAia7bYeh4t">YOUR LEARNING SPACE</p>
+              <h1 data-page-node-id="BVkhQNHQL59FTIXxwENOYx">个人主页</h1>
+            </div>
+            <button class="profile-settings" data-profile-action="设置" aria-label="打开用户设置" title="用户设置" data-page-node-id="NE9h8OW7r9ND9Q9XHK4aai">⚙</button>
+          </div>
+          <button class="profile-identity" data-profile-action="编辑个人资料" data-page-node-id="D3AqUxHUQbQ7GvGb4oec81">
+            <span class="profile-avatar" data-page-node-id="fN6xUsS1po0tcg0v6Tk8KO">S<i data-page-node-id="cbfdJCwoQlKRLQ0gjWNTQP">＋</i></span>
+            <span class="profile-name" data-page-node-id="y1fGCO8xQBmkt8RsWZDedM"><strong data-page-node-id="s2o5o2VPjPVLUdumZM4ebP">Sequoia</strong><small data-page-node-id="8eT2HePBuw2Wyl0Sfw5v07">sequoia@hellolearner.ai</small></span>
+            <b data-page-node-id="Afp3F37asRTe9y16K0EFud">›</b>
+          </button>
+          <div class="profile-stats" aria-label="学习数据" data-page-node-id="ETQDOet5PUss9Z03COwAbG">
+            <div data-page-node-id="t2Iu4N9M38aoblsJAoa5iX"><strong data-page-node-id="EJar1NGsJvtGMCrIoIurk1">7</strong><span data-page-node-id="AOdNc5IiHHaiioF368qS0y">连续学习</span></div>
+            <div data-page-node-id="FNtBHRb449BnWgxeVJ8FZr"><strong data-page-node-id="2uEPffXa8BeSCBYUqGyuqW">3</strong><span data-page-node-id="FdO7pFmXMacoIEQvQJpjmw">完成课程</span></div>
+            <div data-page-node-id="FTJAfSarnq8uAHxsBMSFZv"><strong data-page-node-id="lQXJUUF91m0aZweYu8DUe5">86</strong><span data-page-node-id="OW9dvcmLmp5R00tAr69Tbi">口语评分</span></div>
+          </div>
+        </header>
+
+        <div class="profile-content" data-page-node-id="vQQLYvoZrwTVqUWkEmpHa3">
+          <section class="profile-focus-card" data-page-node-id="U0ZDreD2MK7nuqgYmPREiw">
+            <span class="profile-focus-icon" data-page-node-id="vSlZgonPUQuStpEBOxvBKG">A</span>
+            <div data-page-node-id="92EWbtU2WR05yiUhmE9Rvo"><small data-page-node-id="NuLwCoZKzjiufIVGYXlGWb">NATIVE LANGUAGE MODE</small><strong data-page-node-id="itCDzwl232o6epK21Z3Eg4">母语学习模式</strong><p data-page-node-id="zGJGlEnwkUdb11dZ6UY8ZF">优先使用母语讲解与提示</p></div>
+            <label class="profile-switch" data-page-node-id="zziFn1G4qm8I4a3WTHCwZb"><input id="immersionMode" type="checkbox" checked data-page-node-id="ZU8FNlMNtERBEl51f3KjTT" /><span data-page-node-id="K74MeXqKIUC4xzmECJ8W6Y"></span><em class="sr-only" data-page-node-id="30CNv0hjXQhA04H2eILuCi">切换母语学习模式</em></label>
+          </section>
+
+          <section class="profile-section" aria-labelledby="learningSettingsTitle" data-page-node-id="ni7SHT2rtLKjHESU7AlqFF">
+            <div class="profile-section-heading" data-page-node-id="8cGi1mI4GY9SCQw4jByNbP"><p class="eyebrow" data-page-node-id="JQ8WXkxRBNUwcCrWumUpT1">LEARNING SETTINGS</p><h2 id="learningSettingsTitle" data-page-node-id="r3gSZcA0giTsD7LpPAvDY6">学习偏好</h2></div>
+            <div class="profile-list" data-page-node-id="0TulHtx5kOsAmF32M3k6rN">
+              <button data-profile-action="目标语言" data-page-node-id="9MKXBgjx1cAEDS8JgcPETl"><span class="profile-item-icon icon-blue" data-page-node-id="JRrqCVZchYAaW4vcpyekLs">EN</span><span data-page-node-id="m3I4qceFtipJmSL14kkQR7"><strong data-page-node-id="SB9Fndbk1UvyaOiv9pEHIx">目标语言</strong><small data-page-node-id="j1CBv5AFzBYducL26UwSWH">你正在学习的语言</small></span><em data-page-node-id="4EQl8aiWpYwFpeLvIeLBTv">英语 · 美式</em><b data-page-node-id="GHLm4anz1DZ9XT3vumvc9A">›</b></button>
+              <button data-profile-action="语言水平" data-page-node-id="rHnFJMBF40BCgXng1HehCF"><span class="profile-item-icon icon-lime" data-page-node-id="mc8xOFNMLPILCREwt9vrRv">A1</span><span data-page-node-id="YVskGI4leRmfNZFEh0Jo74"><strong data-page-node-id="lxeK69Y5ZXg1K7NsBCkUHk">语言水平</strong><small data-page-node-id="oSHY9GHxkblC22Bdi4oXsz">用于匹配课程难度</small></span><em data-page-node-id="8qatyzjfql1e8qVkF1bCtL">初级</em><b data-page-node-id="hiId6EFzkkkucJQnOac5nz">›</b></button>
+              <button data-profile-action="母语" data-page-node-id="1vULfQk5yyATDq832qkUm8"><span class="profile-item-icon icon-coral" data-page-node-id="G2L8wOMupXrL3wXbXiE41u">文</span><span data-page-node-id="3js3pCobWq0NYbxV24fTzv"><strong data-page-node-id="hu6SQcvggdGLJkUogUlamM">母语</strong><small data-page-node-id="Zi4b1aoYtFH4yotO7iHVAS">讲解与提示语言</small></span><em data-page-node-id="TJVfyD79HtubdHrH01T2gg">简体中文</em><b data-page-node-id="kLM0LJwnbCu8ZRHJwqnShv">›</b></button>
+              <button data-profile-action="兴趣爱好" data-page-node-id="mpcdsPQr1RnozP95ZDpBPH"><span class="profile-item-icon icon-yellow" data-page-node-id="XRpGfQRHzhScbpwCRTCSBw">✦</span><span data-page-node-id="RBbcnmHlhW7qUwjbC439sE"><strong data-page-node-id="HqXwvtDm036ftOztwMmIa5">兴趣爱好</strong><small data-page-node-id="JTHbpBTchsOCpbNRS4OufR">个性化对话主题</small></span><em data-page-node-id="mNwwNvFdPpL4alzvLGB410">旅行 · 美食</em><b data-page-node-id="FMS7tl3xeCwZ8Gkf37bRPr">›</b></button>
+            </div>
+          </section>
+
+          <section class="profile-section" aria-labelledby="habitSettingsTitle" data-page-node-id="n3QY0zCkW9aapNnXbGgAfM">
+            <div class="profile-section-heading" data-page-node-id="R0EOzt0wHrWsKw9YDDbPW8"><p class="eyebrow" data-page-node-id="3OZfcjcX5gyWFWruOkmhTo">DAILY ROUTINE</p><h2 id="habitSettingsTitle" data-page-node-id="RUtGSl3IZTWHDRx4ksxlVl">学习习惯</h2></div>
+            <div class="profile-list compact-list" data-page-node-id="AVlgZEgFxLOMAyBjSRnEhi">
+              <button data-profile-action="每日目标" data-page-node-id="MejCSciVNqugCuixYp8C8U"><span class="profile-item-icon icon-lime" data-page-node-id="5tCwRIXuH0bqo5ArD0idVJ">◎</span><span data-page-node-id="3kIv33FpdCmkmNjeBcdPto"><strong data-page-node-id="k8ejonp6tcSOMMRpNRuxyu">每日目标</strong><small data-page-node-id="TPBlMhrYehcMdipl4EJTEM">保持适合你的学习节奏</small></span><em data-page-node-id="YXFG99DJDACQ57XcDBklOR">每天 10 分钟</em><b data-page-node-id="1QTyQNDpHTXiwYADaYGWqw">›</b></button>
+              <button data-profile-action="每日提醒" data-page-node-id="MwIbBuj2eL44pf9z9TTzAQ"><span class="profile-item-icon icon-coral" data-page-node-id="rnEmb8iaJQC9hmYbIHiFiC">●</span><span data-page-node-id="sYM1IftnJCcvGNmZak9aC3"><strong data-page-node-id="X9tvs2FLnMknNznSScvWQM">每日提醒</strong><small data-page-node-id="wiAQJnfA3Bv2uAlBNk2ggE">每天 20:30 提醒</small></span><em data-page-node-id="2itZnrRZOqghvLDOfpDhO2">已开启</em><b data-page-node-id="G8H1fij4YUOZHjj4YzIpDt">›</b></button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="progress-page" id="progressPage" hidden data-page-node-id="lveL2cfKCHWLMQaxxzKcYU">
+        <header class="progress-header" data-page-node-id="nXPquOziDZcbGS6ohgtl0e">
+          <div data-page-node-id="Np0BJkr65DwQA8UEhcColt"><p class="eyebrow" data-page-node-id="5wkTHFKzVmZWP4lD0Yej7w">YOUR JOURNEY</p><h1 data-page-node-id="g8uEPZ29arG84bOo4x1Nqg">学习进度</h1><p data-page-node-id="tblaCYUobjiBFv04plFcqV">每一次开口，都在让表达更自然。</p></div>
+          <span class="progress-streak" data-page-node-id="HwOClJSoFxzVick28KJuoP">🔥 <strong data-page-node-id="TcwkkcaewFoP0UsblFX30Q">7</strong><small data-page-node-id="XNkEs94NjeepzDp8EmEsc8">连续天数</small></span>
+        </header>
+
+        <div class="progress-content" data-page-node-id="moQeaDe9U0oIrfwXiL9p85">
+          <section class="progress-section feedback-section" aria-labelledby="feedbackTitle" data-page-node-id="MwsMXl0dWtbYbkxp0iPw17">
+            <div class="progress-title" data-page-node-id="auJGNcyOvjtIfFC2CTbtK5"><div data-page-node-id="FA6X9skb345qYj9VEWTazI"><p class="eyebrow" data-page-node-id="P62v30jBi6pUqyy7pf0WuD">AI FEEDBACK</p><h2 id="feedbackTitle" data-page-node-id="OYvAUQeA1Km7nckgpHSjyd">反馈中心</h2></div><span data-page-node-id="UO06P66GLvsYEsVejnWSZt">本周 12 条建议</span></div>
+            <div class="feedback-grid" data-page-node-id="AUOIl5EeLdROBFMQ4YsdLV">
+              <button data-progress-action="语法反馈" class="feedback-card feedback-grammar" data-page-node-id="A6Nd46KMal0UV80olNoYyH"><span data-page-node-id="okejFXwezqnamV93pDhUXp">Ab</span><small data-page-node-id="jl4l4vcHSHwSQfXZQnToNC">语法</small><strong data-page-node-id="S9iNuGBrUHokBcDpEIDkmk">3<em data-page-node-id="q08GKc2gAV89SFeCjEDbcG">条</em></strong><b data-page-node-id="vV1wMWsuKFKAE9SHDcCUYL">↗</b></button>
+              <button data-progress-action="表达反馈" class="feedback-card feedback-expression" data-page-node-id="9G8GiE7qpkSF5HudVDkRRq"><span data-page-node-id="eIO0sOhpO7T4mK0aBxZ5Bt">✦</span><small data-page-node-id="rJjrJ2Bff8UiHFwBRAO4p3">更佳表达</small><strong data-page-node-id="xqQO9ShyGkTGBnfBUBa0Wo">5<em data-page-node-id="YGEt5dwgz1HVSQJjhspikJ">条</em></strong><b data-page-node-id="bPYDEP9X0okqiJam69oAG0">↗</b></button>
+              <button data-progress-action="发音反馈" class="feedback-card feedback-pronunciation" data-page-node-id="7WRyQ4U8uPxKtmtpTuLe3v"><span data-page-node-id="tVoqFvJAj2UnD6BcnXTNJs">◉</span><small data-page-node-id="LJKrF5izyW25qdSL9GYkr7">发音</small><strong data-page-node-id="3vOOOZDxJfmNAGPgfXXrVp">4<em data-page-node-id="3afsemBhmooCHdcNE6gj1E">条</em></strong><b data-page-node-id="034LThjCYEB08E8J2zBG0q">↗</b></button>
+            </div>
+          </section>
+
+          <section class="progress-section" aria-labelledby="vocabTitle" data-page-node-id="GRVBrveQ6ANzNro80UAAKO">
+            <div class="progress-title" data-page-node-id="WCHonfMc95mOHP8DnE3nb5"><div data-page-node-id="IKFAvZGs43xhTOkIsG3Pwy"><p class="eyebrow" data-page-node-id="dTGwX7xpY4NhH3CIK112lJ">VOCABULARY</p><h2 id="vocabTitle" data-page-node-id="WHp2hbEpBtWpLjAczg8cFY">词汇训练</h2></div><button data-progress-action="词汇训练" data-page-node-id="X0F6MbDZedcAe7hdHjzTkR">开始复习 ↗</button></div>
+            <div class="vocab-progress-card" data-page-node-id="z0MVbiAhmZ89ZNAYAFC8YB">
+              <div class="vocab-progress-copy" data-page-node-id="d6niUOjmccnQ8TgGi5pnzz"><span data-page-node-id="XkO82UyZAaE3iKkivwSrG8">本周已掌握</span><strong data-page-node-id="sijdyJvADMabdW0ttM9fjB">24 <small data-page-node-id="8tjh0Teckvaf0bIjAQYIhz">个单词</small></strong></div>
+              <div class="vocab-progress-track" data-page-node-id="u6v93BCE87CFZsDyZFX0p6"><i data-page-node-id="1F4qMQCbZWtjE5uDKleU63"></i></div>
+              <div class="vocab-numbers" data-page-node-id="vM9tFxBIJ6bs9hZBc7vspW"><div data-page-node-id="ihRYsitNDDGFwZQnFhzVBK"><small data-page-node-id="v1zU1H0CGV05HaKJYnxVH4">新词</small><strong data-page-node-id="l3RwHwkyLhHZFWbSPrqeX3">12</strong></div><div data-page-node-id="fHdgnDh893Wi3ko7q9VEB3"><small data-page-node-id="PVXLHrVgmevxWv4jrFyy6P">学习中</small><strong data-page-node-id="D7hnzpTsqe1LQVK70CXYf3">48</strong></div><div data-page-node-id="WNV01LwHihtDqxh2rDwNjk"><small data-page-node-id="JE4UynXiaryBgck2eFp8MB">已掌握</small><strong data-page-node-id="HsG6HHXcZpjh7dbenGyREh">96</strong></div></div>
+            </div>
+          </section>
+
+          <section class="progress-section" aria-labelledby="streakTitle" data-page-node-id="XqzclnTCHWDOrFDZCwm1R1">
+            <div class="progress-title" data-page-node-id="LzubgysQCgOAXf4BIYgYY0"><div data-page-node-id="AfwMz3QyjaeU0wLCB8EvJt"><p class="eyebrow" data-page-node-id="VxYEu5an22HvQ6sldFmE7s">YOUR STREAK</p><h2 id="streakTitle" data-page-node-id="CjpjxAx7RVhJAK5IC1FYvD">你的连胜</h2></div><span data-page-node-id="Fl1VKRceZ3VXDlgjXXtkki">最长 7 天</span></div>
+            <div class="streak-card" data-page-node-id="qFyztb6zEt1i2nzzzEEfuB">
+              <div class="streak-summary" data-page-node-id="kjQaz5DtZcgQ2zX3sgpdgj"><span data-page-node-id="igjYj6zX38Fx3LTl9dNpC1">🔥</span><div data-page-node-id="oC9gOvUD3ZxpG9aibMr8Qu"><strong data-page-node-id="eiclapJtPErY9NRIKoTSlj">连续学习 7 天</strong><small data-page-node-id="uVtaInFiRZRTqWfykFMkXA">再坚持一天，创造新纪录</small></div></div>
+              <div class="streak-week" aria-label="本周学习记录" data-page-node-id="tiHxHgVDbBFRG2HZmM1UQG">
+                <div class="done" data-page-node-id="xMqc5z5sDcE4MH85FTNdvK"><i data-page-node-id="yeiPlgwmEHusRWxHly2twc">✓</i><span data-page-node-id="qrdJgLuZ5IvmNkkRqCJD1L">三</span></div><div class="done" data-page-node-id="jzArKzz3OmpbOWPNuJUBsn"><i data-page-node-id="PqiusIyz6t6rSDKOeQLmN3">✓</i><span data-page-node-id="KXE39fBLkfX6480Hew32TY">四</span></div><div class="done" data-page-node-id="yGrEHDgXFmqsSpUqX9NLbC"><i data-page-node-id="xtOISrdg2A3wHZVpZuL4SQ">✓</i><span data-page-node-id="ZOUMNbfLGXZAree13U9AIL">五</span></div><div class="done" data-page-node-id="vpWHnCETGrFZDWUQlVC7RH"><i data-page-node-id="n26Xz9phzZrlE3ziAxyuTO">✓</i><span data-page-node-id="bEPEG6I2FTk304NMK2MJdo">六</span></div><div class="done" data-page-node-id="caykUn1ZIxH8WEMfJOjH3U"><i data-page-node-id="IOqyeOLTOJfy9FUUDDSu8D">✓</i><span data-page-node-id="0hZOTQIk55wHNLPVGHUA1C">日</span></div><div class="done" data-page-node-id="LcqhLSVIaG06sizoY66BH3"><i data-page-node-id="hoBEnJEMBSxw1BLMF3qTb4">✓</i><span data-page-node-id="5jH9FVfXcMuITiGH1ekNzP">一</span></div><div class="today" data-page-node-id="nQ0clO6G98c6YleVCLDN7B"><i data-page-node-id="OW0fZ7vsx8bNrkxAQfyfcv">🔥</i><span data-page-node-id="s40utXSPi3ee8oXIbQgE9X">二</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="progress-section" aria-labelledby="speakingTimeTitle" data-page-node-id="Xi2GgVD8OQcDWfnXYSk7b2">
+            <div class="progress-title" data-page-node-id="gi5pAxo4Vo9JFmiT16mdqG"><div data-page-node-id="RvNDlMlrLYXUxENqksCwfp"><p class="eyebrow" data-page-node-id="cBBvoyFHDSbObPB9ttH0VO">SPEAKING TIME</p><h2 id="speakingTimeTitle" data-page-node-id="xQonKFwPcbuxVFPcgloKNn">口语练习时长</h2></div><span data-page-node-id="dacI8pHHI4GxaGm9BOVuK3">本周 · 7/15–7/21</span></div>
+            <div class="speaking-chart-card" data-page-node-id="1NOdaMD5HzgWMiDHhKc3fw">
+              <div class="speaking-metrics" data-page-node-id="6ss4MsSHZnjqfz4ZNqw8yd">
+                <div data-page-node-id="cECOAX4ZqJvZVX9EOR92OH"><small data-page-node-id="SlRevv49oWXjRGJ52QReKj">本周累计</small><strong data-page-node-id="jQVgphNzDrIoAFeH8gy4nY"><span id="speakingTotalMinutes" data-page-node-id="z9KVolz4BkjaRq5SbTouJE">24</span><em data-page-node-id="79wAaVWIUbvJnUAbMhGFXr">分钟</em></strong></div>
+                <div data-page-node-id="qpFZJ4G9e7a5a5AjcaKwwv"><small data-page-node-id="U5cO3RBivS3xvIBwqPx8op">日均时长</small><strong data-page-node-id="UbApSxvPfcXExNx1bjF259"><span id="speakingDailyAverage" data-page-node-id="KA9LBrDCAjWM1RVoW8dXLH">3.4</span><em data-page-node-id="ud76vxej8shGeMvWEZ0bOG">分钟</em></strong></div>
+                <div data-page-node-id="B9ONhPU1AMIC6ycA7cr2Zp"><small data-page-node-id="B5tkDVC52EpmbuOlp2uf2F">每日目标</small><strong data-page-node-id="ALFlHf3qECE0IAGd65Cim5"><span id="speakingDailyGoal" data-page-node-id="V6Bn1afCSLoDElZ4iaT5uO">5</span><em data-page-node-id="hWgEIPqYouSc8FR8fUD4aa">分钟</em></strong></div>
+              </div>
+              <div class="speaking-chart-meta" data-page-node-id="WI1DCmI3TTx5HdHcutE53U"><strong data-page-node-id="PZUv1fVPATFCyfzk631FrH">近 7 天趋势</strong><span data-page-node-id="JrV6K5wv1iAQaBDdlKE32Q">单位：分钟</span></div>
+              <div class="speaking-chart" id="weeklySpeakingChart" role="img" aria-label="最近七天口语练习时长柱状图" data-page-node-id="qwIx0ZfsExRLdoRhVMjdSD">
+                <div class="speaking-target-line" aria-hidden="true" data-page-node-id="DqFhzsCCLaFXH9sJdAmriA"><span data-page-node-id="uXB5f3ob2B8seNj48HaGrB">目标 5m</span></div>
+                <div class="speaking-bars" id="weeklySpeakingBars" data-page-node-id="1KIph3HXdt0C3dKSgBwhPo"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="progress-section conversation-section" aria-labelledby="conversationTitle" data-page-node-id="Be7aDvkrYQ7BKmHCGN15sb">
+            <div class="progress-title" data-page-node-id="BOCGfgJtFRvH0boZI5yByM"><div data-page-node-id="GlVrtlktG9lDK6XAty5CrD"><p class="eyebrow" data-page-node-id="kl92cCUnrVYCAOKYQDLxdx">RECENT PRACTICE</p><h2 id="conversationTitle" data-page-node-id="yMyuYpLwR0LXn3ugRtoaJK">最近练习</h2></div><button data-progress-action="全部练习记录" data-page-node-id="qODXj3GQJEZi5B3YQM4F52">查看全部</button></div>
+            <div class="conversation-list" data-page-node-id="c19fWd0ooB2CMQ2Kmg6Tu8">
+              <button data-progress-action="咖啡店点单练习" data-page-node-id="E7qrzTqzUF1GmvSAmkWFb8"><span class="conversation-icon icon-coral" data-page-node-id="x6SOX6y374rjyyVLi3ipbH">☕</span><span data-page-node-id="gmRrEoyzJQfX73czQ4G4kC"><strong data-page-node-id="132Mg8rXVC9XXtXDsAgBTW">咖啡店点单</strong><small data-page-node-id="ncADgyoXY2vEP8ow2zFHXV">今天 20:24 · 8 分钟</small></span><em data-page-node-id="QZQIrXy5wjcDZCDiOh1Z3M">86分</em><b data-page-node-id="UupVDX4m8qkSbwaBQ1vNP0">›</b></button>
+              <button data-progress-action="自我介绍练习" data-page-node-id="CCVAhIMz3NJKlhONLEap99"><span class="conversation-icon icon-lime" data-page-node-id="TpHHB8ze7awTOFUlfdjEv5">Hi</span><span data-page-node-id="2MGPGAxbAMKMIFyIqCOZhc"><strong data-page-node-id="7RYhLuC7mnxOHWJFDip5Iz">自我介绍</strong><small data-page-node-id="AbtzPqZE7h1Fz4EeTXTSC9">昨天 17:13 · 6 分钟</small></span><em data-page-node-id="tRYxtG2r5ioucCf3EsDri6">92分</em><b data-page-node-id="tB9tiRa6Zpygm8S3YQtQm9">›</b></button>
+              <button data-progress-action="问路与指路练习" data-page-node-id="HkRmhuPLFo0kkAEiEEfCVZ"><span class="conversation-icon icon-blue" data-page-node-id="AxHS4DvuDTqBCfvyCbX0HS">↗</span><span data-page-node-id="7xsvyNA384UB0WwxcoGkjO"><strong data-page-node-id="E9AsQip7xbP8997hP2oFW2">问路与指路</strong><small data-page-node-id="i3gsrvDqkbUymPDaLUTBpm">7月19日 08:41 · 10 分钟</small></span><em data-page-node-id="9fYdJD3vcfNuCGPaDurXrp">81分</em><b data-page-node-id="7jm6YIfaRD3Mg8FfboIAmz">›</b></button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="主导航" data-page-node-id="0zzca0IX9zMKoSzEFBPMgC">
+      <button class="active" data-tab="path" data-page-node-id="E0DXNy4wEkrWD0qGGHJmMv"><span class="nav-icon" data-page-node-id="HvkzYfHEnK1aCNWvoS85Em">⌂</span><strong data-page-node-id="8MkdQGtG8KGe31VZ1VmWcW">学习路线</strong></button>
+      <button data-tab="roleplay" data-page-node-id="IcfakXkxKcePFXKVSZZfoM"><span class="nav-icon" data-page-node-id="qTSnHTWFlFJ6rrLQY1mnvC">◌</span><strong data-page-node-id="kFBGbDyKSVqUbua0FPQELF">角色扮演</strong></button>
+      <button data-tab="progress" data-page-node-id="NscAhWhNTxJTk2RCQ1SnWH"><span class="nav-icon" data-page-node-id="BbCcFjH0X3S3dxlmFC8EJh">▥</span><strong data-page-node-id="er11eSE89Qj5RJlLGCAIo0">进度</strong></button>
+      <button data-tab="profile" data-page-node-id="QP3Bj9umXVigYATmJMh85j"><span class="nav-icon" data-page-node-id="ez11QkN0PStGfHohrWade3">○</span><strong data-page-node-id="ZRYwEMxsSrbJAJGC7DGHGR">个人主页</strong></button>
+    </nav>
+      </div>
+    </div>
+
+    <button class="jump-button" id="jumpToCurrent" aria-label="跳到当前课程" data-page-node-id="pDAw9D2hjg8KFpkoNMK0aL">↓</button>
+    <div class="toast" id="toast" role="status" aria-live="polite" data-page-node-id="0m90WrsUu82T7FfKnaeWFK">完成上一课后即可解锁</div>
+
+    <dialog class="lesson-overview" id="introOverview" data-page-node-id="HHb1g95yOt9YESkL1lTT6J">
+      <div class="overview-shell" data-page-node-id="wf6jPPr1XoNA48b8ipUWjP">
+        <header class="overview-hero" data-page-node-id="pgPo7abFP6TCFBTqCWtUbM">
+          <span class="sheet-handle" aria-hidden="true" data-page-node-id="hJ3wEXsCrC9OnKxa4F5BcB"></span>
+          <button class="overview-close" id="closeIntroOverview" aria-label="关闭课程介绍" data-page-node-id="9vXGgqxg6MbVu5AY6Ogrxi">×</button>
+          <p class="overview-kicker" data-page-node-id="DXnX2KRBgmYIkiCFuoii2B">LESSON 01 · 自我介绍</p>
+          <h2 data-page-node-id="AUoPYl0BCc4WhBH3AIhES8">What's your name?</h2>
+          <p data-page-node-id="2g4KI6RgBBP6LjaxqB07vE">学习如何询问对方姓名，并自然、礼貌地介绍自己。</p>
+          <div class="lesson-meta" data-page-node-id="70VWnQb3nVc5LcVwSZ3rbg">
+            <span data-page-node-id="XqWGu5MfF6AHPKPB79MA0L"><b data-page-node-id="z15uiZX1nio5sHg0QyGagI">6</b> 单词</span>
+            <span data-page-node-id="kvv5J5H18J0tKowsisaCuk"><b data-page-node-id="xWsBIfUIXtbDIqQpMppjaq">2</b> 句型</span>
+            <span data-page-node-id="hT6YZMe9HKFJje0PK4oKcI">约 4 分钟</span>
+          </div>
+        </header>
+
+        <div class="overview-content" data-page-node-id="M9tEDVqLL9rQBf8RJM3Fxe">
+          <div class="overview-actions" aria-label="课程内容导航" data-page-node-id="AkGDlP6QVaQxDS2ugpgsHB">
+            <button class="active" data-jump="explanation" data-page-node-id="HksRXrhEfKH8VOrpZ3RRn2"><span data-page-node-id="epTfp0zkGo7l0kGwX36rCX">Aa</span><strong data-page-node-id="zt5RoZT77sqOTsgvwRjf14">中文讲解</strong></button>
+            <button data-jump="sampleDialogue" data-page-node-id="Qq94nt4VYWYMeZj9Egb9EQ"><span data-page-node-id="mvMa50yHbaaGZEVO715beN">◌</span><strong data-page-node-id="nbcdjE1kGBw1egkwtAH3WI">示范对话</strong></button>
+          </div>
+
+          <section class="explanation-section" id="explanation" data-page-node-id="BGw9jLhLak0prXACMvBW3Q">
+            <div class="content-heading" data-page-node-id="aDo6mKLODu5tjFu1RDOphf">
+              <p class="eyebrow" data-page-node-id="aBNgjqaAjsFkqHJKwNKs4A">HOW IT WORKS</p>
+              <h3 data-page-node-id="Sifne3lrcfbImrrqfKMEik">怎么询问对方的名字？</h3>
+            </div>
+            <div class="phrase-card" data-page-node-id="4EBYucdZ3oq74zk1zEwaca">
+              <div class="phrase-topline" data-page-node-id="EE88wR615US7DDt6Eg9ZMF">
+                <div data-page-node-id="cxqGNgSiikBkQzx3lbQs6G"><strong data-page-node-id="7Fwec0DijjyMWKnLK2X75y">What's your name?</strong><span data-page-node-id="Wj3sLIyvAB6dRRGqpr3phM">/wʌts jər neɪm/</span></div>
+                <button class="round-audio" data-speak="What's your name?" aria-label="播放 What's your name 发音" data-page-node-id="o05uINKpTh7pzag8e8hbo8">▶</button>
+              </div>
+              <p data-page-node-id="DOaGNhLi6s2Xu3BzCUydy7">意思是“你叫什么名字？”，用于第一次见面时询问姓名。</p>
+              <div class="formula" data-page-node-id="OURuyOB4v9RlIin22StQ3U">
+                <span data-page-node-id="W5RR7DhPipZ3xgeE1dyseU"><b data-page-node-id="bZ28RCyEhi7Qb8EBcfADMa">What's</b><small data-page-node-id="LD9bQ4Ym3ACtb6Tg71PiyI">What is</small></span>
+                <i data-page-node-id="3gXIUawNfO5c4cqcJoirSx">+</i>
+                <span data-page-node-id="ksXiY3MdxyoM7GTRIud0DB"><b data-page-node-id="CTBNmuZWGgZdd4ExCNSlo5">your</b><small data-page-node-id="YfcwdgZtMuZKDAq2p2BKVI">你的</small></span>
+                <i data-page-node-id="YbUg6Dhe83VZF4f5jGw6vs">+</i>
+                <span data-page-node-id="Mh0ozSbG36crJ33lcJS979"><b data-page-node-id="yZBaFEpJWKsaACWeDQnW9f">name?</b><small data-page-node-id="6IsWxM9fsaNHhi0WZFlPqA">名字</small></span>
+              </div>
+            </div>
+            <div class="answer-tip" data-page-node-id="KNoR3wjsFG1nFw3Gv6tyBz">
+              <span class="tip-icon" data-page-node-id="nbR8t1NIRlJHFQKXaGj8LD">✦</span>
+              <div data-page-node-id="eO4fPOj0QydPYEeNAqFPQy"><strong data-page-node-id="mAWeAXqHBn9t5SB2P1FUfR">这样回答</strong><p data-page-node-id="u5wMElQZk0bJYFJB9SwzYK"><b data-page-node-id="zrLV6icxO36O3iWtmlcMsC">I'm Sequoia.</b> = 我是 Sequoia。<br  data-page-node-id="16XZX6N9PTOT7EwvItOtcO"/>I'm 是 <b data-page-node-id="C3Tv0Y2oDBJD2wEgRFelFt">I am</b> 的缩写，口语中更自然。</p></div>
+            </div>
+          </section>
+
+          <section class="dialogue-section" id="sampleDialogue" data-page-node-id="9IDGhtfcZAobRH2JReoy1F">
+            <div class="content-heading" data-page-node-id="qY2xj5GzPjpeDwJ9NQu3Vc">
+              <p class="eyebrow" data-page-node-id="FYBLPakX7MCbt75bE8Cg6s">MINI DIALOGUE</p>
+              <h3 data-page-node-id="VSNzlU4sVvIWfDcK1m0J3s">这次会练到的对话</h3>
+            </div>
+            <div class="sample-chat" data-page-node-id="R2X3xoD2128f2zFGPcw6DX">
+              <div class="chat-avatar" data-page-node-id="1dJl4Z4xoeT5HGPsMNujBw">M</div>
+              <div class="chat-copy" data-page-node-id="4T2wX5IJAYxwLLHmxpNYT8"><small data-page-node-id="zFl3mlfaJfR97loduMmFkc">MAYA</small><p data-page-node-id="oOLumUwDdmfj8uCMeCXoL9">Hi! What's your name?</p><span data-page-node-id="fuTMha5SAM9udvL83zaLbd">你好！你叫什么名字？</span></div>
+              <button data-speak="Hi! What's your name?" aria-label="播放 Maya 的对话" data-page-node-id="oQZVT33mLpXGLKBTG9KhKc">▶</button>
+            </div>
+            <div class="sample-chat learner-chat" data-page-node-id="o2pzgsa4GdeFOoCRFUfldD">
+              <div class="chat-avatar" data-page-node-id="MnPJdHfzx3SGiGguyvDgW0">YOU</div>
+              <div class="chat-copy" data-page-node-id="3fYcYcYi7kcPj2oxW7NBoD"><small data-page-node-id="gYBtcHWuiAHpxTwgzDq1YE">YOU</small><p data-page-node-id="CQ88oL9RmQpLbLSntbQFxH">I'm Sequoia. Nice to meet you.</p><span data-page-node-id="jF3Vpqndcqch8kmjmRCmTj">我是 Sequoia，很高兴认识你。</span></div>
+              <button data-speak="I'm Sequoia. Nice to meet you." aria-label="播放示范回答" data-page-node-id="pO3o6X8OfF3Qebjuf53InG">▶</button>
+            </div>
+            <div class="sample-chat" data-page-node-id="V3y2eKNDCFjygclwoR5Rf8">
+              <div class="chat-avatar" data-page-node-id="oy4nEhuIBJT9us89fxdqKl">M</div>
+              <div class="chat-copy" data-page-node-id="Cv1djgRoclO7UGx5JCOFrL"><small data-page-node-id="kskP76s2SfgClGx7N428MQ">MAYA</small><p data-page-node-id="SlYA22nFo5POiihWFEpjv2">Nice to meet you, too!</p><span data-page-node-id="DuRBakhGk5qkIVNKNQrCo8">我也很高兴认识你！</span></div>
+              <button data-speak="Nice to meet you, too!" aria-label="播放 Maya 的回应" data-page-node-id="NKYbt42lnYsYWOdGSerKbc">▶</button>
+            </div>
+          </section>
+
+          <section class="vocabulary-section" data-page-node-id="WJcXdBtNAiYSCxglczCLnM">
+            <div class="content-heading vocabulary-heading" data-page-node-id="8AQTk6CIlRbdIqoaYdGXqG">
+              <div data-page-node-id="3EX9cdycKHwcYo8ya4msZm"><p class="eyebrow" data-page-node-id="hKQk4VjXOr4ViH5QR4liFt">VOCABULARY</p><h3 data-page-node-id="PTVUmIjgNlis7Ltc74Rccr">本次对练会出现的单词</h3></div>
+              <span data-page-node-id="7GekY2fWSIp5G5BD3y067D">点击试听</span>
+            </div>
+            <div class="word-grid" data-page-node-id="H8OxPUnY7Fweji3NaECEzF">
+              <button class="word-card" data-speak="name" data-page-node-id="NrQmNHt1Qy0Xhq6HSoYrHE"><span class="word-audio" data-page-node-id="OV8VZsLIPfFzVTh5xsbXQg">▶</span><span data-page-node-id="rftKFf3Uf5heUMC6j3FLRZ"><strong data-page-node-id="fOy7nc8eHVNBlmWZIAmBrB">name</strong><small data-page-node-id="EapJB2xJHvsAis2YKHFNPP">/neɪm/ · 名字</small></span></button>
+              <button class="word-card" data-speak="your" data-page-node-id="Bmu0b25FmTWXKi6iHK0NDJ"><span class="word-audio" data-page-node-id="wHQD53OyQZGjM1q5oXTVF6">▶</span><span data-page-node-id="e9BEESyYJoxIGVdU4G5dFs"><strong data-page-node-id="ydJ4ZJTZUlEDIwmH8YFzqA">your</strong><small data-page-node-id="S1JfRAhOTFIDthb1iG4hqS">/jʊr/ · 你的</small></span></button>
+              <button class="word-card" data-speak="my" data-page-node-id="MhwBUCTLYDC0jZZ9UA7Txq"><span class="word-audio" data-page-node-id="fEA2QLx4V7qizArvpdtj2h">▶</span><span data-page-node-id="s9pIGjLNrAeyFE6RFsdz7Q"><strong data-page-node-id="3k6qKFSW3PSgX10FO6RUyd">my</strong><small data-page-node-id="NoF6PUvxKBBVskkzwAEY8c">/maɪ/ · 我的</small></span></button>
+              <button class="word-card" data-speak="meet" data-page-node-id="Y4G3evUOoMTZIUkUG3QgTc"><span class="word-audio" data-page-node-id="oszbbS7u1AtY44HX5P0OLD">▶</span><span data-page-node-id="QD3XvELvNNkHgoLDcVjRK9"><strong data-page-node-id="XdRdsDyL8PRvMyv1MOQKHr">meet</strong><small data-page-node-id="LVrZZXUnNtlxDFXpVtqg5b">/miːt/ · 认识、见面</small></span></button>
+              <button class="word-card" data-speak="nice" data-page-node-id="RhwHVz1C5XDbMx1RuzbDgF"><span class="word-audio" data-page-node-id="beV9YpC22xhNxEAKFOFDUn">▶</span><span data-page-node-id="UFFaNK78rLSUl1V75eHDmy"><strong data-page-node-id="MqsyPcdMUCsdgakcDSRl9E">nice</strong><small data-page-node-id="TyDMtrjaB5t6jWApnH5ZOu">/naɪs/ · 令人愉快的</small></span></button>
+              <button class="word-card" data-speak="too" data-page-node-id="OUIugszJ53Ly0ENiSTPIDb"><span class="word-audio" data-page-node-id="GiXCPtmq7DpW7qAvJcf7Ld">▶</span><span data-page-node-id="mRawAF9vNxipEffvdGms06"><strong data-page-node-id="NtUqpACfLrduWDyZIvz505">too</strong><small data-page-node-id="6UTL5gjhffQrkgaPFSl9g7">/tuː/ · 也</small></span></button>
+            </div>
+          </section>
+        </div>
+
+        <footer class="overview-footer" data-page-node-id="ZiiEGEwpvtSd09JWXl8MiU">
+          <button id="startIntroPractice" data-page-node-id="suFYAKJWLMBQKte1yhloOv"><span data-page-node-id="WWPMhcbIu6CX27iz2xdgNx">开始对练</span><b data-page-node-id="VELMJwAFHW1EBKSiz8tvwm">→</b></button>
+        </footer>
+      </div>
+    </dialog>
+
+    <section class="practice-room" id="introPracticeRoom" hidden aria-label="What's your name 对练房间" data-page-node-id="mBcCAoQpT3SZx095ERJlpZ">
+      <div class="practice-room-shell" data-phase="intro" data-page-node-id="DD1PH63fCCPzEl9l3Y99BD">
+        <section class="room-stage" data-page-node-id="rycz3IvtEWbNpOSlAa3m0z">
+          <div class="room-toolbar" data-page-node-id="bgtUXTSbXtBYmYJCbNkxZ7">
+            <button class="room-tool room-close" id="closePracticeRoom" aria-label="返回首页" data-page-node-id="QE57zPYwskJrui3ov1OZhn">←</button>
+            <span class="language-detected" id="nativeLanguageBadge" data-page-node-id="XzJUMEDs0YSXwCIZN4V6WZ">中文辅助 · 已识别</span>
+            <button class="room-tool" id="practiceSpeed" aria-label="调整语速" data-page-node-id="ZME8jHXKk5PPKskriS14d4">1×</button>
+          </div>
+
+          <div class="room-teacher" aria-label="AI 英语教练 Maya" data-page-node-id="m2k81jJm0yjKg0pbeULq2X">
+            <div class="room-avatar-halo" data-page-node-id="vTVYLbruk3sJR0BACJe6gu"></div>
+            <button class="room-avatar" id="practiceAvatarStage" type="button" aria-pressed="true" aria-label="AI 英语教练 Maya，上半身特写模式，点击切换为全身" data-page-node-id="e7FE2DsdNmfxQDp0Vghh8E">
+            </button>
+            <div class="teacher-status" data-page-node-id="EAq5uSeRm4F0W9HrZPd8ZL"><i data-page-node-id="veM8pHgveHq5c41JMNQSXQ"></i><span data-page-node-id="lQlzEIDoyQCbAvMdEClyN0">Maya · AI 英语教练</span></div>
+          </div>
+
+          <div class="phase-rail" aria-label="课程阶段" data-page-node-id="XGEqYnt5EsYYatGiC3F6nG">
+            <div class="phase-item active" data-phase-label="intro" data-page-node-id="gkjnUUNmoQfkEZ0s8eQrtP"><i data-page-node-id="8OFgOHacxDodpJZODuviEQ"></i><span data-page-node-id="QIsuRDDpTS7LAMMCXPY7yC">讲解</span></div>
+            <div class="phase-line" data-page-node-id="i2pm6cUUwSjAm7kroGudry"></div>
+            <div class="phase-item" data-phase-label="practice" data-page-node-id="iFoOXxYL25jMHfsIPzPiCm"><i data-page-node-id="S9SmZ1xYx7yaGmKqUR2uLe"></i><span data-page-node-id="nXUQXxwZQ02Liw7niBqqJf">对练</span></div>
+          </div>
+          <span class="room-live" data-page-node-id="Rb0Xs5yKV8Nzdcw8Lx29wj">● AI LIVE</span>
+        </section>
+
+        <section class="room-chat" data-page-node-id="iKSx5S1ABEIFu2vpViPpFN">
+          <header class="room-topic" data-page-node-id="oh6WpbqNk1xa19yr0gGwHp">
+            <span class="room-topic-icon" data-page-node-id="KQsiksyG46Qh3BMi7LiUR6">Aa</span>
+            <div data-page-node-id="SIdLEOiC9OUhqAS4nlB7or"><small id="roomPhaseTitle" data-page-node-id="8nPWeu290EzpubRsIYsHlD">课程讲解</small><strong data-page-node-id="UXK4dnx3WNp5eO7HAFtZ2r">What's your name?</strong></div>
+            <span class="round-count" id="roomRoundCount" data-page-node-id="8ntzvqZANFPPLrBXa0OAxG">01</span>
+          </header>
+
+          <div class="chat-feed" id="practiceChatFeed" data-page-node-id="aEJMb5D4frpYduSwycioH4">
+            <article class="room-message ai-room-message welcome-room-message" data-page-node-id="UxwODjvqJ4Jyurjrt3n1nB">
+              <div class="message-avatar" data-page-node-id="O7H2kfVJrSgAShTk9NA0XC">M</div>
+              <div class="message-column" data-page-node-id="Qo6YtM9i93uA0ujpJbwwXs">
+                <div class="message-label" data-page-node-id="RDafyWlamuGfpgGVHHhDgy"><span data-page-node-id="YgotwWsWeTh913JH4DVYrX">MAYA</span><b id="messageLanguageLabel" data-page-node-id="wuZzPy2Olf6Ru34onquec7">用中文讲解</b></div>
+                <div class="message-bubble" data-page-node-id="n24uHmLzu3SkGe0016b2A4">
+                  <p id="nativeWelcomeMessage" data-page-node-id="qdAc0FTVvzUrntBpNC9tZB">欢迎你进入 <strong data-page-node-id="dZzQEybKbC3TKpLFdV0tjH">“What's your name?”</strong> 自我介绍主题。接下来我们会练习如何用英语询问姓名、介绍自己。我会用中文提供必要的提示。</p>
+                  <div class="welcome-keyphrase" data-page-node-id="6YS9FPL88JzRyYdT8pIR9R"><small data-page-node-id="wLGj7wy4H0bupT4ABbTeny">TODAY'S KEY PHRASE</small><strong data-page-node-id="wYwaCkOdHIblqeDS77JA1U">What's your name?</strong><span data-page-node-id="quZOpCbPNy3Cxfc8D5gD2S">你叫什么名字？</span></div>
+                </div>
+                <div class="message-tools" data-page-node-id="l42BY30ntQ5MsPqqTvUY24">
+                  <button id="toggleWelcomeTranslation" data-page-node-id="Lwd3fKlndKWBbw6Ik90UkH"><span data-page-node-id="il6tFQwnwXRJTX7MzCqhEW">文</span> 英文翻译</button>
+                  <button id="playWelcome" data-page-node-id="69mVFRj2vl8EAeTP48lRUt"><span data-page-node-id="A50RbV1rOXyOvyQjtTzSSv">▶</span> 朗读</button>
+                </div>
+                <p class="welcome-translation" id="welcomeTranslation" hidden data-page-node-id="9i5rbjnwKstPj7lHUS8geS">Welcome to “What's your name?”. We’ll practise asking someone’s name and introducing yourself. Are you ready?</p>
+              </div>
+            </article>
+
+            <article class="room-message ai-room-message vocabulary-room-message" id="vocabularyPreviewMessage" hidden data-page-node-id="7jICYQB5n1BGVELZWr5Mkt">
+              <div class="message-avatar" data-page-node-id="NBahPnCGltNWiHs9V9Gdfw">M</div>
+              <div class="message-column" data-page-node-id="opVYBvaEMtmJFfqSokUlgA">
+                <div class="message-label" data-page-node-id="Y5Et3GOVC6KFKWzRFLSdMe"><span data-page-node-id="cbtFbF2UASQQiZulyOHpW0">MAYA</span><b data-page-node-id="58lfij9SOZZwdc03CkdKuT">对练词汇预告</b></div>
+                <div class="message-bubble vocabulary-bubble" data-page-node-id="PhbHjIf2NirI5RC0DGmqPR">
+                  <p id="nativeVocabularyIntro" data-page-node-id="O5yUAYyySDJ23UzErGhNk1">在接下来的对话里，你会听到下面 6 个词。不用一次全部记住，我会在对话中提醒你。准备好了吗？</p>
+                  <div class="vocab-preview-grid" data-page-node-id="cHpnvKgnzmAS5LUEPAjaNW">
+                    <button data-room-speak="name" data-page-node-id="qS4MuxbrMw1uD8rbFtoRy2"><strong data-page-node-id="qI9k2ElTI2aBYBkcyFQL7F">name</strong><small data-page-node-id="4v8FJpk4NEKiEdbemIzF4l">名字</small></button>
+                    <button data-room-speak="your" data-page-node-id="CCAWRrfd7qTRagt02TgqU2"><strong data-page-node-id="RXpXhL8AqU2nUrfL3jwPFF">your</strong><small data-page-node-id="eSLc65guIM0NZK4CNEqxGA">你的</small></button>
+                    <button data-room-speak="my" data-page-node-id="faFAvecfhOzIakmFF2OmEo"><strong data-page-node-id="WOjHf5yu1BpWGiE2f3lA2C">my</strong><small data-page-node-id="BhXvG4RRyQ5oqttyMTH7UV">我的</small></button>
+                    <button data-room-speak="meet" data-page-node-id="rja1HxR0ajNfRPz8ZuOJTg"><strong data-page-node-id="O8tgRJWo5DdD2fHKHUEQob">meet</strong><small data-page-node-id="6WulljD184dWmArFwtXC6C">认识</small></button>
+                    <button data-room-speak="nice" data-page-node-id="IIVyw2KoOLGjARLlthtYia"><strong data-page-node-id="Ag3aVN6ApG4qmBCGSK4AMt">nice</strong><small data-page-node-id="5rNAs1d2Rr1orYpVEFXm8O">愉快的</small></button>
+                    <button data-room-speak="too" data-page-node-id="dBP3EtgCmqPBEpGJAUt9GI"><strong data-page-node-id="wOydiVyJFAPxejk2C4GFBC">too</strong><small data-page-node-id="md9I6znNSIyXCZ5Lyfbr9h">也</small></button>
+                  </div>
+                </div>
+                <div class="message-tools" data-page-node-id="EGmbqTfqWYZ5KBKw2xgysm"><button id="playVocabularyIntro" data-page-node-id="6UbCuliXc4PXE6x8IleHvA"><span data-page-node-id="57SvicfE2BfLgi3v9IDdc7">▶</span> 朗读这段</button></div>
+              </div>
+            </article>
+
+            <div class="ready-prompt" id="readyPrompt" hidden data-page-node-id="ELjmJoROz1qkk1BWK3uBSe">
+              <button class="ready-primary" id="readyToStart" data-page-node-id="RyJ4ffch8LiqlmnTgLQPTu"><span data-page-node-id="lGsrWF0s64bhNl3lYE8pnT">我准备好了，开始吧</span><b data-page-node-id="bxJJGABLndYQIHXFcHoieV">→</b></button>
+              <button class="ready-secondary" id="hearWelcomeAgain" data-page-node-id="PNU1qhZ6lfRaVXs3eLSg5E">我想再听一遍</button>
+            </div>
+
+            <div class="practice-turn" id="practiceTurn" hidden data-page-node-id="bYG9XngNRYQNLWIkhLHdCb">
+              <div class="warmup-quiz" id="warmupQuiz" data-page-node-id="uwcOepBE0r2jaosLm1SPC7">
+                <div class="phase-divider" data-page-node-id="ww2XfzC2YofkUq6IrTjY25"><span data-page-node-id="iC9QrLmXb5BxaC2L1pGLEF">进入练习 · 先做一道热身题</span></div>
+                <article class="room-message ai-room-message" data-page-node-id="sAXPklNhySY5e3GgEMjIPE">
+                  <div class="message-avatar" data-page-node-id="lZjCkBhOnvI6101cGVClDl">M</div>
+                  <div class="message-column" data-page-node-id="dpZX52XNl0xHXl3b03m1yI">
+                    <div class="message-label" data-page-node-id="0M8YR8ULT6sEH7JepMpiJc"><span data-page-node-id="v6dCTzcnPrnLQkO8sRGERr">MAYA</span><b data-page-node-id="oYgLrDCH8UjHofEGFjy3U5">WARM-UP · 语法判断</b></div>
+                    <div class="message-bubble quiz-bubble" data-page-node-id="9LeqDhq7KanUineeN07y8k">
+                      <p class="quiz-lead" data-page-node-id="97APTJhZIe5YQ7unon6csX">阅读完整句，只验证下面这一项语法：</p>
+                      <p class="quiz-grammar-focus" data-page-node-id="e5YjSeYJ49XhDkrKDf0OIQ"><span data-page-node-id="EAChqEhif5gL7dzaizMmBN">验证语法</span><strong id="quizGrammarFocus" data-page-node-id="f2JlrTfn92BDPA4VdA9a4c">名词前使用物主限定词</strong></p>
+                      <button class="quiz-sentence" data-room-speak="What is you name?" aria-label="播放 What is you name" data-page-node-id="rDREqUeCJ9G00sYGC1aD0b"><strong data-page-node-id="2lvvyLEubG0iT17ESt4rnV">What is you name?</strong><span data-page-node-id="M9sNklBX78W9esAreS6A1b">▶</span></button>
+                      <p class="quiz-question" data-page-node-id="gHLAeJaIeaGflJG1csuiDk">这个完整句子的语法正确吗？</p>
+                    </div>
+                  </div>
+                </article>
+
+                <div class="quiz-options" id="quizOptions" data-page-node-id="vaIPD14AYJYzyHg9yZt0rP">
+                  <button data-judgment="true" aria-label="语法正确" data-page-node-id="bhmiURTQ3x4P2Rt1GDzMi3"><span data-page-node-id="zngtKJnAYZTZJ6nyV6NuRz">✓</span><strong data-page-node-id="QSjF10zjn7vqqAXVG0pDll">语法正确</strong><small data-page-node-id="HOv1MTD0PMDrBJPMvU3z2m">符合验证规则</small></button>
+                  <button data-judgment="false" aria-label="存在语法错误" data-page-node-id="4YBBc1v1QsJRk7tiA2fZ5P"><span data-page-node-id="ODpPJxeZ49iNwpf2GUZa8M">×</span><strong data-page-node-id="Tx1J1IOFoPiHNG1c9kxrp5">存在错误</strong><small data-page-node-id="Ef31qfOEkZl1U22EihfKtx">不符合验证规则</small></button>
+                </div>
+
+                <div class="quiz-feedback" id="quizFeedback" hidden data-page-node-id="lerriu0ymLMnfFbBLJESHb">
+                  <div class="feedback-heading" data-page-node-id="GQ9dAbMFw09KAc4lRNrntg"><span id="quizFeedbackIcon" data-page-node-id="Uwo8AOAyxtdMs0HvXAXr5a">✓</span><div data-page-node-id="mZGBBObsZB31dfGACFkJAP"><strong id="quizFeedbackTitle" data-page-node-id="AruEVt4wBg5QTqwzsMCs7z">太棒了，答对啦！</strong><small id="quizFeedbackSubtitle" data-page-node-id="awC4AaE928AfHFKu5BO5oO">你准确完成了语法判断</small></div><b class="attempt-badge" id="quizAttemptBadge" hidden data-page-node-id="24EwdFZxluPZtwjnU2WgmA">第 1 / 20 次</b><b class="reward-badge" id="quizReward" data-page-node-id="SeawTY6dPay4qyQ3ILQEPH">+10 XP</b></div>
+                  <p class="quiz-encouragement" id="quizEncouragement" data-page-node-id="awJpt9kMWTHJHw0itIn7yX">做得非常好！你正确验证了这个完整句的语法。</p>
+                  <p class="quiz-explanation" id="quizExplanation" data-page-node-id="s7LCwd0aOmHqO3mPYRNyTJ">这里会说明具体规则，以及句子为什么正确或错误。</p>
+                  <div class="sentence-correction" data-page-node-id="HvEVGD2tFg0At00xigiEBL"><del data-page-node-id="mACCqZxbljPcksnr8qLab8">What is you name?</del><span data-page-node-id="zlhpGtlVmCOeY3t6cRuTPn">→</span><strong data-page-node-id="4DMILyDhuEtolYqrbTFYm3">What is your name?</strong></div>
+                  <button class="continue-dialogue" id="continueToDialogue" data-action="dialogue" data-page-node-id="EWqnLwfQxFlpiQSVxpZ1ES"><span data-page-node-id="ykyKP4qseNoEAp6VrFibYq">继续口语对练</span><b data-page-node-id="LlCB4TYHEP1EKFFLT38V5n">→</b></button>
+                </div>
+              </div>
+
+              <div class="fill-quiz" id="fillQuiz" hidden data-page-node-id="dAXcHEygV1we0USn0n4iOj">
+                <div class="phase-divider" data-page-node-id="Fbu6kGT6bNjXRUo6UIUhri"><span id="fillQuestionProgress" data-page-node-id="M2TTK5Ly4RD9BrVN0N3zRn">FILL 1 / 3 · 填空题</span></div>
+                <article class="room-message ai-room-message" data-page-node-id="3SRIRE9Q6W6VAe1hYy3PxT">
+                  <div class="message-avatar" data-page-node-id="PCocrbmW2VkDHAS3BOrBgJ">M</div>
+                  <div class="message-column" data-page-node-id="4N74XkksrNGXQJDoD8JaLV">
+                    <div class="message-label" data-page-node-id="LKY40OwrM2v5u5pVg3tKxd"><span data-page-node-id="ELdQ9or8K9GZxusDXsOyxt">MAYA</span><b data-page-node-id="HjsfDH5KiZFRGLkKWjnE8J">FILL IN THE BLANK</b></div>
+                    <div class="message-bubble fill-prompt-bubble" data-page-node-id="tSHTemUHN9KWqyfdULCHOm">
+                      <p id="fillPromptText" data-page-node-id="WuBjGgCPUKm0ZywLHNsDP7">很好，下面有三道填空题。先补全这个句子：</p>
+                      <span class="native-assist" id="fillPromptAssist" data-page-node-id="uKKkmCVZwHgVXxGAXGHkvD">在空格里输入缺少的 be 动词。</span>
+                    </div>
+                  </div>
+                </article>
+
+                <form class="fill-question-form" id="fillQuestionForm" data-page-node-id="ZkHb7Div1RlJfoZ1mBOJ9D">
+                  <div class="fill-sentence" aria-label="What 空格 your name" data-page-node-id="lJKC5QyFaYB3RHytBJsqY5">
+                    <strong id="fillSentencePrefix" data-page-node-id="8IIGs2lv1EPHDnNhToWS8Z">What</strong>
+                    <label data-page-node-id="ysY1PTu5i9GBpbvkdkiSnc"><span class="sr-only" data-page-node-id="O25ocjInknvxEF8Dq8YmVP">输入缺少的英文单词</span><input id="fillAnswerInput" type="text" maxlength="12" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="_____" aria-label="输入缺少的英文单词" data-page-node-id="U8oh5GgZtdJZvB41ZJZJZF" /></label>
+                    <strong id="fillSentenceSuffix" data-page-node-id="HQS0FTYCfee7CAC2YtjODp">your name?</strong>
+                  </div>
+                  <p class="voice-first-note" data-page-node-id="OXkd9c8g9n2yeqGAmM46AV"><span data-page-node-id="vevi4k2ITMWRC1lQosZBWZ">●</span><strong data-page-node-id="aql1W14BDOa3PFVT0OXG0i">优先点击下方麦克风，说出缺少的单词</strong><small data-page-node-id="Cr5ryO1FNLvTlXilpU3O4s">也可以使用键盘输入</small></p>
+                  <button type="submit" data-page-node-id="7448h70re1i4NYaoq9VOZC"><span data-page-node-id="3797mdmok8yZwnhMHqmJ62">使用键盘提交</span><b data-page-node-id="5BJ7yjMp0svBfkj5VTIHJQ">→</b></button>
+                </form>
+
+                <div class="fill-feedback" id="fillFeedback" hidden data-page-node-id="gYcHxRkcxVGcJXq1kJBxok">
+                  <div class="feedback-heading" data-page-node-id="gYHmKiVktZ4xP8R1KP7c4y"><span id="fillFeedbackIcon" data-page-node-id="LOAtwRY6PWaNfPo0jNVAhH">✓</span><div data-page-node-id="VEmbH6Zgw2LEG8GEnKyBKI"><strong id="fillFeedbackTitle" data-page-node-id="EFk4txaLCue8gqeyzonGA9">答对了！</strong><small id="fillFeedbackSubtitle" data-page-node-id="dUOQtrqeQcIGPscAUr3pkG">完整句子已经补全</small></div><b class="attempt-badge" id="fillAttemptBadge" hidden data-page-node-id="2SMnGjh0mTu1uUb0LhbpkZ">第 1 / 20 次</b><b class="reward-badge" id="fillReward" data-page-node-id="T47UsHxwFHt3jEuwYkhRrD">+10 XP</b></div>
+                  <p class="quiz-encouragement" id="fillEncouragement" data-page-node-id="d61bBMTflrEkfeWfRkDOL4">太棒了！你正确填入了 <b data-page-node-id="AuVCQvax1U95DBx0u7CDsu">is</b>。</p>
+                  <p class="quiz-explanation" id="fillExplanation" data-page-node-id="oedyuyXgNNVxnt9GDXl5Nc"><b data-page-node-id="15kqg2iDXpYLu5s25Kv2Bn">What is your name?</b> 意思是“你叫什么名字？”</p>
+                  <div class="completed-sentence" data-page-node-id="PwLjBNSQ5QvLQrEbnVT4Xo"><span id="completedSentencePrefix" data-page-node-id="LEAE1hZ0ZC9S6hChrWOfgO">What</span><b id="completedSentenceAnswer" data-page-node-id="XKOnBhzBxA85EBXHQcxj3U">is</b><span id="completedSentenceSuffix" data-page-node-id="1misXVces1kqSx2gr4zkVJ">your name?</span></div>
+                  <p class="auto-start-note" id="fillAutoStartNote" hidden data-page-node-id="8095BKsgB0VOb5adrPKrJx"><span data-page-node-id="8zT4nmIHu9G3cSHDDLRbWq">●</span> <b id="fillAutoStartText" data-page-node-id="CuwNXObyGs3u2OsauPgRGG">答对后将自动进入下一题</b></p>
+                  <button class="continue-dialogue" id="fillFeedbackAction" data-action="dialogue" data-page-node-id="yPVWApbUATL0bxOpRNPKS4"><span data-page-node-id="HvJpVqZbDIMeuGDyzVUTdX">继续口语对练</span><b data-page-node-id="UDqIaEstXWHhUHkHGH4atU">→</b></button>
+                </div>
+              </div>
+
+              <div class="roleplay-briefing" id="roleplayBriefing" hidden data-page-node-id="5MSE2fSbyeWFRVO7Vhonbd">
+                <div class="phase-divider" data-page-node-id="7nHta4swPlp1YKJbqaV9jK"><span data-page-node-id="yFkeu9cqofgjXWSCYS7Nxx">ROLE PLAY · 角色扮演准备</span></div>
+
+                <div class="roleplay-briefing-banner" data-page-node-id="abUGZ7Ie2xaFBjNPg9z0lG">
+                  <span data-page-node-id="0rKTmonXgHKgQQ749n1sJH">◌</span>
+                  <div data-page-node-id="oFaxy8ACPx76K7EtEmARFb"><small data-page-node-id="PAYspRb30sSbbEOBVppIht">PRACTICE TIME</small><strong id="roleplayBriefingTitle" data-page-node-id="TtvrhGtV2fAetN2kyXkL76">接下来进行角色扮演</strong></div>
+                </div>
+
+                <article class="room-message ai-room-message" data-page-node-id="mFJmdbqlEB0l9sFxNPjExp">
+                  <div class="message-avatar" data-page-node-id="lQ2g1EWogOnHROFx8UukHc">M</div>
+                  <div class="message-column" data-page-node-id="bMoiKy1wttu2vHE99BUJeI">
+                    <div class="message-label" data-page-node-id="cA6MOnpofehem0JBg6unOB"><span data-page-node-id="gkm814OHDLu9cWvSHS1tYM">MAYA</span><b data-page-node-id="HzEMfElOtrZYcgmwqtuF34">场景说明 · 中文辅助</b></div>
+                    <div class="message-bubble roleplay-briefing-bubble" data-page-node-id="9NiWDi5Jax3RBKzNyyNNUA">
+                      <p data-page-node-id="BeUZbr6RvqDJ0s0N1SZSnK">接下来我们进行一段真实的自我介绍对话。场景是：你在语言交流活动中第一次遇见新同学 Maya。</p>
+                      <p data-page-node-id="7Rq7RHgcIL9dXH1pd6jhVd">Maya 会先用英语问你的名字。你的任务是用英语介绍自己，并礼貌回应。你不用完全照着示例说，只要意思正确，我都会理解并给你反馈。</p>
+                      <div class="roleplay-mission" data-page-node-id="VEZcNgQyvvFUYscaCT6r7f">
+                        <span data-page-node-id="ZvlSCyN3Es7Nn5AiOaVFLF"><small data-page-node-id="yPZmp8wJQu3l4u4jVSBbh9">你的角色</small><strong data-page-node-id="vBlkl39eSsXYEZuhW1Myz9">第一次见面的新同学</strong></span>
+                        <span data-page-node-id="p6rY8nNocfozcI84BnxaGk"><small data-page-node-id="WVAWSC8v7Gm7W6ZdJQipdr">你的任务</small><strong data-page-node-id="FHnoLqwzy1d83AbbIlzRbF">说出名字并礼貌问候</strong></span>
+                      </div>
+                      <div class="roleplay-language-help" data-page-node-id="orbqqADE9FrpvXMz6uoBz3">
+                        <small data-page-node-id="KB6ATNjCUlo76jH7gOByf1">3 个参考表达 · 意思符合场景即可，不要求逐字一致</small>
+                        <div class="roleplay-goal-list" id="roleplayGoalList" data-page-node-id="HFL6cfzl1z7PFLWUKGM1GZ">
+                          <span data-page-node-id="BY8nyK3HOcXK658ckFPVhi"><i data-page-node-id="aGyOhFZG3bHaRju5tmpkt8">01</i><strong data-page-node-id="Ciawn3Pv7orQluWlR7jEjn">I'm Sequoia.</strong></span>
+                          <span data-page-node-id="g1hnsLOyVRnnqFaHDLC5lo"><i data-page-node-id="n3V0fkmdUtp7ftw7BS7Opy">02</i><strong data-page-node-id="dnwYq4CzW3PbdnLFK09sIL">Nice to meet you, too.</strong></span>
+                          <span data-page-node-id="YlBVacFqAapw2W5SKpZ9CB"><i data-page-node-id="qTivOJcFvOplf8CQcKBwck">03</i><strong data-page-node-id="bo4zZfJ5MkOaB3eQRzWG92">What's your name?</strong></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="message-tools" data-page-node-id="Awk9rEYfsAK4gaNmUVIA87"><button id="hearRoleplayBriefing" data-page-node-id="Mwwd6KN9tGsw9n6bFV11WU"><span data-page-node-id="gzep24AQCU6r9ppGXTfVhH">▶</span> 再听一遍说明</button></div>
+                  </div>
+                </article>
+
+                <div class="roleplay-ready-card" data-page-node-id="TuwpmCPsNtfMeBKJRHtgxl">
+                  <span class="roleplay-ready-icon" data-page-node-id="IC2Mj7RmKxdQVn1twOd4BO">✓</span>
+                  <div data-page-node-id="jMiS85AgFDlQU7kA9gGByv"><strong data-page-node-id="sQjqe05D8ss6HMSGPddXs8">Maya 会先开口，你准备好了吗？</strong><small data-page-node-id="CkomFr4miUlyDI2KQKTArR">确认后才会开始正式英文对话</small></div>
+                  <button id="roleplayReady" data-page-node-id="qxXnXTqqg1xEJRkRNfwMGC"><span data-page-node-id="0NoOFxG6W4Jo9sNlLmLM6i">我准备好了，开始角色扮演</span><b data-page-node-id="AqpY6ItY1aIQ4Z88tL4JjT">→</b></button>
+                </div>
+              </div>
+
+              <div class="dialogue-turn" id="dialogueTurn" hidden data-page-node-id="I27QgysQBru7yuI2IN3Qp5">
+                <div class="phase-divider" data-page-node-id="oJ9wBV67VwQtJ2c74ySxwv"><span id="dialogueRoundProgress" data-page-node-id="B4sVLZQa8W2BmwqerAza2a">ROUND 1 / 3 · 正式对话</span></div>
+                <div class="dialogue-vocab-tracker" aria-label="本次对话任务进度" data-page-node-id="opCqv8jnNTZjkGtVHDAIjl">
+                  <div class="dialogue-vocab-heading" data-page-node-id="SpjADBwGd9miXor96htyHF"><span id="dialogueTrackerLabel" data-page-node-id="DOYK0mTTLtcvy47WqP9Qmc">本课词汇 · 对话中自然出现</span><b id="dialogueCoverageCount" data-page-node-id="vOrhI2Eu8HgkHoHz6Jy1vA">2 / 6 已出现</b></div>
+                  <div class="dialogue-vocab-chips" id="dialogueGoalChips" data-page-node-id="b879C6tOHSRSP6mZJnHngo">
+                    <span data-dialogue-word="name" data-page-node-id="M7S9lie51AiFFo5BkwgFiC">name</span>
+                    <span data-dialogue-word="your" data-page-node-id="M2EAy4T0nkVKpFi2q4cVv1">your</span>
+                    <span data-dialogue-word="my" data-page-node-id="oJaWGZyDiocrF8EfvoFIMn">my</span>
+                    <span data-dialogue-word="meet" data-page-node-id="6PPqOhh9JxghGnMQQCmw65">meet</span>
+                    <span data-dialogue-word="nice" data-page-node-id="J7TfshCJNdqWu3hDHRElka">nice</span>
+                    <span data-dialogue-word="too" data-page-node-id="itMwYq8jsrDZTyAPC3JDRB">too</span>
+                  </div>
+                </div>
+                <div class="scenario-freetalk-note" id="scenarioFreetalkNote" hidden data-page-node-id="drrIRieCEY2IRB5NQ6q502">
+                  <span data-page-node-id="Eod1vrFTjN6tdrUmtjvbG9">✦</span>
+                  <div data-page-node-id="vKfgQwA9LWv9qeDTWEhvWF">
+                    <strong data-page-node-id="dDxBNsnInb7pyDkmVPAKAG">自由表达区</strong>
+                    <small id="scenarioFreetalkText" data-page-node-id="vsHYU9HF5jXAJFG0Eg1C6c">不用照抄示例；说到哪个任务信息，就完成哪个任务。</small>
+                  </div>
+                </div>
+                <article class="room-message ai-room-message" data-page-node-id="VFyw3SticxRMkmeXXmFXDM">
+                  <div class="message-avatar" data-page-node-id="GJYIDHAmjkIGLvisr5u0L2">M</div>
+                  <div class="message-column" data-page-node-id="6xJFRZCsSFMyXnfxYxQ3Kr">
+                    <div class="message-label" data-page-node-id="JumvOeb5JHAQkgVHf9fHVU"><span data-page-node-id="oNpiNtAFEBldpGFZHlXzvN">MAYA</span><b id="dialogueOpeningStatus" data-page-node-id="ckr5eAyPF6AV9E4aMTk5ea">ROUND 1 / 3</b></div>
+                    <div class="message-bubble english-bubble" data-page-node-id="IXZn3LAK476x89VpMfeXfH">
+                      <p data-page-node-id="9QwavP8zWJR6BO52mIjkEG">Hi! I'm Maya. <strong data-page-node-id="QE4BEFd4xeE9LyS7uGJqLF">What's your name?</strong></p>
+                      <span class="native-assist" id="dialogueOpeningNative" data-page-node-id="sLBAgklzPU3iazECjyFCns">你好！我是 Maya。你叫什么名字？</span>
+                    </div>
+                    <div class="message-tools" data-page-node-id="s0FWEvq9r6vxhw36RXkNqG"><button data-room-speak="Hi! I'm Maya. What's your name?" data-page-node-id="WKU0wtBhsxAdFwzZCoTcHc"><span data-page-node-id="7jArNgmAhX1kFT93RCo0KM">▶</span> 再听一次</button></div>
+                  </div>
+                </article>
+                <div class="dialogue-history" id="dialogueHistory" aria-live="polite" data-page-node-id="9Hzrzp6DKp18Mj8BF1a5kz"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="answer-hint" id="roomAnswerHint" hidden data-page-node-id="kPziFWkoFRQYn7YVqpJW0o">
+            <span data-page-node-id="trm5Bf7vVO2dH7hfJ3a8NS">推荐回答</span><strong id="roomAnswerHintText" data-page-node-id="m3LiLiD5DaGGPVu8IDTVQ0">“I'm Sequoia.”</strong>
+          </div>
+
+          <form class="text-entry" id="practiceTextForm" hidden data-page-node-id="0yAoXNPgCQ9PfKeLAsxlfu">
+            <input id="practiceTextInput" type="text" autocomplete="off" placeholder="输入英文回答…" aria-label="输入英文回答" data-page-node-id="R4UdWtFEVqxpUK4fKQAfhY" />
+            <button type="submit" data-page-node-id="1mSCFT1wC0hWKIkW7kNjOi">发送</button>
+          </form>
+
+          <footer class="room-controls" data-page-node-id="WddT5IYMcW05JopyKqVrH6">
+            <button class="control-side" id="typeAnswer" data-page-node-id="uDDbCEXcuDXuNH7TXJ6E1i"><span data-page-node-id="r2IFS9lGnAopN0ksynVCMt">⌨</span><small data-page-node-id="GMDP8JxaERgeZSbkGO9Q1L">输入</small></button>
+            <button class="room-mic" id="roomMic" aria-label="开始语音回答" data-page-node-id="BGj4sGhAcrrB51yD84w2ua"><span data-page-node-id="UYM0HDQB11rubF5MFaRJBr">●</span></button>
+            <button class="control-side" id="showRoomHint" data-page-node-id="NCaXVq1RlnuTJOMJzatLm9"><span data-page-node-id="qmWfRD7VkUSI3oP7OtpbvX">✦</span><small data-page-node-id="P2jpmZFa2mASUcCOk4Kl19">提示</small></button>
+          </footer>
+          <p class="room-mic-label" id="roomMicLabel" role="status" aria-live="polite" data-page-node-id="RJFg0nQK7DNB3EJPMaUHRC">确认准备好后开始对练</p>
+        </section>
+      </div>
+    </section>
+
+    <dialog id="lessonDialog" data-page-node-id="mfh3ntiShtgrBpS4hyZZKz">
+      <div class="dialog-top" data-page-node-id="7kRl4zWPSYY3XkoDJ8lD0l">
+        <button id="closeDialog" aria-label="关闭" data-page-node-id="yoKSq9aB66QdAWQ2yBNWkJ">×</button>
+        <span id="dialogMode" data-page-node-id="DRFqZMTGnKQUJigNd2NXwe">AI ROLEPLAY</span>
+        <span class="live-dot" data-page-node-id="gh8SwX12jzKMIVhJVcvh7u">● LIVE</span>
+      </div>
+      <div class="coach" data-page-node-id="DBIJMe61jyzCno8qyx2EQo">
+        <div class="coach-avatar" data-page-node-id="G9V0b5K6nk2SRYFkLtwYNn">AI</div>
+        <p id="coachStatus" data-page-node-id="CvkeF8hjR4XzkPoCL6lfZN">Maya · Your barista</p>
+        <h2 id="coachLine" data-page-node-id="Zlijh1a7A85j4hIWGD7Cyh">Hi! What can I get for you today?</h2>
+        <button class="listen-button" id="listenButton" data-page-node-id="iDDcM3QBseRxVHECXt04uE">🔊 再听一次</button>
+      </div>
+      <div class="hint" data-page-node-id="Y47uvTjh9pIZWUzNahzp6E"><strong data-page-node-id="gHsvwB2cF1A0AEMfasrG29">TRY SAYING</strong><p id="hintLine" data-page-node-id="4pX97vHKmDOmjDGEgk2boo">“Could I have a medium latte, please?”</p></div>
+      <div class="mic-row" data-page-node-id="Aho0bYliGzWFZQPGXdhtbu">
+        <button class="mic-button" id="micButton" data-page-node-id="hmQNzACLsmUo3Rqh0Ry8Sc"><span data-page-node-id="sQTkHJKF5jejIJSEZCV6Up">●</span></button>
+        <p id="micLabel" data-page-node-id="rvNHi3jMRN7xHgzGulQGpx">点击开始说话</p>
+      </div>
+    </dialog>
+
+    <dialog class="onboarding-dialog" id="onboardingDialog" aria-labelledby="onboardingTitle" data-page-node-id="D0VvDbW7LLT4GTAA6FMq1d">
+      <form class="onboarding-shell" id="onboardingForm" data-page-node-id="r1JMsti2iOpsSFLRtATLg9">
+        <header class="onboarding-header" data-page-node-id="UUAtRrGHpDRNLJkUKUEF9q">
+          <a class="onboarding-brand" href="#" aria-label="Hello Learner" data-page-node-id="Zs729PcnhOdF9AbzVnw1Dz"><span data-page-node-id="P3wPsGpFg4UZKrSReIEDf2">H</span><strong data-page-node-id="x6G18r2heFfEWrUGH9mdM7">Hello Learner</strong></a>
+          <div class="onboarding-progress" aria-label="新手引导进度" data-page-node-id="2OgnXF8sMCLC8hNG9LJ5pn">
+            <i class="active" data-page-node-id="b7rzafJhxSYnWaISK15nyj"></i><i data-page-node-id="JSoAIBuUoR8AyBsykyBlLb"></i><i data-page-node-id="Si16GVH0KDIwm0ayoZboa7"></i><i data-page-node-id="tWXTQXlJgzYpfU3Vtjbpop"></i>
+          </div>
+          <small id="onboardingStepLabel" data-page-node-id="vjuIAq7tBZBChAvTvF5Dm1">STEP 1 OF 4</small>
+        </header>
+
+        <section class="onboarding-step active" data-onboarding-step="1" data-page-node-id="DiDH4Eqeu4O0fnc6HCTB5P">
+          <div class="onboarding-icon" data-page-node-id="z1xEFloEj2WpFP0jXqQCmV">👋</div>
+          <p class="eyebrow" data-page-node-id="IhoTURmjQVptuh4dIfAf9W">WELCOME ABOARD</p>
+          <h2 id="onboardingTitle" data-page-node-id="AvlS6KpJ0THEMOlSsZ8Eoy">先认识一下你</h2>
+          <p class="onboarding-intro" data-page-node-id="qEqFtFWrRkDxHMxCz4Lfnv">创建你的学习档案，让 Maya 为你准备更合适的英语练习。</p>
+          <div class="onboarding-fields" data-page-node-id="ESVyHaSnLEHNu2HEoHRwfq">
+            <label data-page-node-id="5VkcmSGuo3iS1E6jRUwicy"><span data-page-node-id="D4dScKT61OzHAoDMZlOPzb">你的名字</span><input name="learnerName" type="text" autocomplete="name" minlength="2" maxlength="30" placeholder="例如：Sequoia" required data-page-node-id="Gb8ztfM1CvApdKCEfWDE63" /></label>
+          </div>
+        </section>
+
+        <section class="onboarding-step" data-onboarding-step="2" hidden data-page-node-id="6ldW0gDSqbCUuZzC3t13OA">
+          <div class="onboarding-icon" data-page-node-id="TGil13OXBadyd63uQ35zOA">📚</div>
+          <p class="eyebrow" data-page-node-id="jmu3aF5VBE26C8onKDi6Oz">YOUR LEVEL</p>
+          <h2 data-page-node-id="nqWC82mtPoJKrB7lmbyPPU">你目前的英语水平？</h2>
+          <p class="onboarding-intro" data-page-node-id="iGGLquaxiGGcIN6gxxmYRc">不用担心选错，之后可以在个人主页随时调整。</p>
+          <div class="onboarding-options level-options" data-page-node-id="CewPPgYHkfNGGc8pV1OP3T">
+            <label data-page-node-id="TZZY8PZnSyIYacBrKW8mMf"><input type="radio" name="englishLevel" value="Pre-A1" required data-page-node-id="J8N7DoxqtHRjLO4aXOeUIW" /><span data-page-node-id="xX0XTGeKFherGZ0HhHoVvC"><b data-page-node-id="vjR5ooM0Bd69sCv1Tg5S4v">刚刚开始</b><small data-page-node-id="ZpsxWkjW30y4V6AjfKZnaW">认识少量单词，还不能完整表达</small><em data-page-node-id="xm5t1xTz4KrAlYBxI8ufxK">Pre-A1</em></span></label>
+            <label data-page-node-id="7zOLnMD13TvzpPRXiNEXcj"><input type="radio" name="englishLevel" value="A1" checked data-page-node-id="vaBbtvahX977OXWvDu50N1" /><span data-page-node-id="OGCRmJCsDEfkefmIJeSC5E"><b data-page-node-id="cXqY9o0p3M4nSZGrnRs03y">基础入门</b><small data-page-node-id="WsodYsk7tBBwjOSEzPzpdR">能完成简单问候和日常表达</small><em data-page-node-id="S5zGhryhAQGpymftJHjZXD">A1</em></span></label>
+            <label data-page-node-id="t8lGpZBHGJOY4LemBbXE80"><input type="radio" name="englishLevel" value="A2" data-page-node-id="kNfpmh5lEMQubSaVj9W06L" /><span data-page-node-id="lEfkvBHlq8bVVOqSK6smF1"><b data-page-node-id="ZXiPhYDVFS12rBi2YMfQ8c">日常交流</b><small data-page-node-id="o1muqowpu1SmavvNREvgZg">能聊熟悉话题，理解简单对话</small><em data-page-node-id="qxg72WVVASywApD5fBtZNm">A2</em></span></label>
+            <label data-page-node-id="lvlADOTFXNPCm1b6AXouSF"><input type="radio" name="englishLevel" value="B1+" data-page-node-id="EHnVkfJyjZSV9aDq1dpkot" /><span data-page-node-id="J5nO8N8moUF6tbrk3k9GcD"><b data-page-node-id="f5lyH7XOUK3nnHFZaEBTbV">进阶提升</b><small data-page-node-id="ZeLqcce4DyIZHKpvPzh0qp">能连续表达，希望说得更自然</small><em data-page-node-id="g9QTOMcX6dM6InrcyFz1PZ">B1+</em></span></label>
+            <label data-page-node-id="NetBGtnZvGv1YRMKlNwowt"><input type="radio" name="englishLevel" value="B2" data-page-node-id="jU4oWRjnqg3YgErarz6NDO" /><span data-page-node-id="LoKXaeNA4F3yDNgdBmvM2P"><b data-page-node-id="MIgHdjcdDaaga3jtLoKGRu">高级沟通</b><small data-page-node-id="3ZkW2DQyOxGGqGttop9Yjc">能深入讨论，并清晰表达观点</small><em data-page-node-id="6nnuEEVctvsK4fABSHR7GR">B2</em></span></label>
+            <label data-page-node-id="TbbhQVTls64dPRMb6CtJWx"><input type="radio" name="englishLevel" value="C1" data-page-node-id="oIjIVil3NjvTL45KWksK6L" /><span data-page-node-id="5V0BaSxMOxgw498oyGx6Mr"><b data-page-node-id="3uEuFmI9kXGADQoC3rhICB">熟练表达</b><small data-page-node-id="sV8ggooYrUf6uJ3ULGjlNh">能灵活准确地用于学习和工作</small><em data-page-node-id="B9IwMS0jbcYizrHYgq6gdn">C1</em></span></label>
+          </div>
+        </section>
+
+        <section class="onboarding-step" data-onboarding-step="3" hidden data-page-node-id="CLJFTgK2vzewIDDfdUV0lL">
+          <div class="onboarding-icon" data-page-node-id="fnLJmWc0Vl3JDC0SqTCYCQ">🎯</div>
+          <p class="eyebrow" data-page-node-id="EHbsC5hsUnpazIrmOas9QW">YOUR GOAL</p>
+          <h2 data-page-node-id="ELAWVhvWdKS35DxOso33um">你学习英语的目标？</h2>
+          <p class="onboarding-intro" data-page-node-id="rxYlMV4VmuhvkIJkSlMfRR">可多选，我们会优先推荐与你目标相关的内容。</p>
+          <div class="onboarding-options goal-options" data-page-node-id="lyDWdsRxI8YPpl1BWGeITp">
+            <label data-page-node-id="edExaCtb9wzHLt3Akjvcbu"><input type="checkbox" name="learningGoals" value="日常交流" data-page-node-id="8rO9Yy02n9s3Ie49QyWNEa" /><span data-page-node-id="Ye4lRVfdggCoRVWZOMYgm2"><b data-page-node-id="zkJEZkLhRqSYxGCr1Itiei">💬 日常交流</b><small data-page-node-id="jb8wKiEXxnzt21WahFlP1g">更自信地聊天和表达</small></span></label>
+            <label data-page-node-id="kjzP6V8bgVngUJbf0j0Kuo"><input type="checkbox" name="learningGoals" value="旅行出行" data-page-node-id="dhBztEPd9dtZf24ZruQgUa" /><span data-page-node-id="czhAqk2Hgtvf51qfSaJiIj"><b data-page-node-id="peFRSCW7Sn7Y79JduYcn2L">✈️ 旅行出行</b><small data-page-node-id="jGXK5pUmc9D4xNTeHrvJcY">应对机场、酒店与问路</small></span></label>
+            <label data-page-node-id="GvjQcN9pfWIdFOYfIbsHKS"><input type="checkbox" name="learningGoals" value="职场英语" data-page-node-id="2mUoUwWIAwOCXNOjQgsorQ" /><span data-page-node-id="14bX2bEJdSEGCaCZdVkrP9"><b data-page-node-id="WqHOmxzNLfNg0tTaxjgV3z">💼 职场英语</b><small data-page-node-id="4eEtlMejCfeiKNzKpSFoKh">会议、汇报与面试沟通</small></span></label>
+            <label data-page-node-id="pNZ258EOiPKnaA36GX6Lwr"><input type="checkbox" name="learningGoals" value="考试提升" data-page-node-id="8bnlC9VWL3hjnw0j1iECIq" /><span data-page-node-id="mJicb0qBDCaZE7jGPsrqEv"><b data-page-node-id="b3PL1oi13jVRHRFWRmNpqB">📝 考试提升</b><small data-page-node-id="qr1W62UBX1ERSEKB1Qz1oq">系统提升词汇与语法</small></span></label>
+          </div>
+          <p class="onboarding-error" id="goalError" hidden data-page-node-id="eduRTtL7f4t2YlznsdePtx">请至少选择一个学习目标</p>
+        </section>
+
+        <section class="onboarding-step" data-onboarding-step="4" hidden data-page-node-id="LvGoanhHw4iPefD5HlSdU1">
+          <div class="onboarding-icon" data-page-node-id="VR0YvKh0S9n0FDO5uMsXcD">⏱</div>
+          <p class="eyebrow" data-page-node-id="9uL8L2YyBIfSti6cywRq64">DAILY ROUTINE</p>
+          <h2 data-page-node-id="jnCAxAniMDeAI9zTZkRmXK">每天可以学习多久？</h2>
+          <p class="onboarding-intro" data-page-node-id="IoUIJYfhufq74CEHtyG8pT">保持轻松可持续，比一次学习很久更重要。</p>
+          <div class="onboarding-options time-options" data-page-node-id="f2umhhrgJ2kmuDqtN4Rd45">
+            <label data-page-node-id="7R6yG5AEa9QzMzUBTfdllS"><input type="radio" name="dailyMinutes" value="5" required data-page-node-id="Ax6jhyCreWvGf3g4K4olGA" /><span data-page-node-id="x3X1DzmOVkgWdZhCnJ0wp5"><b data-page-node-id="tZzznFAvJO2kJ20d0eAqn8">5 分钟</b><small data-page-node-id="3KUeGdD3A5UL9F8yAV4Owf">轻松开始</small></span></label>
+            <label data-page-node-id="QtPhee2RFdutGCgWFQi2Jo"><input type="radio" name="dailyMinutes" value="10" checked data-page-node-id="rGk3xQNJOYFEQB0x8opEaI" /><span data-page-node-id="eoCPP9lek9NEhiw96qboXG"><b data-page-node-id="LDHjaFwb4K3DgfwNfZUZ3g">10 分钟</b><small data-page-node-id="eWngD4mYDYddr91vIF54OU">推荐节奏</small><em data-page-node-id="UWjwBtWg5Zcmmfub8kGHCh">推荐</em></span></label>
+            <label data-page-node-id="LHnY07aGdUgsDJmJuqNbnv"><input type="radio" name="dailyMinutes" value="20" data-page-node-id="BbbhdenfjiI4Sy7kxsTRgs" /><span data-page-node-id="WGHp1Z70MaRjMMk8PNIKlM"><b data-page-node-id="sjFlZTi3RDq36Pgys4kTrS">20 分钟</b><small data-page-node-id="IwGiIRaIwT9gFN8CuxfmQj">稳定进步</small></span></label>
+            <label data-page-node-id="PLJECL6qSvNXDGIzJAnTHD"><input type="radio" name="dailyMinutes" value="30" data-page-node-id="OEfB1sypjnWHM4eYxiXATE" /><span data-page-node-id="AH7AOx3dT9Ij8RnNXn3zxl"><b data-page-node-id="kDpAZvVx9zZ6LibDW2ezf1">30 分钟</b><small data-page-node-id="WvWVRoZrgZvNnW2vGN6iAS">沉浸练习</small></span></label>
+          </div>
+        </section>
+
+        <footer class="onboarding-footer" data-page-node-id="jiayBEDDxo6kv0KWFhxL8L">
+          <button class="onboarding-back" id="onboardingBack" type="button" hidden data-page-node-id="gowugL7uSV4pnxjGjtI6cM">← 上一步</button>
+          <button class="onboarding-next" id="onboardingNext" type="button" data-page-node-id="UNDFkSPtSWGEMOMxS7fCf1"><span data-page-node-id="cE7AT8wlj7nhyIUrdDiKGS">继续</span><b data-page-node-id="ruGdb8OJXaKGy9s2Z8giN7">→</b></button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script src="data/curriculum-data.js"></script>
+  </body>
+</html>
