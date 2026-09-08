@@ -170,3 +170,5 @@ AIChat engine, allowing a browser paint before engine startup. The account contr
 shows a loading state rather than a false login prompt during initialization.
 Embedded mode starts the bridge early because its learner records require the
 host workspace transport.
+
+General-purpose interactions extend the original English experience; see [interaction contracts](general-interactions.md) for version 2 data, completion rules and inline AIChat activities.

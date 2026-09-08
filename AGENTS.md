@@ -2,7 +2,7 @@
 
 These instructions apply to every file under this `HelloLearner/` directory.
 
-HelloLearner is the learner-only H5 application behind the catalog product **LanguageLearner** — a Chinese-first, mobile-first English learning experience for Keepwork users. It runs in two modes:
+HelloLearner is the learner-only H5 application behind the catalog product **LanguageLearner** — a Chinese-first, mobile-first learning experience across subjects for ages 7–70 for Keepwork users. It runs in two modes:
 
 - **Standalone** — opened directly in a browser. It mounts a hidden, non-persistent AIChat iframe as its LLM engine and persists through `sdk.personalPageStore`.
 - **Embedded** — loaded as an AIChat external tool iframe. It talks to the parent over `aichat.external-tool.v1` and persists through the host workspace bridge.
@@ -186,3 +186,14 @@ Then:
 ## Related directories
 
 - `../AIChat/` — the host app. Its `AGENTS.md` and `docs/external-html-tools.md` define the parent side of the protocol this app implements. Read them before changing bridge behavior.
+
+## General-purpose plan interactions (2026-09-08)
+
+New plan/lesson/unit/progress artifacts use version 2; version 1 remains readable and
+is not migrated on load. Core profile/settings/progress records retain version 1.
+`js/interaction-registry.js` owns interaction contracts and legacy adapters;
+`js/view_interactions.js` owns new interaction views and cleanup. The runner owns step
+navigation and app callbacks own persistence. See `docs/general-interactions.md`.
+The standalone engine uses `layout=agent`; reveal its existing iframe in an inline slot
+without reparenting/reloading it. Embedded activities use the parent host's tool tabs.
+Bounded context additionally includes subject, teachingLanguage and optional age.

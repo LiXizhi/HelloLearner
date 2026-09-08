@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>互动类型源代码验收</title>
+<style>body{font:18px/1.6 system-ui;margin:24px auto;padding:0 16px;max-width:900px;color:#174f46}button,input,select{font:inherit;margin:8px;padding:12px;max-width:100%;box-sizing:border-box}label{display:block}button{cursor:pointer}#activity{padding:16px;border:1px solid #ccc}#status{white-space:pre-wrap}iframe[hidden]{display:none}</style></head>
+<body><h1>互动类型源代码验收</h1><p>测试页面：回答仅保留内存；讨论使用标明的测试回复。电影通过真实 AIChat 引擎打开，需要在播放器中手动选片。</p>
+<label>互动类型 <select id="type"><option>single-choice</option><option>multiple-choice</option><option>fill-blanks</option><option>repeat</option><option>discussion</option><option>external-tool</option></select></label>
+<main id="activity"></main><p id="status" role="status"></p>
+<script type="module">
+import { getInteraction } from '../js/interaction-registry.js?v=20260908j';
+import { AIChatBridge } from '../js/aichat-bridge.js?v=20260908j';
+const content = {
+ 'single-choice':{prompt:'哪个是行星？',options:[{id:'earth',text:'地球'},{id:'sun',text:'太阳'}],correctIds:['earth']},
+ 'multiple-choice':{prompt:'选择所有行星',options:[{id:'earth',text:'地球'},{id:'mars',text:'火星'},{id:'sun',text:'太阳'}],correctIds:['earth','mars']},
+ 'fill-blanks':{prompt:'___ + ___ = 5',blanks:[{id:'a',answers:['2','二']},{id:'b',answers:['3','三']}]},
+ repeat:{target:'Hello world!',answers:['Hello world'],language:'en-US'},
+ discussion:{mode:'socratic',topic:'证据',opening:'你如何知道地球是圆的？'},
+ 'external-tool':{tool:'roleplay-movie-player',prompt:'打开互动电影播放器，由学习者选择内容。',params:{}}
+};
+const bridge = new AIChatBridge({getContext:()=>({app:'LanguageLearner',screen:'test'}),executeCommand:async()=>({})});
+bridge.requestLLM = async () => ({text:'（测试回复）你能举一个支持这个想法的例子吗？'});
+// mountEngine resolves against location.href, so this fixture supplies the normal
+// sibling URL before mounting while preserving the production handshake/lifecycle.
+bridge.mountEngine = () => {
+ const frame=document.createElement('iframe');frame.hidden=true;frame.title='测试 AIChat';frame.allow='microphone; autoplay';
+ frame.src=new URL('../../AIChat/AIChat.html?layout=agent&chat=new&persist=0&hide=pet',location.href).href;
+ document.body.append(frame);bridge.engineFrame=frame;
+};
+bridge.start();
+let view; const answers=new Map();
+function render(){view?.stop();const type=document.querySelector('#type').value;const root=document.querySelector('#activity');root.replaceChildren();
+ view=getInteraction(type).render({root,step:{id:'step-test',type,content:content[type]},plan:{id:'plan-test',subject:'科学',priorKnowledge:'零基础',teachingLanguage:'zh-CN'},response:answers.get(type),bridge,
+ speak:async text=>{document.querySelector('#status').textContent='播放示范：'+text;},
+ onCheckpoint:async detail=>{answers.set(type,structuredClone(detail.response));document.querySelector('#status').textContent='已保存内存检查点；完成：'+detail.completed;},
+ onComplete:()=>{document.querySelector('#status').textContent+=' ✓';}});
+}
+document.querySelector('#type').addEventListener('change',render);render();
+</script></body></html>

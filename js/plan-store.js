@@ -1,4 +1,5 @@
-import { PLAN_ROOT, validId, validatePlan, validateDailyLesson, stepCompleted } from './plan-model.js?v=20260907o';
+import { validateResponse, getInteraction } from './interaction-registry.js?v=20260908j';
+import { PLAN_ROOT, validId, validatePlan, validateDailyLesson, stepCompleted } from './plan-model.js?v=20260908j';
 
 export class PlanStore {
   constructor(backend) {
@@ -60,7 +61,7 @@ export class PlanStore {
       try {
         const plan = await this.get(id);
         const progress = await this.progress(id);
-        plans.push({ id, title: plan.title.slice(0, 160), goal: plan.goal.slice(0, 300), level: plan.level,
+        plans.push({ id, title: plan.title.slice(0, 160), goal: plan.goal.slice(0, 300), level: plan.level || plan.priorKnowledge, subject: plan.subject,
           dailyMinutes: plan.dailyMinutes, count: plan.lessons.length, updatedAt: plan.updatedAt || '',
           completed: plan.lessons.filter(l => progress.lessons?.[l.id]?.completedAt).length });
       } catch { warnings.push(id); }
@@ -79,7 +80,7 @@ export class PlanStore {
     const index = await this.read(path, { schemaVersion: 1, plans: [] });
     if (!Array.isArray(index.plans)) throw new Error('计划目录损坏；计划已保存，请修复目录后重试');
     await this.write(path, { ...index, plans: [...index.plans.filter(p => p.id !== plan.id), {
-      id: plan.id, title: plan.title, goal: plan.goal, level: plan.level, dailyMinutes: plan.dailyMinutes, count: plan.lessons.length,
+      id: plan.id, title: plan.title, goal: plan.goal, level: plan.level || plan.priorKnowledge, subject: plan.subject, dailyMinutes: plan.dailyMinutes, count: plan.lessons.length,
     }] });
     });
   }
@@ -103,9 +104,9 @@ export class PlanStore {
     const expected = plan.lessons.find(lesson => lesson.id === outline.id);
     if (!expected || expected.unit !== outline.unit) throw new Error('课程不属于当前主题单元');
     const unit = await this.read(this.path(plan.id, plan.unitFiles[outline.unit].slice(2)), {
-      schemaVersion: 1, planId: plan.id, id: outline.unit, title: plan.units[outline.unit], lessons: [],
+      schemaVersion: plan.schemaVersion, planId: plan.id, id: outline.unit, title: plan.units[outline.unit], lessons: [],
     });
-    if (unit.schemaVersion !== 1 || unit.planId !== plan.id || unit.id !== outline.unit || !Array.isArray(unit.lessons)) throw new Error('主题单元文件损坏');
+    if (unit.schemaVersion !== plan.schemaVersion || unit.planId !== plan.id || unit.id !== outline.unit || !Array.isArray(unit.lessons)) throw new Error('主题单元文件损坏');
     const ids = new Set();
     for (const lesson of unit.lessons) {
       const summary = plan.lessons.find(item => item.id === lesson?.id && item.unit === outline.unit);
@@ -118,10 +119,11 @@ export class PlanStore {
   async progress(id) {
     const progress = await this.read(this.path(id, 'progress.json'), { schemaVersion: 1, lessons: {}, feedback: [] });
     if (!progress.lessons || typeof progress.lessons !== 'object' || Array.isArray(progress.lessons)) throw new Error('学习进度文件损坏');
-    if (progress.schemaVersion !== 1 || (progress.feedback !== undefined && !Array.isArray(progress.feedback))) throw new Error('学习进度格式不支持');
+    if (![1, 2].includes(progress.schemaVersion) || (progress.feedback !== undefined && !Array.isArray(progress.feedback))) throw new Error('学习进度格式不支持');
     for (const state of Object.values(progress.lessons)) {
       if (!state || typeof state !== 'object' || !state.steps || typeof state.steps !== 'object' || Array.isArray(state.steps)) throw new Error('步骤进度文件损坏');
       for (const step of Object.values(state.steps)) {
+        if (step?.response && (typeof step.response !== 'object' || Array.isArray(step.response) || JSON.stringify(step.response).length > 50000)) throw new Error('互动回答文件损坏');
         if (!step || !Array.isArray(step.answers) || step.answers.some(a => typeof a !== 'string' || a.length > 2000)) throw new Error('步骤回答文件损坏');
       }
     }
@@ -132,15 +134,17 @@ export class PlanStore {
     const step = lesson.steps.find(s => s.id === detail.stepId);
     if (!step) throw new Error('未知步骤');
     if (!Array.isArray(detail.answers) || detail.answers.length > 20 || detail.answers.some(a => typeof a !== 'string' || a.length > 2000)) throw new Error('无效的步骤回答');
-    if (detail.completed && !stepCompleted(step, detail.answers)) throw new Error('步骤尚未完成');
+    if (!getInteraction(step.type).legacy && (plan.schemaVersion !== 2 || !validateResponse(step, detail.response))) throw new Error('无效的互动回答');
+    if (detail.completed && !stepCompleted(step, detail.answers, detail.response)) throw new Error('步骤尚未完成');
     const path = this.path(plan.id, 'progress.json');
     const progress = this.cache.get(path) || await this.progress(plan.id);
     const previous = progress.lessons[lesson.id] || { steps: {} };
     const state = { ...previous, attempts: (previous.attempts || 0) + 1,
       steps: { ...previous.steps, [step.id]: { ...(previous.steps?.[step.id] || {}), answers: detail.answers,
+        ...(detail.response ? { response: structuredClone(detail.response) } : {}),
         completedAt: detail.completed ? new Date().toISOString() : previous.steps?.[step.id]?.completedAt || '' } } };
     if (lesson.steps.every(s => state.steps[s.id]?.completedAt)) state.completedAt ||= new Date().toISOString();
-    await this.write(path, { ...progress, lessons: { ...progress.lessons, [lesson.id]: state },
+    await this.write(path, { ...progress, schemaVersion: plan.schemaVersion, lessons: { ...progress.lessons, [lesson.id]: state },
       feedback: detail.feedback ? [...(progress.feedback || []), { text: detail.feedback.slice(0, 300), at: new Date().toISOString() }].slice(-100) : progress.feedback });
     return state;
     });

@@ -151,6 +151,19 @@ with terminal `tool:status` messages. See [general lesson plans](general-lesson-
 
 ## Continuous practice voice
 
+Voice/Observer follows the school-teacher division: Voice has `voice-tools: []`
+and only speaks; Observer owns audited app operations. Free talk follows QA:
+Voice answers directly, Observer normally sends no note. Guided explanation
+uses a current-step `Copilot小纸条：请说：` payload containing only filtered
+learner-facing language. Exercises wait for learner input. Observer uses a 5m
+heartbeat, thinking disabled, and does not send notes on idle ticks or in reply
+to its own completed note. Playback completion permits checking context, not
+awarding progress or skipping an unanswered exercise.
+
+The collapsed observer row is display-only; RTC playback remains host-owned.
+These are learner skill/startup instructions, not an audio mute/filter in the
+browser. No shared AIChat or school-teacher runtime behavior is changed.
+
 Entering lesson dialogue (including the in-app skip confirmation) automatically
 starts live voice after the opening greeting. Startup sends the existing bounded
 context through `host:voice.prompt`; no learner records or history are added.
@@ -220,3 +233,15 @@ All callback text is inserted as text, never HTML.
 
 - `../AIChat/docs/external-html-tools.md` — the parent-side definition of this protocol.
 - `../AIChat/AGENTS.md` — host-side contributor rules.
+
+## General learning activity extension
+
+See [general-interactions.md](general-interactions.md). Standalone boot now uses
+`layout=agent` and checks `host:ready` for `agent-layout` before showing activities.
+The same hidden engine provides ordinary LLM/Voice requests. It is never reparented
+or recreated merely to show/hide a tool. The parent/child source checks are unchanged.
+`promptUserTool` uses `tool:host-command` with bounded `params` and `activityId`;
+embedded calls include the current `expectedWorkspaceId`. The command response is
+only launch acceptance. Completion requires a separate learner confirmation.
+Bounded context adds subject (120 chars), discussionMode, teachingLanguage (80 chars)
+and optional age. It excludes interests, identifiers, tokens, files and raw history.

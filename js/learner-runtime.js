@@ -5,7 +5,7 @@ let plannerPaused = false, practiceEpoch = 0, plannerRollback = null;
 import { evaluateLessonDialogue } from './lesson-engine.js?v=20260905a';
 import { confirmPractice } from './view_confirm_practice.js?v=20260907a';
 import { openProgressDetail } from './view_progress.js?v=20260905c';
-import { openProfileSetup } from './view_profile_setup.js?v=20260905b';
+import { openProfileSetup } from './view_profile_setup.js?v=20260908j';
 import { projectUnitProgress, projectSpeakingWeek } from './curriculum-progress.js?v=20260905b';
 
 const dialog = document.querySelector('#lessonDialog');
@@ -59,7 +59,9 @@ let activeLessonKey = 'introductions';
 let activeRoleplayScenarioId = '';
 let dialogueVocabulary = ['name', 'your', 'my', 'meet', 'nice', 'too'];
 let roleplayBriefingSpeech = '';
-const roleplayScenarioConfigs = window.HELLO_LEARNER_ROLEPLAYS?.scenarios || {};
+function getRoleplayScenarioConfigs() {
+  return window.HELLO_LEARNER_ROLEPLAYS?.scenarios || {};
+}
 
 const grammarJudgmentPlaceholderPattern = /_{2,}|\[\s*\]|\{\s*blank\s*\}|<blank>|…{2,}/i;
 const completeSentencePattern = /[.?!]["')\]]?$/;
@@ -379,7 +381,7 @@ function getActiveLesson() {
 }
 
 function getActiveRoleplayScenario() {
-  return activeRoleplayScenarioId ? roleplayScenarioConfigs[activeRoleplayScenarioId] || null : null;
+  return activeRoleplayScenarioId ? getRoleplayScenarioConfigs()[activeRoleplayScenarioId] || null : null;
 }
 
 function getActiveDialogueConfig() {
@@ -1197,7 +1199,7 @@ async function submitFreeTalkAnswer(answer) {
     const response = await window.helloLearnerAI.requestLLM({
       displayPrompt: answer,
       messages: [
-        { role: 'system', content: 'You are Maya, a friendly English conversation partner. This is open-ended free talk, not a course or goal-based exercise. Follow the user\'s topic. Reply in 1–3 short sentences, ask at most one natural follow-up question, and offer gentle help when needed. Do not redirect to a lesson, score, or mark completion. Return plain text.' },
+        { role: 'system', content: 'You are Maya, a friendly learning partner for any subject and ages 7–70. Use the learner\'s preferred language and adapt to their stated prior knowledge. This is open-ended free talk, not a course or goal-based exercise. Follow the user\'s topic. Reply in 1–3 short sentences, ask at most one natural follow-up question, and offer gentle help when needed. Do not redirect to a lesson, score, or mark completion. Return plain text.' },
         ...freeTalkHistory.slice(-20),
         { role: 'user', content: answer },
       ],
@@ -2503,6 +2505,7 @@ document.querySelectorAll('.bottom-nav button').forEach((button) => {
       document.body.classList.remove('progress-active');
       pageScrollArea.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (button.dataset.tab === 'roleplay') {
+      window.ensureRoleplayCatalog?.();
       document.querySelector('.coach-stage').hidden = true;
       document.querySelector('#learningPath').hidden = true;
       document.querySelector('#roleplayPage').hidden = false;
@@ -2620,9 +2623,10 @@ previousTopicButton.addEventListener('click', () => {
 
 pageScrollArea.addEventListener('scroll', updatePreviousTopicButton, { passive: true });
 
-function openScenario(card) {
+async function openScenario(card) {
+  await window.ensureRoleplayCatalog?.();
   lessonOpenRequest++;
-  const config = roleplayScenarioConfigs[card.dataset.scenarioId];
+  const config = getRoleplayScenarioConfigs()[card.dataset.scenarioId];
   if (!config) {
     showToast('这个角色扮演场景正在补充内容');
     return;
@@ -2684,7 +2688,7 @@ function showOnboardingStep(step) {
 
 function validateOnboardingStep() {
   if (onboardingStep === 1) {
-    return onboardingForm.elements.learnerName.reportValidity();
+    return onboardingForm.elements.learnerName.reportValidity() && (!onboardingForm.elements.learnerAge || onboardingForm.elements.learnerAge.reportValidity());
   }
   if (onboardingStep === 2) {
     const selected = onboardingForm.querySelector('[name="englishLevel"]:checked');
@@ -2692,7 +2696,7 @@ function validateOnboardingStep() {
     return Boolean(selected);
   }
   if (onboardingStep === 3) {
-    const valid = onboardingForm.querySelectorAll('[name="learningGoals"]:checked').length > 0;
+    const valid = true; // Goals are optional; subject goals are collected when planning.
     document.querySelector('#goalError').hidden = valid;
     return valid;
   }
@@ -2765,10 +2769,10 @@ window.helloLearnerRuntime = {
     }
   },
   openLessonById: openCurriculumLesson,
-  openRoleplayById(scenarioId) {
+  async openRoleplayById(scenarioId) {
     const card = document.querySelector(`[data-scenario-id="${CSS.escape(scenarioId)}"]`);
     if (!card) throw new Error('Unknown roleplay');
-    openScenario(card);
+    await openScenario(card);
   },
   navigate(screen) {
     const tab = screen === 'learning' ? 'path' : screen;

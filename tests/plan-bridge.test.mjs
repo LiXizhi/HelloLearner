@@ -7,7 +7,7 @@ globalThis.window = {}; window.parent = window;
 const { AIChatBridge } = await import('../js/aichat-bridge.js');
 const channel = 'aichat.external-tool.v1';
 
-test('daily lesson replaces stale curriculum context without expanding the public shape', () => {
+test('daily lesson replaces stale curriculum context with bounded general learning context', () => {
   const app = fs.readFileSync(new URL('../js/app.js', import.meta.url), 'utf8');
   const context = { window: { helloLearnerRuntime: { getContext: () => ({ activeLessonId: 'old' }) } },
     getState: () => ({ screen: 'learning', profile: {}, progress: {}, planContext: {
@@ -18,7 +18,7 @@ test('daily lesson replaces stale curriculum context without expanding the publi
   const value = context.getBoundedContext();
   assert.equal(value.activeLessonId, 'plan-test-day-01');
   assert.equal(value.screen, 'lesson');
-  assert.deepEqual(Object.keys(value), ['app', 'screen', 'learnerLevel', 'activeLessonId', 'activeLessonTitle', 'activeScenarioId', 'exercise', 'goalIndex', 'speaking', 'completedLessonCount', 'completedRoleplayCount']);
+  assert.deepEqual(Object.keys(value), ['app', 'screen', 'learnerLevel', 'subject', 'discussionMode', 'teachingLanguage', 'age', 'activeLessonId', 'activeLessonTitle', 'activeScenarioId', 'exercise', 'goalIndex', 'speaking', 'completedLessonCount', 'completedRoleplayCount']);
 });
 
 test('standalone engine can discover and invoke planner Voice commands; replies return to that engine', async () => {

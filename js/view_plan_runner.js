@@ -1,4 +1,5 @@
-import { checkItem, STEP_LABELS } from './plan-model.js?v=20260907o';
+import { getInteraction, interactionCompleted, validateResponse } from './interaction-registry.js?v=20260908j';
+import { checkItem, STEP_LABELS } from './plan-model.js?v=20260908j';
 import { evaluateLessonDialogue } from './lesson-engine.js?v=20260905a';
 
 export function element(tag, text = '', parent) {
@@ -19,16 +20,22 @@ export function button(parent, label, action) {
 }
 
 export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, onCheckpoint, onDone, onAvatar, onIntent, onContext, sharedPractice = false }) {
+  for (const step of lesson.steps) {
+    const saved = progress.steps?.[step.id];
+    if (!saved || getInteraction(step.type).legacy) continue;
+    if (!validateResponse(step, saved.response) || saved.completedAt && !interactionCompleted(step, saved.response)) throw new Error('互动进度无效，请重新加载课程');
+  }
   let stopped = false, waiting = false, cursor = 0, generation = 0, submitText = () => {};
   const completed = new Set(Object.entries(progress.steps || {}).filter(([, s]) => s.completedAt).map(([id]) => id));
   const savedAnswers = new Map(Object.entries(progress.steps || {}).map(([id, s]) => [id, s.answers || []]));
-  let controller = null;
+  let controller = null, activeInteraction = null;
   const advance = () => {
     cursor = lesson.steps.findIndex(step => !completed.has(step.id));
     if (cursor < 0) { root.replaceChildren(); element('h3', '本课已完成', root); button(root, '返回计划', onDone); return; }
     render();
   };
   function render() {
+    activeInteraction?.stop(); activeInteraction = null;
     const token = ++generation;
     root.replaceChildren();
     const step = lesson.steps[cursor];
@@ -43,16 +50,37 @@ export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, o
       if (index === cursor) tab.className += ' bg-[#174f46] text-white';
     });
     onContext?.({ screen: 'lesson', activeLessonId: `${plan.id}-${lesson.id}`, activeLessonTitle: lesson.title,
-      activeScenarioId: '', exercise: step.type, goalIndex: cursor });
+      activeScenarioId: '', subject: plan.subject || 'English', priorKnowledge: plan.priorKnowledge || plan.level, teachingLanguage: plan.teachingLanguage || 'zh-CN', discussionMode: step.content.mode || '', exercise: step.type, goalIndex: cursor });
     let answers = [...(savedAnswers.get(step.id) || [])];
     element('p', `${cursor + 1} / ${lesson.steps.length} · ${STEP_LABELS[step.type]} · 约 ${step.minutes} 分钟`, root).className = 'text-sm opacity-70';
     element('h3', step.objective, root).className = 'text-xl font-bold my-3';
     const avatar = element('div', '', root);
     avatar.hidden = sharedPractice;
     avatar.className = 'relative h-40 overflow-hidden rounded-xl bg-[#edf3e4]';
-    element('span', 'Maya · 英语教练', avatar).className = 'absolute bottom-2 left-3 text-sm';
+    element('span', 'Maya · 学习伙伴', avatar).className = 'absolute bottom-2 left-3 text-sm';
     if (!sharedPractice) onAvatar?.(avatar);
     const content = step.content;
+    const interaction = getInteraction(step.type);
+    if (!interaction.legacy) {
+      activeInteraction = interaction.render({ root, step, plan, response: progress.steps?.[step.id]?.response,
+        bridge, speak: (text, options = {}) => speak(text, { language: plan.teachingLanguage || 'zh-CN', ...options }), onIntent,
+        onCheckpoint: async detail => {
+          if (stopped || token !== generation) return;
+          await onCheckpoint(detail);
+          if (stopped || token !== generation) return;
+          progress.steps ||= {}; progress.steps[step.id] = { ...progress.steps[step.id], ...detail };
+        },
+        onComplete: () => {
+          if (stopped || token !== generation) return;
+          completed.add(step.id);
+          button(root, completed.size === lesson.steps.length ? '完成本课' : '下一步骤', advance);
+        },
+      });
+      submitText = text => activeInteraction?.submitText(text);
+      return;
+    }
+
+    return interaction.render({ renderLegacy() {
     if (['vocabulary', 'phrase'].includes(step.type)) {
       const study = element('details', '', root);
       study.className = 'rounded-xl bg-[#edf3e4] p-3 my-3';
@@ -122,7 +150,7 @@ export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, o
           const after = evaluateLessonDialogue(content, proposed);
           controller = new AbortController();
           const result = await bridge.requestLLM({ displayPrompt: answer,
-            messages: [{ role: 'system', content: `You are a friendly English tutor playing ${content.role}. Reply in 1–3 short sentences, at most one question. Give one gentle correction if needed. Never score or award completion. Next prompt: ${after.bridge}. Learner level: ${plan.level}.` },
+            messages: [{ role: 'system', content: `You are a friendly tutor playing ${content.role}. Reply in 1–3 short sentences, at most one question. Give one gentle correction if needed. Never score or award completion. Next prompt: ${after.bridge}. Subject: ${plan.subject || 'English'}. Prior knowledge: ${plan.priorKnowledge || plan.level}. Teaching language: ${plan.teachingLanguage || 'English'}.` },
               ...answers.slice(-10).map(value => ({ role: 'user', content: value })), { role: 'user', content: answer }] }, 90000, { signal: controller.signal });
           if (stopped || token !== generation) return;
           if (!String(result.text || '').trim()) throw new Error('AI 返回空回复，请重试');
@@ -165,7 +193,8 @@ export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, o
     });
     submitText = text => { input.value = String(text).slice(0, 2000); form.requestSubmit(); };
     if (!sharedPractice) input.focus();
+    } });
   }
   advance();
-  return { submitText: text => submitText(text), stop() { stopped = true; generation++; controller?.abort(); } };
+  return { submitText: text => submitText(text), stop() { stopped = true; generation++; controller?.abort(); activeInteraction?.stop(); } };
 }

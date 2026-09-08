@@ -2,6 +2,18 @@
 
 Start here. `AGENTS.md` at the project root is the authoritative operating manual for anyone — human or agent — changing this app.
 
+## Current design and session handoff
+
+For work continuing the general-purpose learning design agreed on 2026-09-08, read:
+
+1. [General learning session handoff](general-learning-handoff.md) — accepted decisions, current implementation, UI correction and future scope.
+2. [General interaction contracts](general-interactions.md) — module ownership, schemas, completion rules and AIChat integration.
+3. [General interaction verification](general-interactions-qa.md) — recorded tests, known failures and manual verification limits.
+
+These documents extend the original English-demo design below. Keep the English
+curriculum, but do not treat its original English-only scope or hidden-only engine
+description as restrictions on new generalized plans.
+
 ## Reading order
 
 | # | Document | Read when |
@@ -24,7 +36,7 @@ the workspace library, AI planning conversation, on-demand daily steps, storage,
 bridge additions and verification. This extends the original three-core-record
 and five-command baseline described in older sections below.
 
-HelloLearner is the learner-only H5 application behind the catalog product **LanguageLearner**. It is a Chinese-first, mobile-first English learning experience for Keepwork users, ported from the supplied Hello Learner demo.
+HelloLearner is the learner-only H5 application behind the catalog product **LanguageLearner**. It is a Chinese-first, mobile-first learning experience across subjects for ages 7–70 for Keepwork users, ported from the supplied Hello Learner demo.
 
 It runs standalone in a browser, or embedded inside AIChat as an external tool. Curriculum administration, CMS publishing, local accounts, and password handling are explicitly out of scope.
 
@@ -34,7 +46,7 @@ It runs standalone in a browser, or embedded inside AIChat as an external tool. 
 - 15 authored roleplay scenarios with deterministic goal matching.
 - 9 selectable Live2D coach avatars with per-role voice profiles.
 - Three persisted records under `.hellolearner/`: `profile.json`, `progress.json`, `settings.json`.
-- Bridge channel `aichat.external-tool.v1`; five audited commands.
+- Bridge channel `aichat.external-tool.v1`; audited learning/navigation/planning commands are declared in `js/aichat-bridge.js`.
 - No framework, no build step in the source path, no localStorage, no passwords.
 
 ## Conventions worth knowing before your first edit
@@ -42,3 +54,5 @@ It runs standalone in a browser, or embedded inside AIChat as an external tool. 
 - **Cache busters.** Local modules are referenced with `?v=<yyyymmdd><letter>`. Bump the suffix whenever you change that module, or your edit will not appear in the browser. See `AGENTS.md`.
 - **Preserved demo assets.** `HelloLearner.html` and `styles.css` keep their `data-page-node-id` attributes and demo visual system. Do not reformat them.
 - **Vite is release-only.** Run the app from a plain static server, never `npm run dev`.
+
+General-purpose interactions extend the original English experience; see [interaction contracts](general-interactions.md) for version 2 data, completion rules and inline AIChat activities.

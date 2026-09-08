@@ -1,17 +1,17 @@
 import { runtimeConfig, SDK_CDN_URL, sanitizeWorkspace } from './config.js';
-import { PlanStore } from './plan-store.js?v=20260907o';
-import { LessonPlanner } from './lesson-planner.js?v=20260908e';
-import { mountLessonPlans } from './view_lesson_plans.js?v=20260908g';
+import { PlanStore } from './plan-store.js?v=20260908j';
+import { LessonPlanner } from './lesson-planner.js?v=20260908j';
+import { mountLessonPlans } from './view_lesson_plans.js?v=20260908k';
 import { updateState, getState, subscribe } from './state.js';
 import { KeepworkAuth } from './auth.js?v=20260907g';
-import { AIChatBridge } from './aichat-bridge.js?v=20260907v';
+import { AIChatBridge } from './aichat-bridge.js?v=20260908j';
 import { initLiveVoice } from './view_live_voice.js?v=20260907u';
-import { LearnerStorage, createEmbeddedBackend, createStandaloneBackend } from './storage.js?v=20260907c';
+import { LearnerStorage, createEmbeddedBackend, createStandaloneBackend } from './storage.js?v=20260908j';
 import { SpeechController } from './speech.js?v=20260905r';
 import { AvatarController } from './avatar.js?v=20260906a';
 import { applyLearnerProjections, renderShell } from './view_shell.js?v=20260907h';
 import { openSystemSettings } from './view_system_settings.js?v=20260907d';
-import { openProfileSetup } from './view_profile_setup.js?v=20260905b';
+import { openProfileSetup, readLearningPreferences } from './view_profile_setup.js?v=20260908j';
 import { initAvatarSelector } from './view_select_avartar.js?v=20260905n';
 import { $, todayKey } from './utils.js';
 import { loadDefaultLessons } from './lesson-catalog.js?v=20260907n';
@@ -131,7 +131,11 @@ function getBoundedContext() {
   return {
     app: 'LanguageLearner',
     screen: runtime.screen || state.screen,
-    learnerLevel: state.profile?.englishLevel || 'A1',
+    learnerLevel: runtime.priorKnowledge || state.profile?.englishLevel || 'A1',
+    subject: String(runtime.subject || '').slice(0, 120),
+    discussionMode: runtime.discussionMode === 'socratic' ? 'socratic' : '',
+    teachingLanguage: String(runtime.teachingLanguage || state.profile?.teachingLanguage || 'zh-CN').slice(0, 80),
+    age: Number.isInteger(state.profile?.age) ? state.profile.age : null,
     activeLessonId: runtime.activeLessonId ?? state.activeLessonId ?? '',
     activeLessonTitle: runtime.activeLessonTitle || '',
     activeScenarioId: runtime.activeScenarioId ?? state.activeScenarioId ?? '',
@@ -201,7 +205,7 @@ function bindLearnerEvents() {
   }));
   addEventListener('hellolearner:profile-save', (event) => {
     if (!getState().auth.loggedIn) return auth.login().catch((error) => showNotice(error.message));
-    const profile = storage.update('profile', event.detail);
+    const profile = storage.update('profile', { ...event.detail, ...readLearningPreferences() });
     updateState({ profile });
     applyLearnerProjections(storage.records);
   });
@@ -336,7 +340,15 @@ async function bootstrap() {
 
   const initialAuth = await auth.initialize();
   updateState({ auth: initialAuth });
-  window.HELLO_LEARNER_ROLEPLAYS = await loadRoleplayCatalog();
+  let roleplayCatalogPromise = null;
+  window.ensureRoleplayCatalog = () => {
+    if (!roleplayCatalogPromise) {
+      roleplayCatalogPromise = loadRoleplayCatalog()
+        .then(catalog => { window.HELLO_LEARNER_ROLEPLAYS = catalog; return catalog; })
+        .catch(error => { roleplayCatalogPromise = null; console.warn('[HelloLearner] roleplay catalog load failed', error); return null; });
+    }
+    return roleplayCatalogPromise;
+  };
   auth.subscribe(async (nextAuth) => {
     if (getState().auth.loggedIn && !nextAuth.loggedIn) { planUI?.invalidate(); planStores.clear(); }
     updateState({ auth: nextAuth });
@@ -432,7 +444,7 @@ async function bootstrap() {
       alert(`课程包加载失败，保留内置课程。\n${error.message}`);
     }
   }
-  await import('./learner-runtime.js?v=20260908g');
+  await import('./learner-runtime.js?v=20260908j');
   planner = new LessonPlanner(bridge, getState);
   window.helloLearnerPlanRequest = routePlanRequest;
   const restorePlanAvatar = () => {
@@ -447,7 +459,7 @@ async function bootstrap() {
       speech.cancel();
     },
     resume: () => window.helloLearnerRuntime?.resumeAfterPlanner?.(),
-    speak: text => speech.speak(text, { language: 'en-US', rate: 0.84 }),
+    speak: (text, options = {}) => speech.speak(text, { language: 'en-US', rate: 0.84, ...options }),
     cancelSpeech: () => speech.cancel(),
     onAvatar: target => avatar.setTarget(target, { closeUp: true }), restoreAvatar: restorePlanAvatar,
     route: routePlanRequest,

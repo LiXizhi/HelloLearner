@@ -1,7 +1,13 @@
-import { newId, validatePlan, validateDailyLesson, parseGeneration, previewLines, learnerSummary } from './plan-model.js?v=20260908b';
+import { newId, validatePlan, validateDailyLesson, parseGeneration, previewLines, learnerSummary } from './plan-model.js?v=20260908j';
 
-export const PLAN_SCHEMA = `PLAN: {schemaVersion:1,id:APP_ASSIGNED,title,goal,level:"Pre-A1|A1|A1+|A2|A2+",dailyMinutes:10|20,units:{"unit-01":"Big topic title","unit-02":"Another big topic"},lessons:[{id:"day-01",unit:"unit-01",title,objectives:[text],steps:[{id:"step-01",type:"vocabulary|phrase|grammar|cloze|dialogue|review",objective,minutes:positive_integer}]}]}. 1–60 lessons, grouped into named big-topic units of 1–6 lessons, 2–12 steps each. Each lesson must name its unit. Keep each unit contiguous in lesson order. Unit IDs must be lowercase kebab-case. The app assigns relative unitFiles paths. Step minutes must total dailyMinutes. Use IDs day-01, day-02 etc and step-01, step-02 etc; the app assigns final IDs.`;
-export const LESSON_SCHEMA = `LESSON: {schemaVersion:1,planId,id,title,steps:[{id,type,objective,minutes,content}]}. Copy IDs, types, order and minutes from the requested outline. Content for vocabulary/phrase/cloze/review: {items:[{prompt,answers:[accepted_exact_answer,...],hint:optional_text}]}, 1–12 items. Vocabulary prompts give Chinese meanings, answers English words; phrase prompts request an English expression, answers acceptable expressions; cloze prompt contains exactly one ___, answers contain only the missing text; review tests prior expressions. Content for grammar: {sentence,correct:boolean,correction,explanation}; complete punctuated sentences, correct is true iff sentence equals correction. Content for dialogue: {role,opening,completionMessage,goals:[{id,prompt,hint,accept:[accepted_phrase,...]}]}; 1–12 goals, 1–20 phrases each. All text plain, no HTML, <=4000 characters per field. Include multiple natural accepted answers where appropriate.`;
+export const PLAN_SCHEMA = `PLAN: {schemaVersion:2,id:APP_ASSIGNED,title,goal,subject,priorKnowledge,teachingLanguage,level:optional_English_level,dailyMinutes:10|20,units:{"unit-01":"Big topic title","unit-02":"Another big topic"},lessons:[{id:"day-01",unit:"unit-01",title,objectives:[text],steps:[{id:"step-01",type:"single-choice|multiple-choice|fill-blanks|repeat|discussion|external-tool|vocabulary|phrase|grammar|cloze|dialogue|review",objective,minutes:positive_integer}]}]}. 1–60 lessons, grouped into named big-topic units of 1–6 lessons, 2–12 steps each. Each lesson must name its unit. Keep each unit contiguous in lesson order. Unit IDs must be lowercase kebab-case. The app assigns relative unitFiles paths. Step minutes must total dailyMinutes. Use IDs day-01, day-02 etc and step-01, step-02 etc; the app assigns final IDs.`;
+export const LESSON_SCHEMA = `LESSON: {schemaVersion:2,planId,id,title,steps:[{id,type,objective,minutes,content}]}. Copy IDs, types, order and minutes from the requested outline. Content for vocabulary/phrase/cloze/review: {items:[{prompt,answers:[accepted_exact_answer,...],hint:optional_text}]}, 1–12 items. Vocabulary prompts give Chinese meanings, answers English words; phrase prompts request an English expression, answers acceptable expressions; cloze prompt contains exactly one ___, answers contain only the missing text; review tests prior expressions. Content for grammar: {sentence,correct:boolean,correction,explanation}; complete punctuated sentences, correct is true iff sentence equals correction. Content for dialogue: {role,opening,completionMessage,goals:[{id,prompt,hint,accept:[accepted_phrase,...]}]}; 1–12 goals, 1–20 phrases each. New interaction content:
++ single-choice/multiple-choice: {prompt,options:[{id:lowercase_kebab_id,text}],correctIds:[option_id]}, 2–20 unique options; single-choice has exactly one correct ID; multiple-choice has one or more.
++ fill-blanks: {prompt,blanks:[{id,answers:[accepted_answer]}]}, 1–20 blanks; each ___ in prompt corresponds to one blank in order.
++ repeat: {target,answers:[accepted_transcript],language:BCP47_code}; text matching only, not pronunciation scoring.
++ discussion: {mode:"free|socratic",topic,opening}; completion is learner-confirmed after participation.
++ external-tool: {tool:"paracraft|roleplay-movie-player",prompt,params:{}}; Paracraft params may include pid. Only use known user-supplied world IDs, never invent them. Movie player opens for manual movie selection; it does not load a supplied movie automatically. Keep params JSON under 4000 characters, maximum nesting depth 4, no credentials. Opening tools never awards completion.
+All new content text fields <=2000 characters. All text plain, no HTML, <=4000 characters per field. Include multiple natural accepted answers where appropriate.`;
 
 export class LessonPlanner {
   constructor(bridge, getState, fetcher = fetch, baseUrl = globalThis.document?.baseURI || new URL('../', import.meta.url).href) {
@@ -16,7 +22,7 @@ export class LessonPlanner {
   async instructions() {
     if (this.skill) return this.skill;
     // Copied beside the entry HTML, independently of Vite's assets/ chunks.
-    const response = await this.fetcher(new URL('./lesson-planner/SKILL.md?v=20260908b', this.baseUrl));
+    const response = await this.fetcher(new URL('./lesson-planner/SKILL.md?v=20260908j', this.baseUrl));
     if (!response.ok) throw new Error('课程规划技能加载失败，请重试');
     this.skill = await response.text();
     return this.skill;
@@ -32,7 +38,7 @@ export class LessonPlanner {
     const result = await this.bridge.requestLLM({
       model: this.getState().settings?.coursewareModel || 'keepwork-pro',
       presentation: 'tool',
-      displayPrompt: operation === 'outline' ? '制定 / 修改学习计划' : '准备今天的英语课',
+      displayPrompt: operation === 'outline' ? '制定 / 修改学习计划' : '准备今天的课程',
       messages,
     }, 300000, { signal: controller.signal, onStream: message => {
       onPreview(previewLines(message.text));
@@ -66,7 +72,7 @@ export class LessonPlanner {
         }
       }
     };
-    const scheduleSchema = `${PLAN_SCHEMA}\nFor this operation return a COMPACT schedule, NOT detailed steps: {"kind":"schedule","value":{title,goal,level,dailyMinutes,units,lessons:[{unit,title,objectives:[text]}]}}. Omit steps for now. Preserve the requested day count and distribute concrete target words across days in objectives. For a 100-word goal, allocate 100 distinct words across the schedule, with later reviews explicitly marked. Use grade-appropriate English related to the requested games. This operation-specific format overrides the full-plan result format. A question result is allowed only if essential information is missing.`;
+    const scheduleSchema = `${PLAN_SCHEMA}\nFor this operation return a COMPACT schedule, NOT detailed steps: {"kind":"schedule","value":{title,goal,subject,priorKnowledge,teachingLanguage,level,dailyMinutes,units,lessons:[{unit,title,objectives:[text]}]}}. Omit steps for now. Preserve the requested day count. Distribute concrete subject objectives across days with later reviews explicitly marked. Adapt examples to the learner's optional age and interests, and difficulty to their prior knowledge. For language vocabulary goals, distribute the requested distinct words across the schedule. This operation-specific format overrides the full-plan result format. A question result is allowed only if essential information is missing.`;
     const result = pending.schedule || await attempt('outline', data, scheduleSchema, result => {
       if (result.kind === 'question') return result;
       if (result.kind === 'plan') { this.normalizePlan(result.value, draft?.id); return result; }
@@ -74,7 +80,7 @@ export class LessonPlanner {
       this.normalizePlan({ ...result.value, lessons: result.value?.lessons?.map(lesson => ({ ...lesson,
         steps: [{ type: 'vocabulary', objective: '学习', minutes: result.value.dailyMinutes - 1 }, { type: 'review', objective: '复习', minutes: 1 }] })) }, draft?.id);
       return result;
-    }, '正在安排主题和每日词汇');
+    }, '正在安排主题和每日目标');
     if (result.kind === 'question' && typeof result.message === 'string') return { question: result.message.slice(0, 500) };
     if (result.kind === 'plan') return { plan: this.normalizePlan(result.value, draft?.id) };
     pending.schedule = result;
@@ -107,7 +113,8 @@ export class LessonPlanner {
     if (result.kind !== 'plan' || !result.value || !Array.isArray(result.value.lessons)) throw new Error('AI 未返回完整计划，请重试');
     if (!result.value.units || typeof result.value.units !== 'object' || Array.isArray(result.value.units)) throw new Error('AI 未按大主题分组课程，请重试');
     const id = existingId || newId('plan');
-    const plan = { ...result.value, id, schemaVersion: 1,
+    const plan = { ...result.value, id, schemaVersion: 2,
+      subject: value.subject || (value.schemaVersion === 1 ? '英语' : ''), priorKnowledge: value.priorKnowledge || value.level || '', teachingLanguage: value.teachingLanguage || 'zh-CN',
       unitFiles: Object.fromEntries(Object.keys(result.value.units).map(unit => [unit, `./units/${unit}.json`])),
       lessons: result.value.lessons.map((lesson, i) => ({ ...lesson, id: `day-${String(i + 1).padStart(2, '0')}`,
         steps: Array.isArray(lesson.steps) ? lesson.steps.map((step, j) => ({ ...step, id: `step-${String(j + 1).padStart(2, '0')}` })) : lesson.steps })) };
@@ -115,7 +122,7 @@ export class LessonPlanner {
   }
   async daily(plan, outline, progress, onPreview, onOutput) {
     const result = await this.generate('daily', { plan, requestedLesson: outline,
-      learner: learnerSummary(this.getState(), progress) }, onPreview, null, '', onOutput);
+      learner: learnerSummary(this.getState(), progress) }, onPreview, null, LESSON_SCHEMA.replace('schemaVersion:2', `schemaVersion:${plan.schemaVersion}`), onOutput);
     if (result.kind !== 'lesson') throw new Error('AI 未返回完整课程，请重试');
     return validateDailyLesson(result.value, plan, outline);
   }

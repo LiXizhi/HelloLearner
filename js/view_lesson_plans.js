@@ -1,5 +1,5 @@
-import { STEP_LABELS } from './plan-model.js?v=20260907o';
-import { element, button, mountPlanRunner } from './view_plan_runner.js?v=20260908g';
+import { STEP_LABELS } from './plan-model.js?v=20260908j';
+import { element, button, mountPlanRunner } from './view_plan_runner.js?v=20260908j';
 
 export function mountLessonPlans(options) {
   const { planner, getStore, getWorkspace, pause, resume, savePlan, saveLesson, checkpoint, speak, onAvatar, restoreAvatar, route } = options;
@@ -165,14 +165,14 @@ export function mountLessonPlans(options) {
   const current = token => dialog && token === epoch;
   const stream = token => lines => {
     if (!current(token)) return;
-    if (activity && !activity.hidden && lines.length) activityStage.textContent = /^(正在安排主题和每日词汇|已完成 \d+\/\d+ 天)/.test(lines[0]) ? `当前阶段：${lines[0]}` : '正在接收课程内容…';
+    if (activity && !activity.hidden && lines.length) activityStage.textContent = /^(正在安排主题和每日目标|已完成 \d+\/\d+ 天)/.test(lines[0]) ? `当前阶段：${lines[0]}` : '正在接收课程内容…';
     previews.replaceChildren();
     lines.forEach(line => element('p', line, previews));
   };
   function outlineView(container, plan, clickable = false, progress = {}, readiness = {}) {
     element('h3', plan.title, container).className = 'text-xl font-bold';
     element('p', plan.goal, container);
-    element('p', `${plan.level} · ${plan.lessons.length} 课 · 每课 ${plan.dailyMinutes} 分钟`, container).className = 'text-sm opacity-70';
+    element('p', `${plan.subject || plan.level || '自主学习'} · ${plan.lessons.length} 课 · 每课 ${plan.dailyMinutes} 分钟`, container).className = 'text-sm opacity-70';
     const next = plan.lessons.find(l => !progress.lessons?.[l.id]?.completedAt);
     if (clickable && next) button(container, '继续学习', () => openLesson(plan.id, next.id));
     const list = element('ol', '', container); list.className = 'space-y-3';
@@ -213,7 +213,7 @@ export function mountLessonPlans(options) {
     conversation.slice(-8).forEach(turn => element('p', `${turn.role === 'user' ? '你' : '规划老师'}：${turn.content}`, history));
     const form = element('form', '', body); form.className = 'flex flex-col gap-3';
     const input = element('textarea', '', form); input.rows = 3; input.maxLength = 2000;
-    input.placeholder = draft ? '修改目标、主题或课程长度…' : '例如：制定 14 天旅行英语计划，每天 10 分钟';
+    input.placeholder = draft ? '修改目标、主题或课程长度…' : '例如：学习天文学，零基础，14 天，每天 10 分钟';
     input.setAttribute('aria-label', '与 AI 讨论学习计划');
     input.className = 'rounded-xl border border-[#174f46]/25 p-3';
     requestInput = input;
@@ -348,7 +348,7 @@ export function mountLessonPlans(options) {
       const card = element('article', '', parent); card.className = 'rounded-2xl border border-[#174f46]/10 bg-white p-5 my-3';
       button(card, plan.title, () => showPlan(plan.id));
       element('p', plan.goal, card).className = 'my-2 text-sm';
-      element('p', `${plan.level} · ${plan.count} 课 · 每课 ${plan.dailyMinutes} 分钟 · 已完成 ${plan.completed}/${plan.count}`, card).className = 'text-sm opacity-70';
+      element('p', `${plan.subject || plan.level || '自主学习'} · ${plan.count} 课 · 每课 ${plan.dailyMinutes} 分钟 · 已完成 ${plan.completed}/${plan.count}`, card).className = 'text-sm opacity-70';
     });
   }
   async function showPlan(id) {
@@ -456,7 +456,7 @@ export function mountLessonPlans(options) {
       const result = await getStore().list({ limit: 3 });
       if (token !== homeEpoch) return;
       renderCards(list, result.plans);
-      if (!result.total) element('p', '让 AI 为你制定每天 10 或 20 分钟的英语课程。', list).className = 'text-sm mt-3';
+      if (!result.total) element('p', '让 AI 为你制定每天 10 或 20 分钟的课程。', list).className = 'text-sm mt-3';
       if (result.warnings.length) element('p', '部分计划读取失败，请打开全部计划查看。', list);
     } catch { if (token === homeEpoch) element('p', '课程空间暂时不可用，请打开全部计划重试。', list); }
   }

@@ -6,7 +6,7 @@ workspace plan library, and 10/20-minute daily lessons generated when opened.
 
 ## Overview
 
-HelloLearner is the learner-only H5 application behind the catalog product **LanguageLearner**. It is a Chinese-first, mobile-first English learning experience for Keepwork users, based closely on the supplied Hello Learner demo. It runs directly in a browser, inside AIChat as an embedded external tool, or standalone with an optional embedded AIChat tutor.
+HelloLearner is the learner-only H5 application behind the catalog product **LanguageLearner**. It is a Chinese-first, mobile-first learning experience across subjects for ages 7–70 for Keepwork users, based closely on the supplied Hello Learner demo. It runs directly in a browser, inside AIChat as an embedded external tool, or standalone with an optional embedded AIChat tutor.
 
 Target users are beginner to lower-intermediate English learners using phones, tablets, or desktop browsers. Curriculum administration, CMS publishing, local accounts, and password handling are explicitly excluded.
 
@@ -78,3 +78,5 @@ Default is Simplified Chinese (`zh-CN`) with English learning phrases. `?lang=en
 8. Standalone AIChat tutor uses the LanguageLearner skill, a fresh non-persistent chat, compact chrome, and memory-only token.
 9. Voice and observer skill contracts follow the `Copilot小纸条：` private-guidance protocol.
 10. Catalog registration is stable (`language-learner`, display `LanguageLearner`) and is neither featured nor made globally default.
+
+General-purpose interactions extend the original English experience; see [interaction contracts](general-interactions.md) for version 2 data, completion rules and inline AIChat activities.
