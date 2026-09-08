@@ -11,6 +11,7 @@ const { chromium } = createRequire(import.meta.url)('playwright');
 const root = path.resolve(import.meta.dirname, '..', '..');
 const files = new Map(), requests = [], errors = [];
 let holdGeneration = false, releaseGeneration, malformed = false, rejectWrite = false, loggedIn = true;
+let partialGeneration = false;
 const engine = `<!doctype html><script>
 const channel='aichat.external-tool.v1';
 addEventListener('message',async e=>{const m=e.data;if(m.channel!==channel)return;
@@ -74,7 +75,17 @@ try {
     requests.push(request);
     const system = request.messages?.[0]?.content || '';
     if (system.includes('Classify the user turn')) return JSON.stringify({ action: /list|列出/.test(request.messages.at(-1).content) ? 'list' : 'create' });
-    if (system.includes('Operation: outline')) return JSON.stringify({ kind: 'plan', value: examplePlan() });
+    if (system.includes('Operation: outline-batch') || (partialGeneration && system.includes('Operation: outline'))) {
+      const data = JSON.parse(request.messages.at(-1).content);
+      const plan = examplePlan();
+      if (!('offset' in data)) return JSON.stringify({ kind: 'schedule', value: plan });
+      if (partialGeneration && data.offset === 3) await new Promise(resolve => { releaseGeneration = resolve; });
+      return JSON.stringify({ kind: 'batch', value: { lessons: plan.lessons.slice(data.offset, data.offset + 3) } });
+    }
+    if (system.includes('Operation: outline')) {
+      if (holdGeneration) await new Promise(resolve => { releaseGeneration = resolve; });
+      return JSON.stringify({ kind: 'plan', value: examplePlan() });
+    }
     if (system.includes('Operation: daily')) {
       if (holdGeneration) await new Promise(resolve => { releaseGeneration = resolve; });
       if (malformed) return '{"kind":"lesson","value":';
@@ -135,6 +146,18 @@ try {
   await page.setViewportSize({ width: 1280, height: 900 });
   const builtinPanel = page.getByRole('tabpanel', { name: '系统内置课程', exact: true });
   assert.equal(await builtinPanel.getByRole('button').count(), 54);
+  const unitSections = builtinPanel.locator('[data-curriculum-unit]');
+  assert.deepEqual(await unitSections.evaluateAll(sections => sections.map(section => section.dataset.curriculumUnit)),
+    ['U1', 'U2', 'U3', 'U4', 'U5', 'U6', 'U7', 'U8', 'U9']);
+  assert.deepEqual(await unitSections.getByRole('heading').allTextContents(), [
+    'Unit 1 · 初次连接', 'Unit 2 · 身边事物', 'Unit 3 · 正在发生',
+    'Unit 4 · 日常生活', 'Unit 5 · 健康与周末', 'Unit 6 · 出行与购物',
+    'Unit 7 · 经历与计划', 'Unit 8 · 清晰表达', 'Unit 9 · 进阶沟通',
+  ]);
+  assert.deepEqual(await unitSections.evaluateAll(sections => sections.map(section => section.querySelectorAll('button').length)),
+    Array(9).fill(6));
+  assert.match(await unitSections.first().getByRole('button').first().innerText(), /^01\s+礼貌打招呼/);
+  assert.match(await unitSections.last().getByRole('button').last().innerText(), /^54\s+服务与流程/);
   await builtinPanel.getByRole('button').first().click();
   await page.locator('#introPracticeRoom').waitFor();
   await page.locator('#closePracticeRoom').click();
@@ -145,6 +168,27 @@ try {
   await page.locator('#lessonPlanLibrary').getByRole('button', { name: '新建计划', exact: true }).click();
   const dialog = page.locator('#lessonPlansDialog');
   await dialog.getByLabel('与 AI 讨论学习计划').fill('帮我制定旅行英语计划');
+  holdGeneration = true;
+  await dialog.getByRole('button', { name: '与 AI 制定计划', exact: true }).click();
+  const stop = dialog.getByRole('button', { name: '停止生成 · 请稍候 / Please wait', exact: true });
+  await stop.waitFor();
+  await dialog.locator('[data-plan-activity]').waitFor();
+  await page.waitForFunction(() => /已等待 [1-9]\d* 秒/.test(document.querySelector('[data-plan-activity]')?.textContent || ''));
+  assert.equal(await dialog.getByLabel('与 AI 讨论学习计划').isDisabled(), true);
+  await dialog.getByText('本课将练习：A coffee, please.', { exact: true }).waitFor();
+  await stop.click();
+  assert.equal(await dialog.locator('[data-plan-activity]').isVisible(), false);
+  assert.equal(await dialog.getByLabel('与 AI 讨论学习计划').inputValue(), '帮我制定旅行英语计划');
+  holdGeneration = false; releaseGeneration?.();
+  partialGeneration = true;
+  await dialog.getByRole('button', { name: '与 AI 制定计划', exact: true }).click();
+  const partial = dialog.locator('[data-partial-plan]');
+  await partial.getByText('已生成课程预览 · 3/14 天 · 尚未保存', { exact: true }).waitFor();
+  assert.equal(await partial.getByRole('heading', { name: '第 3 天 · 旅行交流 3', exact: true }).count(), 1);
+  assert.ok((await partial.boundingBox()).y > (await stop.boundingBox()).y);
+  await stop.click();
+  assert.equal(await partial.isVisible(), true, 'completed days remain visible after stopping');
+  partialGeneration = false; releaseGeneration?.();
   await dialog.getByRole('button', { name: '与 AI 制定计划', exact: true }).click();
   await dialog.getByRole('button', { name: '保存计划', exact: true }).waitFor();
   const qaDir = path.join(tmpdir(), 'hellolearner-plan-qa'); await mkdir(qaDir, { recursive: true });
@@ -158,33 +202,43 @@ try {
   await dialog.locator('[data-plan-status]').filter({ hasText: 'fixture save failed' }).waitFor();
   rejectWrite = false;
   await dialog.getByRole('button', { name: '重试', exact: true }).click();
-  await dialog.getByRole('button', { name: '继续学习', exact: true }).waitFor();
+  await page.locator('[data-plan-day="day-01"]').waitFor();
+  assert.equal(await page.locator('[data-plan-day]').count(), 14);
   const planPath = [...files.keys()].find(key => key.endsWith('/plan.json'));
   assert.ok(planPath);
   const plan = JSON.parse(files.get(planPath));
   holdGeneration = true;
-  await dialog.getByRole('button', { name: '继续学习', exact: true }).click();
+  await page.locator('[data-plan-day="day-01"]').click();
+  assert.equal(await dialog.evaluate(node => node.tagName), 'SECTION');
   await dialog.getByText('本课将练习：A coffee, please.', { exact: true }).waitFor();
   assert.equal(await dialog.getByText('DO NOT SHOW THIS', { exact: true }).count(), 0);
   assert.equal(await dialog.getByRole('button', { name: '开始本课', exact: true }).count(), 0);
-  await dialog.getByRole('button', { name: '取消生成', exact: true }).click();
+  assert.match(await dialog.locator('[data-daily-stream] pre').textContent(), /A coffee, please/);
+  await page.waitForFunction(() => /已等待 [1-9]\d* 秒/.test(document.querySelector('[data-daily-generation-status]')?.textContent || ''));
+  await dialog.getByRole('button', { name: '停止生成', exact: true }).click();
+  assert.equal(await dialog.locator('[data-daily-stream]').isVisible(), true);
   holdGeneration = false; releaseGeneration();
   await dialog.getByRole('button', { name: '重试', exact: true }).click();
   await dialog.getByRole('button', { name: '开始本课', exact: true }).waitFor();
   const dailyRequests = () => requests.filter(r => r.messages?.[0]?.content.includes('Operation: daily')).length;
   const generatedCount = dailyRequests();
   await dialog.getByRole('button', { name: '开始本课', exact: true }).click();
+  const practice = page.locator('#introPracticeRoom');
+  await page.screenshot({ path: path.join(qaDir, 'shared-practice-desktop.png') });
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.ok(await practice.evaluate(node => node.scrollWidth <= node.clientWidth + 1));
+  await page.screenshot({ path: path.join(qaDir, 'shared-practice-mobile.png') });
+  await page.setViewportSize({ width: 1280, height: 900 });
   for (const answer of ['coffee', 'coffee', '正确', 'coffee', 'a coffee please', 'coffee']) {
-    await dialog.getByLabel('练习回答').fill(answer);
-    await dialog.getByRole('button', { name: '提交', exact: true }).click();
-    const next = answer === 'coffee' && (await dialog.getByRole('button', { name: '完成本课', exact: true }).isVisible())
-      ? dialog.getByRole('button', { name: '完成本课', exact: true }) : dialog.getByRole('button', { name: /下一步骤|完成本课/ });
+    await practice.locator('#practiceTextInput').fill(answer);
+    await practice.locator('#practiceTextForm').evaluate(form => form.requestSubmit());
+    const next = practice.getByRole('button', { name: /下一步骤|完成本课/ });
     await next.waitFor({ state: 'visible' }); await next.click();
   }
-  await dialog.getByRole('button', { name: '返回计划', exact: true }).click();
-  await dialog.getByRole('button', { name: /第 1 天.*已完成/ }).waitFor();
+  await practice.getByRole('button', { name: '返回计划', exact: true }).click();
+  await page.getByRole('button', { name: /第 1 天.*已完成/ }).waitFor();
   assert.ok(JSON.parse(files.get(planPath.replace('plan.json', 'progress.json'))).lessons['day-01'].completedAt);
-  await dialog.getByRole('button', { name: /第 1 天.*已完成/ }).click();
+  await page.getByRole('button', { name: /第 1 天.*已完成/ }).click();
   await dialog.getByRole('button', { name: '开始本课', exact: true }).waitFor();
   assert.equal(dailyRequests(), generatedCount, 'cached lesson must not regenerate');
   await page.setViewportSize({ width: 390, height: 844 });
@@ -239,7 +293,7 @@ try {
   const embeddedDialog = frame.locator('#lessonPlansDialog');
   await embeddedDialog.getByRole('button', { name: '保存计划', exact: true }).waitFor();
   await embeddedDialog.getByRole('button', { name: '保存计划', exact: true }).click();
-  await embeddedDialog.getByRole('button', { name: '继续学习', exact: true }).waitFor();
+  await frame.locator('[data-plan-day="day-01"]').waitFor();
   const listed = await page.evaluate(() => window.commandFixture('list_lesson_plans'));
   assert.equal(listed.result.plans.length, 1);
   const embeddedPlanId = listed.result.plans[0].id;
@@ -249,6 +303,7 @@ try {
   await page.evaluate(() => window.setFixtureSpace({ id: 'embedded-b', name: 'EmbeddedB', workspace: 'EmbeddedB', type: 'project' }));
   await embeddedDialog.waitFor({ state: 'detached' });
   holdGeneration = false; releaseGeneration();
+  await frame.locator('[data-tab="progress"]').click();
   await frame.locator('#lessonPlanLibrary').getByRole('button', { name: '全部计划', exact: true }).click();
   await embeddedDialog.getByRole('tab', { name: '系统内置课程', selected: true }).waitFor();
   assert.equal([...files.keys()].some(key => key.startsWith('EmbeddedB/') && key.includes('/plans/')), false);
@@ -257,9 +312,9 @@ try {
   await frame.locator('#lessonPlanLibrary').getByRole('button', { name: plan.title, exact: true }).waitFor();
   const snapshot = await page.evaluate(id => window.commandFixture('open_lesson_plan', { planId: id }), embeddedPlanId);
   assert.equal(snapshot.ok, true);
-  await embeddedDialog.getByRole('button', { name: '继续学习', exact: true }).waitFor();
+  await frame.locator('[data-plan-day="day-01"]').waitFor();
   malformed = true;
-  await embeddedDialog.getByRole('button', { name: '继续学习', exact: true }).click();
+  await frame.locator('[data-plan-day="day-01"]').click();
   await embeddedDialog.locator('[data-plan-status]').filter({ hasText: '内容不完整' }).waitFor();
   assert.equal(await embeddedDialog.getByRole('button', { name: '开始本课', exact: true }).count(), 0);
   malformed = false;

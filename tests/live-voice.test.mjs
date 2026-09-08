@@ -6,6 +6,34 @@ globalThis.window = {};
 globalThis.window.parent = globalThis.window;
 const { AIChatBridge } = await import('../js/aichat-bridge.js');
 
+test('voice startup sends current bounded lesson context, stop sends no prompt', async () => {
+  const context = { activeLessonId: 'lesson-1', activeLessonTitle: '礼貌打招呼', exercise: 'dialogue', learnerLevel: 'A1' };
+  const bridge = new AIChatBridge({ getContext: () => context });
+  bridge.engineReadyPromise = Promise.resolve();
+  const calls = [];
+  bridge.request = async (type, detail) => { calls.push({ type, detail }); return { active: true }; };
+  await bridge.requestVoice('start');
+  await bridge.requestVoice('stop');
+  assert.equal(calls[0].type, 'host:voice');
+  assert.ok(calls[0].detail.prompt.includes(JSON.stringify(context)));
+  assert.equal(calls[1].detail.prompt, undefined);
+});
+
+test('free talk and lesson voice startup distinguish private observer guidance from speech', async () => {
+  for (const exercise of ['free-talk', 'dialogue']) {
+    const bridge = new AIChatBridge({ getContext: () => ({ exercise }) });
+    bridge.engineReadyPromise = Promise.resolve();
+    let prompt;
+    bridge.request = async (type, detail) => { prompt = detail.prompt; return { active: true }; };
+    await bridge.requestVoice('start');
+    assert.match(prompt, /marked as observer or prefixed with Copilot小纸条：/);
+    assert.match(prompt, /not learner input or text to speak/);
+    assert.match(prompt, /Never read aloud, quote, translate, summarize, or paraphrase the note itself/);
+    assert.match(prompt, /How often do you play tennis\?/);
+    assert.ok(prompt.includes(JSON.stringify({ exercise })));
+  }
+});
+
 function element() {
   return {
     textContent: '', hidden: false, children: [], attrs: {}, events: {},

@@ -58,3 +58,24 @@ test('failed translations remain retryable', async () => {
   await button.events.click();
   assert.equal(column.children[1].textContent, '你好');
 });
+
+test('translation displays cumulative stream before completion and keeps it for an empty final response', async () => {
+  const column = element();
+  let finish, onStream;
+  const control = createTranslationControl(column, (detail, timeout, options) => {
+    onStream = options.onStream;
+    return new Promise(resolve => { finish = resolve; });
+  });
+  control.update('Hello');
+  const button = column.children[0].children[0];
+  const pending = button.events.click();
+  onStream({ text: '你' });
+  assert.equal(column.children[1].textContent, '你');
+  assert.equal(column.children[1].hidden, false);
+  assert.equal(button.disabled, true);
+  onStream({ text: '你好' });
+  finish({ text: '' });
+  await pending;
+  assert.equal(column.children[1].textContent, '你好');
+  assert.equal(button.textContent, '收起翻译');
+});

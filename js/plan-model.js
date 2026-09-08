@@ -110,14 +110,34 @@ export function stepCompleted(step, answers) {
 export function previewLines(output) {
   return String(output || '').split('\n').flatMap(line => {
     try { const value = JSON.parse(line); return value.kind === 'preview' && text(value.message) ? [value.message] : []; }
-    catch { return []; }
+    catch {
+      if (!/^\s*\{\s*"kind"\s*:\s*"preview"\s*,\s*"message"\s*:\s*"/.test(line)) return [];
+      const partial = line.replace(/^\s*\{\s*"kind"\s*:\s*"preview"\s*,\s*"message"\s*:\s*"/, '');
+      try { const message = JSON.parse(`"${partial.replace(/\\(?:u[0-9a-f]{0,3})?$/i, '')}"`); return text(message) ? [message] : []; }
+      catch { return []; }
+    }
   }).slice(-30);
 }
 export function parseGeneration(output) {
   const source = String(output || '');
   requireValue(source.length <= 1000000, '生成内容超过大小限制');
   const values = source.split('\n').flatMap(line => { try { return [JSON.parse(line)]; } catch { return []; } });
-  const result = values.findLast(value => ['plan', 'lesson', 'question', 'action'].includes(value?.kind));
+  let start = -1, depth = 0, quoted = false, escaped = false;
+  for (let index = 0; index < source.length; index++) {
+    const character = source[index];
+    if (quoted) {
+      if (escaped) escaped = false;
+      else if (character === '\\') escaped = true;
+      else if (character === '"') quoted = false;
+      continue;
+    }
+    if (character === '"' && depth) quoted = true;
+    else if (character === '{') { if (!depth) start = index; depth++; }
+    else if (character === '}' && depth && !--depth) {
+      try { values.push(JSON.parse(source.slice(start, index + 1))); } catch {}
+    }
+  }
+  const result = values.findLast(value => ['plan', 'lesson', 'question', 'action', 'schedule', 'batch'].includes(value?.kind));
   requireValue(result, 'AI 返回的内容不完整，请重试');
   return result;
 }

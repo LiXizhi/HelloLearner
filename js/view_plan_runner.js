@@ -18,7 +18,7 @@ export function button(parent, label, action) {
   return node;
 }
 
-export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, onCheckpoint, onDone, onAvatar, onIntent, onContext }) {
+export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, onCheckpoint, onDone, onAvatar, onIntent, onContext, sharedPractice = false }) {
   let stopped = false, waiting = false, cursor = 0, generation = 0, submitText = () => {};
   const completed = new Set(Object.entries(progress.steps || {}).filter(([, s]) => s.completedAt).map(([id]) => id));
   const savedAnswers = new Map(Object.entries(progress.steps || {}).map(([id, s]) => [id, s.answers || []]));
@@ -32,15 +32,26 @@ export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, o
     const token = ++generation;
     root.replaceChildren();
     const step = lesson.steps[cursor];
+    const stages = element('nav', '', root); stages.className = 'flex flex-wrap gap-2 mb-5'; stages.setAttribute('aria-label', '课程环节');
+    lesson.steps.forEach((stage, index) => {
+      const tab = button(stages, `${index + 1} · ${STEP_LABELS[stage.type]}${completed.has(stage.id) ? ' ✓' : ''}`, () => {
+        if (waiting || stopped) return;
+        cursor = index; render();
+      });
+      tab.setAttribute('aria-current', index === cursor ? 'step' : 'false');
+      tab.disabled = completed.has(stage.id);
+      if (index === cursor) tab.className += ' bg-[#174f46] text-white';
+    });
     onContext?.({ screen: 'lesson', activeLessonId: `${plan.id}-${lesson.id}`, activeLessonTitle: lesson.title,
       activeScenarioId: '', exercise: step.type, goalIndex: cursor });
     let answers = [...(savedAnswers.get(step.id) || [])];
     element('p', `${cursor + 1} / ${lesson.steps.length} · ${STEP_LABELS[step.type]} · 约 ${step.minutes} 分钟`, root).className = 'text-sm opacity-70';
     element('h3', step.objective, root).className = 'text-xl font-bold my-3';
     const avatar = element('div', '', root);
+    avatar.hidden = sharedPractice;
     avatar.className = 'relative h-40 overflow-hidden rounded-xl bg-[#edf3e4]';
     element('span', 'Maya · 英语教练', avatar).className = 'absolute bottom-2 left-3 text-sm';
-    onAvatar?.(avatar);
+    if (!sharedPractice) onAvatar?.(avatar);
     const content = step.content;
     if (['vocabulary', 'phrase'].includes(step.type)) {
       const study = element('details', '', root);
@@ -55,11 +66,12 @@ export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, o
     const history = element('div', '', root);
     history.className = 'my-3 space-y-2';
     const prompt = element('p', '', root);
-    prompt.className = 'whitespace-pre-wrap text-lg my-3';
+    prompt.className = sharedPractice ? 'room-message ai-room-message whitespace-pre-wrap text-lg my-3' : 'whitespace-pre-wrap text-lg my-3';
     const feedback = element('p', '', root);
     feedback.setAttribute('role', 'status');
     feedback.className = 'whitespace-pre-wrap text-sm my-2';
     const form = element('form', '', root);
+    form.hidden = sharedPractice;
     form.className = 'flex flex-wrap gap-2';
     const input = element('input', '', form);
     input.type = 'text'; input.maxLength = 2000;
@@ -99,6 +111,10 @@ export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, o
       try {
         if (await onIntent(answer)) return;
         if (stopped || token !== generation) return;
+        if (sharedPractice) {
+          const message = element('p', answer, history);
+          message.className = 'room-message learner-room-message whitespace-pre-wrap';
+        }
         let accepted = false, done = false, note = '';
         if (step.type === 'dialogue') {
           const before = goalState();
@@ -148,7 +164,7 @@ export function mountPlanRunner(root, { plan, lesson, progress, bridge, speak, o
       } finally { waiting = false; submit.disabled = false; }
     });
     submitText = text => { input.value = String(text).slice(0, 2000); form.requestSubmit(); };
-    input.focus();
+    if (!sharedPractice) input.focus();
   }
   advance();
   return { submitText: text => submitText(text), stop() { stopped = true; generation++; controller?.abort(); } };

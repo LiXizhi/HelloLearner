@@ -41,6 +41,8 @@ test('streaming stays request/source scoped; cancellation rejects and ignores la
   const bridge = new AIChatBridge(), streams = [], controller = new AbortController();
   const pending = bridge.request('tool:llm-request', {}, 300000, peer, { signal: controller.signal, onStream: m => streams.push(m) });
   const id = [...bridge.pending.keys()][0];
+  await bridge.handleMessage({ source: peer, data: { channel, type: 'host:status', requestId: id, ok: false } });
+  assert.equal(bridge.pending.size, 1);
   await bridge.handleMessage({ source: other, data: { channel, type: 'host:llm-stream', requestId: id, text: 'wrong' } });
   await bridge.handleMessage({ source: peer, data: { channel, type: 'host:llm-stream', requestId: id, text: 'preview', reasoning: 'private' } });
   assert.deepEqual(streams, [{ text: 'preview' }]);

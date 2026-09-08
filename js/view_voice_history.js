@@ -1,4 +1,4 @@
-import { createTranslationControl } from './view_translation.js?v=20260906p';
+import { createTranslationControl } from './view_translation.js?v=20260907u';
 const OBSERVER_PREFIX = 'Copilot小纸条：';
 
 export function splitVoiceText(text, notes = []) {

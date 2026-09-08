@@ -83,9 +83,10 @@ Every command produces `busy` first and **must** end with `done` or `error`. Nev
 | `host:chat-io` | `onHostEvent`; when `source === 'voice'` and `role === 'assistant'`, drives the avatar mouth until `phase` is `done` or `error` |
 | `host:get-tool-context` / `host:tool-context-request` | Replies with `tool:tool-context` |
 | `host:tool-command` | Validated and executed; see below |
-| `host:llm-stream` | Ignored (streaming chunks) |
+| `host:llm-stream` | Forwarded to the request's optional `onStream` callback; request stays pending |
 | `host:llm-error` | Rejects the pending request |
-| any other with a known `requestId` | Resolves the pending request |
+| `host:llm-result` | Resolves the pending LLM request |
+| any other with a known `requestId` | Resolves non-LLM requests only; LLM requests wait for result/error |
 
 Messages that are not from `window.parent` or the engine iframe, or whose `channel` does not match, are dropped immediately.
 
@@ -149,6 +150,20 @@ and reasoning out of the host popup/history. Other requests retain existing UI.
 with terminal `tool:status` messages. See [general lesson plans](general-lesson-plans.md).
 
 ## Continuous practice voice
+
+Entering lesson dialogue (including the in-app skip confirmation) automatically
+starts live voice after the opening greeting. Startup sends the existing bounded
+context through `host:voice.prompt`; no learner records or history are added.
+AIChat installs this prompt in both the session and RTC system instructions.
+
+HelloLearner includes its private observer guidance rules in this startup prompt
+for both free talk and lessons. Messages marked `messageType: 'observer'` or
+prefixed `Copilot小纸条：` are not learner input or scripts to read aloud. The
+tutor must not quote, translate, summarize, or paraphrase the note itself; it
+may use the guidance to form a natural learner-facing correction or question.
+The existing observer marker still drives the collapsed note display. No
+HelloLearner-specific routing is added to AIChat. Restart voice after changing
+these instructions; an already-active session does not receive a new prompt.
 
 The practice microphone delegates to AIChat's existing `host:voice` API through
 `AIChatBridge.requestVoice('start'|'stop')`. One click starts a continuous

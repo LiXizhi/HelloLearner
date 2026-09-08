@@ -1,4 +1,4 @@
-import { newId, validatePlan, validateDailyLesson, parseGeneration, previewLines, learnerSummary } from './plan-model.js?v=20260907o';
+import { newId, validatePlan, validateDailyLesson, parseGeneration, previewLines, learnerSummary } from './plan-model.js?v=20260908b';
 
 export const PLAN_SCHEMA = `PLAN: {schemaVersion:1,id:APP_ASSIGNED,title,goal,level:"Pre-A1|A1|A1+|A2|A2+",dailyMinutes:10|20,units:{"unit-01":"Big topic title","unit-02":"Another big topic"},lessons:[{id:"day-01",unit:"unit-01",title,objectives:[text],steps:[{id:"step-01",type:"vocabulary|phrase|grammar|cloze|dialogue|review",objective,minutes:positive_integer}]}]}. 1–60 lessons, grouped into named big-topic units of 1–6 lessons, 2–12 steps each. Each lesson must name its unit. Keep each unit contiguous in lesson order. Unit IDs must be lowercase kebab-case. The app assigns relative unitFiles paths. Step minutes must total dailyMinutes. Use IDs day-01, day-02 etc and step-01, step-02 etc; the app assigns final IDs.`;
 export const LESSON_SCHEMA = `LESSON: {schemaVersion:1,planId,id,title,steps:[{id,type,objective,minutes,content}]}. Copy IDs, types, order and minutes from the requested outline. Content for vocabulary/phrase/cloze/review: {items:[{prompt,answers:[accepted_exact_answer,...],hint:optional_text}]}, 1–12 items. Vocabulary prompts give Chinese meanings, answers English words; phrase prompts request an English expression, answers acceptable expressions; cloze prompt contains exactly one ___, answers contain only the missing text; review tests prior expressions. Content for grammar: {sentence,correct:boolean,correction,explanation}; complete punctuated sentences, correct is true iff sentence equals correction. Content for dialogue: {role,opening,completionMessage,goals:[{id,prompt,hint,accept:[accepted_phrase,...]}]}; 1–12 goals, 1–20 phrases each. All text plain, no HTML, <=4000 characters per field. Include multiple natural accepted answers where appropriate.`;
@@ -16,17 +16,17 @@ export class LessonPlanner {
   async instructions() {
     if (this.skill) return this.skill;
     // Copied beside the entry HTML, independently of Vite's assets/ chunks.
-    const response = await this.fetcher(new URL('./lesson-planner/SKILL.md?v=20260907p', this.baseUrl));
+    const response = await this.fetcher(new URL('./lesson-planner/SKILL.md?v=20260908b', this.baseUrl));
     if (!response.ok) throw new Error('课程规划技能加载失败，请重试');
     this.skill = await response.text();
     return this.skill;
   }
-  async generate(operation, data, onPreview = () => {}) {
-    this.cancel();
-    const controller = this.controller = new AbortController();
+  async generate(operation, data, onPreview = () => {}, sharedController = null, schema = '', onOutput = () => {}) {
+    if (!sharedController) this.cancel();
+    const controller = sharedController || (this.controller = new AbortController());
     const instructions = await this.instructions();
     controller.signal.throwIfAborted();
-    const messages = [{ role: 'system', content: `${instructions}\nOperation: ${operation}\n${operation === 'outline' ? PLAN_SCHEMA : LESSON_SCHEMA}` },
+    const messages = [{ role: 'system', content: `${instructions}\nOperation: ${operation}\n${schema || (operation === 'outline' ? PLAN_SCHEMA : LESSON_SCHEMA)}` },
       { role: 'user', content: JSON.stringify(data) }];
     if (new TextEncoder().encode(JSON.stringify(messages)).length > 128000) throw new Error('规划内容过长，请缩短课程摘要后重试');
     const result = await this.bridge.requestLLM({
@@ -34,26 +34,88 @@ export class LessonPlanner {
       presentation: 'tool',
       displayPrompt: operation === 'outline' ? '制定 / 修改学习计划' : '准备今天的英语课',
       messages,
-    }, 300000, { signal: controller.signal, onStream: message => onPreview(previewLines(message.text)) });
+    }, 300000, { signal: controller.signal, onStream: message => {
+      onPreview(previewLines(message.text));
+      onOutput(String(message.text || ''));
+    } });
     controller.signal.throwIfAborted();
+    onOutput(String(result.text || ''));
     return parseGeneration(result.text);
   }
-  async outline(request, draft, conversation, onPreview) {
-    const result = await this.generate('outline', { request: request.slice(0, 2000),
-      learner: learnerSummary(this.getState()), draft, conversation: conversation.slice(-8) }, onPreview);
+  async outline(request, draft, conversation, onPreview, onPartial = () => {}) {
+    this.cancel();
+    const controller = this.controller = new AbortController();
+    const data = { request: request.slice(0, 2000), learner: learnerSummary(this.getState()), draft, conversation: conversation.slice(-8) };
+    const key = JSON.stringify(data);
+    if (this.pendingOutline?.key !== key) this.pendingOutline = { key, schedule: null, lessons: [] };
+    const pending = this.pendingOutline;
+    const report = (label, lines = []) => onPreview?.([label, ...lines]);
+    const attempt = async (operation, payload, schema, validate, label) => {
+      let feedback = '';
+      for (let retry = 0; retry < 3; retry++) {
+        controller.signal.throwIfAborted();
+        report(`${label}${retry ? '，正在修复并重试…' : '…'}`);
+        try {
+          const result = await this.generate(operation, { ...payload, ...(feedback ? { repair: feedback } : {}) },
+            lines => report(label, lines), controller, schema);
+          return validate(result);
+        } catch (error) {
+          controller.signal.throwIfAborted();
+          if (error.name === 'AbortError' || retry === 2) throw error;
+          feedback = `Previous response was invalid: ${error.message}. Return a complete result matching the requested schema; keep text concise.`;
+        }
+      }
+    };
+    const scheduleSchema = `${PLAN_SCHEMA}\nFor this operation return a COMPACT schedule, NOT detailed steps: {"kind":"schedule","value":{title,goal,level,dailyMinutes,units,lessons:[{unit,title,objectives:[text]}]}}. Omit steps for now. Preserve the requested day count and distribute concrete target words across days in objectives. For a 100-word goal, allocate 100 distinct words across the schedule, with later reviews explicitly marked. Use grade-appropriate English related to the requested games. This operation-specific format overrides the full-plan result format. A question result is allowed only if essential information is missing.`;
+    const result = pending.schedule || await attempt('outline', data, scheduleSchema, result => {
+      if (result.kind === 'question') return result;
+      if (result.kind === 'plan') { this.normalizePlan(result.value, draft?.id); return result; }
+      if (result.kind !== 'schedule') throw new Error('AI 未返回课程日程');
+      this.normalizePlan({ ...result.value, lessons: result.value?.lessons?.map(lesson => ({ ...lesson,
+        steps: [{ type: 'vocabulary', objective: '学习', minutes: result.value.dailyMinutes - 1 }, { type: 'review', objective: '复习', minutes: 1 }] })) }, draft?.id);
+      return result;
+    }, '正在安排主题和每日词汇');
     if (result.kind === 'question' && typeof result.message === 'string') return { question: result.message.slice(0, 500) };
+    if (result.kind === 'plan') return { plan: this.normalizePlan(result.value, draft?.id) };
+    pending.schedule = result;
+    const schedule = result.value;
+    const publishPartial = () => onPartial({ ...schedule, lessons: structuredClone(pending.lessons) }, schedule.lessons.length);
+    publishPartial();
+    while (pending.lessons.length < schedule.lessons.length) {
+      const offset = pending.lessons.length;
+      const requestedLessons = schedule.lessons.slice(offset, offset + 3);
+      const lessons = await attempt('outline-batch', { ...data, draft: undefined, schedule, offset, requestedLessons },
+        `${PLAN_SCHEMA}\nReturn {"kind":"batch","value":{"lessons":[...]}} with detailed steps for ONLY the requested ${requestedLessons.length} lessons, in order. Copy their unit, title and objectives exactly. Do not return the entire plan. No exercise content yet. This batch format overrides the full-plan result format.`, result => {
+          const lessons = result.kind === 'batch' && result.value?.lessons;
+          if (!Array.isArray(lessons) || lessons.length !== requestedLessons.length) throw new Error('生成的课程数量不匹配');
+          const merged = lessons.map((lesson, index) => ({ ...lesson, ...requestedLessons[index], steps: lesson.steps }));
+          const units = Object.fromEntries([...new Set(merged.map(lesson => lesson.unit))].map(unit => [unit, schedule.units[unit]]));
+          this.normalizePlan({ ...schedule, units, lessons: merged }, draft?.id);
+          return merged;
+        }, `已完成 ${offset}/${schedule.lessons.length} 天，正在生成第 ${offset + 1}–${offset + requestedLessons.length} 天`);
+      controller.signal.throwIfAborted();
+      pending.lessons.push(...lessons);
+      publishPartial();
+      report(`已完成 ${pending.lessons.length}/${schedule.lessons.length} 天`, pending.lessons.map((lesson, index) => `第 ${index + 1} 天 · ${lesson.title}：${lesson.objectives.join('；')}`));
+    }
+    const plan = this.normalizePlan({ ...schedule, lessons: pending.lessons }, draft?.id);
+    this.pendingOutline = null;
+    return { plan };
+  }
+  normalizePlan(value, existingId) {
+    const result = { kind: 'plan', value };
     if (result.kind !== 'plan' || !result.value || !Array.isArray(result.value.lessons)) throw new Error('AI 未返回完整计划，请重试');
     if (!result.value.units || typeof result.value.units !== 'object' || Array.isArray(result.value.units)) throw new Error('AI 未按大主题分组课程，请重试');
-    const id = draft?.id || newId('plan');
+    const id = existingId || newId('plan');
     const plan = { ...result.value, id, schemaVersion: 1,
       unitFiles: Object.fromEntries(Object.keys(result.value.units).map(unit => [unit, `./units/${unit}.json`])),
       lessons: result.value.lessons.map((lesson, i) => ({ ...lesson, id: `day-${String(i + 1).padStart(2, '0')}`,
         steps: Array.isArray(lesson.steps) ? lesson.steps.map((step, j) => ({ ...step, id: `step-${String(j + 1).padStart(2, '0')}` })) : lesson.steps })) };
-    return { plan: validatePlan(plan) };
+    return validatePlan(plan);
   }
-  async daily(plan, outline, progress, onPreview) {
+  async daily(plan, outline, progress, onPreview, onOutput) {
     const result = await this.generate('daily', { plan, requestedLesson: outline,
-      learner: learnerSummary(this.getState(), progress) }, onPreview);
+      learner: learnerSummary(this.getState(), progress) }, onPreview, null, '', onOutput);
     if (result.kind !== 'lesson') throw new Error('AI 未返回完整课程，请重试');
     return validateDailyLesson(result.value, plan, outline);
   }

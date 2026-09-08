@@ -1,3 +1,16 @@
+# Iterative Generation
+
+Planning first requests a compact schedule with concrete daily vocabulary goals,
+then expands up to three days per request. Each response is validated, with at
+most two repair retries. Validated batches stay in memory for retry of the same
+request; changing the request or learner context starts a new draft. Reloading
+the page discards this unsaved checkpoint. Only Save persists a complete plan.
+
+The main generate button becomes Stop / Please wait while busy. Stopping aborts
+the current request and prevents later batches. Content previews stream as text;
+private reasoning and unfinished plan JSON are never rendered. Both JSONL and
+formatted complete JSON results are accepted; truncated results fail validation.
+
 # General lesson plans
 
 The **进度 / Learning progress** tab's **学习计划 / Lesson plans** library lists the current lesson

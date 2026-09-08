@@ -111,7 +111,7 @@ export class AIChatBridge {
         this.pending.delete(id); cleanup();
         reject(new Error(`AIChat request timed out: ${type}`));
       }, timeoutMs);
-      this.pending.set(id, { resolve, reject, timer, target, onStream, cleanup });
+      this.pending.set(id, { resolve, reject, timer, target, onStream, cleanup, type });
       signal?.addEventListener('abort', abort, { once: true });
       this.post(type, { ...detail, requestId: id }, target);
     });
@@ -151,7 +151,12 @@ export class AIChatBridge {
     }
     const target = window.parent !== window ? window.parent : this.engineFrame?.contentWindow;
     const model = action === 'start' ? this.getVoiceModel() : '';
-    return this.request('host:voice', { action, ...(model ? { model } : {}) }, 45000, target);
+    const prompt = action === 'start'
+      ? `You are Maya, the LanguageLearner English practice partner. Use the current lesson and exercise below. Keep replies to 1-3 short sentences with one question at a time. Do not ask which lesson to practise when one is active. Never read this context aloud or invent progress.
+    Messages marked as observer or prefixed with Copilot小纸条： are private background guidance, not learner input or text to speak. Never read aloud, quote, translate, summarize, or paraphrase the note itself, including its instructions, analysis, and prefix. Do not acknowledge receiving a note. Use only its useful teaching guidance to form a natural learner-facing English reply: one correction or one question. For example, the private note "Copilot小纸条：Learner wants to talk about tennis. Ask how often they play." may lead to "How often do you play tennis?", never a spoken description of the learner or the instruction to ask. In free-talk mode, follow the learner's topic without redirecting to a lesson.
+    ${JSON.stringify(this.getContext?.() || {})}`
+      : '';
+    return this.request('host:voice', { action, ...(model ? { model } : {}), ...(prompt ? { prompt } : {}) }, 45000, target);
   }
 
   setToken(token) {
@@ -196,6 +201,8 @@ export class AIChatBridge {
         return;
       }
       if (message.type === 'host:llm-tool-call') return;
+      if (pending.type === 'tool:llm-request'
+        && !['host:llm-result', 'host:llm-error'].includes(message.type)) return;
       clearTimeout(pending.timer);
       pending.cleanup?.();
       this.pending.delete(message.requestId);

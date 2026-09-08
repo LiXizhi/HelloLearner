@@ -1,8 +1,9 @@
 import { openPracticePage, closePracticePage } from './view_practice_page.js?v=20260906m';
-import { createTranslationControl } from './view_translation.js?v=20260906p';
+import { createTranslationControl } from './view_translation.js?v=20260907u';
 import { getState } from './state.js';
 let plannerPaused = false, practiceEpoch = 0, plannerRollback = null;
 import { evaluateLessonDialogue } from './lesson-engine.js?v=20260905a';
+import { confirmPractice } from './view_confirm_practice.js?v=20260907a';
 import { openProgressDetail } from './view_progress.js?v=20260905c';
 import { openProfileSetup } from './view_profile_setup.js?v=20260905b';
 import { projectUnitProgress, projectSpeakingWeek } from './curriculum-progress.js?v=20260905b';
@@ -986,6 +987,12 @@ function startDialogueVoiceAnswer() {
     const transcript = result[0]?.transcript?.trim() || '';
     roomMicLabel.textContent = transcript ? `正在识别：“${transcript}”` : '正在识别你的回答…';
     if (!result.isFinal) return;
+    if (window.helloLearnerGeneratedPractice) {
+      stopDialogueSpeechRecognition();
+      if (transcript) void submitPracticeAnswer(transcript);
+      else roomMicLabel.textContent = '没有听清，请再试一次。';
+      return;
+    }
     const alternatives = Array.from(result, item => evaluateDialogueSpeech(item.transcript));
     const best = alternatives.find(item => item.accepted) || alternatives[0];
     stopDialogueSpeechRecognition();
@@ -1222,7 +1229,7 @@ function openIntroPracticeRoom() {
   openPracticePage();
   window.helloLearnerMountPracticeAvatar?.();
   window.setTimeout(() => {
-    if (!plannerPaused && !introPracticeRoom.hidden) speakText(`${config.welcome} ${config.vocabIntro}`, languageProfile.speechLanguage, 0.92);
+    if (!plannerPaused && !introPracticeRoom.hidden && practiceRoomShell.dataset.phase === 'intro') speakText(`${config.welcome} ${config.vocabIntro}`, languageProfile.speechLanguage, 0.92);
   }, 220);
   openIntroPracticeRoom.vocabularyTimer = window.setTimeout(() => {
     vocabularyPreviewMessage.hidden = false;
@@ -1419,9 +1426,13 @@ function continueToDialogue() {
     : '点击与 Maya 对话 · 无需按住，再次点击结束';
   window.setTimeout(() => {
     dialogueTurn.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const scenario = getActiveRoleplayScenario();
-    speakEnglish(scenario ? scenario.goals[0].prompt : getActiveLesson().opening, 0.82);
   }, 150);
+  const scenario = getActiveRoleplayScenario();
+  const greeting = () => window.helloLearnerSpeech?.speak(scenario ? scenario.goals[0].prompt : getActiveLesson().opening, {
+    language: 'en-US', rate: 0.82,
+  });
+  if (window.helloLearnerLiveVoice) void window.helloLearnerLiveVoice.start({ beforeStart: greeting });
+  else void greeting();
 }
 
 function toSpeechText(value) {
@@ -2015,6 +2026,7 @@ function scrollDialogueHistoryToEnd() {
 }
 
 async function submitPracticeAnswer(answer) {
+  if (window.helloLearnerGeneratedPractice) return window.helloLearnerGeneratedPractice.submitText(answer);
   if (plannerPaused) return;
   const epoch = practiceEpoch;
   if (!practiceRoomShell.dataset.freeTalk && await window.helloLearnerPlanRequest?.(String(answer || ''))) return;
@@ -2308,6 +2320,41 @@ document.querySelector('#fillFeedbackAction').addEventListener('click', (event) 
   else continueToDialogue();
 });
 document.querySelector('#roleplayReady').addEventListener('click', continueToDialogue);
+const practicePhaseEntry = document.querySelector('[data-phase-label="practice"]');
+practicePhaseEntry.setAttribute('role', 'button');
+practicePhaseEntry.setAttribute('tabindex', '0');
+practicePhaseEntry.setAttribute('aria-label', '直接进入对练');
+practicePhaseEntry.setAttribute('title', '直接进入对练');
+practicePhaseEntry.style.cursor = 'pointer';
+function confirmDirectPractice() {
+  if (plannerPaused || introPracticeRoom.hidden || practiceRoomShell.dataset.freeTalk
+    || practiceRoomShell.dataset.practiceStep === 'dialogue') return;
+  confirmPractice(enterDirectPractice);
+}
+function enterDirectPractice() {
+  if (plannerPaused || introPracticeRoom.hidden || practiceRoomShell.dataset.freeTalk
+    || practiceRoomShell.dataset.practiceStep === 'dialogue') return;
+  window.clearTimeout(openIntroPracticeRoom.vocabularyTimer);
+  window.clearTimeout(openIntroPracticeRoom.readyTimer);
+  window.helloLearnerSpeech?.cancel?.();
+  window.speechSynthesis?.cancel();
+  stopFillSpeechRecognition();
+  stopDialogueSpeechRecognition();
+  practiceRoomShell.dataset.phase = 'practice';
+  welcomeRoomMessage.hidden = true;
+  vocabularyPreviewMessage.hidden = true;
+  readyPrompt.hidden = true;
+  practiceTurn.hidden = false;
+  roomAnswerHint.hidden = true;
+  practiceTextForm.hidden = true;
+  continueToDialogue();
+}
+practicePhaseEntry.addEventListener('click', confirmDirectPractice);
+practicePhaseEntry.addEventListener('keydown', event => {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  event.preventDefault();
+  confirmDirectPractice();
+});
 document.querySelector('#hearRoleplayBriefing').addEventListener('click', speakRoleplayBriefing);
 document.querySelector('#hearWelcomeAgain').addEventListener('click', () => {
   const languageProfile = getNativeLanguageProfile();
@@ -2363,6 +2410,11 @@ practiceTextForm.addEventListener('submit', (event) => {
   practiceTextInput.value = '';
 });
 roomMic.addEventListener('click', () => {
+  if (window.helloLearnerGeneratedPractice) {
+    if (dialogueSpeechRecognition) dialogueSpeechRecognition.stop();
+    else startDialogueVoiceAnswer();
+    return;
+  }
   if (window.helloLearnerLiveVoice) {
     stopFillSpeechRecognition();
     stopDialogueSpeechRecognition();
@@ -2673,6 +2725,23 @@ onboardingBack.addEventListener('click', () => showOnboardingStep(Math.max(1, on
 onboardingForm.addEventListener('submit', (event) => event.preventDefault());
 
 window.helloLearnerRuntime = {
+  openGeneratedPractice(title) {
+    resetPracticeRoom();
+    plannerPaused = false;
+    practiceRoomShell.dataset.phase = 'practice';
+    practiceRoomShell.dataset.practiceStep = 'dialogue';
+    welcomeRoomMessage.hidden = vocabularyPreviewMessage.hidden = readyPrompt.hidden = practiceTurn.hidden = true;
+    practiceTextForm.hidden = false;
+    document.querySelector('#roomPhaseTitle').textContent = '定制课程';
+    document.querySelector('.room-topic strong').textContent = title;
+    roomMicLabel.textContent = '点击麦克风回答，也可以输入文字';
+    const surface = document.createElement('div');
+    surface.dataset.generatedPractice = '';
+    practiceChatFeed.append(surface);
+    openPracticePage();
+    window.helloLearnerMountPracticeAvatar?.();
+    return surface;
+  },
   submitText(text) {
     if (introPracticeRoom.hidden) openFreeTalk();
     return submitPracticeAnswer(text);

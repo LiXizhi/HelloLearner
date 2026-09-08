@@ -1,11 +1,11 @@
 import { runtimeConfig, SDK_CDN_URL, sanitizeWorkspace } from './config.js';
 import { PlanStore } from './plan-store.js?v=20260907o';
-import { LessonPlanner } from './lesson-planner.js?v=20260907p';
-import { mountLessonPlans } from './view_lesson_plans.js?v=20260907o';
+import { LessonPlanner } from './lesson-planner.js?v=20260908e';
+import { mountLessonPlans } from './view_lesson_plans.js?v=20260908g';
 import { updateState, getState, subscribe } from './state.js';
 import { KeepworkAuth } from './auth.js?v=20260907g';
-import { AIChatBridge } from './aichat-bridge.js?v=20260907r';
-import { initLiveVoice } from './view_live_voice.js?v=20260906p';
+import { AIChatBridge } from './aichat-bridge.js?v=20260907v';
+import { initLiveVoice } from './view_live_voice.js?v=20260907u';
 import { LearnerStorage, createEmbeddedBackend, createStandaloneBackend } from './storage.js?v=20260907c';
 import { SpeechController } from './speech.js?v=20260905r';
 import { AvatarController } from './avatar.js?v=20260906a';
@@ -432,7 +432,7 @@ async function bootstrap() {
       alert(`课程包加载失败，保留内置课程。\n${error.message}`);
     }
   }
-  await import('./learner-runtime.js?v=20260907m');
+  await import('./learner-runtime.js?v=20260908g');
   planner = new LessonPlanner(bridge, getState);
   window.helloLearnerPlanRequest = routePlanRequest;
   const restorePlanAvatar = () => {

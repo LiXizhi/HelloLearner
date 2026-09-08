@@ -1,4 +1,4 @@
-import { createVoiceHistory } from './view_voice_history.js?v=20260906p';
+import { createVoiceHistory } from './view_voice_history.js?v=20260907u';
 // AIChat owns the digital-human session, ASR, replies and audio playback.
 export function initLiveVoice({ bridge, cancelSpeech, onError, micSelector = '#roomMic', labelSelector = '#roomMicLabel', roomSelector = '#introPracticeRoom', anchorSelector = 'footer' }) {
   const mic = document.querySelector(micSelector);

@@ -1,11 +1,72 @@
 import { STEP_LABELS } from './plan-model.js?v=20260907o';
-import { element, button, mountPlanRunner } from './view_plan_runner.js?v=20260907o';
+import { element, button, mountPlanRunner } from './view_plan_runner.js?v=20260908g';
 
 export function mountLessonPlans(options) {
   const { planner, getStore, getWorkspace, pause, resume, savePlan, saveLesson, checkpoint, speak, onAvatar, restoreAvatar, route } = options;
   let dialog = null, body, status, previews, runner = null, busy = false, epoch = 0, draft = null;
   let conversation = [], lastAction = null, returnFocus = null, openingLesson = '';
-  let cancelButton, retryButton;
+  let cancelButton, retryButton, generateButton, requestInput;
+  let partialPreview;
+  let inlinePage = false, hiddenSurfaces = [], selectedPlan = null;
+  const journey = document.querySelector('#learningPath');
+  let officialNodes = null;
+  function restoreOfficial() {
+    if (!officialNodes) return;
+    journey.replaceChildren(...officialNodes); officialNodes = null; selectedPlan = null;
+  }
+  async function selectPlan(plan, progress) {
+    close();
+    selectedPlan = plan;
+    if (!officialNodes) officialNodes = [...journey.childNodes];
+    journey.replaceChildren();
+    const header = element('header', '', journey); header.className = 'journey-header';
+    const heading = element('div', '', header);
+    element('p', '当前学习计划', heading).className = 'eyebrow';
+    element('h2', plan.title, heading);
+    button(header, '切换课程', library);
+    element('p', plan.goal, journey).className = 'mb-5';
+    const route = element('div', '', journey); route.className = 'space-y-6';
+    plan.lessons.forEach((lesson, index) => {
+      if (!index || lesson.unit !== plan.lessons[index - 1].unit) {
+        const banner = element('div', '', route); banner.className = 'unit-banner';
+        element('strong', plan.units[lesson.unit], banner);
+      }
+      const row = element('div', '', route); row.className = 'flex items-center gap-4 py-3';
+      const done = Boolean(progress.lessons?.[lesson.id]?.completedAt);
+      const node = button(row, done ? '✓' : String(index + 1).padStart(2, '0'), () => openLesson(plan.id, lesson.id));
+      node.className = 'h-16 w-16 shrink-0 rounded-full border-4 border-[#d5e5dc] bg-[#174f46] text-lg font-bold text-white';
+      node.setAttribute('aria-label', `第 ${index + 1} 天 · ${lesson.title}${done ? ' · 已完成' : ''}`);
+      node.dataset.planDay = lesson.id;
+      const label = element('div', '', row);
+      element('h3', lesson.title, label).className = 'font-semibold';
+      element('p', `第 ${index + 1} 天 · ${lesson.steps.length} 个环节 · ${plan.dailyMinutes} 分钟`, label).className = 'text-sm opacity-70';
+    });
+    window.helloLearnerRuntime?.navigate?.('learning');
+  }
+  let activity, activityStage, activityTime, activityTimer, activityStarted = 0;
+  function endActivity() {
+    clearInterval(activityTimer); activityTimer = null;
+    if (activity) activity.hidden = true;
+  }
+  function beginActivity() {
+    endActivity();
+    activity.hidden = false;
+    activityStage.textContent = '正在等待 AI 生成内容…';
+    activityStarted = Date.now();
+    const tick = () => { activityTime.textContent = `已等待 ${Math.floor((Date.now() - activityStarted) / 1000)} 秒`; };
+    tick(); activityTimer = setInterval(tick, 1000);
+  }
+  function syncGeneration() {
+    if (!generateButton?.isConnected) return;
+    generateButton.type = busy ? 'button' : 'submit';
+    generateButton.textContent = busy ? '停止生成 · 请稍候 / Please wait' : draft ? '修改计划' : '与 AI 制定计划';
+    requestInput.disabled = busy;
+    generateButton.setAttribute('aria-label', busy ? '停止生成 · 请稍候 / Please wait' : generateButton.textContent);
+  }
+  function stopGeneration() {
+    if (!busy) return;
+    cancel(); retryButton.hidden = false; status.textContent = '已停止，已完成的内容已保留，重试将继续生成。';
+  }
   let viewMode = 'library';
   const home = element('section');
   home.id = 'lessonPlanLibrary'; home.dataset.planSurface = '';
@@ -29,21 +90,35 @@ export function mountLessonPlans(options) {
   if (practiceHeader) button(practiceHeader, '学习计划', () => library());
 
   function cancel() {
+    endActivity();
     epoch++; planner.cancel(); runner?.stop(); runner = null; busy = false; openingLesson = '';
     options.cancelSpeech?.();
     options.onPlanContext?.(null);
     if (cancelButton) { cancelButton.disabled = true; cancelButton.hidden = true; }
+    syncGeneration();
   }
-  function close() { dialog?.close(); }
-  async function open() {
+  function close() {
+    const surface = dialog;
+    if (!surface) return;
+    if (!inlinePage) surface.close();
+    surface.dispatchEvent(new Event('close'));
+  }
+  async function open(asPage = false) {
+    if (dialog && asPage !== inlinePage) close();
     if (dialog) return;
     returnFocus = document.activeElement;
     await pause();
     // pause can await Voice shutdown; another request may already have opened it.
     if (dialog) return;
-    dialog = element('dialog', '', document.body);
+    inlinePage = asPage;
+    dialog = element(asPage ? 'section' : 'dialog', '', asPage ? document.querySelector('#learnerPane') : document.body);
     dialog.id = 'lessonPlansDialog'; dialog.dataset.planSurface = '';
     dialog.className = 'm-auto w-[calc(100%_-_24px)] max-w-4xl max-h-[92dvh] overflow-hidden rounded-3xl border border-[#174f46]/20 bg-[#f7faf8] p-0 text-[#174f46] shadow-xl backdrop:bg-black/40';
+    if (asPage) {
+      dialog.className = 'mx-auto w-full max-w-5xl min-h-screen bg-[#f7faf8] text-[#174f46]';
+      hiddenSurfaces = [...document.querySelector('#learnerPane').children].filter(node => node !== dialog && !node.hidden);
+      hiddenSurfaces.forEach(node => { node.hidden = true; });
+    }
     dialog.setAttribute('aria-labelledby', 'lessonPlansTitle');
     const header = element('header', '', dialog); header.className = 'border-b border-[#174f46]/10 bg-white px-5 py-4 sm:px-7';
     const top = element('div', '', header); top.className = 'flex items-center justify-between gap-3';
@@ -51,35 +126,46 @@ export function mountLessonPlans(options) {
     button(top, '返回练习', close);
     element('p', `课程空间：${getWorkspace()}`, header).className = 'mt-1 text-xs opacity-60 break-all';
     const content = element('div', '', dialog); content.className = 'max-h-[calc(92dvh_-_110px)] overflow-y-auto p-5 sm:p-7';
+    if (asPage) content.className = 'p-5 sm:p-7';
     const nav = element('div', '', content); nav.className = 'flex flex-wrap gap-2 mb-4';
     button(nav, '全部计划', () => { cancel(); return library(); });
     const create = button(nav, '新建计划', () => { cancel(); return start(); });
     create.className = 'rounded-xl bg-[#174f46] px-4 py-3 text-sm font-semibold text-white hover:bg-[#23695d]';
-    cancelButton = button(nav, '取消生成', () => { if (!busy) return; cancel(); retryButton.hidden = false; status.textContent = '已取消，可以重试。'; });
+    cancelButton = button(nav, '取消生成', stopGeneration);
     cancelButton.disabled = true; cancelButton.hidden = true;
     retryButton = button(nav, '重试', () => run(lastAction)); retryButton.hidden = true;
     status = element('p', '', content); status.className = 'mb-4 text-sm leading-relaxed opacity-70'; status.dataset.planStatus = ''; status.setAttribute('role', 'status');
+    activity = element('div', '', content); activity.hidden = true; activity.dataset.planActivity = '';
+    activity.className = 'my-3 border-l-2 border-[#174f46]/30 pl-3 text-sm';
+    const activityHeading = element('div', '', activity); activityHeading.className = 'flex flex-wrap items-center gap-3';
+    element('span', 'AI 处理中', activityHeading).className = 'font-semibold';
+    activityTime = element('span', '', activityHeading); activityTime.className = 'text-xs opacity-60 tabular-nums';
+    activityStage = element('p', '', activity); activityStage.className = 'mt-1 break-words opacity-70';
+    activityStage.setAttribute('role', 'status');
     previews = element('div', '', content); previews.className = 'space-y-2 my-3 text-sm'; previews.setAttribute('aria-live', 'polite');
     body = element('div', '', content); body.className = 'space-y-4';
     dialog.addEventListener('close', () => {
       cancel(); restoreAvatar?.(); dialog.remove(); dialog = null;
+      hiddenSurfaces.forEach(node => { node.hidden = false; }); hiddenSurfaces = []; inlinePage = false;
       resume(); returnFocus?.isConnected && returnFocus.focus();
       void refreshHome();
-    });
-    dialog.showModal();
+    }, { once: true });
+    if (!asPage) dialog.showModal();
   }
   async function run(action) {
     if (!action || busy) return;
     lastAction = action; busy = true;
+    syncGeneration();
     cancelButton.disabled = false; cancelButton.hidden = false; retryButton.hidden = true;
     const token = epoch;
     try { await action(token); }
     catch (error) { if (dialog && token === epoch && error.name !== 'AbortError') { status.textContent = `${error.message}。内容已保留，可重试。`; retryButton.hidden = false; } }
-    finally { if (token === epoch) { busy = false; cancelButton.disabled = true; cancelButton.hidden = true; } }
+    finally { if (token === epoch) { endActivity(); busy = false; cancelButton.disabled = true; cancelButton.hidden = true; syncGeneration(); } }
   }
   const current = token => dialog && token === epoch;
   const stream = token => lines => {
     if (!current(token)) return;
+    if (activity && !activity.hidden && lines.length) activityStage.textContent = /^(正在安排主题和每日词汇|已完成 \d+\/\d+ 天)/.test(lines[0]) ? `当前阶段：${lines[0]}` : '正在接收课程内容…';
     previews.replaceChildren();
     lines.forEach(line => element('p', line, previews));
   };
@@ -130,14 +216,32 @@ export function mountLessonPlans(options) {
     input.placeholder = draft ? '修改目标、主题或课程长度…' : '例如：制定 14 天旅行英语计划，每天 10 分钟';
     input.setAttribute('aria-label', '与 AI 讨论学习计划');
     input.className = 'rounded-xl border border-[#174f46]/25 p-3';
+    requestInput = input;
     const send = element('button', draft ? '修改计划' : '与 AI 制定计划', form); send.type = 'submit';
+    generateButton = send;
     send.className = 'rounded-xl bg-[#174f46] px-4 py-3 text-white';
+    send.addEventListener('click', event => { if (busy) { event.preventDefault(); stopGeneration(); } });
+    syncGeneration();
     form.addEventListener('submit', event => { event.preventDefault(); if (input.value.trim()) void discuss(input.value.trim()); });
+    partialPreview = element('section', '', body);
+    partialPreview.dataset.partialPlan = '';
+    partialPreview.hidden = true;
+    partialPreview.className = 'min-w-0 border-t border-[#174f46]/15 pt-4 break-words';
+    partialPreview.setAttribute('aria-label', '已生成课程预览');
   }
   async function discuss(request) {
     await run(async token => {
+      beginActivity();
       status.textContent = '正在规划课程…'; previews.replaceChildren();
-      const result = await planner.outline(request, draft, conversation, stream(token));
+      partialPreview.replaceChildren(); partialPreview.hidden = true;
+      const result = await planner.outline(request, draft, conversation, stream(token), (partial, total) => {
+        if (!current(token)) return;
+        partialPreview.replaceChildren();
+        partialPreview.hidden = !partial.lessons.length;
+        if (!partial.lessons.length) return;
+        element('p', `已生成课程预览 · ${partial.lessons.length}/${total} 天 · 尚未保存`, partialPreview).className = 'mb-3 text-sm font-semibold';
+        outlineView(partialPreview, partial);
+      });
       if (!current(token)) return;
       conversation.push({ role: 'user', content: request.slice(0, 2000) });
       if (result.question) conversation.push({ role: 'assistant', content: result.question });
@@ -176,23 +280,35 @@ export function mountLessonPlans(options) {
     return panel;
   }
   async function builtins() {
+    restoreOfficial();
     await open(); cancel(); restoreAvatar?.(); viewMode = 'library';
     body.replaceChildren(); previews.replaceChildren();
     const panel = libraryTabs('builtin');
-    const { lessons = [], completed = {}, premade = false } = options.getCurriculum();
+    const { units = {}, lessons = [], completed = {}, premade = false } = options.getCurriculum();
     status.textContent = `${premade ? '当前课程包' : '系统内置课程'} · 共 ${lessons.length} 课，点击课程开始学习。`;
-    panel.className = 'grid grid-cols-1 gap-3 sm:grid-cols-2';
-    lessons.forEach((lesson, index) => {
-      const card = button(panel, '', () => {
-        dialog.addEventListener('close', () => options.openCurriculumLesson(lesson.id), { once: true });
-        close();
+    panel.className = 'space-y-7';
+    const unitEntries = Object.entries(units).map(([id, title], index) => ({ id, title, index, number: /^U(\d+)$/i.exec(id)?.[1] }));
+    unitEntries.sort((a, b) => a.number && b.number ? Number(a.number) - Number(b.number)
+      : a.number ? -1 : b.number ? 1 : a.index - b.index);
+    unitEntries.forEach(unit => {
+      const unitLessons = lessons.filter(lesson => lesson.unit === unit.id).sort((a, b) => a.order - b.order);
+      if (!unitLessons.length) return;
+      const section = element('section', '', panel); section.dataset.curriculumUnit = unit.id;
+      const heading = element('h3', `${unit.number ? `Unit ${Number(unit.number)}` : unit.id} · ${unit.title}`, section);
+      heading.className = 'mb-3 text-lg font-bold';
+      const grid = element('div', '', section); grid.className = 'grid grid-cols-1 gap-3 sm:grid-cols-2';
+      unitLessons.forEach(lesson => {
+        const card = button(grid, '', () => {
+          dialog.addEventListener('close', () => options.openCurriculumLesson(lesson.id), { once: true });
+          close();
+        });
+        card.className = 'group flex items-center gap-3 rounded-2xl border border-[#174f46]/10 bg-white p-4 text-left transition-colors hover:border-[#174f46]/40 hover:bg-[#edf3e4] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#174f46]';
+        element('span', lesson.number || String(lesson.order).padStart(2, '0'), card).className = 'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#edf3e4] text-sm font-bold';
+        const detail = element('span', '', card); detail.className = 'min-w-0 flex-1';
+        element('span', lesson.title, detail).className = 'block text-base font-semibold leading-snug';
+        element('span', `${lesson.level || '英语课程'} · ${completed[lesson.id] ? '已完成 ✓' : '开始学习'}`, detail).className = 'mt-1 block text-xs opacity-60';
+        const arrow = element('span', '→', card); arrow.setAttribute('aria-hidden', 'true'); arrow.className = 'text-lg opacity-50';
       });
-      card.className = 'group flex items-center gap-3 rounded-2xl border border-[#174f46]/10 bg-white p-4 text-left transition-colors hover:border-[#174f46]/40 hover:bg-[#edf3e4] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#174f46]';
-      element('span', String(index + 1).padStart(2, '0'), card).className = 'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#edf3e4] text-sm font-bold';
-      const detail = element('span', '', card); detail.className = 'min-w-0 flex-1';
-      element('span', lesson.title, detail).className = 'block text-base font-semibold leading-snug';
-      element('span', `${lesson.level || '英语课程'} · ${completed[lesson.id] ? '已完成 ✓' : '开始学习'}`, detail).className = 'mt-1 block text-xs opacity-60';
-      const arrow = element('span', '→', card); arrow.setAttribute('aria-hidden', 'true'); arrow.className = 'text-lg opacity-50';
     });
   }
   async function library(autoSelect = true) {
@@ -242,15 +358,13 @@ export function mountLessonPlans(options) {
       const store = getStore(); status.textContent = '正在读取计划…';
       const plan = await store.get(id), progress = await store.progress(id), readiness = {};
       if (!current(token)) return;
-      body.replaceChildren(); previews.replaceChildren(); restoreAvatar?.();
-      outlineView(body, plan, true, progress, readiness);
-      status.textContent = '选择任意一天；未准备的课程会现场生成。';
+      await selectPlan(plan, progress);
     });
     return { opened: true, planId: id };
   }
   async function openLesson(planId, lessonId) {
     if (openingLesson === `${planId}/${lessonId}`) return { opened: true, planId, lessonId };
-    await open(); cancel();
+    await open(true); cancel();
     viewMode = 'lesson';
     openingLesson = `${planId}/${lessonId}`;
     await run(async token => {
@@ -265,8 +379,37 @@ export function mountLessonPlans(options) {
       let lesson = await store.lesson(plan, outline);
       if (!current(token)) return;
       if (!lesson) {
-        status.textContent = '我们会根据这一天的学习目标和你最近的练习情况生成课程，可能需要几分钟。';
-        lesson = await planner.daily(plan, outline, progress, stream(token));
+        beginActivity();
+        status.textContent = '正在准备本课，可能需要几分钟，请耐心等待。你可以随时停止，稍后重试。';
+        element('p', outline.objectives.join(' · '), body).className = 'text-sm';
+        const dailyStatus = element('p', '正在等待 AI 输出课程内容…', body);
+        dailyStatus.dataset.dailyGenerationStatus = ''; dailyStatus.setAttribute('role', 'status');
+        const dailyStop = button(body, '停止生成', stopGeneration);
+        const outputPanel = element('details', '', body); outputPanel.open = true;
+        outputPanel.dataset.dailyStream = '';
+        element('summary', '实时生成内容', outputPanel).className = 'cursor-pointer text-sm font-semibold';
+        const output = element('pre', '等待内容输出，请耐心等待…', outputPanel);
+        output.className = 'mt-3 max-h-64 overflow-y-auto whitespace-pre-wrap break-words rounded-lg border border-[#174f46]/15 bg-white p-3 text-sm';
+        const started = Date.now();
+        let received = 0;
+        const timer = setInterval(() => {
+          dailyStatus.textContent = `已等待 ${Math.floor((Date.now() - started) / 1000)} 秒 · 已接收 ${received} 字符${received ? '，正在生成课程…' : '，请耐心等待…'}`;
+        }, 1000);
+        try {
+          lesson = await planner.daily(plan, outline, progress, stream(token), text => {
+            if (!current(token)) return;
+            const follow = output.scrollHeight - output.scrollTop - output.clientHeight < 48;
+            received = text.length;
+            if (text) output.textContent = text;
+            if (follow) output.scrollTop = output.scrollHeight;
+          });
+          if (current(token)) dailyStatus.textContent = '生成完成，正在校验并保存课程。';
+        } catch (error) {
+          dailyStatus.textContent = error.name === 'AbortError' || !current(token) ? '已停止，生成内容保留供预览。' : '生成未完成，内容保留供预览，请重试。';
+          throw error;
+        } finally {
+          clearInterval(timer); dailyStop.disabled = true; dailyStop.hidden = true;
+        }
         if (!current(token)) return;
         status.textContent = '课程校验通过，正在保存…';
         cancelButton.disabled = true;
@@ -282,11 +425,20 @@ export function mountLessonPlans(options) {
       lesson.steps.forEach(step => element('p', `${STEP_LABELS[step.type]} · ${step.minutes} 分钟 · ${step.objective}`, body));
       button(body, '开始本课', () => {
         if (runner) return;
-        previews.replaceChildren(); status.textContent = '完成每个活动后继续，进度会自动保存。';
-        runner = mountPlanRunner(body, { plan, lesson, progress: progress.lessons[lesson.id] || {}, bridge: options.bridge,
+        close();
+        const surface = window.helloLearnerRuntime.openGeneratedPractice(lesson.title);
+        const leave = () => { document.querySelector('#closePracticeRoom').click(); };
+        runner = mountPlanRunner(surface, { plan, lesson, progress: progress.lessons[lesson.id] || {}, bridge: options.bridge,
+          sharedPractice: true,
           onContext: options.onPlanContext,
-          speak, onAvatar, onIntent: async text => text === 'list' ? (await library(), true) : route(text),
-          onCheckpoint: detail => checkpoint(store, plan, lesson, detail), onDone: () => showPlan(plan.id) });
+          speak, onAvatar, onIntent: async text => text === 'list' ? (leave(), await library(), true) : route(text),
+          onCheckpoint: detail => checkpoint(store, plan, lesson, detail), onDone: () => { leave(); return showPlan(plan.id); } });
+        window.helloLearnerGeneratedPractice = runner;
+        document.querySelector('#introPracticeRoom').addEventListener('close', () => {
+          runner?.stop(); runner = null;
+          window.helloLearnerGeneratedPractice = null;
+          surface.remove(); options.onPlanContext?.(null); options.cancelSpeech?.();
+        }, { once: true });
       });
     });
     openingLesson = '';
@@ -314,6 +466,6 @@ export function mountLessonPlans(options) {
       if (runner) return runner.submitText(text);
       throw new Error('请先选择计划或开始课程，也可以说“新建学习计划”。');
     },
-    invalidate() { cancel(); close(); void refreshHome(); },
+    invalidate() { cancel(); close(); restoreOfficial(); void refreshHome(); },
     cancel, get busy() { return busy; }, get isOpen() { return Boolean(dialog); } };
 }
